@@ -1,0 +1,101 @@
+#let question = counter("questions")
+
+#set heading(numbering: (..numbers) => {
+  let n=numbers.pos().len();
+  if n==1 {question.update(0); }
+  else if n==2 { [Partie ]; numbering("I",numbers.pos().at(1)) ;"."}
+  else if n==3 {[N=°];question.step(); question.display();"."}
+  else if n==4 {numbering("a.",numbers.pos().at(3)+1)}
+  else if n==5 {numbering("i.",numbers.pos().at(4))}
+  })
+#show heading : it => {if it.body==[] or it.level>=3 [#parbreak() #linebreak() #counter(heading).display() #it.body]
+    else [#parbreak() #linebreak() #counter(heading).display() #it.body]}
+
+#let nonumeq = math.equation.with(block: true, numbering: none)
+#let dm(x) = box[#nonumeq[#x]]
+#let dfrac(x,y) = math.frac(dm(x),dm(y))
+#let lbar(..args) = math.display(math.cases(delim:"|",..args))
+#let ubar(body, col: red) = rect(inset: 0pt,outset: (bottom:3pt,rest:0pt), stroke: (bottom:(0.5pt+col),rest:0pt))[#body]
+
+#let frame(x) = rect(stroke: 1pt+red,outset: (x:-2pt, y:2pt ))[#x]
+#let dframe(x) = frame(dm(x))
+#let donc = "Donc" + h(5pt)
+#let onA = "On a" + h(5pt)
+#let tq = "tel que" + h(5pt)
+#let dt = math.dif + "t"
+#let tend(n,val) = $limits(-->)_(#n -> #val)$
+#set underline(stroke: red+1pt)
+#let undermath(body, col:red)= {
+  style(styles => {
+  let size = measure(dm(body), styles);
+  let size2 = measure(body,styles);
+  let offshet = ((size.height)-(size2.height))/1.1+1.3pt;
+  box(stroke: (bottom:col+1pt),outset: (bottom:offshet),body);
+})
+}
+#let th = "th"
+#let t(x) = for i in range(x) {h(1em)}
+#set par(leading: 10pt)
+
+Gaspar Daguet
+#align(center, text(20pt)[Maths : DM 10])
+
+== Le théorème de Cesàro
+=== a. \
+#t(1) Soit $epsilon in RR$ alors par la définition de limite:\
+#t(1) #undermath[$ exists n_0 in NN^*, forall n >= n_0, abs(u_n) <= epsilon/2 $]
+
+==== \
+#t(1) Soient $n_0,n in NN^* tq n >= n_0$ alors \
+#t(1) $ abs(sigma_n) = abs((sum_(k=1)^n u_k)/n) = abs((sum_(k=1)^(n_0 -1) u_k)/n +(sum_(k=n_0)^n u_k)/n) <=abs((sum_(k=1)^(n_0 -1) u_k)/n) + abs((sum_(k=n_0)^n u_k)/n) <= (sum_(k=1)^(n_0 -1) abs(u_k))/n + (sum_(k=n_0)^(n) abs(u_k))/n $\
+#t(1) Ainsi on a bien:\
+#t(1) #undermath[$ forall n >= n_0, abs(sigma_n) <= (abs(u_1) + abs(u_2) + dots + abs(u_(n_0 -1)))/n + (abs(u_(n_0)) + dots +abs(u_n) )/n $]
+
+==== \
+#t(1) Comme $1/n sum^(n_0 -1)_(k=1) u_k$ est une somme finis alors:
+$ 1/n sum^(n_0 -1)_(k=1) abs(u_k) op(-->,limits: #true)_(n->+oo) 0 $
+#t(1) Donc par la définition de limite: $ exists n_1 in NN^* , forall n >= n_1, 1/n sum^(n_0 -1)_(k=1) abs(u_k) <=epsilon/2 $ \
+#t(1) De plus:\
+$ 1/n sum^(n)_(k=n_0) abs(u_k) <= 1/n sum^(n)_(n_0) epsilon/2 = (n-n_0+1)/2 epsilon <=epsilon/2 $ \
+#pagebreak()
+#t(1) Poson $N = max(n_1,n_0)$ alors : $ forall n >=N, abs(sigma_n) <= 1/n sum^(n_0 -1)_(k=1) abs(u_k) + 1/n sum^(n)_(k=n_0) abs(u_k) <=epsilon/2 + epsilon/2 <= epsilon $\
+#t(1) Donc #undermath[$ sigma_n op(-->, limits: #true)_(n -> +oo) 0 $]
+
+=== \
+#t(1) Soit $(u_n) in RR^NN tq u_n tend(n,+oo) l$ et $sigma_n$ la suite des moyennes de Césàro associée à $(u_n)$ alors : \
+#t(1) la suite $(u_n - l)$ tend vers $0$\
+#t(1) Donc selon le résulta précédent: $sigma_n - l tend(n,+oo) 0$ \
+#t(1) Donc :
+#undermath[$ sigma_n tend(n,+oo) l $]
+
+=== \
+#t(1) Soit $(u_n)_(n>=1)$ la suite définie par $forall n in NN,u_n = (-1)^n$ \
+#t(1) Cette suite n'admet pas de limite \
+#t(1) Or la suite des moyennes de Césàro associé à $(u_n)$:
+$ sigma_n = 1/n sum^n_(k=1)(-1)^k = ((-1)^n -1)/(2n) tend(n,+oo) 0 $
+#t(1) Donc $sigma_n$ converge vers 0\
+#t(1) #undermath[Ce qui contredit la réciproque]
+
+=== \
+#t(1) Soit $A in RR$ alors:\
+#t(1) $exists n_0 in NN, forall n >= n_0, u_n >= 2A$ alors \
+#t(1) Soit un tel $n_0$ et \
+#t(1) Soit $(sigma_n)$ la suite des moyennes de Césàro de $(u_n)$, alors pour $n >= n_0$ :
+$ sigma_n = 1/n sum^n_(k=1)u_k = 1/n sum^(n_0 -1)_(k=1)(u_k) +1/n sum^(n)_(k=n_0)(u_k) >= 1/n sum^(n_0 -1)_(k=1)(u_k) + 2A (n-n_0+1)/n $\
+#t(1) Comme $1/n sum^(n_0 -1)_(k=1)(u_k)$ tend vers 0 (cf: première question) alors à partir qu'un certain rang $n_1$:
+$ 1/n sum^(n_0 -1)_(k=1)(u_k) >= -A/5 $ \
+#t(1) Et $2(n-n_0 +1)/n$ tend vers $2$ donc à partir d'un certain rang $n_2$: $2(n-n_0 +1 )/n >= 9/5$\
+#t(1) Poson $N = max(n_0, n_1, n_2)$\
+#pagebreak()
+#t(1) Alors pour tout $n >= N$:
+$ sigma_n >= -A/5+9/5 A >= 8/5 A >= A $
+#t(1) #undermath[Donc $sigma_n$ diverge vers $+oo$]
+
+=== \
+#t(1) Le sens $<==$ à déjà été prouver il reste donc le sens $==>$ à prouvé\
+#t(1) Supposons que $(sigma_n)$ converge vers $l$ et que $(u_n)$ est croissante alors:\
+#t(1) #text(20pt)[A faire]
+
+== Quelques appliquations
+=== \
+#t(1)
