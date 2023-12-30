@@ -25,6 +25,7 @@
 #let donc = "Donc" + h(5pt)
 #let onA = "On a" + h(5pt)
 #let tq = "tel que" + h(5pt)
+#let et = "et" + h(5pt)
 #let dt = math.dif + "t"
 #let tend(n, val) = $limits(-->)_(#n -> #val)$
 #set underline(stroke: red + 1pt)
@@ -41,6 +42,7 @@
   h(1em)
 }
 #set par(leading: 10pt)
+#let cv = "converge" + h(5pt)
 
 Gaspar Daguet
 #align(center, text(20pt)[Maths : DM 10])
@@ -105,7 +107,7 @@ alors:\
 #t(1) #text(20pt)[A faire]
 
 == Quelques appliquations
-=== \
+=== *Le lemme de l'escalier* \
 #t(1) Soit $n in NN$\
 #t(1) Poson $forall n>=2, v_n = a_n - a_(n-1)$ \
 #t(1) Selons le lemme de Césàro on a: 
@@ -116,3 +118,37 @@ $ 1/n sum^n_(k=2) v_n tend(n, +oo) a $ \
 #t(1) Poson alors $epsilon = abs(a_1) + abs(a) >0$\
 #t(1) Donc $forall n>=n_0, abs(a_n/n -a) < epsilon$\
 #t(1) #undermath[Autrement dit $a_n/n tend(n, +oo) a$]
+
+=== a.\
+#t(1) Prouvons tout d'abord que $u_n cv$ \
+#t(1) Comme $1+u_n^2 >0 et u_1 >0$ alors $forall n in NN^*, u_n > 0$\
+#t(1) Donc la suite est strictement positve et minorée par 0 \
+#pagebreak()
+#t(1) Et on a $ u_(n+1) - u_n = u_n/(1+u_n^2) - u_n = -u_n^3/(1+u_n^2) $
+#t(1) Or comme $u_n > 0 et 1 + u_n^2 > 0$ alors $-u_n^3 / (1+u_n^2) < 0$\
+#t(1) Donc la suite est décroisante \
+#t(1) Ainsi comme la suite est minorée et décroisante alors par le théorème de la limite monotone, \
+#t(1) $(u_n)$ converges vers $l$\
+\
+#t(1) Par passage à la limite dans la définition \
+#t(1) $l = l/(1+l^2) $\
+#t(1) donc $1+l^2 = 1$\
+#t(1) donc $l^2 = 0$ \
+#t(1) donc $l = 0$ \
+#t(1) #undermath[Ainsi $display(op(lim, limits: #true)_(n->+oo) u_n = 0)$]
+
+==== \
+#t(1) $v_n$ est bien définis car $u_n > 0$ \
+$ v_n+1 - v_n = 1/u_(n+1)^2 - 1/u_n^2 = (1+u_n^2)^2/u_n^2 - 1/u_n^2 = (1 + 2u_n^2 + u_n^4 - 1)/u_n^2 = 2 + underbracket(u_n^2, --> 0) tend(n,+oo) 2 $
+
+#t(1) #undermath[Ainsi $display(lim_(n->+oo) (v_(n+1) - v_n) = 2) $]
+
+==== \
+#t(1) Par le lemme de l'escalier, on a: $v_n / n = 1/(n u_n^2) tend(n, +oo) 2$ \
+#t(1) Donc $1/(2n u_n^2) tend(n,+oo) 1$ \
+#t(1) Donc $2n u_n^2 tend(n,+oo) 1$ \
+#t(1) #undermath[Donc $u_n sqrt(2n) tend(n,+oo) 2$] \
+
+= Exercice 2 : calcul des puissances d'une matrice $3 times 3$
+
+=== a. \
