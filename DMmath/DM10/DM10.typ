@@ -140,7 +140,7 @@ $ 1/n sum^n_(k=2) v_n tend(n, +oo) a $ \
 #t(1) Ainsi comme la suite est minorée et décroisante alors par le théorème de la limite monotone, \
 #t(1) $(u_n)$ converges vers $l$\
 \
-#t(1) Par passage à la limite dans la définition \
+#t(1) Par passage à la limite et par unicité de la limite dans la définition \
 #t(1) $l = l/(1+l^2) $\
 #t(1) donc $1+l^2 = 1$\
 #t(1) donc $l^2 = 0$ \
@@ -217,10 +217,19 @@ $ T^(n+1) = T^n T = #Tn #T = mat(1,n+1,0;0,1,0;0,0,2^(n+1)) $
 #t(1) #undermath[Donc l'hérédité est vérifiée] \
 \
 #t(1) #undermath[Ainsi par la principe de récurance simple $forall n in NN; T^n = #Tn$]
+#pagebreak()
 === \
 #let An = $mat(2^(n+1)-1, 2^(n+1)-2-n, -n; 1-2^n, 2-2^n +n, n; 2^n -1, 2^n -n -1, 1-n)$
-#t(1) Soit $n in NN$\
-#t(1) On sais que $A = P T P^(-1)$ \
-#t(1) Donc on a $A^n = P T^n P^(-1) = #P #Tn #P-1 = #An$\
+#t(1) On va prouver par récurance simple la proposition suivante  $P(n): A^n = P T^n P^(-1)$\
+- *Initialisation:*
+#t(1) $A^0 = "Id"_3$ et $P T^0 P^(-1) = P P^(-1) = "Id"_3$ \
+#t(1) #undermath[Donc l'initialisation est vérifiée] 
+- *Hérédité:* \
+#t(1) Soit $n in NN tq P(n)$ est vraie \
+#t(1) On rappelle que $A = P T P^(-1)$
+#t(1) $A^(n+1) = A^n A = P T^n P^(-1) P T P^(-1) = P T^n T P^(-1) = P T^(n+1) P ^(-1)$ \
+#t(1) #undermath[Donc l'hérédité est vérifiée] \
+#t(1) Ainsi par principe de récurance $P(n)$ est vraie \ 
+#t(1) Donc on a: $ forall n in NN, A^n = P T^n P^(-1) = #P #Tn #P-1 = #An $\
 \
 #t(1) #undermath[Ainsi $forall n in NN, A^n = #An$]
