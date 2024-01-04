@@ -59,7 +59,7 @@ Gaspar Daguet
 
 == Le théorème de Cesàro
 === a.\
-#t(1) Soit $epsilon in RR$ alors par la définition de limite:\
+#t(1) Par la définition de limite:\
 #t(1) #undermath[$ exists n_0 in NN^*, forall n >= n_0, abs(u_n) <= epsilon/2 $]
 
 ==== \
@@ -73,7 +73,7 @@ Gaspar Daguet
 $ 1/n sum^(n_0 -1)_(k=1) abs(u_k) op(-->, limits: #true)_(n->+oo) 0 $
 #t(1) Donc par la définition de limite: $ exists n_1 in NN^* , forall n >= n_1, 1/n sum^(n_0 -1)_(k=1) abs(u_k) <=epsilon/2 $ \
 #t(1) De plus:\
-$ 1/n sum^(n)_(k=n_0) abs(u_k) <= 1/n sum^(n)_(n_0) epsilon/2 = (n-n_0+1)/2 epsilon <=epsilon/2 $ \
+$ 1/n sum^(n)_(k=n_0) abs(u_k) <= 1/n sum^(n)_(k =n_0) epsilon/2 = (n-n_0+1)/2 epsilon <=epsilon/2 $ \
 #pagebreak()
 #t(1) Poson $N = max(n_1, n_0)$ alors : $ forall n >=N, abs(sigma_n) <= 1/n sum^(n_0 -1)_(k=1) abs(u_k) + 1/n sum^(n)_(k=n_0) abs(u_k) <=epsilon/2 + epsilon/2 <= epsilon $\
 #t(1) Donc #undermath[$ sigma_n op(-->, limits: #true)_(n -> +oo) 0 $]
@@ -111,10 +111,11 @@ $ sigma_n >= -A/5+9/5 A >= 8/5 A >= A $
 #t(1) #undermath[Donc $sigma_n$ diverge vers $+oo$]
 
 === \
-#t(1) Supposons que $(sigma_n)$ converge vers $l$ et que $(u_n)$ est croissante
-alors:\
-#t(1) #text(20pt)[A faire]
-
+#t(1) Supposons que $(sigma_n)$ converge vers $l$ et \
+#t(1) Supposons par l'absurde que $(u_n)$ est divergante \
+#t(1) Donc puisque $u_n$ est croissante alors $u_n --> +oo$ \
+#t(1) Ainsi par la question 4, $sigma_n --> +oo$ ce qui est absurde puisque $sigma_n cv$ \
+#t(1) #undermath[Ainsi $u_n cv$]
 == Quelques appliquations
 === *Le lemme de l'escalier* \
 #t(1) Soit $n in NN$\
