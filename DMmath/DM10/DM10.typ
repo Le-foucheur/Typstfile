@@ -27,6 +27,16 @@
 #let tq = "tel que" + h(5pt)
 #let et = "et" + h(5pt)
 #let dt = math.dif + "t"
+#let Id(n) = math.mat(..for x in range(n){
+  let l = ()
+  for y in range(n){
+    if y == x {
+      l.push(1)
+    }
+    else {l.push(0)}
+  }
+  (l,)
+})
 #let tend(n, val) = $limits(-->)_(#n -> #val)$
 #set underline(stroke: red + 1pt)
 #let undermath(body, col: red)= {
@@ -152,3 +162,65 @@ $ v_n+1 - v_n = 1/u_(n+1)^2 - 1/u_n^2 = (1+u_n^2)^2/u_n^2 - 1/u_n^2 = (1 + 2u_n^
 = Exercice 2 : calcul des puissances d'une matrice $3 times 3$
 
 === a. \
+#t(1) Soit $X in cal(M)_(3,1)(RR)$ et soient $a,b,c in RR tq X = mat(a;b;c)$ \
+#t(1) Ainsi le systeme se réécrit: $ cases(3a + b -c = a\ -a+b+c = b \ a = c) <=> cases(c= -b \ b= b \ a = -b) $ 
+
+#t(1) Ainsi l'ensemble des solution du système est: ${mat(-b;b;-b), b in RR}$ \
+#t(1) #undermath[Donc la matrice $C_1$ vaut: $mat(1;-1;1)$ ]
+
+==== \
+#t(1) Soit $X in cal(M)_(3,1)$ et soient $a,b,c in RR tq X = mat(a;b;c)$ \
+#t(1) Ainsi le systeme se réécrit: $ cases(3a + b -c = 2a\ -a+b+c = 2b \ a = 2c) <=> cases(c= -2b \ b= b \ a = -b) $ 
+#t(1) Ainsi l'ensemble des solution du système est: ${mat(-2b;b;-b), b in RR}$ \
+#t(1) #undermath[Donc la matrice $C_3$ vaut: $mat(2;-1;1)$ ]
+
+==== \
+#text(20pt)[A FAIRE]
+
+==== \
+#t(1) Soit $C_2 in cal(M)_(3,1)(RR)$ et soient $a,b,c in RR tq X = mat(a;b;c)$ \
+#t(1) Ainsi le systeme se réécrit: $ cases(3a + b -c = 1+a\ -a+b+c = -1+b \ a = 1+c) <=> cases(c= -1-b \ b= b \ a = -b) $ 
+
+#t(1) Ainsi l'ensemble des solution du système est: ${mat(-b;b;-1-b), b in RR}$ \
+#t(1) #undermath[Donc la matrice $C_2$ vaut: $mat(0;0;-1)$ ]
+
+=== \
+#let A = $mat(3,1,-1;-1,1,1;1,0,0)$
+#let P = $mat(1,0,2;-1,0,-1;1,-1,1)$
+#let T = $mat(1,1,0;0,1,0;0,0,2)$
+#t(1) On a donc $P = #P$
+
+*a.* \
+#t(1) $T = mat(1,1,0;0,1,0;0,0,2)$ est une telle matrice \
+#t(1) En effet:
+$ A P = #A #P  = mat(1,1,4;-1,-1,-2;1,0,2) = #P #T = P T $ 
+
+==== \
+#let P-1 = $mat(-1,-2,0;0,-1,-1;1,1,0)$
+#t(1) $ mat(1,0,2,1,0,0;-1,0,-1,0,1,0;1,-1,1,0,0,1;augment: #3) <==>_(cases(L_2 <- L_2 + L_1 \ L_3 <- L_1 - L_3 ,delim: "|")) mat(1,0,2,1,0,0;0,0,1,1,1,0;0,1,1,1,0,-1;augment: #3) <==>_(cases(delim: "|", L_2 <-> L_3)) mat(1,0,2,1,0,0;0,1,1,1,0,-1;0,0,1,1,1,0;augment: #3) $ \
+#t(1)  #undermath[Donc $P$ est inversible car tous les coefficients diagonaux sont non nul], alors: \
+$  mat(1,0,2,1,0,0;0,1,1,1,0,-1;0,0,1,1,1,0;augment: #3) <==>_(cases(delim: "|", L_1 <- L_1 - 2 L_3 \ L_2 <- L_2 - L_3)) mat(1,0,0,-1,-2,0;0,1,0,0,-1,-1;0,0,1,1,1,0;augment: #3) $
+#t(1) Ainsi $P^(-1) = #P-1$ \
+#t(1) Deplus, on a $A = P T P^(-1)$
+
+==== \
+#let Tn = $mat(1,n,0;0,1,0;0,0,2^n)$
+#t(1) On cherche à monter par récurance simple que $T^n = #Tn$
+
+- *Initialisation:*
+#t(1) Pour n = 0:
+$ T^0 = "Id"_3 = #Id(3) = mat(1,0,0;0,1,0;0,0,2^0) $
+#t(1) #undermath[Donc l'initialisation est vérifiée] 
+- *Hérédité:*
+#t(1) Soit $n in NN$ tel que $forall n in NN, T^n = #Tn$, alors:
+$ T^(n+1) = T^n T = #Tn #T = mat(1,n+1,0;0,1,0;0,0,2^(n+1)) $
+#t(1) #undermath[Donc l'hérédité est vérifiée] \
+\
+#t(1) #undermath[Ainsi par la principe de récurance simple $forall n in NN; T^n = #Tn$]
+=== \
+#let An = $mat(2^(n+1)-1, 2^(n+1)-2-n, -n; 1-2^n, 2-2^n +n, n; 2^n -1, 2^n -n -1, 1-n)$
+#t(1) Soit $n in NN$\
+#t(1) On sais que $A = P T P^(-1)$ \
+#t(1) Donc on a $A^n = P T^n P^(-1) = #P #Tn #P-1 = #An$\
+\
+#t(1) #undermath[Ainsi $forall n in NN, A^n = #An$]
