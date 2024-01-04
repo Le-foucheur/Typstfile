@@ -111,7 +111,6 @@ $ sigma_n >= -A/5+9/5 A >= 8/5 A >= A $
 #t(1) #undermath[Donc $sigma_n$ diverge vers $+oo$]
 
 === \
-#t(1) Le sens $<==$ à déjà été prouver il reste donc le sens $==>$ à prouvé\
 #t(1) Supposons que $(sigma_n)$ converge vers $l$ et que $(u_n)$ est croissante
 alors:\
 #t(1) #text(20pt)[A faire]
@@ -175,7 +174,13 @@ $ v_n+1 - v_n = 1/u_(n+1)^2 - 1/u_n^2 = (1+u_n^2)^2/u_n^2 - 1/u_n^2 = (1 + 2u_n^
 #t(1) #undermath[Donc la matrice $C_3$ vaut: $mat(2;-1;1)$ ]
 
 ==== \
-#text(20pt)[A FAIRE]
+#let l = math.lambda
+#t(1) Soit $X in cal(M)_(3,1)$ et soient $a,b,c in RR tq X = mat(a;b;c)$ \
+#t(1) Ainsi le systeme se réécrit: $ cases(3a + b -c = lambda a\ -a+b+c = #l b \ a = #l c) <=> cases(3 #l c + b - c = #l^2 c \ -#l c + b +c = #l b \ a = #l c) <=> cases( c (-#l^2 + 3#l -2) =0 \ b = -c \ a = #l c) $ 
+#t(1) la première ligne force $c=0$ car les racines du polynome $-x^2 + 3x -2$ sont $2 et 1$\
+#t(1) or #l est différent de 2 et de 1\
+#t(1) Donc la seul solution du système est $X = 0$\
+#t(1) #undermath[Donc il n'y a pas de solution au système non nul]
 
 ==== \
 #t(1) Soit $C_2 in cal(M)_(3,1)(RR)$ et soient $a,b,c in RR tq X = mat(a;b;c)$ \
