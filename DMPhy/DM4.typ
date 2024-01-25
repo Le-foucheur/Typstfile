@@ -67,7 +67,7 @@ on ne le prend plus en compte\ #t(1) pour la suite des calcules
 #t(1) Selon la question précédente:
 $ cases(#D(2)[x] = omega #D(1)[y] \ #D(2)[y] = -omega #D(1)[x]) $
 #t(1) Donc$ cases(
-  integral_0^t #D(2)[x] dt= omega integral _0^t #D(1)[y] \ integral_0^t #D(2)[y] dt= -omega integral _0^t #D(1)[x]
+  integral_0^t #D(2)[x] dt= omega integral_0^t #D(1)[y] \ integral_0^t #D(2)[y] dt= -omega integral_0^t #D(1)[x]
 ) = cases(#D(1)[x] = omega y \ #D(1)[y] = -omega x + v_0) $
 #t(1) Ainsi en remplaçant #D(1)[x] et #D(1)[y] dans la première équation on
 trouve:
