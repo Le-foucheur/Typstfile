@@ -58,3 +58,38 @@ Gaspar Daguet
 #align(center, text(20pt)[Maths : DM 10])
 
 === \
+#t(1) soit $n in NN^* $
+#t(1) $ v_p (x^n - y^n) = v_p ((x-y)sum_(k=0)^(n-1)(x^(n-1-k) y^k)) = v_p (x-y) + v_p (sum_(k=0)^(n-1)(x^(n-1-k) y^k)) $
+#t(1) Or par l'énoncé $p divides x-y$ donc $x equiv y [p]$\
+#t(1) Ainsi $display(sum_(k=0)^(n-1))(x^(n-1-k) x^k) equiv display(sum_(k=0)^(n-1))(x^(n-1-k) y^k) equiv display(sum_(k=0)^(n-1))(x^(n-1)) equiv display(x^(n-1) sum_(k=0)^(n-1))1 equiv n x^(n-1) [p]$ \
+#t(1) Donc comme p premier à $n$ et à $x$, il l'est aussi à $x^(n-1)$ alors $p divides.not n x^(n-1)$\
+#t(1) Ainsi: $v_p (display(sum_(k=0)^(n-1)(x^(n-1-k) y^k))) = 0$
+$ v_p (x^n - y^n) = v_p (x-y) + v_p (sum_(k=0)^(n-1)(x^(n-1-k) y^k)) = v_p (x-y) $
+#t(1) #undermath[Donc $forall n in NN^*,n and p = 1 => v_p (x^n - y^n) = v_p (x-y)$]
+
+=== a\
+#t(1) On a $2$ premier à $x$ et à $y$, il sont donc tout les deux impair \
+#t(1) Or la somme de deux impairs est pair donc $2 divides x+y$ \
+#t(1) Supposons par l'absurde que $4 divides x+y$ \
+#t(1) Donc comme $4 divides x-y$ alors $4 divides x+y+x-y = 2x$\
+#t(1) Donc $2 divides x$, absurde !\
+#t(1) Donc $4 = 2^2 divides.not x+y$ et $2 = 2^1 divides x+y$\
+#t(1) Ainsi $v_p (x+y) = 1$\
+#t(1) Donc:
+$ v_2 (x^2 - y^2) = v_2 (x-y) + v_2 (x+y) = v_p (x-y)+1 $
+
+==== \
+#t(1) Soit la propriété $P(n): v_2 (x^n-y^n) = v_2 (x-y) + v_2 (n)$\
+#t(1) On a, $v_2 (x-y) = v_2 (x-y) + v_p (1)$\
+#t(1) Donc pour $n=1$ la propriété est vérifié\
+#t(1) Soit $n in NN^* tq forall k in [|1;n|], P(k)$\
+#pagebreak()
+- Si $n+1$ est impair
+#t(1) alors $n+1 and 2 = 1$ et par la question 1\
+ $ v_2 (x^(n+1)-y^(n+1)) = v_2 (x-y) $
+- Si $n$ est pair alors, $exists k in NN^*, n = 2k$\
+#t(1) Soit un tel $k$ alors $v_2  (x^n - y^n) = v_2 ((x^k)^2-(y^k)^2)$\
+#t(1) Donc par la question 2.a 
+$ v_2 ((x^k)^2-(y^k)^2) = v_2 (x^k-y^k)+1 $
+#t(1) Or $k<n$, donc on peut appliquer l'hypothèse de récurance, ainsi
+$ v_2 (x^k-y^k)+1 = v_2 (x-y) + v_2 (k) +1 $
