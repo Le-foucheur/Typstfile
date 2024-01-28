@@ -52,6 +52,8 @@
 }
 #set par(leading: 10pt)
 #let cv = "converge" + h(5pt)
+#let vp = $v_p$
+#let bi = math.beta.alt
 
 Gaspar Daguet
 #align(center, text(20pt)[Maths : DM 10])
@@ -90,13 +92,13 @@ $ v_2 (x^(n+1)-y^(n+1)) = v_2 (x-y) = v_2 (x-y) + v_2 (n+1) $
 #t(1) Soit un tel $k$ alors $v_2 (x^n - y^n) = v_2 ((x^k)^2-(y^k)^2)$\
 #t(1) Donc par la question 2.a
 $ v_2 ((x^k)^2-(y^k)^2) = v_2 (x^k-y^k)+1 $
-#t(1) Or $k<n$, donc on peut appliquer l'hypothèse de récurance, ainsi
+#t(1) Or $k<n$, donc on peut appliquer l'hypothèse de récurrence, ainsi
 $ v_2 (x^k-y^k)+1 = v_2 (x-y) + v_2 (k) +1 $
 #t(1) Or $v_2 (2) = 1$, donc
 $ v_2 (x-y) + v_2 (k) +1 = v_2 (x-y) + v_2 (k) + v_2 (2) = v_2 (x-y) + v_2 (2k)\ = v_2 (x-y) + v_2 (n+1) $
 \
 #t(1) Ainsi dans les deux cas on a bien: $v_2 (x^(n+1)-y^(n+1)) = v_2 (x-y) +v_2 (n+1)$\
-#t(1) #undermath[Donc par le principe de récurence forte $v_2 (x^n-y^(n)) = v_2 (x-y) +v_2 (n)$]
+#t(1) #undermath[Donc par le principe de récurrence forte $v_2 (x^n-y^(n)) = v_2 (x-y) +v_2 (n)$]
 
 === a.\
 #t(1) Soit $k in [|1;p-1|]$ et $k$ impair
@@ -110,5 +112,46 @@ $ x^k equiv y^k+k(x-y)y^(k-1) + sum_(i=0)^(k-2) binom(k,i) y^i (x-y)^(k-i) equiv
 #pagebreak()
 ==== \
 $ sum_(k=0)^(p-1) x^k y^(p-1-k) = y^(p-1)  + sum_(k=1)^(p-1) x^k y^(p-1-k) $\
-#t(1) D'après la question précédente et comme $k in [|1|]$ $ y^(p-1) + sum_(k=1)^(p-1) x^k y^(p-1-k) equiv y^(p-1) + sum_(k=1)^(p-1) y^(p-1) + sum_(k=1)^(p-1)k(x-y)y^(p-2)\ equiv p y^(p-1) + (x-y)y^(p-2) p(p-1)/2  equiv p y^(p-1) [p^2] $\
-Donc $display(sum_(k=0)^(p-1) x^k y^(p-1-k) equiv p y^(p-1) [p^2] )$\
+#t(1) D'après la question précédente et comme $k in [|1; p-1|]$ $ y^(p-1) + sum_(k=1)^(p-1) x^k y^(p-1-k) equiv y^(p-1) + sum_(k=1)^(p-1) y^(p-1) + sum_(k=1)^(p-1)k(x-y)y^(p-2)\ equiv p y^(p-1) + (x-y)y^(p-2) p(p-1)/2  equiv p y^(p-1) [p^2] $\
+#t(1) #undermath[Donc $display(sum_(k=0)^(p-1) x^k y^(p-1-k) equiv p y^(p-1) [p^2] ) equiv 0 [p]$]\
+\
+#t(1) Ainsi $display(v_p (sum_(k=0)^(p-1) x^k y^(p-1-k)) = 1)$ \
+#t(1) Donc
+#undermath[$ v_p (x^p-y^p) = v_p (x-y) + v_p (sum_(k=0)^(p-1) x^k y^(p-1-k)) = v_p (x-y) +1  $]
+
+==== \
+#t(1) Prouvons par récurrence forte que $forall n in NN^*, v_p (x^n-y^n) = v_p (x-y) + v_p (n)$\
+#t(1) pour $n = 1$, $v_p (x^1-y^1) = v_p (x-y) + underbrace(v_p(1),=0)$\
+\
+#t(1) Soit $n in NN^* tq forall k in [|1; n|], v_p (x^k-y^k) = v_p (x-y) + v_p (KK)$
+- Si $p divides.not n+1$ alors $p and n+1 = 1$
+#t(1) Donc par la question 1:
+$ vp(x^p - y^p) = vp(x-y) = vp(x-y) + underbrace(vp(n+1), =0) $
+
+#pagebreak()
+- Si $p divides n+1$ alors $exists k in NN, n+1 = k p$, ainsi
+$ vp(x^(n+1)-y^(n+1)) = vp((x^k)^p-(y^k)^p) $
+#t(1) Donc par la question précédente
+$ vp((x^k)^p-(y^k)^p) = vp(x^k-y^k) +1 $
+#t(1) Or $k<p$, donc par hypothèse de récurrence 
+$ vp(x^k-y^k) +1 = vp(x-y) + vp(k) + underbrace(1, = vp(p)) = vp(x-y) + vp(p k) = vp(x-y) + vp(n+1) $
+
+#t(1) Ainsi dans les deux cas on a $vp(x^(n+1)-y^(n+1)) = vp(x-y) + vp(n+1)$\
+\
+#t(1) #undermath[Donc par le principe de récurence forte $vp(x^n-y^n) = vp(x-y) +vp(n)$]
+
+=== \
+- Si n est impaire, alors $exists beta.alt in NN, n = 2beta.alt +1$ alors 
+$ 2^n -1 = 2^(2beta.alt+1) -1 = 2(2^2)^beta.alt -1 $ 
+#t(1) Or $2^2 equiv 1 [3]$ donc
+$ 2(2^2)^beta.alt -1 equiv 2 -1 equiv 1 [3] $
+#t(1) #undermath[Ainsi $3 divides.not 2^n-1$ donc $forall k in NN^*, 3^k divides.not 2^n-1$]
+
+- Si n est pair, alors $exists beta.alt in NN, n = 2beta.alt$, donc on cherche $n tq v_3 (2^n -1) >= k$, alors
+$ v_3 (2^n -1) = v_3 (4^bi - 1) $
+#t(1) Or $3 divides 4-1$, donc par la question 3
+$ v_3 (4^bi - 1^bi) = v_3 (3) + v_3 (bi) = 1 + V_3 (bi) >= k $ 
+#t(1) donc $v_3 (bi) >= k-1$ \
+#t(1) Ainsi $3^k divides 2^n-1 <=> 2 times 3^(k-1) divides n$\
+\
+#t(1) #undermath[Donc les $n$ telles que $3^k divides 2^n -1 $ sont les $n$ divisible par $2 times 3^(k-1)$]
