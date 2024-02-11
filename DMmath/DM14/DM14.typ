@@ -7,8 +7,7 @@
   },
 )
 #set underline(stroke: red + 1pt)
-#set par(leading: 10pt)
-#set text(font: "Allura")
+#set par(leading: 0.7em)
 
 Gaspar Daguet
 #align(center, text(20pt)[Maths : DM 14])
@@ -137,4 +136,28 @@ $ beta.alt = n $
 #t(1) Si $cal(C)_p$ contient un polynôme de degré 3, alors soit $P = X^3 + a X^2 + b X + c $ un telle polynôme.\
 #t(1) Alors 
 $ P compose (X^2+p) &= (X^2+p)^3 + a (X^2+p)^2 + b (X^2+p) + c \
-&= X^6 $
+&= X^6 +(3p+a) X^4 + (3p^2 + 2a p + b) X^2 + p^3 + a p^2 + b p+c $
+#t(1) et 
+$ (X^2 + p) compose P &= (X^3 + a X^2 + b X + c)^2 + p\
+&= X^6 + 2a X^5 + (a^2 + 2b)X^4 + 2( a b+c )X^3 + (b^2 +2a c )X^2 + 2b c X + c^2 + p $
+#t(1) Il en vient donc:
+$ cases(2a = 0, a^2 + 2b = 3p + a, 2(a b+c) = 0, b^2 + 2a c = (3p^2 + 2a p+ b), 
+2 b c = 0, c^2 + p = p^3 + a p^2 + b p + c) <=> 
+cases(a=0, 3 p = 2b, c = 0,b^2 = 3 p^2 + b  , p^3 + 3/2p^2 = p) <=> 
+cases(a=0,c=0, , 12 p^2 - 9p^2 + 6 p = 3p(p +2),
+p(2p^2+3p-2)=p(p - 1/2)(p+2)) $
+#t(1) #undermath[Donc les deux dernière lignes du système nous donne que $p = 0 #underline(stroke: black)[ou] p =-2$]
+
+==== \
+#t(1) #soitn($P$, $RR[X]$) tel que $P$ non constant et qu'il vérifie $P compose X^2 = X^2 compose P$\
+#t(1) Alors posons $P = display(sum_(k=0)^(n)a_k X^k)$ avec $n$ le degré de $P$ et $a_0, dots.h.c, a_(n-1) in RR$ et $a_n = 1$\
+#t(1) Alors $P compose X^2 = display(sum_(k=0)^(n)a_k X^(2k))$ et $X^2 compose P = (display(sum_(k=0)^(n)a_k X^k))^2 = display(sum_(k=0)^(n)a_k^2 X^2k) + 2 display(sum_(j=0)^(n)sum_(i=0)^(j-1))a_i a_j$\
+#t(1) Donc 
+$ P compose X^2 = X^2 compose P <=> display(sum_(k=0)^(n)(a_k - a_k^2)X^(2k)) - 2 display(sum_(j=0)^(n)sum_(i=0)^(j-1)a_i a_j) = 0 $
+#t(1) Donc $display(sum_(j=0)^(n)sum_(i=0)^(j-1)a_i a_j) = 0$ \
+#t(1) Donc pour $j = n, display(sum_(i=0)^(n-1)a_i a_n) = display(sum_(i=0)^(n-1)a_i) = 0$\
+#t(1) Ainsi $forall i in [|0; n-1|], a_i = 0$\
+#t(1) Donc $P = X^n$ car $a_n$ est le seul coefficent non nul\
+#t(1) #undermath[Ainsi $cal(C)_0 {X^n, n in NN^*}$]
+
+=== a\
