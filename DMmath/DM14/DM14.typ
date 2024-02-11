@@ -8,6 +8,7 @@
 )
 #set underline(stroke: red + 1pt)
 #set par(leading: 10pt)
+#set text(font: "Allura")
 
 Gaspar Daguet
 #align(center, text(20pt)[Maths : DM 14])
@@ -93,3 +94,47 @@ $ (T_n compose T_m)(cos(theta)) = T_n (cos(m theta)) = cos(n m theta)  =T_(m n)(
 == Le théorème de Block et Thielman\
 
 === \
+#t(1) #soietn($m,n$, $NN^*$)\
+#t(1) Alors
+$ X^n compose X^m =(X^m)^n = X^(m n) = (X^n)^m = X^m compose X^n $
+#t(1) et 
+$ T_n compose T_m = T_(n m) = T_(m n) = T_m compose T_n $
+#t(1) De plus \
+$ deg X^n = n $
+#t(1) et on a déjà montré que $deg T_n = n$\
+#t(1) #undermath[Ainsi $(X^n)_(n in NN^*) et (T_n)_(n in NN^*)$ sont comutante ]
+
+=== a.\
+#t(1) #soitn($P$, $cal(C)_p$) et #soietn($a,p$, $RR$), le coefficent dominant de $P$\
+#t(1) Alors $P$ doit vérifier: $P compose (X^2+p) = (X^2+1)compose P$\
+#t(1) Or le coefficent dominant de $P compose (X^2+p)$ est $a$\
+#t(1) et celuis de $(X^2+1)compose P$ est $a^2$ \
+#t(1) Donc $a^2 = a <=> a = 1 #underline("ou", stroke: black) a = 0$\
+#t(1) Or si $a = 0$ alors $a$ n'est pas le coefficent dominant de $P$, \
+#t(1) ce qui est impossible par définition de $a$\
+#t(1) #undermath[Donc $a =1$]
+
+==== \
+#t(1) Supposons par l'absurde que $P_1 != P_2$\
+#t(1) Tout d'abord on a, 
+$ P_1 compose (X^2+p) - P_2 (X^2 + p) = (P_1 - P_2) compose (X^2 +p) $
+#t(1) De plus 
+$ P_1 compose (X^2+p) - P_2 (X^2 + p) &= (X^2+p) compose P_1 - (X^2+p) compose P_2 \
+&= P_1^2+p - P_2^2 - p = P_1^2 -P_2^2 $ 
+#t(1) Ainsi $(P_1 - P_2) compose (X^2 +p) = P_1^2 - P_2^2$\
+#t(1) Sauf que $P_1 et P_2$ sont tout deux unitaire par la question précédente\
+#t(1) et de même degrés donc $deg(P_1 - P_2) = beta.alt in [|1;n-1|]$\
+#t(1) Ainsi:
+$ deg((P_1 - P_2) compose (X^2 +p)) = deg(P_1^2 - P_2^2) &= deg((P_1 + P_2)(P_1 - P_2)) $
+#t(1) Donc:
+$ 2 beta.alt = n + beta.alt $
+#pagebreak()
+#t(1) Donc:
+$ beta.alt = n $ 
+#t(1) #undermath[Ce qui est absurde, donc $P_1 = P_2$]
+
+==== \
+#t(1) Si $cal(C)_p$ contient un polynôme de degré 3, alors soit $P = X^3 + a X^2 + b X + c $ un telle polynôme.\
+#t(1) Alors 
+$ P compose (X^2+p) &= (X^2+p)^3 + a (X^2+p)^2 + b (X^2+p) + c \
+&= X^6 $

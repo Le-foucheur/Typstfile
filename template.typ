@@ -43,4 +43,5 @@
 }
 #let cv = "converge" + h(5pt)
 #let bi = math.beta.alt
-#let soitn(body, ens) = [Soit $#body in #ens$,]
+#let soitn(body, ens) = [Soit $#body in #ens$]
+#let soietn(body, ens) = [Soient $#body in #ens$]
