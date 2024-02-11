@@ -45,3 +45,4 @@
 #let bi = math.beta.alt
 #let soitn(body, ens) = [Soit $#body in #ens$]
 #let soietn(body, ens) = [Soient $#body in #ens$]
+#let ssi = "si et seulement si" + h(5pt)

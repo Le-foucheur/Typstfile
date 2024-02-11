@@ -8,6 +8,7 @@
 )
 #set underline(stroke: red + 1pt)
 #set par(leading: 0.7em)
+#set page(numbering: "1/1", number-align: right)
 
 Gaspar Daguet
 #align(center, text(20pt)[Maths : DM 14])
@@ -158,6 +159,49 @@ $ P compose X^2 = X^2 compose P <=> display(sum_(k=0)^(n)(a_k - a_k^2)X^(2k)) - 
 #t(1) Donc pour $j = n, display(sum_(i=0)^(n-1)a_i a_n) = display(sum_(i=0)^(n-1)a_i) = 0$\
 #t(1) Ainsi $forall i in [|0; n-1|], a_i = 0$\
 #t(1) Donc $P = X^n$ car $a_n$ est le seul coefficent non nul\
-#t(1) #undermath[Ainsi $cal(C)_0 {X^n, n in NN^*}$]
+#t(1) #undermath[Ainsi $cal(C)_0 = {X^n, n in NN^*}$]
 
 === a\
+
+#t(1) #soietn($U,P$, $RR[X]$) de degrés respectif $n et m$ tel que $U compose P = P compose U = X$\
+#t(1) Alors $deg(U compose P) = deg(P compose U) = deg X <=> m n = n m = 1 <=> m = n = 1$ car $n, m in NN$\
+#t(1) #undermath[Donc $U$ est inversible #ssi $deg U = 1$]
+
+==== \
+#t(1) Soit $U = a X+b in RR[X]$, vérifions que $P =1/a X - b/a $ est bien l'inverse de $U$\
+#t(1) Alors \
+$ U compose P = a P +b = X = a (X-b)/a + b = X-b + b = X $
+#t(1) Et 
+$ P compose U = ((a X + b) - b)/a = (a X)/a = X $
+#t(1) Donc $P = U^(-1) = 1/a X - b/a$
+
+=== \
+
+#t(1) #soietn($n, m$, $NN^*$)\
+#t(1) Alors, on a 
+$ deg(U compose P_n compose U^(-1)) = 1 times n times 1 = n $
+#t(1) Et
+$ (U compose P_n compose U^(-1)) compose (U compose P_m compose U^(-1) ) &= U compose P_n compose U^(-1) compose U compose P_m compose U^(-1)\
+&= U compose P_n compose P_m compose U^(-1) = U compose P_m compose P_n compose U^(-1)\
+&= U compose P_m compose U^(-1) compose U compose P_n compose U^(-1) = (U compose P_m compose U^(-1)) compose (U compose P_n compose U^(-1)) $
+#t(1) #undermath[Donc $(U compose P_n compose U^(-1))_(n in NN^*)$ est une suite commutante]
+
+=== \
+#t(1) On a selon la question *7.b*, $U^(-1) = 1/a X -b/(2a) $\
+#t(1) Donc 
+$ U compose P compose U^(-1) &= U(P(U^(-1))) = U(P(1/a X - b/(2a)))\
+&= U(a(1/a X - b/(2a))^2+b(1/a X - b/(2a))+c)\
+&= U(1/a X^2 cancel(stroke: #red,- b/a X) + cancel(stroke: #red,b^2/(2a)) + cancel(stroke: #red,b/a X ) cancel(stroke: #red, - b^2/(2a)) + c)\
+&= U(1/a X^2 + c)\
+&= a(1/a X^2+ c) + b/2 = X^2 + underbrace(a c +b/2, = p)
+$
+#t(1) #undermath[Donc $U compose P compose U^(-1) = X^2 + p$ avec $p = a c + b/2$]
+
+#pagebreak()
+=== \
+#t(1) Montrons que $V = 1/2 X in RR[X]$ est un tel polynôme
+#t(1) Soit $V$ un tel polynôme, alors:
+$ V compose (X^2 -2) compose V^(-1) = 1/2((2X)^2 - 2) = 1/2 (4X^2 - 2) = 2X^2 - 1 = T_2 $
+#t(1) #undermath[Donc $V$ est un tel polynôme]
+
+=== \
