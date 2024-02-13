@@ -46,3 +46,4 @@
 #let soitn(body, ens) = [Soit $#body in #ens$]
 #let soietn(body, ens) = [Soient $#body in #ens$]
 #let ssi = "si et seulement si" + h(5pt)
+#let calC = text(font: "Wedding")[C]

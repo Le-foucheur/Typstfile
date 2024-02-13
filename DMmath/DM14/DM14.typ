@@ -105,7 +105,7 @@ $ deg X^n = n $
 #t(1) #undermath[Ainsi $(X^n)_(n in NN^*) et (T_n)_(n in NN^*)$ sont comutante ]
 
 === a.\
-#t(1) #soitn($P$, $cal(C)_p$) et #soietn($a,p$, $RR$), le coefficent dominant de $P$\
+#t(1) #soitn($P$, $calC_p$) et #soietn($a,p$, $RR$), le coefficent dominant de $P$\
 #t(1) Alors $P$ doit vérifier: $P compose (X^2+p) = (X^2+1)compose P$\
 #t(1) Or le coefficent dominant de $P compose (X^2+p)$ est $a$\
 #t(1) et celuis de $(X^2+1)compose P$ est $a^2$ \
@@ -134,7 +134,7 @@ $ beta.alt = n $
 #t(1) #undermath[Ce qui est absurde, donc $P_1 = P_2$]
 
 ==== \
-#t(1) Si $cal(C)_p$ contient un polynôme de degré 3, alors soit $P = X^3 + a X^2 + b X + c $ un telle polynôme.\
+#t(1) Si $calC_p$ contient un polynôme de degré 3, alors soit $P = X^3 + a X^2 + b X + c $ un telle polynôme.\
 #t(1) Alors 
 $ P compose (X^2+p) &= (X^2+p)^3 + a (X^2+p)^2 + b (X^2+p) + c \
 &= X^6 +(3p+a) X^4 + (3p^2 + 2a p + b) X^2 + p^3 + a p^2 + b p+c $
@@ -150,16 +150,15 @@ p(2p^2+3p-2)=p(p - 1/2)(p+2)) $
 #t(1) #undermath[Donc les deux dernière lignes du système nous donne que $p = 0 #underline(stroke: black)[ou] p =-2$]
 
 ==== \
-#t(1) #soitn($P$, $RR[X]$) tel que $P$ non constant et qu'il vérifie $P compose X^2 = X^2 compose P$\
-#t(1) Alors posons $P = display(sum_(k=0)^(n)a_k X^k)$ avec $n$ le degré de $P$ et $a_0, dots.h.c, a_(n-1) in RR$ et $a_n = 1$\
-#t(1) Alors $P compose X^2 = display(sum_(k=0)^(n)a_k X^(2k))$ et $X^2 compose P = (display(sum_(k=0)^(n)a_k X^k))^2 = display(sum_(k=0)^(n)a_k^2 X^2k) + 2 display(sum_(j=0)^(n)sum_(i=0)^(j-1))a_i a_j$\
-#t(1) Donc 
-$ P compose X^2 = X^2 compose P <=> display(sum_(k=0)^(n)(a_k - a_k^2)X^(2k)) - 2 display(sum_(j=0)^(n)sum_(i=0)^(j-1)a_i a_j) = 0 $
-#t(1) Donc $display(sum_(j=0)^(n)sum_(i=0)^(j-1)a_i a_j) = 0$ \
-#t(1) Donc pour $j = n, display(sum_(i=0)^(n-1)a_i a_n) = display(sum_(i=0)^(n-1)a_i) = 0$\
-#t(1) Ainsi $forall i in [|0; n-1|], a_i = 0$\
-#t(1) Donc $P = X^n$ car $a_n$ est le seul coefficent non nul\
-#t(1) #undermath[Ainsi $cal(C)_0 = {X^n, n in NN^*}$]
+#t(1) #soitn($X^n$, $RR_n [X]$)\
+#t(1) Alors
+$ X^n compose X^2 = (X^2)^n = X^(2n) = (X^n)^2 = X^2 compose X^n $
+#t(1) Donc $X^n in calC_0 $\
+#t(1) Donc ${X^n, n in NN^*} subset calC_0$\
+#t(1) Or on a montré à la question *6.b* que si il y avais un polynôme de degré $n$ dans $calC$\
+#t(1) alors il est le seul de ce degré \
+#t(1) #undermath[Ainsi ${X^n, n in NN^*} = calC_0$]
+
 
 === a\
 
@@ -199,9 +198,10 @@ $
 
 #pagebreak()
 === \
-#t(1) Montrons que $V = 1/2 X in RR[X]$ est un tel polynôme
+#t(1) Montrons que $V = 1/2 X in RR[X]$ est un tel polynôme \
 #t(1) Soit $V$ un tel polynôme, alors:
 $ V compose (X^2 -2) compose V^(-1) = 1/2((2X)^2 - 2) = 1/2 (4X^2 - 2) = 2X^2 - 1 = T_2 $
 #t(1) #undermath[Donc $V$ est un tel polynôme]
 
 === \
+#str.from-unicode(0x16A1)
