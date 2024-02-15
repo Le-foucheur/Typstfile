@@ -22,6 +22,9 @@
 #let eh = str.from-unicode(0x16D6)
 #let per = str.from-unicode(0x16C8)
 #let ber = str.from-unicode(0x16D2)
+#let naing = str.from-unicode(0x16DC)
+#let suz = str.from-unicode(0x16AD)
+#let zus = rotate(180deg)[#str.from-unicode(0x16AD)]
 
 #table(
   columns: 3,
@@ -53,6 +56,9 @@
   $<$,$eh$,[e],
   $>=$,$man ing$,[maning],
   $<=$,$eh ing$,[ehwing],
+  $!=$,$naing$, [naing/na i ng],
+  $subset$,$suz$, [suz],
+  $supset$,$zus$, [zus],
 )
 
 #let b12(n) ={ let rep = ""
@@ -131,5 +137,5 @@ let tmp = 0
 #grid(
   columns:1,
   gutter: 5pt,
-  ..oui(0,144)
+  ..oui(0,30)
 )
