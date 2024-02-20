@@ -17,7 +17,7 @@
 Gaspar Daguet
 #align(
   center,
-  text(20pt)[DM n°4]
+  text(20pt)[DM n°5]
 )
 
 #align(center)[= Exercice 2 : Chauffage d'un gaz par effet Joule]
