@@ -101,5 +101,6 @@ et\
 Q = #calc.round(1/(o/(2* calc.pi*900)-(2* calc.pi*900)/o),digits: 1) $
 
 === \
-#t(1) On a $f'_r = sqrt(1/(C' L)) donc C' =1/(L f'_r^2) $\
-#t(1) #undermath[AN:] $C' = 156,25 mu F$
+#t(1) Ajouter un condensateur reviens à ajouter leur capacités \
+#t(1) Donc on a $f'_r = 1/(2pi) sqrt(1/((C'+C) L)) donc C' =1/(4pi^2 L f'_r^2) - C $\
+#t(1) #undermath[AN:] $C' = 1.43 mu F$
