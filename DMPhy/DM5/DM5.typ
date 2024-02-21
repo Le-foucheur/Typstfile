@@ -13,6 +13,7 @@
 }
 #set underline(stroke: red + 1pt)
 #set par(leading: 10pt)
+#set page(numbering: "1/1", number-align: right)
 
 Gaspar Daguet
 #align(
@@ -101,6 +102,7 @@ et\
 Q = #calc.round(1/(o/(2* calc.pi*900)-(2* calc.pi*900)/o),digits: 1) $
 
 === \
-#t(1) Ajouter un condensateur reviens à ajouter leur capacités \
-#t(1) Donc on a $f'_r = 1/(2pi) sqrt(1/((C'+C) L)) donc C' =1/(4pi^2 L f'_r^2) - C $\
+#t(1) Ajouter un condensateur reviens à l'étude du système ci-dessus \
+#t(1) avec un condensateur de capacité $C+C'$ \
+#t(1) Donc on a $f'_r = 1/(2 pi) omega_r =1/(2pi) sqrt(1/((C'+C) L)) donc C' =1/(4pi^2 L f'_r^2) - C $\
 #t(1) #undermath[AN:] $C' = 1.43 mu F$
