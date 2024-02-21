@@ -38,7 +38,7 @@ $ P_f V_f = R n T_f $
 === \
 #t(1) On a le travaille éléctrique élémentaire qui vaut:
 $ delta W_(è l) = E i dt = E^2/R(T) dt $
-#t(1) Or ce travaille va se transformer en chaleur pour le gaz donc on a: $delta Q = delta W_(è l)$\
+#t(1) Or ce travaille va se transformer en chaleur par effet joule pour le gaz donc on a: $delta Q = delta W_(è l)$\
 #t(1) De plus comme la transformation est isobare et que $C_(p m)$ est constant on a:
 $ dif H = n C_(p m) dif T $
 #pagebreak()
