@@ -49,14 +49,17 @@ $ &dif H = delta Q\
   &"Donc" n C_(p m) dif T = E^2/R(T) dt \
   &"Donc" (dif T)/dt = E^2/(n C_(p m) R(T)) = E^2/(C_(p) alpha T)\
   &"Donc" 2T (dif T)/dt = (dif T^2)/dt = (2E^2)/(C_(p) alpha)\
-  &"Donc" T^2 = (2E^2)/(C_(p) alpha)(t_f - t_i) =(2E^2 T_0)/(C_(p) R_0)(t_f - t_i) \
-  &"Donc" T(t) = E sqrt((2 T_0)/(C_(p) R_0) (t_f - t_i))
+  &"Donc" T^2 = (2E^2)/(C_(p) alpha)(t_f - t_i)  + C_1 =(2E^2 T_0)/(C_(p) R_0)(t_f - t_i) + C_1 \
+  &"Donc" T(t) =sqrt((2 T_0 E^2)/(C_(p) R_0) (t_f - t_i) + C_1)
 $
-#t(1) Donc en prenant $t_i = 0$ à l'instant où on commance à faire chauffer le système\
-#t(1) #undermath[On obtient: $display(T(t) = E sqrt((2 T_0)/(C_p R_0)t))$]
-
+#t(1) Donc en prenant $t_i = 0$ à l'instant où on commance à faire chauffer le système \
+#t(1) On obtient: $display(T(t) = sqrt((2 T_0 E^2)/(C_p R_0)t + C_1))$ \
+#t(1) Or $T(0) = T_0$ 
+$ &"donc" T_0 = sqrt(C_1)\
+&"donc" T_0^2 = C_1 $
+#t(1) #undermath[Ainsi $display(T(t) = T_0 sqrt((2 E^2)/(C_p R_0 T_0)t+1))$]
 === \
-#t(1) #undermath[On a que: $display(T_f = T(tau) = E sqrt((2 T_0)/(C_p R_0) tau))$]\
+#t(1) #undermath[On a que: $display(T_f = T(tau) = T_0 sqrt((2 E^2)/(C_p R_0 T_0) tau +1))$]\
 \
 
 #align(center,text[ = Exercice 3 : Circuit $R L C$ parallèle])
