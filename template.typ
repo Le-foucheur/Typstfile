@@ -43,7 +43,13 @@
 }
 #let cv = "converge" + h(5pt)
 #let bi = math.beta.alt
-#let soitn(body, ens) = [Soit $#body in #ens$]
-#let soietn(body, ens) = [Soient $#body in #ens$]
+#let soitn(body, ens) = [soit $#body in #ens$]
+#let soietn(body, ens) = [soient $#body in #ens$]
+#let Soitn(body, ens) = [Soit $#body in #ens$]
+#let Soietn(body, ens) = [Soient $#body in #ens$]
 #let ssi = "si et seulement si" + h(5pt)
 #let calC = text(font: "Wedding")[C]
+#let vect(body) = "Vect("+ body + ")"
+#let ateb = math.beta.alt
+#let Ker(body) = if (body.fields().keys() == ("text",)) {[Ker #body]} else {[Ker(#body) ]}
+#let Im(body) = if (body.fields().keys() == ("text",)) {[Im #body]} else {[Im(#body) ]}
