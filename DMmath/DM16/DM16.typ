@@ -55,7 +55,23 @@ $ u(x+y) = u(x) + u(y) = lambda_x x + lambda_y y $
 #t(1) alors $phi (A B) = ateb tr(A B) = ateb tr(B A) = phi (B A)$\
 #t(1) #undermath[ Donc $phi in vect(tr) => forall A,B in cal(M)_n (CC), phi (A B) = phi (B A)$]\
 \
-- ($arrow.l.double$) Supposons que $forall A,B in cal(M)_n (CC), phi (A B) = phi (B A)$
+- ($arrow.l.double$) Supposons que $forall A,B in cal(M)_n (CC), phi (A B) = phi (B A)$\
+#t(1) Soit $M in M_n (CC)$, alors $M = sum_(1<=i,j<=n)m_(i,j) E_(i,j)$ avec $forall i,j in [|1;n|]  m_(i,j) in CC$\
+#t(1) Ainsi
+$ phi(M) = phi(sum_(1<=i,j<=n )m_(i,j) E_(i,j) ) = sum_(1<=i,j<=n )m_(i,j) phi(E_(i,j)) $
+#t(1) Or 
+$forall i,j,l,k in [|1,n|], E_(i,j) E_(l,k) =delta_(j,l)E_(i,k)$\
+#t(1) Donc
+$ sum_(1<=i,j<=n )m_(i,j) phi(E_(i,j)) &= sum_(1<=i,j<=n )m_(i,j) phi(delta_(1,1)E_(i,j)) = sum_(1<=i,j<=n )m_(i,j) phi(E_(i,1) E_(1,j))\
+&=sum_(1<=i,j<=n )m_(i,j) phi(E_(1,j)E_(i,1)) = sum_(1<=i,j<=n )m_(i,j) phi(delta_(i,j)E_(1,1))\
+&= underbrace(sum_(1<=i<j<=n )m_(i,j) phi(delta_(i,j)E_(i,j)), =0", car" i !=j) + sum_(k=1)^(n)m_(k,k)phi(delta_(1,1)E_(1,1))\
+&= phi(E_(1,1)) sum_(k=1)^(n)m_(k,k) = phi(E_(1,1))tr(M) $
+#t(1) Donc $phi(M) = lambda tr(M)$ avec $lambda = phi(E_(1,1))$\
+#t(1) #undermath[Donc $phi in vect(tr)$]\
+\
+#t(1) #undermath[Ainsi par double implication $phi in vect(tr) <=> forall A,B in cal(M)_n (CC), phi(A B) = phi(B A)$]
+
+#pagebreak()
 
 = Exercice 3: composée de deux projecteurs qui commutent \
 \
