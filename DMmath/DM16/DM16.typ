@@ -3,11 +3,7 @@
 #set heading(
   numbering: (..numbers) => {
     let n = numbers.pos().len();
-    if n == 1 { question.update(1); } 
-    else if n == 2 { [Partie ]; numbering("I", numbers.pos().at(1)) ;"." } 
-    else if n == 3 { [N=°];question.step(); question.display();"." } 
-    else if n == 4 { numbering("a.", numbers.pos().at(3) + 1) } 
-    else if n == 5 { numbering("i.", numbers.pos().at(4)) }
+    if n == 1 { question.update(0); } else if n == 2 { [Partie ]; numbering("I", numbers.pos().at(1)) ;"." } else if n == 3 { [N=°];question.step(); question.display();"." } else if n == 4 { numbering("a.", numbers.pos().at(3) + 1) } else if n == 5 { numbering("i.", numbers.pos().at(4)) }
   },
 )
 #set underline(stroke: red + 1pt)
@@ -56,7 +52,7 @@ $ u(x+y) = u(x) + u(y) = lambda_x x + lambda_y y $
 #t(1) #undermath[ Donc $phi in vect(tr) => forall A,B in cal(M)_n (CC), phi (A B) = phi (B A)$]\
 \
 - ($arrow.l.double$) Supposons que $forall A,B in cal(M)_n (CC), phi (A B) = phi (B A)$\
-#t(1) Soit $M in M_n (CC)$, alors $M = sum_(1<=i,j<=n)m_(i,j) E_(i,j)$ avec $forall i,j in [|1;n|]  m_(i,j) in CC$\
+#t(1) Soit $M in M_n (CC)$, alors $display(M = sum_(1<=i,j<=n)m_(i,j) E_(i,j))$ avec $forall i,j in [|1;n|]  m_(i,j) in CC$\
 #t(1) Ainsi
 $ phi(M) = phi(sum_(1<=i,j<=n )m_(i,j) E_(i,j) ) = sum_(1<=i,j<=n )m_(i,j) phi(E_(i,j)) $
 #t(1) Or 
