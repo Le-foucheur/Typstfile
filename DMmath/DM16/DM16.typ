@@ -91,14 +91,27 @@ $ (p compose q)(ateb x + y) &= p(q(ateb x + y)) = p(ateb q(x) + q(y))\
 #t(2) Donc $x in Ker(p compose q)$\
 #t(2) Donc $Ker(p)+Ker(q) subset Ker(p compose q)$\
 \
-#t(1) 2. De plus #soitn($x$, $Ker(p compose q)$)
-
+#t(1) 2. De plus #soitn($x$, $Ker(p compose q)$), \
+#t(2) alors $p(q(x)) = q(p(x)) = 0$ donc $p(x) in Ker(q)$\
+#t(2) Ainsi, $p(x-q(x)) = p(x) - p(q(x)) = p(x) in Ker(q)$\
+#t(2) Donc $x = (x-q(x)) + q(x)$ avec $x-q(x) in Ker(q) et q(x) in Ker(p)$\
+#t(2) Donc $x in Ker(p) + Ker(q) $\
+#t(2) Donc $Ker(p compose q) subset Ker(p) + Ker(q)$ \
+\
+#t(1) #undermath[Donc par le principe de double inclusion, $Ker(p compose q) = Ker(p) + Ker(q)$]\
+\
 - Enfin prouvons également par double inclusion que $Im(p compose q) = Im(p) sect Im(q)$
 #t(1) 1. #Soitn($x$, $Im(p compose q)$) alors 
-$ exists y in E, x = p(q(x))$, soit un telle $y$\
+$ exists y in E, x = p(q(y))$, soit un tel $y$\
 #t(2) donc $x in Im(p)$\
 #t(2) et $x = p(q(x)) = q(p(x)) in Im(q)$\
 #t(2) Donc $x in Im(p) sect Im(q)$\
 #t(2) Donc $Im(p compose q) subset Im(p) sect Im(q) $\
+\
 #t(1) 2. #Soitn($x$, $Im(p) sect Im(q)$) alors $x in Im(p) #underline(stroke : black)[et] x in Im(q)$\
-#t(2) Donc $exists y,y' in E, x = p(y) #underline(et, stroke: black) x =q(y')$
+#t(2) Donc $x = p(x) = q(x)$\
+#t(2) il vient donc que $x = p(q(x))$\
+#t(2) Donc $x in Im(p compose q)$\
+#t(2) Donc $Im(p) sect Im(q) subset Im(p compose q)$\
+\
+#t(1) #undermath[Ainsi par la principe de double inclusion $Im(p compose q) = Im(p) sect Im(q)$]
