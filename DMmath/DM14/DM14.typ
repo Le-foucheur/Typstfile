@@ -190,7 +190,7 @@ $ (U compose P_n compose U^(-1)) compose (U compose P_m compose U^(-1) ) &= U co
 #t(1) Donc 
 $ U compose P compose U^(-1) &= U(P(U^(-1))) = U(P(1/a X - b/(2a)))\
 &= U(a(1/a X - b/(2a))^2+b(1/a X - b/(2a))+c)\
-&= U(1/a X^2 cancel(stroke: #red,- b/a X) + cancel(stroke: #red,b^2/(2a)) + cancel(stroke: #red,b/a X ) cancel(stroke: #red, - b^2/(2a)) + c)\
+&= U(1/a X^2 -cancel(stroke: #red, b/a X) + cancel(stroke: #red,b^2/(2a)) + cancel(stroke: #red,b/a X ) -cancel(stroke: #red,  b^2/(2a)) + c)\
 &= U(1/a X^2 + c)\
 &= a(1/a X^2+ c) + b/2 = X^2 + underbrace(a c +b/2, = p)
 $

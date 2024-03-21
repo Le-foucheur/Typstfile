@@ -137,5 +137,5 @@ let tmp = 0
 #grid(
   columns:1,
   gutter: 5pt,
-  ..oui(0,12)
+  ..oui(0,calc.pow(12,1))
 )
