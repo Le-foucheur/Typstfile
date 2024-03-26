@@ -53,3 +53,4 @@
 #let ateb = math.beta.alt
 #let Ker(body) = if (body.fields().keys() == ("text",)) {[Ker #body]} else {[Ker(#body) ]}
 #let Im(body) = if (body.fields().keys() == ("text",)) {[Im #body]} else {[Im(#body) ]}
+#let Vect = "Vect"

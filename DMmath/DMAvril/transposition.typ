@@ -1,30 +1,34 @@
 //chiffre
-#let fe = str.from-unicode(0x16A0)
-#let ur = str.from-unicode(0x16A2)
-#let tur = str.from-unicode(0x16A6)
-#let an = str.from-unicode(0x16A8)
-#let rai = str.from-unicode(0x16B1)
-#let kau = str.from-unicode(0x16B2)
-#let geb = str.from-unicode(0x16B7)
-#let wun = str.from-unicode(0x16B9)
-#let hag = str.from-unicode(0x16BA)
-#let nau = str.from-unicode(0x16BE)
-#let je = str.from-unicode(0x16C3)
-#let ei = str.from-unicode(0x16C7)
+#let fe = str.from-unicode(0x16A0) + h(0.5pt)
+#let ur = str.from-unicode(0x16A2) + h(0.5pt)
+#let tur = str.from-unicode(0x16A6)+ h(0.5pt)
+#let an = str.from-unicode(0x16A8)+ h(0.5pt)
+#let rai = str.from-unicode(0x16B1)+ h(0.5pt)
+#let kau = str.from-unicode(0x16B2)+ h(0.5pt)
+#let geb = str.from-unicode(0x16B7)+ h(0.5pt)
+#let wun = str.from-unicode(0x16B9)+ h(0.5pt)
+#let hag = str.from-unicode(0x16BA)+ h(0.5pt)
+#let nau = str.from-unicode(0x16BE)+ h(0.5pt)
+#let je = str.from-unicode(0x16C3)+ h(0.5pt)
+#let ei = str.from-unicode(0x16C7)+ h(0.5pt)
 //symbole math
-#let ing = str.from-unicode(0x16DD)
-#let ti = str.from-unicode(0x16CF)
-#let al = str.from-unicode(0x16C9)
-#let dag = str.from-unicode(0x16DE)
-#let lag = str.from-unicode(0x16DA)
-#let so = str.from-unicode(0x16CA)
-#let man = str.from-unicode(0x16D7)
-#let eh = str.from-unicode(0x16D6)
-#let per = str.from-unicode(0x16C8)
-#let ber = str.from-unicode(0x16D2)
-#let naing = str.from-unicode(0x16DC)
-#let suz = str.from-unicode(0x16AD)
-#let zus = rotate(180deg)[#str.from-unicode(0x16AD)]
+#let ing = h(2pt) + str.from-unicode(0x16DD) + h(2pt)
+#let ti = h(2pt) + str.from-unicode(0x16CF) + h(2pt)
+#let al = h(2pt) + str.from-unicode(0x16C9) + h(2pt)
+#let dag = h(2pt) + str.from-unicode(0x16DE) + h(2pt)
+#let lag = h(2pt) + str.from-unicode(0x16DA) + h(2pt)
+#let so = h(2pt) + str.from-unicode(0x16CA) + h(2pt)
+#let man = h(2pt) + str.from-unicode(0x16D7) + h(2pt)
+#let eh = h(2pt) + str.from-unicode(0x16D6) + h(2pt)
+#let per = h(2pt) + str.from-unicode(0x16C8) + h(2pt)
+#let ber = h(2pt) + str.from-unicode(0x16D2) + h(2pt)
+#let naing = h(2pt) + str.from-unicode(0x16DC) + h(2pt)
+#let suz = h(2pt) + str.from-unicode(0x16AD) + h(2pt)
+#let zus =h(2pt) + rotate(180deg)[#str.from-unicode(0x16AD)]+ h(2pt)
+//variable
+#let inc = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10901) #h(0.5pt)]
+#let v1 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10907) #h(0.5pt)]
+#let com = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10900) #h(0.5pt)]
 
 #table(
   columns: 3,
@@ -130,12 +134,3 @@ let tmp = 0
   }
   r
 }
-
-#let oui(s,n) = for i in range(s,n+1){
-  ($#i _10 = #b12(i)_12 = #na(i)_(ur tur)$,)
-}
-#grid(
-  columns:1,
-  gutter: 5pt,
-  ..oui(0,calc.pow(12,1))
-)
