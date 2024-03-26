@@ -52,8 +52,8 @@ Gaspar Daguet
     $exists$,$ber$,[ber],
     $>$,$man$,[man],
     $<$,$eh$,[e],
-    $>=$,$man ing$,[maning],
-    $<=$,$eh ing$,[ehwing],
+    $>=$,$maning$,[maning],
+    $<=$,$ehwing$,[ehwing],
     $!=$,$naing$, [naing],
     $subset$,$suz$, [suz],
     $supset$,$zus$, [zus],
@@ -79,9 +79,13 @@ Gaspar Daguet
 #t(1) de plus soit $com so CC$ alors
 $ per inc, v1 so RR, com ing inc ti i v1 <=> com so Vect((ur,fe),(fe,i)) $
 #t(1) Ainsi comme $(ur,fe)$ et $(fe,i)$ ne sont pas colinéaire, $Vect((ur,fe),(fe,i))$ forme une base de $CC$\
-#t(1) #undermath[Ainsi $[CC : RR] ing  tur$]
-
-
+#t(1) #undermath[Ainsi $[CC : RR] ing  tur$]\
+\
+#t(1) soit $ens$ un sous-corps qui contient $RR$\
+#t(1) comme $[RR : RR] ing ur$ et que l'on vient de prouver que $[CC : RR] ing  tur$\
+#t(1) il apparait donc comme condition que, $ur ehwing [ens : RR] ehwing tur $\
+#t(1) Ainsi $[ens : RR] ing ur$ ou $[ens : RR] ing tur$\
+#t(1) #undermath[Et ansi $ens ing RR$ ou $ens ing CC$]
 
 // #pagebreak()
 
