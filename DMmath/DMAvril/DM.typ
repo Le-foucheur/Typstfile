@@ -61,7 +61,7 @@ Gaspar Daguet
   v(16em)+
   $ #na(79) ti #na(65) ing #na(144) " ce qui est équivalant à" 79+65=144 $ + 
   v(6em) + 
-  $ e^inc limits(ing)_(x -> fe) ur ti inc ti inc^tur /tur! ti dots.c ti inc^v1 / v1! + o(inc^v1) $ + 
+  $ e^inc limits(ing)_(x -> fe) ur ti inc ti inc^tur /tur! ti dots.c ti inc^v1 / v1! ti o(inc^v1) $ + 
   align(center)[est équivalant à] +
   $ e^x limits(=)_(x -> 0) 1 + x + x^2/2 + dots.c + x^n/x! + o(x^n) $
 )
