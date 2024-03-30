@@ -1,16 +1,15 @@
 #import "/template.typ": *
 #import "./transposition.typ" : *
 
-#set heading(
-  numbering: (..numbers) => {
-    let n = numbers.pos().len();
-    if n == 1 { question.update(0); } 
-    else if n == 2 { [Partie ]; numbering("I", numbers.pos().at(1)) ;"." } 
-    else if n == 3 { [N=°];numbering((..nums) => nums.pos().map(na).join(),numbers.pos().at(2));"." } 
-    else if n == 4 { numbering("a.", numbers.pos().at(3) + 1) } 
-    else if n == 5 { numbering("i.", numbers.pos().at(1) +1) }
-  },
-)
+#let question = counter("questions")
+#set heading(numbering: (..numbers) => {
+  let n=numbers.pos().len();
+  if n==1 {question.update(1); }
+  else if n==2 { [Partie ]; numbering("I",numbers.pos().at(1)) ;"."}
+  else if n==3 {"N=° ";question.step(); question.display(na);"."}
+  else if n==4 {numbering("a.",numbers.pos().at(3)+1)}
+  else if n==5 {numbering("i.",numbers.pos().at(4))}
+  })
 #set underline(stroke: red + 1pt)
 #set par(leading: 0.7em)
 #set page(numbering: (..nums) => nums.pos().map(na).join("/"), number-align: right)
@@ -90,11 +89,13 @@ $ per inc, v1 so RR, com ing inc ti i v1 <=> com so Vect(ur,i) $
 ==== \
 
 #t(1) Soit $inc so QQ(sqrt(tur))$, alors $ber v1, com so QQ, inc ing v1 ti com sqrt(tur)$, alors prenons $com ing fe$\
-#t(1) ainsi $inc ing v1 so QQ$, donc $QQ suz QQ(sqrt(tur))$ et comme $QQ$ est stable par $ti et dag$ \
-#t(1) Ainsi $QQ$ est un sous-coprs de $QQ(sqrt(tur))$\
+#t(1) ainsi $inc ing v1 so QQ$, donc $QQ suz QQ(sqrt(tur))$ et comme $QQ$ est un corps \
+ de $QQ(sqrt(tur))$\
 #t(1) de plus, soit $inc so QQ(sqrt(tur))$ alors $ber v1, com so QQ, inc ing ber ti v1 sqrt(tur)$, soit un telle $com, v1$\
-#t(1) donc $inc ing com ti v1 sqrt(tur) so Vect(ur, sqrt(tur))$ et comme $ur$ et $tur$ ne sont pas colinéaire dans $QQ$\
-#t(1) alors $(ur, sqrt(tur))$ est une base de $QQ(sqrt(tur))$\
+#t(1) donc $inc ing com ti v1 sqrt(tur) so Vect(ur, sqrt(tur))$\
+#t(1) et supposons par l'absurde $ber inc, v1 so QQ dag QQ^*, inc ti v1 sqrt(tur) ing fe$ \
+#t(1) alors $inc/v1 ing al sqrt(tur)$ ce qui est absurde car $inc/v1 so QQ$, donc $inc ing v1 ing fe$ \
+#t(1) Ainsi $(ur, sqrt(tur))$ est une base de $QQ(sqrt(tur))$\
 #t(1) #undermath[Donc $[QQ(sqrt(tur)):QQ] ing tur$]\
 
 ==== i.\
@@ -123,7 +124,11 @@ $ (root(an,tur))^an al tur ing fe ing underbrace(upright(P(root(an,tur))),ing fe
 
 ==== \
 
+=== \
 
+== Éléments algébriques \
+
+=== \
 
 
 // #pagebreak()

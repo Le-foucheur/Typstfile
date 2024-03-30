@@ -1,4 +1,4 @@
-#let question = counter("questions")
+// #let question = counter("questions")
 #show heading : it => {
   if it.body == [] or it.level >= 3 [#parbreak() #linebreak() #counter(heading).display() #it.body] else [#parbreak() #linebreak() #counter(heading).display() #it.body]
 }
