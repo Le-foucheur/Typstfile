@@ -32,6 +32,7 @@
 #let v1 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10907) #h(0.5pt)]
 #let com = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10900) #h(0.5pt)]
 #let ens = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10988) #h(0.5pt)]
+#let v2 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x1090C) #h(0.5pt)]
 
 #table(
   columns: 3,

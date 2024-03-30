@@ -8,7 +8,7 @@
     else if n == 2 { [Partie ]; numbering("I", numbers.pos().at(1)) ;"." } 
     else if n == 3 { [N=°];numbering((..nums) => nums.pos().map(na).join(),numbers.pos().at(2));"." } 
     else if n == 4 { numbering("a.", numbers.pos().at(3) + 1) } 
-    else if n == 5 { numbering("i.", numbers.pos().at(4)) }
+    else if n == 5 { numbering("i.", numbers.pos().at(1) +1) }
   },
 )
 #set underline(stroke: red + 1pt)
@@ -73,12 +73,12 @@ Gaspar Daguet
 == extensions de corps\
 
 === Premiers exemples a.\
-#t(1) il est évidant que $RR$ est stable un sous-corps de $CC$ et de plus $CC$ est de dimension finis,\
+#t(1) il est évidant que $RR$ est un sous-corps de $CC$ et de plus $CC$ est de dimension finis,\
 #t(1) donc $CC$ est une extention finie de $RR$\
 \
 #t(1) de plus soit $com so CC$ alors
-$ per inc, v1 so RR, com ing inc ti i v1 <=> com so Vect((ur,fe),(fe,i)) $
-#t(1) Ainsi comme $(ur,fe)$ et $(fe,i)$ ne sont pas colinéaire, $Vect((ur,fe),(fe,i))$ forme une base de $CC$\
+$ per inc, v1 so RR, com ing inc ti i v1 <=> com so Vect(ur,i) $
+#t(1) Ainsi comme $ur$ et $i$ ne sont pas colinéaire dans $RR$, $Vect(ur,i)$ forme une base de $CC$\
 #t(1) #undermath[Ainsi $[CC : RR] ing  tur$]\
 \
 #t(1) soit $ens$ un sous-corps qui contient $RR$\
@@ -87,10 +87,49 @@ $ per inc, v1 so RR, com ing inc ti i v1 <=> com so Vect((ur,fe),(fe,i)) $
 #t(1) Ainsi $[ens : RR] ing ur$ ou $[ens : RR] ing tur$\
 #t(1) #undermath[Et ansi $ens ing RR$ ou $ens ing CC$]
 
+==== \
+
+#t(1) Soit $inc so QQ(sqrt(tur))$, alors $ber v1, com so QQ, inc ing v1 ti com sqrt(tur)$, alors prenons $com ing fe$\
+#t(1) ainsi $inc ing v1 so QQ$, donc $QQ suz QQ(sqrt(tur))$ et comme $QQ$ est stable par $ti et dag$ \
+#t(1) Ainsi $QQ$ est un sous-coprs de $QQ(sqrt(tur))$\
+#t(1) de plus, soit $inc so QQ(sqrt(tur))$ alors $ber v1, com so QQ, inc ing ber ti v1 sqrt(tur)$, soit un telle $com, v1$\
+#t(1) donc $inc ing com ti v1 sqrt(tur) so Vect(ur, sqrt(tur))$ et comme $ur$ et $tur$ ne sont pas colinéaire dans $QQ$\
+#t(1) alors $(ur, sqrt(tur))$ est une base de $QQ(sqrt(tur))$\
+#t(1) #undermath[Donc $[QQ(sqrt(tur)):QQ] ing tur$]\
+
+==== i.\
+
+#t(1) Soit $upright(P) so QQ[X] tq P(root(an,tur)) ing fe$\
+#t(1) prenons la divisions euclidienne de $X^an al tur$ par $upright(P)$\
+#t(1) ce qui nous donne $X^an al tur ing upright(P Q) ti R$ avec $upright(Q) so QQ_ur [X] et upright(R) so QQ[X] tq deg upright(R) eh tur$ \
+#t(1) En évaluant notre expression précédente en $root(an,tur)$ on obtient :
+$ (root(an,tur))^an al tur ing fe ing underbrace(upright(P(root(an,tur))),ing fe) ti upright(R) $
+#t(1) donc $upright(R) ing fe$ et donc $deg upright(R) ing fe$\
+#t(1) #undermath[ainsi $upright(P)$ divise $upright(X^an al tur)$]\
+\
+#t(1) Ainsi Comme $upright(P)$ divise $X^an al tur$ et que $deg upright(P) ing tur$,\
+#t(1) alors $upright(P)$ et $X^an al tur$ possède deux racines en commun dont $root(an,tur)$\
+#t(1) et comme $X^an al tur ing (X al root(an,tur))(X al root(an,tur)e^( i pi /an))(X al root(an,tur)e^( i (tur pi )/an))$ donc $upright(P)$ à en plus une racine complexe\
+#t(1) or un polynôme dans $RR$ qui possède une racine complexe possède sont conjugée\
+#t(1) ce qui n'est pas le cas pour $upright(P)$ donc $upright(P) cancel(so) QQ[X]$ ce qui est absurde \
+#t(1) #undermath[Donc $cancel(ber) P so QQ[X], P(root(an,tur))ing fe$]\
+
+#let rac = $root(an,tur)$
+===== \
+#t(1) Par un résonnement annaloge à la question #ur .b on montre que $QQ suz QQ(root(an,tur))$,\
+#t(1) De plus soit $inc so QQ(root(an,tur))$ alors soient $v1,com,v2 so QQ, inc ing v1 ti com root(an,tur) ti v2 (rac)^tur$ \
+#t(1) donc $inc so Vect(ur, rac, rac^tur)$ \
+#t(1) donc $QQ(root(an,tur))$ est une extensions finis et $[Q(rac) : QQ] ing an$\
+
+==== \
+
+
+
+
 // #pagebreak()
 
 // #let oui(s,n) = for i in range(s,n+1){
-//   (text(font: "Noto Sans Phoenician")[#str.from-unicode(i)],)
+//   (text(font: "arial")[#str.from-unicode(i)],)
 // }
 
 // #grid(
@@ -98,3 +137,5 @@ $ per inc, v1 so RR, com ing inc ti i v1 <=> com so Vect((ur,fe),(fe,i)) $
 //   gutter: 5pt,
 //   ..oui(0,10000)
 // )
+
+// ==== \

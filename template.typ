@@ -14,10 +14,10 @@
 
 #let frame(x) = rect(stroke: 1pt + red, outset: (x: -2pt, y: 2pt))[#x]
 #let dframe(x) = frame(dm(x))
-#let donc = "Donc" + h(5pt)
-#let onA = "On a" + h(5pt)
-#let tq = "tel que" + h(5pt)
-#let et = "et" + h(5pt)
+#let donc = "Donc" + h(3pt)
+#let onA = "On a" + h(3pt)
+#let tq = "tel que" + h(3pt)
+#let et = "et" + h(3pt)
 #let dt = math.dif + "t"
 #let Id(n) = math.mat(..for x in range(n){
   let l = ()
@@ -41,13 +41,13 @@
 #let t(x) = for i in range(x) {
   h(1em)
 }
-#let cv = "converge" + h(5pt)
+#let cv = "converge" + h(3pt)
 #let bi = math.beta.alt
 #let soitn(body, ens) = [soit $#body in #ens$]
 #let soietn(body, ens) = [soient $#body in #ens$]
 #let Soitn(body, ens) = [Soit $#body in #ens$]
 #let Soietn(body, ens) = [Soient $#body in #ens$]
-#let ssi = "si et seulement si" + h(5pt)
+#let ssi = "si et seulement si" + h(3pt)
 #let calC = text(font: "Wedding")[C]
 #let vect(body) = "Vect("+ body + ")"
 #let ateb = math.beta.alt
