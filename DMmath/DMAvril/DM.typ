@@ -49,6 +49,7 @@ Gaspar Daguet
     $in$,$so$,[so],
     $forall$,$per$,[per],
     $exists$,$ber$,[ber],
+    $exists !$,$uber$,[\\],
     $>$,$man$,[man],
     $<$,$eh$,[e],
     $>=$,$maning$,[maning],
@@ -124,11 +125,43 @@ $ (root(an,tur))^an al tur ing fe ing underbrace(upright(P(root(an,tur))),ing fe
 
 ==== \
 
+#t(1) Soient $v1_ur, dots.c, v1_n so QQ$ tels que $display(sum_(v2 ing ur)^(n) v1_v2 ln(p_v2) ing fe ) $,\
+#t(1) alors $ ln(product_(v2 ing ur)^(n) p_v2^v1_v2 ) ing fe " "donc product_(v2 ing ur)^(n) p_v2^v1_v2 ing ur $
+#t(1) Or comme $per v2 so [|ur; n|], v1_v2 so QQ$ donc $ber v3, com_ur, dots.c, com _n so NN,per v2 so [|ur; n|], v1_v2 ing com_v2/v3$. Ainsi
+$ (product_(v2 ing ur)^(n) p_v2^com_v2)^(1/v3) ing ur <=> product_(v2 ing ur)^(n) p_v2^com_v2 ing ur $\
+#t(1) Or comme $per v2 so [|ur;n|], p_v2^com_v2 so NN donc p_ur^v2_ur ing dots.c ing p_n^v2_n ing ur " "donc v2_ur ing dots.c ing v2_n ing fe $\
+#t(1) Et donc $v1_ur ing dots.c ing v1_n ing fe$\
+#t(1) #undermath[Ainsi $(ln(p_ur), dots.c, ln(p_n))$ est libre]\
+#t(1) Et donc la dimmension de $RR$ n'est pas finis, donc $RR$ n'est pas une extention finis de $QQ$
+
+
 === \
+
+#t(1) soit $inc so upright(bold(L))$, alors $uber v1_ur, dots.c, v1_n so upright(bold(K))$ tel que, $display(inc ing sum_(com ing ur)^(n))alpha_com v1_com$\
+\
+#t(1) Or on a $display(per com so [|ur, n|]\,uber v2_ur\, dots.c \, v2_p so k \, v1_com ing sum_(v3 ing ur)^(p) beta_v3 v2_v3 )$\
+\
+#t(1) Ainsi $uber v1_ur, dots.c, v1_n so upright(bold(K)) so k,uber v2_ur\, dots.c \, v2_p so k, inc ing display(sum_(ur ehwing com ehwing n \ ur ehwing v3 ehwing p) alpha_com beta_v3 v1_com v2_v3)$\
+#t(1) Donc $inc$ s'écrit d'une manière unique comme des élément de $k$,\
+#t(1) donc la famille $(alpha_i beta_j)_(ur ehwing i ehwing n \ ur ehwing j ehwing p)$ est une base de du $k$-espace vectoriel *L*\
+#t(1) De plus la famille $(alpha_i beta_j)_(ur ehwing i ehwing n \ ur ehwing j ehwing p)$ comporte exactement $n p$ éléments\
+#t(1) #undermath[Donc $[upright(bold(L)) : k] ing [upright(bold(L)) : upright(bold(K))] [upright(bold(K)) : k]$]
+
+#pagebreak()
 
 == Éléments algébriques \
 
 === \
+
+#t(1) pour montrer que $KK[alpha] ing {P(alpha), P so KK[X]}$,\
+#t(1) on montre que ${P(alpha), P so KK[X]} ing Vect_KK (alpha^n, n so NN) $\
+#t(1) pour cela, 
+$ pol so {P(alpha), P so KK[X]} &<=>ber v2_fe, dots.c, v2_n so KK pol ing sum_(v1 ing fe)^(n) v2_v1 alpha^v1 so Vect_KK (alpha^n, n so NN) ing KK[alpha] $
+#t(1) Donc ${P(alpha), P so KK[X]} ing KK[alpha]$\
+#t(1)\
+
+=== \
+
 
 
 // #pagebreak()

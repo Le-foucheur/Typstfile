@@ -22,6 +22,7 @@
 #let eh = h(2pt) + str.from-unicode(0x16D6) + h(2pt)
 #let per = h(2pt) + str.from-unicode(0x16C8) + h(2pt)
 #let ber = h(2pt) + str.from-unicode(0x16D2) + h(2pt)
+#let uber = h(2pt) + "!" + str.from-unicode(0x16D2) + h(2pt)
 #let naing = h(2pt) + str.from-unicode(0x16DC) + h(2pt)
 #let ehwing =  h(2pt) + str.from-unicode(0x16D6) + str.from-unicode(0x16DD) + h(2pt)
 #let maning =  h(2pt) + str.from-unicode(0x16D7) + str.from-unicode(0x16DD) + h(2pt)
@@ -33,6 +34,8 @@
 #let com = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10900) #h(0.5pt)]
 #let ens = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10988) #h(0.5pt)]
 #let v2 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x1090C) #h(0.5pt)]
+#let v3 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10919) #h(0.5pt)]
+#let pol = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x178D) #h(0.5pt)]
 
 #table(
   columns: 3,
