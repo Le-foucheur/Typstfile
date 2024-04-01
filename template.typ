@@ -1,4 +1,4 @@
-// #let question = counter("questions")
+#let question = counter("questions")
 #show heading : it => {
   if it.body == [] or it.level >= 3 [#parbreak() #linebreak() #counter(heading).display() #it.body] else [#parbreak() #linebreak() #counter(heading).display() #it.body]
 }
@@ -47,10 +47,11 @@
 #let soietn(body, ens) = [soient $#body in #ens$]
 #let Soitn(body, ens) = [Soit $#body in #ens$]
 #let Soietn(body, ens) = [Soient $#body in #ens$]
-#let ssi = "si et seulement si" + h(3pt)
+#let ssi = "si et seulement si" + h(1pt)
 #let calC = text(font: "Wedding")[C]
 #let vect(body) = "Vect("+ body + ")"
 #let ateb = math.beta.alt
 #let Ker(body) = if (body.fields().keys() == ("text",)) {[Ker #body]} else {[Ker(#body) ]}
 #let Im(body) = if (body.fields().keys() == ("text",)) {[Im #body]} else {[Im(#body) ]}
 #let Vect = "Vect"
+#let ou = "ou" + h(3pt)

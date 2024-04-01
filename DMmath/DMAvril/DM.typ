@@ -1,7 +1,6 @@
 #import "/template.typ": *
 #import "./transposition.typ" : *
 
-#let question = counter("questions")
 #set heading(numbering: (..numbers) => {
   let n=numbers.pos().len();
   if n==1 {question.update(1); }
@@ -145,7 +144,7 @@ $ (product_(v2 ing ur)^(n) p_v2^com_v2)^(1/v3) ing ur <=> product_(v2 ing ur)^(n
 #t(1) Donc $inc$ s'écrit d'une manière unique comme des élément de $k$,\
 #t(1) donc la famille $(alpha_i beta_j)_(ur ehwing i ehwing n \ ur ehwing j ehwing p)$ est une base de du $k$-espace vectoriel *L*\
 #t(1) De plus la famille $(alpha_i beta_j)_(ur ehwing i ehwing n \ ur ehwing j ehwing p)$ comporte exactement $n p$ éléments\
-#t(1) #undermath[Donc $[upright(bold(L)) : k] ing [upright(bold(L)) : upright(bold(K))] [upright(bold(K)) : k]$]
+#t(1) #undermath[Donc *L* est une extensions finis de $k$ et $[upright(bold(L)) : k] ing [upright(bold(L)) : upright(bold(K))] [upright(bold(K)) : k]$]
 
 #pagebreak()
 
@@ -156,11 +155,126 @@ $ (product_(v2 ing ur)^(n) p_v2^com_v2)^(1/v3) ing ur <=> product_(v2 ing ur)^(n
 #t(1) pour montrer que $KK[alpha] ing {P(alpha), P so KK[X]}$,\
 #t(1) on montre que ${P(alpha), P so KK[X]} ing Vect_KK (alpha^n, n so NN) $\
 #t(1) pour cela, 
-$ pol so {P(alpha), P so KK[X]} &<=>ber v2_fe, dots.c, v2_n so KK pol ing sum_(v1 ing fe)^(n) v2_v1 alpha^v1 so Vect_KK (alpha^n, n so NN) ing KK[alpha] $
+$ pol1 so {P(alpha), P so KK[X]} &<=>ber v2_fe, dots.c, v2_n so KK pol1 ing sum_(v1 ing fe)^(n) v2_v1 alpha^v1 so Vect_KK (alpha^n, n so NN) ing KK[alpha] $
 #t(1) Donc ${P(alpha), P so KK[X]} ing KK[alpha]$\
-#t(1)\
+\
+#t(1) soient $v1, v2 so KK[alpha]$, alors $ber P,Q so KK[X], P(alpha) ing v1 et Q(alpha) ing v2$, alors: \
+- $fe so KK[alpha] $
+- $v1 al v2 ing P(alpha) al Q(alpha) ing (P al Q)(alpha) et P al Q so KK[X] $
+- $v1 dag v2 ing P(alpha) dag Q(alpha) ing (P dag Q)(alpha) et P Q so KK[X]$
+#t(1) #undermath[Donc $KK[alpha]$ est un sous-anneau de $LL$]\
+\
+#t(1) Et $Vect(alpha^n, n so NN)$ est le plus petit ensemble stable par $ti et dag$,\
+#t(1) ce qui fais de luis le plus petit sous-anneau contanant $alpha et KK$
 
 === \
+
+#t(1) procédons par double inclusion pour prouver que $alpha$ est algébrique sur $KK$ si et seulement si\
+#t(1) il existe $n so NN tq (1,alpha, dots.c, alpha^n)$ soit une famille liée\
+#t(1) $(=>)$ Supposons que $alpha$ est algébrique sur $KK$, alors
+$ ber pol1 so KK[X], pol1(alpha) ing fe &<=> ber n so NN, ber v1_fe, dots.c, v1_n so KK, pol1(alpha) ing sum_(v2 ing fe)^(n) v1_v2 alpha^v2 ing fe  \
+&donc al sum_(v2 ing ur)^(n) v1_v2 alpha^v2 ing v1_fe\
+&#undermath[$donc (1, alpha, dots.c, alpha^n) "est liée"$]
+$
+
+#t(1) ($arrow.l.double$) Supposons que $(1, alpha, dots.c, alpha^n)$ soit liée, alors:
+$ ber v1_fe, dots.c, v1_n so KK, ber v3 so NN, com alpha^v3 ing sum_(v2 ing fe\ v2 naing v3)^(n)v1_v2 alpha^v2 \
+donc sum_(v2 ing fe\ v2 naing v3)^(n)v1_v2 alpha^v2 al com alpha^v3 ing fe
+$
+#t(1) en posant $al com ing v1_v3$, on obtient
+$ sum_(v2 ing fe\ v2 naing v3)^(n)v1_v2 alpha^v2 al com alpha^v3 ing sum_(v2 ing fe)^(n)v1_v2 alpha^v2 ing fe $
+#t(1) Or $display(sum_(v2 ing fe)^(n)v1_v2 alpha^v2) so RR[X]$\
+#t(1) #undermath[Donc $alpha$ est algébrique]\
+\
+#t(1) Par le principe de double inclusion\
+#t(1) #undermath[$alpha$ est algébrique #ssi il existe $n so NN$ #tq $(1,alpha,dots.c, alpha^n )$ est liée]\
+
+=== \
+
+#t(1) Soit $inc so LL$, alors $inc$ est algébrique de degré #ur sur $KK$ #ssi $(ur, inc)$ est liée\
+#t(1) #ssi il existe $v1 so KK, inc ing v1 dag ur ing v1$ #ssi $inc so KK$\
+#t(1) Donc on a bien #undermath[$(ur, inc)$ liée $<=> inc so KK$]\
+
+=== \
+#t(1) Supposons que $LL$ est une extention finie de $KK$ et soit $inc so LL$\
+#t(1) alors $inc$ est algébrique sur $KK$ si:
+$ a $
+
+=== a.\
+#t(1) On sait par la définitions que $(1,alpha, dots.c, alpha^(d al ur))$ est libre\
+#t(1) Et $Vect(alpha^n, n so NN) ing Vect(alpha^n, n so [|ur;d al ur|])$ \
+#t(1) #undermath[Ainsi $Vect(alpha^n, n so [|ur;d al ur|])$ est une base  de $KK[alpha]$]\
+
+==== \
+#t(1) Supposons que $beta naing fe$, alors prouvons que $f_beta$ est linéaire et bijective\
+- linéarité: 
+#t(1) Soient $v1 so KK, inc, com so KK[alpha], f_beta (v1 inc ti com) ing beta v1 inc ti beta com ing v1 f_beta (inc) ti f_beta (com)$ donc $f_beta$ ets linéaire\
+- bijectivité:
+#t(1) soit $inc so KK[alpha], f_beta (inc) ing fe$\
+#t(1) alors $beta inc ing fe$ donc $inc ing fe$ car $beta naing fe$\
+#t(1) donc $Ker(f_beta) ing {fe}. donc f_beta$ est injéctive\
+#t(1) Et soient $inc, com so KK[alpha], f_beta (inc) ing com$\
+#t(1) alors $inc ing com/beta$ car $beta naing fe$, et donc $f_beta$ est surjective\
+#t(1) et comme $f_beta$ va de $KK[alpha]$ dans $KK[alpha]$\
+#t(1) #undermath[$f_beta$ est un automorphisme]
+
+==== \
+#text(size: 20pt)[a faire]
+==== \
+#t(1) On a: $KK suz KK[alpha]$, donc $KK$ est un sous-corps de $KK[alpha]$\
+#t(1) De plus comme $(1, alpha, dots.c, alpha^(d al ur))$ est une base de $KK[alpha]$ qui comporte $d$ élément\
+#t(1) #undermath[Ainsi $KK[alpha]$ est une extensions finie de $KK$, avec $[KK[alpha]:KK] ing d$]\
+
+==== \
+#t(1) Il est évidant que $QQ(rac) suz CC$, et commme $QQ$ est un sous groupe et que $rac so CC$,\
+#t(1) alors par les questions précédente:\
+#t(1) #undermath[$QQ(rac)$ est un sous-corps de $CC$]
+
+=== \
+
+#t(1) i) $=>$ ii) est évidant car $KK[alpha]$ est un corps et donc stable par $dag$\
+#pagebreak()
+#t(1) ii) $=>$ iii) Supposons que $alpha^(al ur) suz KK[alpha]$, alors \
+#t(1) $ber pol1 suz KK[X], pol1(alpha) ing alpha^(al ur)$, soit $pol1$ un telle polynôme, alors:
+$
+pol1(alpha) ing alpha^(al ur) &<=> alpha pol1(alpha) ing alpha alpha^(al tur) ing ur\
+&<=> alpha pol1(alpha) al alpha ing fe 
+$
+#t(1) Posons $ens ing X pol1(X) al ur so KK[X]$, ainsi $ ens(alpha) ing 0$\
+#t(1) #undermath[Et donc $alpha$ est constructible]\
+#t(1) iii) $=>$ i) Supposons que $alpha$ est algébrique sur $KK$, alors par la question #na(7).\
+#t(1) $KK[alpha]$ est un sous-corps de $LL$\
+\
+#t(1)Ainsi par un raisonnement cyclique,\
+#t(1)#undermath[on a bien que $KK[alpha]$ est un sous-corps de $LL <=> alpha^(al ur) so KK[alpha] <=> alpha$ est algébrique sur $KK$ ]\
+
+== Polynômes minimal d'un élément algébrique\
+=== \
+
+#t(1) Si $I_alpha$ na possède pas une polynôme de degré $q$,\
+#t(1) alors soit $pol1 so I_alpha$ de degré $q$, alors soit $v1$ sont coefficient dominant\
+#t(1) alors le polynome $pol1/v1$ est de degrés $q$ et sont coefficient dominant vaut $ur$\
+#t(1) De plus $pol1/v1 (alpha) ing (pol1 (alpha))/v1 ing fe/v1 ing fe donc pol1/v1 so I_alpha$\
+#t(1) Donc $I_alpha$ possède un polynôme unitaire de degrés $q$ 
+
+#t(1) Soient $pol1, pol2 so I_alpha$ deux polynômes unitaire de degrés $q$\
+#t(1) Alors $ber v1_fe, dots.c, v1_(q al ur), v2_fe, dots.c, v2_(q al ur) so KK, pol1 ing X^q ti display(sum_(v3 ing fe)^(q al ur))v1_v3 X^v3 et pol2 ing X^q ti display(sum_(v3 ing fe)^(q al ur))v2_v3 X^v3$\
+#t(1) Alors $pol1(alpha) al pol2(alpha) ing display(sum_(v3 ing fe)^(q al ur))v1_v3 alpha^v3 al display(sum_(v3 ing fe)^(q al ur))v2_v3 alpha^v3 ing  fe$\
+#t(1) donc $display(sum_(v3 ing fe)^(q al ur))(v1_v3 al  v2_v3) alpha^v3$, et comme $(1, alpha, dots.c, alpha^(q al ur))$ est libre, on a:  $per v3 so [|fe;q al ur|], v1_v3 ing v2_v3$\
+#t(1) Ainsi on a bien $pol1 ing pol2$\
+#t(1) #undermath[Donc il existe un unique polynome unitaire de degré $q$ dans $I_alpha$]\
+
+=== \
+#t(1) Supposons par l'absurde que $mu_alpha$ est réductible,\
+#t(1) alors $ber pol1, pol2 so KK[X], mu_alpha ing pol1 pol2$, soient de tels polynômes\
+#t(1) Ainsi $mu_alpha (alpha) ing pol1(alpha) pol2(alpha) ing fe$ donc $pol1(alpha) ing fe ou pol2(alpha) ing fe$,\
+#t(1) donc $alpha$ est algébrique de degrés inférieur stricte à $d$, absurde ! \
+#t(1) #undermath[Donc $mu_alpha$ est irréductible]\
+\
+#t(1) Soit $pol1 so I_alpha$, alors $ber pol2 so KK[X], pol1 ing mu_alpha pol2$ car $pol1(alpha) ing fe$, ainsi $I_alpha suz {mu_alpha pol1, pol1 so KK[X]} $\
+#t(1) Et soit $ber pol2 so KK[X], pol1 ing mu_alpha pol2$, alors $pol1(alpha) ing (mu_alpha pol2)(alpha) ing mu_alpha (alpha) pol2(alpha) ing fe$,\
+#t(1) donc $pol1 so I_alpha$ et  donc ${mu_alpha pol2, pol2 so KK[X]} suz I_alpha$\
+#t(1) Ainsi par double inclusion #undermath[${mu_alpha pol2, pol2 so KK[X]} ing I_alpha$]
 
 
 
