@@ -37,6 +37,7 @@
 #let v3 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10919) #h(0.5pt)]
 #let pol1 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x178D) #h(0.5pt)]
 #let pol2 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x1788) #h(0.5pt)]
+#let v4 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x1090E) #h(0.5pt)]
 
 #table(
   columns: 3,

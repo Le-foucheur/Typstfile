@@ -276,6 +276,64 @@ $
 #t(1) donc $pol1 so I_alpha$ et  donc ${mu_alpha pol2, pol2 so KK[X]} suz I_alpha$\
 #t(1) Ainsi par double inclusion #undermath[${mu_alpha pol2, pol2 so KK[X]} ing I_alpha$]
 
+#pagebreak()
+
+=== \
+#t(1) étant donner que $mu_alpha$ est le plus petit polynômes telle que $mu_alpha (alpha) ing fe$\
+#t(1) alors $(1,alpha, dots.c, alpha^q)$ est la plus petite famille liée, donc le degrés de alpha vaut $q$ est $d$, si bien que:\
+#t(1) #undermath[$deg mu_alpha ing d$]\
+
+=== \
+#t(1) il est évidant que le polynôme minimal est $X^an al  tur$\
+
+=== \
+#let alp = $sqrt(#na(2)) ti sqrt(#na(3))$
+#t(1) Posons $pol1 ing v1 X^#na(4) ti v2 X^#na(3) ti v3 X^#na(2) ti inc X ti com so QQ[X]$, avec $v1,v2,v3,inc,com$ non tous nul\
+#t(1) Alors cherchons $v1,v2,v3,inc,com$ tel que $pol1(alpha) ing fe$\
+#t(1) Ainsi $ pol1(alpha) &ing v1 (alp)^#na(4) ti v2 (alp)^#na(3) ti v3 (alp)^#na(2) ti inc (alp) ti com\
+&ing #na(49)v1 ti #na(20) v1 sqrt(#na(6)) ti #na(11) v2 sqrt(#na(2)) ti #na(9) v2 sqrt(#na(3)) ti #na(5) v3 ti #na(2) v3 sqrt(#na(6)) ti inc sqrt(#na(2)) ti inc sqrt(#na(3)) ti com \
+&ing (#na(20) v1 ti #na(2) v3)sqrt(#na(6)) ti (#na(9)v2 ti inc)sqrt(#na(3)) ti (#na(11)v2 ti inc)sqrt(#na(2)) ti #na(49) v1 ti #na(5) v3 ti com ing fe
+$ 
+#t(1) Alors par identification des coefficient, on obtient:
+$
+cases(#na(20) v1 ti #na(2) v3 ing fe,
+#na(9)v2 ti inc ing fe,
+#na(11)v2 ti inc ing fe,
+#na(49) v1 ti #na(5) v3 ti com ing fe
+) <=> cases(
+v2 ing fe,
+inc ing fe,
+v3 ing al #na(10) v1,
+#na(49) v1 ti #na(5) v3 ti com ing fe
+) <=> cases(
+v2 ing fe,
+inc ing fe,
+v3 ing al #na(10) v1,
+v1 ing com
+)
+$\
+#t(1) #undermath[Ainsi $pol1 ing com X^#na(4) al #na(10)  com X^#na(2) ti com$, ainsi on prouve que $alpha$ est algébrique] \
+#t(1) #undermath[et que $pol1$ est le polynôme minimal de $alpha$ sur $QQ$ car sinon on aurais $v1 ing fe$]\
+
+== Nombres algébriques (sur $QQ$)\
+=== a.\
+#t(1) il est évidant que $QQ[alpha,beta]$ est stable par $ti et dag$ \
+#t(1) et deplus, soit $inc, com, v3 so QQ[alpha,beta]$ alors $ber v1, v2, v4, v1', v2', v4', v1', v2', v4' so QQ, inc ing v1 ti v2 alpha ti v4 beta$\
+#t(1) $et com ing v1' ti v2' alpha ti v4' beta et v3 ing v1' ti v2' alpha ti v4' beta$\
+#t(1) alors 
+$
+(com ti inc)v3 &ing (v1 ti v2 alpha ti v4 beta ti v1' ti v2' alpha ti v4' beta) (v1'' ti v2'' alpha ti v4'' beta)\
+&ing (v1 ti v2 alpha ti v4 beta)(v1'' ti v2'' alpha ti v4'' beta) ti (v1' ti v2' alpha ti v4' beta)(v1'' ti v2'' alpha ti v4'' beta)\
+&ing com v3 ti inc v3
+$
+#t(1) De même $v3(inc ti com) ing v3 inc ti v3 com$\
+#t(1) De plus par la question #na(7) $QQ[alpha, beta]$ est une extention finie de $QQ[alpha]$\
+#t(1) Or $QQ[alpha]$ est une extensions finis de $QQ$\
+#t(1) #undermath[Donc $QQ[alpha, beta]$ est un corps et est une extention finie de $QQ$]\
+
+==== \
+
+
 
 
 // #pagebreak()
