@@ -216,10 +216,11 @@ $ a $
 #t(1) Et soient $inc, com so KK[alpha], f_beta (inc) ing com$\
 #t(1) alors $inc ing com/beta$ car $beta naing fe$, et donc $f_beta$ est surjective\
 #t(1) et comme $f_beta$ va de $KK[alpha]$ dans $KK[alpha]$\
-#t(1) #undermath[$f_beta$ est un automorphisme]
-
-==== \
-#text(size: 20pt)[a faire]
+#t(1) #undermath[$f_beta$ est un automorphisme]\
+#text(fill:white)[
+  ====
+]
+#v(-16pt)
 ==== \
 #t(1) On a: $KK suz KK[alpha]$, donc $KK$ est un sous-corps de $KK[alpha]$\
 #t(1) De plus comme $(1, alpha, dots.c, alpha^(d al ur))$ est une base de $KK[alpha]$ qui comporte $d$ élément\
