@@ -7,7 +7,7 @@
   else if n==2 { [Partie ]; numbering("I",numbers.pos().at(1)) ;"."}
   else if n==3 {"N=° ";question.step(); question.display(na);"."}
   else if n==4 {numbering("a.",numbers.pos().at(3)+1)}
-  else if n==5 {numbering("i.",numbers.pos().at(4))}
+  else if n==5 {numbering("i.",numbers.pos().at(4)+1)}
   })
 #set underline(stroke: red + 1pt)
 #set par(leading: 0.7em)
@@ -294,7 +294,7 @@ $
 &ing #na(49)v1 ti #na(20) v1 sqrt(#na(6)) ti #na(11) v2 sqrt(#na(2)) ti #na(9) v2 sqrt(#na(3)) ti #na(5) v3 ti #na(2) v3 sqrt(#na(6)) ti inc sqrt(#na(2)) ti inc sqrt(#na(3)) ti com \
 &ing (#na(20) v1 ti #na(2) v3)sqrt(#na(6)) ti (#na(9)v2 ti inc)sqrt(#na(3)) ti (#na(11)v2 ti inc)sqrt(#na(2)) ti #na(49) v1 ti #na(5) v3 ti com ing fe
 $ 
-#t(1) Alors par identification des coefficient, on obtient:
+#t(1) Alors comme $(1,sqrt(#na(2)),sqrt(#na(3)),sqrt(#na(6)))$ est libre, on obtient:
 $
 cases(#na(20) v1 ti #na(2) v3 ing fe,
 #na(9)v2 ti inc ing fe,
@@ -331,9 +331,31 @@ $
 #t(1) Or $QQ[alpha]$ est une extensions finis de $QQ$\
 #t(1) #undermath[Donc $QQ[alpha, beta]$ est un corps et est une extention finie de $QQ$]\
 
+#pagebreak()
+
 ==== \
+#t(1) Pourvons d'abord que $sqrt(#na(3)) cancel(so) QQ(sqrt(#na(2)))$,\
+#t(1) Pour cela cherchons $v1, v2 so QQ, v1 ti v2 sqrt(#na(2)) ing sqrt(#na(3))$, alors:
+$
+&v1^#na(2) ti tur v2^tur ti tur v1 v2 sqrt(tur) ing an\
+&donc cases(tur v1 v2 sqrt(tur) ing fe, v1^#na(2) ti tur v2^tur ing an )
+<=>
+cases(v1 ing fe "ou" v2 ing fe, v1^#na(2) ti tur v2^tur ing an) 
+$
+#t(1) Il est évidant que $v2 naing fe$ car $v2 so QQ et sqrt(#na(3)) cancel(so) QQ$ donc $v1 ing fe$\
+#t(1) Ainsi $tur v2^#na(2) ing an <=> v2 ing sqrt(#na(3)/#na(2)) cancel(so )QQ$ absurde, donc $sqrt(an) cancel(so) QQ(sqrt(tur))$\
+#t(1) Et donc comme $QQ$ est un sous corps de $QQ(sqrt(#na(2)))$ et que $QQ(sqrt(#na(2)))$ est un sous corps de $QQ[sqrt(#na(2)), sqrt(#na(3))]$, \
+#t(1) et comme $(1, sqrt(#na(2)))$ est une base du $QQ$-espace vectoriel $QQ(sqrt(tur))$\
+#t(1) et que $(1, sqrt(#na(3)))$ est une base du $QQ(sqrt(tur))$-espace vectoriel $QQ[sqrt(#na(2)), sqrt(#na(3))]$\
+#t(1) Ainsi par la question #na(2). $(1,sqrt(tur), sqrt(an), sqrt(geb))$ est une base du $QQ$-espace vectoriel $QQ[sqrt(#na(2)), sqrt(#na(3))]$\
+#t(1) #undermath[Et donc $QQ[sqrt(#na(2)), sqrt(#na(3))] ing {v1 ti v2 sqrt(tur) ti com sqrt(an) ti v3 sqrt(geb), v1,v2, com, v3 so QQ}$]\
 
-
+=== \
+#let Qb = $overline(QQ)$
+#t(1) Soit $v1, v2 so Qb$. Alors $QQ[v1,v2]$ est un corps,\
+#t(1) et en particulier une extension finie de $QQ$. \
+#t(1) Donc la somme,l’inverse et le produits sont stables dans $QQ[v1,v2]$,\
+#t(1) et donc par la question #na(6). #undermath[$Qb$ est un corps, et est donc un sous-corps de $CC$]
 
 
 // #pagebreak()
