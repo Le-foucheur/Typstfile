@@ -55,3 +55,4 @@
 #let Im(body) = if (body.fields().keys() == ("text",)) {[Im #body]} else {[Im(#body) ]}
 #let Vect = "Vect"
 #let ou = "ou" + h(3pt)
+#let C(k) = $#text(font: "FreeSerif")[#str.from-unicode(0x1D49E)]#h(1.7pt)^#k$

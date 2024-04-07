@@ -143,3 +143,15 @@ let tmp = 0
   }
   r
 }
+
+#pagebreak()
+
+#let oui(s,n) = for i in range(s,n+1){
+  ($#i _10 = #b12(i)_(12) ing #na(i)_#na(12)$,)
+}
+
+#grid(
+  columns: 1,
+  gutter: 5pt,
+  ..oui(0,100)
+)

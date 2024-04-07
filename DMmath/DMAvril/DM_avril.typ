@@ -1,4 +1,4 @@
-#import "/template.typ": *
+#import "./template.typ": *
 #import "./transposition.typ" : *
 
 #set heading(numbering: (..numbers) => {
@@ -357,16 +357,16 @@ $
 #t(1) et donc par la question #na(6). #undermath[$Qb$ est un corps, et est donc un sous-corps de $CC$]
 
 
-// #pagebreak()
+#pagebreak()
 
-// #let oui(s,n) = for i in range(s,n+1){
-//   (text(font: "arial")[#str.from-unicode(i)],)
-// }
+#let oui(s,n) = for i in range(s,n+1){
+  (text(font: "FreeMono")[#str.from-unicode(i)],)
+}
 
-// #grid(
-//   columns: 20,
-//   gutter: 5pt,
-//   ..oui(0,10000)
-// )
+#grid(
+  columns: 25,
+  gutter: 5pt,
+  ..oui(119808,120831)
+)
 
 // ==== \
