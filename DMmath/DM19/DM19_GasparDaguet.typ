@@ -1,6 +1,5 @@
 #import "/template.typ": *
 #import "/transposition.typ": *
-#import "@preview/cetz:0.2.2"
 
 #set heading(
   numbering: (..numbers) => {
@@ -80,7 +79,7 @@ $
 forall x in [a;b], g'(x) = 1-(f'(x)^2 - f(x) f''(x))/(f'(x)^2) = (f(x) f''(x))/underbrace(f'(x)^2, >= 0)
 $
 #t(1) et comme $f$ est convexe, on a $forall x in [a,b], f''(x) >= 0$\
-#t(1) Ainsi sur $[a,c], f$ est positife et donc $g$ est croissante sur $[a,c]$
+#t(1) Ainsi sur $[a,c], f$ est positif et donc $g$ est croissante sur $[a,c]$
 - *Initialisation:*
 #t(1) On a: $f(x_0) > 0 = f(c)$ donc $f(x_0) > f(c)$ et par décroissance de $f$ sur $[a;b]$, on a #undermath[$x_0 < c$]\
 - *Hérédité:* Soit $n in NN tq x_n < c$, alors
@@ -100,9 +99,75 @@ $
 #t(1) #undermath[Ainsi $(x_n)$ converge vers $c$]\
 
 === \
-#text(size: 20pt)[A faire]
+#t(1) Comme $f$ est #C(2), alors $f'$ est continue sur $[a;b]$ est donc par le théorème des borne atteintes \
+#t(1) $f'$ admet un maximum qui, par hypothèse (2) de $f$, est strictement negative\
+#t(1) Et #undermath[donc $abs(f')$ admet un minimum $m$ qui est strictement positive]\
+
+#pagebreak()
+
+
+#t(1) Comme $f$ est #C(2), alors $f''$ est continue sur $[a;b]$ est donc par le théorème des borne atteintes\
+#t(1) et comme $f$ est convexe, $f''$ est strictement positive, car $f$ n'est pas affine\
+#t(1) Ainsi #undermath[$abs(f'')$ admet un maximum $M$ strictement positif]\
 
 === \
-#text(size: 20pt)[A faire]
+#t(1) Comme $f$ est $#C(2)$ et que $x_n,c in ]a;b[$\
+#t(1) D'après la question 1. on obtient:
+$
+underbrace(f(c),=0) = f(x_n) + (c-x_n)f'(x_n)+(c-x_n)^2/2 f''(theta_n)
+$
+$
+&<=> f(x_n) = -(c-x_n)f'(x_n)-(c-x_n)^2/2 f''(theta_n)\
+&<=> f(x_n) = (x_n-c)f'(x_n)-(c-x_n)^2/2 f''(theta_n)
+$
+#t(1) On a donc bien #undermath[$f(x_n) = (x_n-c)f'(x_n)-(c-x_n)^2/2 f''(theta_n)
+$]
+=== \
+#t(1) Transformont l'égalité de de la question précédente de sorte à obtenir ce que l'on cherche, ainsi:\
+$
+f(x_n) = (x_n-c)f'(x_n)-(c-x_n)^2/2 f''(theta_n)\
+$
+$
+&<=> -f(x_n)/(f'(x_n)) = -x_n + c + (c-x_n)^2/2 (f''(theta_n))/(f'(x_n))\
+&<=> x_(n+1) = x_n - f(x_n)/(f'(x_n)) = c +  (c-x_n)^2/2 (f''(theta_n))/(f'(x_n))\
+&<=> abs(x_(n+1) -c) = (c-x_n)^2/2(overbrace(abs(f''(theta_n)),<=M))/underbrace(abs(f'(x_n)), <= m)
+$
+#t(1) Ainsi #undermath[$ abs(x_(n+1)) <= M/(2m) (x_n - c)^2 $]\
 
 === \
+#t(1) comme $x_n #tend($n$, $+oo$) c$, alors par définition de limite:\
+$
+forall epsilon > 0, exists n_0 in NN, forall n >= n_0, abs(x_n_0 - c) <= epsilon
+$
+#t(1) Ainsi en prenant $epsilon = m/M$, on a:
+#t(1) #undermath[$ exists n_0 in NN, forall n >= n_0, abs(x_n_0 - c) <= m/M $]
+
+#t(1) Prouvons par récurance que $forall n >= n_0, display(abs(x_n - c) <= (2m)/M 1/2^2^(n-n_0))$\
+- *Initialisation:*
+#t(1) Pour $n = n_0$, on a: $display(abs(x_n - c) <= (2m)/M 1/2^2^(n_0-n_0) = m/M)$\
+#t(1) ce qui à été prouvé au début de cette question\
+#t(1) Donc l'initialisation est vérifié\
+
+- *Hérédité:*
+#t(1) Soit $n >= n_0$ tel que $display(abs(x_n - c) <= (2m)/M 1/2^2^(n-n_0))$, alors\
+$
+abs(x_(n+1) -  c) &<= M/(2m) (x_n - c)^2 "par la question 8."\
+&<= (M)/(2m) ((2m)/M 1/2^2^(n-n_0))^2\
+&<= (2m)/M 1/2^(2^(n-n_0)+2) <= (2m)/M 1/2^(2^(n+1-n_0))
+$
+#t(1) Ainsi l'hérédité est vérifié\
+\
+#t(1) Donc par principe de récurance simple: #undermath[$forall n >= n_0, display(abs(x_n - c) <= (2m)/M 1/2^2^(n-n_0))$]
+
+=== \
+#t(1) Soit $q in ]0;1[$\
+#t(1) la question revient à prouver que $abs(x_n - c)/q^n$ #cv vers 0\
+#t(1) Ainsi, à partir d'un certins rang:
+$
+0<=abs(x_n - c)/q^n &<= (2m)/M 1/(2^2^(n-n_0)q^n) "par la question précédente"\
+&<= (2m)/M exp(-ln(2^2^(n-n_0)q^n))\
+&<= (2m)/M exp(-2^(n-n_0)ln(2)-n ln(q))\
+&<= (2m)/M exp(overbrace(-2^(n-n_0)(ln(2)+underbrace(n/2^(n-n_0),tend(n, +oo) 0) ln(q)),tend(n,+oo)-oo)) tend(n, +oo) 0
+$
+#t(1) Donc par le théorème des Gendarme, $abs(x_n - c)/q^n tend(n,+oo) 0$\
+#t(1) #undermath[Ainsi, $abs(x_n - c) limits(=)_(n -> +oo) o(q^n) $]
