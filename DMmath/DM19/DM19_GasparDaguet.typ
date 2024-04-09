@@ -170,4 +170,7 @@ $
 &<= (2m)/M exp(overbrace(-2^(n-n_0)(ln(2)+underbrace(n/2^(n-n_0),tend(n, +oo) 0) ln(q)),tend(n,+oo)-oo)) tend(n, +oo) 0
 $
 #t(1) Donc par le théorème des Gendarme, $abs(x_n - c)/q^n tend(n,+oo) 0$\
-#t(1) #undermath[Ainsi, $abs(x_n - c) limits(=)_(n -> +oo) o(q^n) $]
+#t(1) #undermath[Ainsi, $abs(x_n - c) limits(=)_(n -> +oo) o(q^n) $]\
+\
+Je vous met en plus un petit shéma intéractif via desmos fait par mes soins:
+#link("https://www.desmos.com/calculator/ifqjbo98as?lang=fr",figure(image("shame.png",width: 36%), caption: [cliquer sur l'image pour avoir accès au site] ))
