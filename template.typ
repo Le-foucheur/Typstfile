@@ -14,7 +14,8 @@
 
 #let frame(x) = rect(stroke: 1pt + red, outset: (x: -2pt, y: 2pt))[#x]
 #let dframe(x) = frame(dm(x))
-#let donc = "Donc" + h(3pt)
+#let donc = "donc" + h(3pt)
+#let Donc = "Donc" + h(3pt)
 #let onA = "On a" + h(3pt)
 #let tq = "tel que" + h(3pt)
 #let et = "et" + h(3pt)
@@ -56,3 +57,4 @@
 #let Vect = "Vect"
 #let ou = "ou" + h(3pt)
 #let C(k) = $#text(font: "FreeSerif")[#str.from-unicode(0x1D49E)]#h(1.7pt)^#k$
+#let ar(body) = $arrow(#body)$
