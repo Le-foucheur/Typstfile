@@ -148,4 +148,4 @@ $
 #t(1) Ainsi en recalculant $eta_min$ pour cette nouvelle hauteur de table on trouve:
 \
 #t(1) #undermath[AN:] $eta_"mars" approx (pi^2 times 0,05)/(12 times 2,3) approx #calc.round((calc.pow(calc.pi,2) * 0.05)/(12 * 2.3) , digits: 3)$ < 0,02\
-#t(1) Ainsi les martien ne sont pas affecté par ce destint qui accable la terre.
+#t(1) Ainsi les martien ne sont pas affecté par ce destin qui accable la terre.
