@@ -125,9 +125,9 @@ $
 === \
 
 #t(1) Cherchons tout d'abbord la vitesse à la quel un corps touche le sol après une chute de hauteur $h$\
-#t(1) Comme notre tartine beurrée, ce corps metterais $tau = sqrt((2h)/g)$s avant de toucher le sol\
+#t(1) Comme notre tartine beurrée, ce corps metterait $tau = sqrt((2h)/g)$s avant de toucher le sol\
 #t(1) De plus la seconde loi de Newton nous informe que la vitesse au cours de la chute est: $v(t) = g t$\
-#t(1) Donc il toucheras la sol à une vitesse $v_"sol" = v(tau) = sqrt(2 h g)$ (1)\
+#t(1) Donc il touchera le sol à une vitesse $v_"sol" = v(tau) = sqrt(2 h g)$ (1)\
 #t(1) Ainsi en prenant $h$ comme la taille d'un être sur un astre quelconque,\
 #t(1) on à particulièrement pour la terre, où un humain mesure environs $h_o = 1,70m$: $v_h = sqrt(2 g_T h_o)$\
 #t(1) avec $g_T$ l'accélération de pensanteur sur terre\
