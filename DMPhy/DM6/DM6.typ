@@ -32,7 +32,7 @@ ar(T) = cases(delim: "|", -T,0,0) et ar(N) = cases(delim: "|", 0,N,0)\
 "Ainsi après changement dans la base " R " on trouve:"\
 ar(T) = cases(delim: "|", -T cos theta , 0, -T sin theta) et ar(N) = cases(delim: "|", N sin theta , 0, -N cos theta)
 $
-#t(1) De plus on a: $ar(P) = cases(delim: "|", 0,0,m g)$\
+#t(1) De plus, on a: $ar(P) = cases(delim: "|", 0,0,m g)$\
 #t(1) Et comme ce sont les seuls forces qui s'aplique au système {tartine}\
 #t(1) On a par la seconde lois de Newton:
 $
@@ -115,24 +115,24 @@ $
 #t(1) Ainsi #undermath[$ eta_min approx (pi^2 a)/(12 h) $]\
 #t(1) #undermath[AN:] $eta_min approx (pi^2 times 0,05)/(12 times 0,75) approx #calc.round((calc.pow(calc.pi,2) * 0.05)/(12 * 0.75) , digits: 3)$\
 #t(1) Mais comme sur terre $eta approx 0,02$, on en déduit que le destin inévitable de notre tartine est de \
-#t(1) retombé sur sa face beurrée\
+#t(1) retomber sur sa face beurrée\
 
 === \
-#t(1) Comme on la vue à la question précédente $eta$ ne dépant que de $h et a$ et non pas de $g$\
+#t(1) Comme on l'a vu à la question précédente $eta$ ne dépant que de $h et "de " a$ et non pas de $g$\
 #t(1) Donc en modifiant $g$ on ne change pas le destin de notre tartine\
 
 #pagebreak()
 === \
 
 #t(1) Cherchons tout d'abbord la vitesse à la quel un corps touche le sol après une chute de hauteur $h$\
-#t(1) Comme notre tartine beurrée, ce corps metterais $tau = sqrt((2h)/g)$s avant de toucher le sol\
-#t(1) De plus la seconde loi de Newton nous informe que la vitesse au cours de la chute est: $v(t) = g t$\
-#t(1) Donc il toucheras la sol à une vitesse $v_"sol" = v(tau) = sqrt(2 h g)$ (1)\
+#t(1) Comme notre tartine beurrée, ce corps metterait $tau = sqrt((2h)/g)$s avant de toucher le sol\
+#t(1) De plus, d'après la seconde loi de Newton, on a que la vitesse au cours de la chute est: $v(t) = g t$\
+#t(1) Donc il touchera le sol à une vitesse $v_"sol" = v(tau) = sqrt(2 h g)$ (1)\
 #t(1) Ainsi en prenant $h$ comme la taille d'un être sur un astre quelconque,\
 #t(1) on à particulièrement pour la terre, où un humain mesure environs $h_o = 1,70m$: $v_h = sqrt(2 g_T h_o)$\
 #t(1) avec $g_T$ l'accélération de pensanteur sur terre\
-#t(1) En supposant qu'un être sur un astre quelconque et constituer à peut près comme l'être humain\
-#t(1) alors la vitesse $v_h$ devrait être le même quel que soit l'astre\
+#t(1) En supposant qu'un être sur un astre quelconque est constitué à peu près comme l'être humain\
+#t(1) alors la vitesse $v_h$ devrait être la même quelque soit l'astre\
 #t(1) Ainsi en modifiant notre formule (1), on à $h = v_h^2/(2g) = (2g_T h_o)/(2g) = g_T/g h_o$\
 #t(1) Ainsi on trouve que la hauteur d'un être constitué comme l'homme sur un astre quelconque\
 #t(1) est proportionel à la hauteur de l'être humain, avec un cœficient de $g_T/g$,\
@@ -148,4 +148,4 @@ $
 #t(1) Ainsi en recalculant $eta_min$ pour cette nouvelle hauteur de table on trouve:
 \
 #t(1) #undermath[AN:] $eta_"mars" approx (pi^2 times 0,05)/(12 times 2,3) approx #calc.round((calc.pow(calc.pi,2) * 0.05)/(12 * 2.3) , digits: 3)$ < 0,02\
-#t(1) Ainsi les martien ne sont pas affecté par ce destin qui accable la terre.
+#t(1) Ainsi les martiens ne sont pas affectés par ce destin qui accable la terre.
