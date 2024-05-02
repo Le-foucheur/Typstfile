@@ -1,11 +1,12 @@
 #import "/template.typ": *
+#import "@preview/drafting:0.2.0":*
 
 #set heading(
   numbering: (..numbers) => {
     let n = numbers.pos().len();
     if n == 1 { question.update(1); } 
-    else if n == 2 { [Partie ]; numbering("I", numbers.pos().at(1)) ;"." } 
-    else if n == 3 { [N=°];question.step(); question.display();"." } 
+    else if n == 2 { [Partie ]; numbering("I", numbers.pos().at(1)) ;"." }
+    else if n == 3 { question.step(); margin-note(side:left, dy: -15pt, stroke: none, dx: -10pt)[#h(14pt)N=° #question.display().] } 
     else if n == 4 { numbering("a.", numbers.pos().at(3) + 1) } 
     else if n == 5 { numbering("i.", numbers.pos().at(4)) }
   },
@@ -22,6 +23,7 @@ Gaspar Daguet
   center,
   text(20pt)[DM n°5]
 )
+#set-page-properties()
 
 #align(center)[= Chute d'une tartine beurrée]
 
@@ -39,6 +41,7 @@ $
 ar(a) = 1/m (ar(N) + ar(T)+ ar(P)) = cases(delim: "|", N/m sin theta , 0, -N/m cos theta) - cases(delim: "|", T/m cos theta , 0, T/m sin theta) + cases(delim: "|", 0,0,g) = cases(delim: "|", N/m sin theta - T/m cos theta, 0, -N/m cos theta - T/m sin theta + g)
 $
 
+#pagebreak()
 === \
 #t(1) D'abord calculons le moment du poid:
 $
@@ -53,7 +56,7 @@ $
 &donc dot(theta) diaer(theta) = -(m g delta)/J_O_y dot(theta) cos theta\
 &donc dot(theta)^2/2 = omega^2 = (m g delta)/J_O_y sin theta\
 $
-#pagebreak()
+
 $
 donc omega^2 = 2(m g delta)/m(a^2/3 + delta^2) sin theta = g/a (6delta)/(a+3 delta^2/a) sin theta = g/a (6delta/a)/(1+3delta^2/a^2) sin theta = g/a (6 eta)/(1+3eta^2) sin theta
 $
@@ -84,7 +87,7 @@ $
 $
 ar(a) =cases(delim: "|", 0,0,g) donc ar(v) = cases(delim: "|", 0,0,g t) et donc ar("OG") = cases(delim: "|", 0,0,g/2 t^2)
 $
-#pagebreak()
+
 #t(1) On cherche donc a savoir à quel date $tau$, $||ar("OG")|| = h$, ainsi:
 $
 ||ar("OG")|| = g/2 tau^2 = h\
@@ -121,10 +124,10 @@ $
 #t(1) Comme on l'a vu à la question précédente $eta$ ne dépant que de $h et "de " a$ et non pas de $g$\
 #t(1) Donc en modifiant $g$ on ne change pas le destin de notre tartine\
 
-#pagebreak()
+
 === \
 
-#t(1) Cherchons tout d'abbord la vitesse à la quel un corps touche le sol après une chute de hauteur $h$\
+#t(1) Cherchons tout d'abord la vitesse à la quel un corps touche le sol après une chute de hauteur $h$\
 #t(1) Comme notre tartine beurrée, ce corps metterait $tau = sqrt((2h)/g)$s avant de toucher le sol\
 #t(1) De plus, d'après la seconde loi de Newton, on a que la vitesse au cours de la chute est: $v(t) = g t$\
 #t(1) Donc il touchera le sol à une vitesse $v_"sol" = v(tau) = sqrt(2 h g)$ (1)\
@@ -140,7 +143,7 @@ $
 \
 #t(1) #undermath[AN:] $h_m approx (9,81)/(3,7) times 1,7 approx #calc.round(digits: 1, 9.81/3.7 * 1.7)$m\
 \
-#t(1) Ainsi la hauteur d'un martien semblable à l'homme serait d'environs 4m\
+#t(1) Ainsi la hauteur d'un martien semblable à l'homme serait d'environs 4,5m\
 \
 #t(1) En supposant qu'une table fais environs la moitié de la hauteur de l'être qui l'utilise\
 #t(1) alors une table martienne à une hauteur d'environs 2,3m\

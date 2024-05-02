@@ -57,5 +57,6 @@
 #let Vect = "Vect"
 #let ou = "ou" + h(3pt)
 #let C(k) = $#text(font: "FreeSerif")[#str.from-unicode(0x1D49E)]#h(1.7pt)^#k$
+#let G = $#text(font: "FreeSerif")[#str.from-unicode(0x1D4A2)]$+ h(1.7pt)
 #let ar(body) = $arrow(#body)$
 #let ve(..body) = {grid(columns: 1,row-gutter: 3pt ,grid.vline(), ..body)}
