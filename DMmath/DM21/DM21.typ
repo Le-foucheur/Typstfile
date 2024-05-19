@@ -29,7 +29,7 @@ f(x)-f(y) &= integral_0^(pi/4) e^(-x(1+tan^2t))dt - integral_0^(pi/4) e^(-y(1+ta
 &= integral_0^(pi/4) e^(-x(1+tan^2t)) - e^(-y(1+tan^2t))dt\
 $
  Mais, $-x >= -y$ donc $e^(-x) >= e^(-x)$, et pour tout $t in [0, pi/4], 1+tan^2t >=0$\
- Donc $x |-> x^(1+tan^2t)$ est croissante\
+ Donc $x |-> x^(1+tan^2t)$ est c roissante\
  donc $(e^(-x))^(1+tan^2t)>=(e^(-y))^(1+tan^2t) donc e^(-x(1+tan^2t)) -e^(-y(1+tan^2t))>= 0$\
  Ainsi par croissance de l'intégrale $integral_0^(pi/4) e^(-x(1+tan^2t)) - e^(-y(1+tan^2t))dt >= 0$\
  et donc $f(x) -f(y) >= 0$ et donc $f(x) >= f(y)$\
