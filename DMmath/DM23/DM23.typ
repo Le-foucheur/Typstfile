@@ -34,5 +34,16 @@ Donc $sum z^n/n!$ converge absolument
 === \
 Soit $z in ZZ$, alors
 $
-abs(a_n z^n) = o(r^n abs(z)^n)
+abs(a_(n+1) z^(n+1))/abs(a_n z^n) =abs(z) o(r^(n+1)/r^n) =abs(z)  o(r) = o(1) tend(n,+oo) 0 < 1
 $
+Donc la série de terme générale $a_n z^n$ converge absolument
+
+=== \
+Soit $r,r’ in RR_+^* tq 0 <r’<r$, alors $(r’)/r < 1$\ 
+Donc $n((r’)/r)^n = n o(1/n) = o(1)$\
+\
+Donc $display((r’^n)/(r^n 1/n) tend(n,+oo) 0)$ et donc $r’^n = o(r^n/n)$ \
+Et comme $a_n = o(r’^n) = o(r^n/n)$\
+#undermath[Donc $n a_n = o(r^n)$]
+
+=== \
