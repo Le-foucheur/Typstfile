@@ -23,13 +23,13 @@ Gaspar Daguet
 = Problème 2 : une construction rigoureuse des fonctions trigonométriques
 
 === \
-Soit $z in CC$, alors 
+Soit $z in CC$ et $N in NN$ alors 
 $
-sum abs(z^n/n!) = sum abs(z)^n/n! = e^abs(z)
+sum_(n=0)^(N) abs(z^n/n!) = sum_(n=0)^(N) abs(z)^n/n! tend(N,+oo) e^abs(z)
 $
 Donc $sum z^n/n!$ converge absolument 
 
-== \
+== Un théorème de dérivation terme à terme\
 
 === \
 Soit $z in ZZ$, alors
@@ -47,3 +47,8 @@ Et comme $a_n = o(r’^n) = o(r^n/n)$\
 #undermath[Donc $n a_n = o(r^n)$]
 
 === \
+Comme $forall r in RR_+^*,n a_n = o(r^n)$, alors par la question 2. $display(forall z in CC\, sum_(n>=0) n a_n z^n)$ converge absolument\
+Donc en particulier pour $x in RR$ et $N in NN^*$, $ sum_(n=1)^(N) n a_n x^(n-1) = 1/x sum_(n=1)^(N) n a_n x^n "converge absolument"$ \
+
+
+
