@@ -49,14 +49,18 @@
 #let Soitn(body, ens) = [Soit $#body in #ens$]
 #let Soietn(body, ens) = [Soient $#body in #ens$]
 #let ssi = "si et seulement si" + h(1pt)
-#let calC = text(font: "Wedding")[C]
 #let vect(body) = "Vect("+ body + ")"
 #let ateb = math.beta.alt
 #let Ker(body) = if (body.fields().keys() == ("text",)) {[Ker #body]} else {[Ker(#body) ]}
 #let Im(body) = if (body.fields().keys() == ("text",)) {[Im #body]} else {[Im(#body) ]}
 #let Vect = "Vect"
 #let ou = "ou" + h(3pt)
-#let C(k) = $#text(font: "FreeSerif")[#str.from-unicode(0x1D49E)]#h(1.7pt)^#k$
-#let G = $#text(font: "FreeSerif")[#str.from-unicode(0x1D4A2)]$+ h(1.7pt)
+#let G = $#text(font: "LT Perfume")[G]$+ h(4pt)
+#let C = $#text(font: "LT Perfume")[C]$+ h(4pt)
 #let ar(body) = $arrow(#body)$
 #let ve(..body) = {grid(columns: 1,row-gutter: 3pt ,grid.vline(), ..body)}
+#let equi(n : $n$, k : $+oo$) = $ tilde_(#n -> #k) $
+#let po(ele : $x$ , vers : $0$ ) = $ =_(#ele -> #vers) $
+#let QED = align(right, text[*Q.E.D.*]) // Quod erat demonstratum
+#let LAF = align(center, text(17pt)[*L.A.F.*]) //Labor ad facio
+#let a = text[#h(-16pt) a.]
