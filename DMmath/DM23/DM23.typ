@@ -154,7 +154,7 @@ $
 abs((sum_(k=0)^(n)a_k )(sum_(k=0)^(n) b_k) - sum_(k=0)^(n) c_k) = abs(sum_(0<=k,i<=n)(a_k b_i - c_k) ) &<=sum_(0<=k,i<=n)abs(a_k b_i - c_k)\
 &<= (sum_(k=0)^(n) abs(a_k))(sum_(k=0)^(n) abs(b_k)) + sum_(k=0)^(n) abs(c_k)
 $
- 
+#LAF
 === \
 
 Soit $(a,b) in CC^2$, \
