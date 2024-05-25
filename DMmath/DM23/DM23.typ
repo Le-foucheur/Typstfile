@@ -82,7 +82,7 @@ $
 &#h(16pt)abs(f(x_0 + h) - f(x_0) - h display(sum_(n=1)^(+oo)n a_n x_0^(n-1)) )/abs(h) <= h^2/(2abs(h)) sum_(n=2)^(+oo) abs(a_n)n(n-1)(abs(x_0)+1)^(n-2)\
 &<=> 0<=abs(underbrace((f(x_0 + h) - f(x_0))/h, tend(h, 0) f'(x_0)) - sum_(n=1)^(+oo)n a_n x_0^(n-1)) <= underbrace(abs(h)/2 sum_(n=2)^(+oo) abs(a_n)n(n-1)(abs(x_0)+1)^(n-2), tend(h, 0) 0)
 $
-Donc par théorème des gendarme $f'(x_0) = display(sum_(n=1)^(+oo))n a_n x_0^(n-1)$
+Donc par théorème des gendarmes $f'(x_0) = display(sum_(n=1)^(+oo))n a_n x_0^(n-1)$
 
 === #h(-16pt) a. \
 On a pour spécialement pour tout $n,k in NN$
@@ -122,6 +122,8 @@ Soit $n in NN$
 $
 C_n = sum_(k=0)^(n) c_k = sum_(k=0)^(n) sum_(0<=p,q<=k\ p+q = k) a_p b_q =sum_(k=0)^(n) sum_(0<=p,q<=n\ p+q = k) a_p b_q = sum_(0<=p,q<=n\ p+q = n) a_p b_q 
 $
+De plus $C_n = display(sum_(0<=p,q<=n \ p+q = n) a_p b_q ) <= display(sum_(0<=p,q<=n ) a_p b_q ) = A_n B_n$\
+Car la somme $C_n$ comporte moins de terms à sommer car on viens sommer sur les même indices que $A_n B_n$ mais avec une condition en plus sur les indices
 
 ==== \
 $C_n >=0$ car somme de de termes positifs, Ainsi
@@ -129,7 +131,13 @@ $0<= C_n <= A_n B_n tend(n,+oo) A B$\
 Donc par téhorème des gendarmes $C$ converge\
 
 ==== \
+Soit $n in NN$\
+
 #LAF
+Donc $A_n B_n <= C_(2n)$\
+Donc pour $n$ paire, $A_(n/2) B_(n/2) <= C_n$, prenons donc $n$ paire pour la fin de cette exercice\
+Ainsi par la question 7.a. $underbrace(A_(n/2) B_(n/2), tend(n, +oo) A B) <= C_n <= underbrace(A_n B_n, tend(n, +oo) A B)$\
+Donc par le théorème des gendarmes $C_n tend(n, +oo) A B$
 
 === #h(-16pt) a.\
 #LAF
@@ -138,10 +146,14 @@ Donc par téhorème des gendarmes $C$ converge\
 Soit $n in NN$,\
 D'après la question précédente on à : $0 <= display(sum_(k=0)^(n) abs(c_k)) <= (display(sum_(n=0)^(+oo)abs(a_k)))(display(sum_(k=0)^(+oo)abs(b_k)))$\
 Or comme $display(sum_(n=0)^(+oo)abs(a_k))$ et $display(sum_(k=0)^(+oo)abs(b_k))$ converge car $sum a_n et sum b_n$ sont absolument convergentes\
-Dont par théorème des gendarmes $sum c_n$ converge absolument
+Donc par théorème des gendarmes $sum c_n$ converge absolument
 
 ==== \
-#LAF
+Soit $n in NN$
+$
+abs((sum_(k=0)^(n)a_k )(sum_(k=0)^(n) b_k) - sum_(k=0)^(n) c_k) = abs(sum_(0<=k,i<=n)(a_k b_i - c_k) ) &<=sum_(0<=k,i<=n)abs(a_k b_i - c_k)\
+&<= (sum_(k=0)^(n) abs(a_k))(sum_(k=0)^(n) abs(b_k)) + sum_(k=0)^(n) abs(c_k)
+$
  
 === \
 
@@ -202,13 +214,20 @@ Soit $t in RR$
 $
 c(t)^2 + s(t)^2 &= (#c($t$))^2 + (#s($t$))^2\ &= 1/4 (cancel(e^(2i t)) +2+ cancel(e^(-2i t)) - cancel(e^(2i t))+ 2 - cancel(e^(-2i t))) = 4/4 = 1
 $
-#LAF
+#undermath[Donc $c(t)^2 + s(t)^2 = 1$] 
+#QED\
+Ainsi $c(t)^2 = 1- s(t)^2 <= 1$\
+Donc $abs(c(t)) <=1$\
+De même pour $s(t)$\
+$s(t)^2 = 1- c(t)^2 <= 1$\
+Donc $abs(s(t)) <=1$\
+#undermath[Ainsi $s et c$ sont bornée entre $[-1;1]$]
 
 === #a\
 On a prouvé à la question 12. que $s' = c$ \
 Or $c(0) = (e^0+ e^0)/2 = 2/2 = 1 > 0$ \
-et comme on a suppossé que $c$ ne s'annulais pas, alors $forall x in RR, c(x) > 0$\
-Ainsi $s' = c > 0$\
+et comme on a suppossé que $c$ ne s'annulais pas, alors $forall x in RR, c(x) >= 0$\
+Ainsi $s' = c >= 0$\
 Donc $s$ est strictement croissante\ #QED
 
 ==== \
@@ -230,7 +249,8 @@ Donc $c(x)$ s'annule au moins une fois
 
 === #a \
 Soit $x in [0, p/2]$\
-alors $c(x) $
+alors comme $c(x)$ #LAF\
+Alors 
 Ainsi
 #align(center)[
   #table(
@@ -247,7 +267,9 @@ Ainsi
 #v(-7em)
 Comme on vient de montrer que $forall t in [0, p/2], c(t) >= 0$\
 Donc $s'(x) = c(x) >= 0$, Donc $s$ est croissante sur $[0, p/2]$\
-De plus $s(0) = 0 (*et s(p/2) = #s($p/2$) = 1*)$ \
+De plus $s(0) = 0$ et $forall t in RR, s(-t) = (e^(-i t) - e^(i t))/(2i) = - #s($t$) = -s(t)$, donc $s$ est impaire \
+Donc $1 = c(0) = c(p/2 - p/2) = underbrace(c(p/2), =0) c(-p/2) - s(p/2) s(-p/2)$, donc $s(p/2)^2 = 1 (i)$ \
+Mais comme $s$ est croissante sur $[0;p/2]$, et que $s(0) = 1$,alors $s(p/2) >=0$, Donc par $(i), s(p/2) = 1$ \
 Ainsi
 #align(center)[
   #table(
@@ -255,17 +277,109 @@ Ainsi
     align: center,
     $x$, $0$ +h(17.97em)+ $p/2$,
     [Signe de $s'$], $\ \ +$,
-    [Variation de $c$], []
+    [Variation de $s$], []
   )
 ]
-#move(dx:31em, dy: -3.9em, $s(p/2)$)
+#move(dx:32.45em, dy: -3.9em, $1$)
 #move(dx:13.5em, dy: -4em, $0$)
-#line(start :(14.1em,-5.6em), end :(30.4em,-7.14em))
-#move(dx:30.3em, dy:-8.82em)[#rotate(-7deg)[#sym.triangle.filled]]
+#line(start :(14.1em,-5.6em), end :(32em,-7.14em))
+#move(dx:31.9em, dy:-8.8em)[#rotate(-7deg)[#sym.triangle.filled]]
 #v(-7em)
 
 ==== \
-#LAF
-
+Soit $x in RR$
+$
+c(x+p/2) = c(x)underbrace(c(p/2), =0) -s(x)underbrace(s(p/2), =1) = -s(x)\
+"Et"\
+s(x+p/2) = c(x)underbrace(s(p/2), =1) +s(x)underbrace(c(p/2), =0) = c(x)\
+"Et"\
+c(x+p) = c((x+p/2)+p/2) = -s(x+p/2) = -c(x)\
+"Et"\
+s(x+p) = s((x+p/2)+p/2) = c(x + p/2) = -s(x)\
+"Et"\
+c(x+(3p)/2) = c((x+p/2)+p) = -c(x+p/2) =s(x)\
+"Et"\
+s(x+(3p)/2) = s((x+p/2)+p) = -s(x+p/2) = -c(x)
+$
+Donc $forall x in [0; 2p], forall t in [0;p/2], c(x) = 
+cases(
+  c(t) "si " x in [0;p/2],
+  -s(t) "si " x in [p/2; p],
+  -c(t) "si " x in [p;(3p)/2],
+  s(t) "si " x in [(3p)/2, 2p]  
+) 
+et s(x) = 
+cases(
+  s(t) "si " x in [0;p/2],
+  c(t) "si " x in [p/2; p],
+  -s(t) "si " x in [p;(3p)/2],
+  -c(t) "si " x in [(3p)/2, 2p]  
+) 
+$\
+Ainsi, à l'aide de la question précédente, on obtient les tableaux de variation suivant:
+#align(center)[
+  #table(
+    columns: (5em, 30em),
+    align: center,
+    $x$, $0$ +h(6.35em)+ $p/2$ + h(6.35em) + $p$ + h(6.35em) + $(3p)/2$ + h(6.35em) + $2p$,
+    [Variation de $s$], []
+  )
+]
+#move(dx:8.5em, dy: -2.2em, $0$)
+#move(dx:15.5em, dy: -5.8em, $1$)
+#move(dx:22.5em, dy: -6.8em, $0$)
+#move(dx:29em, dy: -7.8em, $-1$)
+#move(dx:37.1em, dy: -11.5em, $0$)
+#line(start :(9.2em,-11.27em), end :(14.8em,-12.77em))
+#move(dx:14.68em, dy:-14.458em)[#rotate(-15deg)[#sym.triangle.filled]]
+#line(start :(16.3em,-16em), end :(28.3em,-14.37em))
+#move(dx:28.2em, dy:-16em)[#rotate(7deg)[#sym.triangle.filled]]
+#line(start :(9.2em+21.5em,-11.27em-6em), end :(14.8em+21.5em,-12.77em-6em))
+#move(dx:14.68em+21.5em, dy:-14.458em-6em)[#rotate(-15deg)[#sym.triangle.filled]]
+#v(-19em)
+Et
+#align(center)[
+  #table(
+    columns: (5em, 30em),
+    align: center,
+    $x$, $0$ +h(6.35em)+ $p/2$ + h(6.35em) + $p$ + h(6.35em) + $(3p)/2$ + h(6.35em) + $2p$,
+    [Variation de $c$], []
+  )
+]
+#move(dx:8.5em, dy: -4em, $1$)
+#move(dx:15.5em, dy: -4.97em, $0$)
+#move(dx:22em, dy: -6em, $-1$)
+#move(dx:29.5em, dy: -8.67em, $0$)
+#move(dx:37.1em, dy: -11.5em, $1$)
+#line(start :(16.3em-7.3em,-16.07em+3em), end :(28.3em-7.3em,-14.4em+3em))
+#move(dx:28.2em-7.3em, dy:-16.03em+3em)[#rotate(7deg)[#sym.triangle.filled]]
+#line(start :(28.3em+8.2em,-15.98em), end :(16.3em+7.4em,-14.37em))
+#move(dx:28.3em+8.1em, dy:-17.658em)[#rotate(-7deg)[#sym.triangle.filled]]
+#v(-15em)
+#QED
 ==== \
-#LAF
+Soit $x in RR$
+Avec ce qui a été fait à la question précédente on a:
+$
+c(x+2p) = c((x+p)+p) = -c(x+p) = c(x)\
+"Et"\
+s(x+2p) = s((x+p)+p) = -s(x+p) = s(x)
+$
+Donc $s et c$ sont $2p$--perdiodiques\
+Prouvons que $2p$ est leur plus petite période\
+Soit $T in RR tq$ $T$ soit la plus petite période de $s$ et $c$\
+Alors $exists n in NN^*, 2p = n T$, soit $n in NN^*$ un telle $n$\ 
+donc $T = (2p)/n$\
+Supposons par l'absudre que $n != 1$, alors 
+- si $n=2$, \
+on a: $forall x in RR, s(p/2 + T) =s(p/2+(2p)/2) = s(p/2+p) = -s(p/2) = -1 != 1 =s(p/2)$\
+et $1 = c(0) = c(0+T) = c(p) = -1$\
+Absurde !
+- si $n > 2$,\
+alors $(2p)/n in ]0; p[$\
+Or par la question 16.b., on sais que $forall x in ]0; p[, s(x) != 0 et c(x) != 1$\
+sauf que $s((2p)/n) = s(0+(2p)/n) = s(0+T) = s(0) = 0 et c((2p)/n) = c(0 +T) = c(0) = 1$\
+ce qui est Absurde\
+Donc $n = 1$ et donc $T = 2p$\
+Ainsi $2p$ est la plus petite période de $s$
+#QED
