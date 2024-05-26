@@ -133,14 +133,13 @@ Donc par téhorème des gendarmes $C$ converge\
 ==== \
 Soit $n in NN$\
 
-#LAF
 Donc $A_n B_n <= C_(2n)$\
 Donc pour $n$ paire, $A_(n/2) B_(n/2) <= C_n$, prenons donc $n$ paire pour la fin de cette exercice\
 Ainsi par la question 7.a. $underbrace(A_(n/2) B_(n/2), tend(n, +oo) A B) <= C_n <= underbrace(A_n B_n, tend(n, +oo) A B)$\
 Donc par le théorème des gendarmes $C_n tend(n, +oo) A B$
 
 === #h(-16pt) a.\
-#LAF
+
 
 ==== \
 Soit $n in NN$,\
@@ -148,20 +147,20 @@ D'après la question précédente on à : $0 <= display(sum_(k=0)^(n) abs(c_k)
 Or comme $display(sum_(n=0)^(+oo)abs(a_k))$ et $display(sum_(k=0)^(+oo)abs(b_k))$ converge car $sum a_n et sum b_n$ sont absolument convergentes\
 Donc par théorème des gendarmes $sum c_n$ converge absolument
 
-==== \
-Soit $n in NN$
-$
-abs((sum_(k=0)^(n)a_k )(sum_(k=0)^(n) b_k) - sum_(k=0)^(n) c_k) = abs(sum_(0<=k,i<=n)(a_k b_i - c_k) ) &<=sum_(0<=k,i<=n)abs(a_k b_i - c_k)\
-&<= (sum_(k=0)^(n) abs(a_k))(sum_(k=0)^(n) abs(b_k)) + sum_(k=0)^(n) abs(c_k)
-$
-#LAF
 === \
 
 Soit $(a,b) in CC^2$, \
 Comme $display(sum_(n=0)^(+oo)) a^n/n! $ vaut $e^a$, de même pour $display(sum_(n=0)^(+oo)) b^n/n!  = e^b$,\
-Alors $
-c_n = sum_(k=0)^(n) 
+
+Alors par tout ce qui à étais fais avant $(display(sum_(n=0)^(+oo)) a^n/n!)(display(sum_(n=0)^(+oo)) b^n/n!)$ converge et vaut:
 $
+e^a e^b = (display(sum_(n=0)^(+oo)) a^n/n!)(display(sum_(n=0)^(+oo)) b^n/n!) &= sum_(n=0)^(+oo)sum_(k=0)^(n)a^k/k! b^(n-k)/(n-k!) \
+&=sum_(n=0)^(+oo)1/n!sum_(k=0)^(n) n!/(k!(n-k)!) a^k b^(n-k)\
+&= sum_(n=0)^(+oo) 1/n! sum_(k=0)^(n) binom(n,k)a^k b^(n-k)\
+&= sum_(n=0)^(+oo) (a+b)^k/n! = e^(a+b)
+$#QED
+
+#pagebreak()
 
 == Fonctions trigonométriques\
 \
@@ -245,31 +244,14 @@ Ce qui est Absurde car $g$ décroissante\
 Donc $c(x)$ s'annule au moins une fois
 
 === \
-#LAF
 
 === #a \
 Soit $x in [0, p/2]$\
-alors comme $c(x)$ #LAF\
-Alors 
-Ainsi
-#align(center)[
-  #table(
-    columns: (5em, 20em),
-    align: center,
-    $x$, $0$ +h(17.97em)+ $p/2$,
-    [Variation de $c$], []
-  )
-]
-#move(dx:13.5em, dy: -3.9em, $1$)
-#move(dx:32.4em, dy: -4em, $0$)
-#line(start :(14.1em,-7.3em), end :(31.7em,-5.6em))
-#move(dx:31.6em, dy:-7.23em)[#rotate(7deg)[#sym.triangle.filled]]
-#v(-7em)
-Comme on vient de montrer que $forall t in [0, p/2], c(t) >= 0$\
-Donc $s'(x) = c(x) >= 0$, Donc $s$ est croissante sur $[0, p/2]$\
-De plus $s(0) = 0$ et $forall t in RR, s(-t) = (e^(-i t) - e^(i t))/(2i) = - #s($t$) = -s(t)$, donc $s$ est impaire \
-Donc $1 = c(0) = c(p/2 - p/2) = underbrace(c(p/2), =0) c(-p/2) - s(p/2) s(-p/2)$, donc $s(p/2)^2 = 1 (i)$ \
-Mais comme $s$ est croissante sur $[0;p/2]$, et que $s(0) = 1$,alors $s(p/2) >=0$, Donc par $(i), s(p/2) = 1$ \
+alors on vient de prouver que $c(x) != 0$ comme $c(0) = 1$\
+Alors $forall t in [0, p/2], c(t) >= 0$\
+Donc comme $s'(x) = c(x) >= 0$, Donc $s$ est croissante sur $[0, p/2]$\
+De plus $s(0) = 0$ et $s(p/2)^2 = 1- c(p/2)^2 = 1 (i)$ \
+Mais comme $s$ est croissante sur $[0;p/2]$, et que $s(0) = 0$,alors $s(p/2) >=0$, Donc par $(i), s(p/2) = 1$ \
 Ainsi
 #align(center)[
   #table(
@@ -285,7 +267,24 @@ Ainsi
 #line(start :(14.1em,-5.6em), end :(32em,-7.14em))
 #move(dx:31.9em, dy:-8.8em)[#rotate(-7deg)[#sym.triangle.filled]]
 #v(-7em)
+On vient de prouvé que $s$ étais croissante et comme $c' = -s <= 0$, donc $c $ est décroissante\
+de plus $c(0) = 1 et c(p/2) = 0$ par définition de $p$\ 
+Ainsi
+#align(center)[
+  #table(
+    columns: (5em, 20em),
+    align: center,
+    $x$, $0$ +h(17.97em)+ $p/2$,
+    [Variation de $c$], []
+  )
+]
+#move(dx:13.5em, dy: -3.9em, $1$)
+#move(dx:32.4em, dy: -4em, $0$)
+#line(start :(14.1em,-7.3em), end :(31.7em,-5.6em))
+#move(dx:31.6em, dy:-7.23em)[#rotate(7deg)[#sym.triangle.filled]]
+#v(-7em)
 
+#pagebreak()
 ==== \
 Soit $x in RR$
 $

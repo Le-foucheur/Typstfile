@@ -39,6 +39,29 @@
 #let pol2 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x1788) #h(0.5pt)]
 #let v4 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x1090E) #h(0.5pt)]
 
+#let nonumeq = math.equation.with(block: true, numbering: none)
+#let dm(x) = box[#nonumeq[#x]]
+
+#let rac(body) = context {
+  let taille = measure(dm(body))
+  line(start: (-1pt,5.6pt), end: (-1pt, -taille.height)) 
+  body
+  line(start: (1pt,5.6pt), end: (1pt, -taille.height)) 
+  line(start: (-taille.width -2pt,-taille.height+2pt), end: (0pt, -taille.height -2.34pt)) 
+  line(start: (-taille.width -2pt,-taille.height -2.34pt), end: (0pt, -taille.height +2pt)) 
+}
+#let nrac(body, n) = context {
+  let taille = measure(dm(body))
+  let taillen = measure(dm(n))
+  line(start: (-1pt,5.6pt), end: (-1pt, -taille.height)) 
+  body
+  line(start: (1pt,5.6pt), end: (1pt, -taille.height)) 
+  line(start: (-taille.width -2pt,-taille.height+2pt), end: (0pt, -taille.height -2.34pt)) 
+  line(start: (-taille.width -2pt,-taille.height -2.34pt), end: (0pt, -taille.height +2pt)) 
+  move(text(taille.height/1.4)[#n], dx: -(taille.width + taillen.width -3pt)/2, dy: -taille.height -3.5pt)
+  h(-taillen.width + 1.5pt)
+}
+
 #table(
   columns: 3,
   align: center,
@@ -62,6 +85,8 @@
   $-$,$al$,[al],
   $times$,$dag$,[dag],
   $div$,$lag$,[lag],
+  $sqrt(a)$,$rac(a)$,[naz],
+  $root(n,a)$,$nrac(a,n)$,[$n$-naz],
   $in$,$so$,[so],
   $forall$,$per$,[per],
   $exists$,$ber$,[ber],
@@ -144,14 +169,16 @@ let tmp = 0
   r
 }
 
+
 #pagebreak()
+#set par(leading: -3pt)
 
 #let oui(s,n) = for i in range(s,n+1){
-  ($#i _10 = #b12(i)_(12) ing #na(i)_#na(12)$,)
+  ($#i _10 = #b12(i)_(12) ing #nrac(na(i), na(i))$,)
 }
 
 #grid(
   columns: 1,
   gutter: 5pt,
-  ..oui(0,100)
+  ..oui(0,300)
 )
