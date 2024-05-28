@@ -354,8 +354,9 @@ Et
 #move(dx:28.2em-7.3em, dy:-16.03em+3em)[#rotate(7deg)[#sym.triangle.filled]]
 #line(start :(28.3em+8.2em,-15.98em), end :(16.3em+7.4em,-14.37em))
 #move(dx:28.3em+8.1em, dy:-17.658em)[#rotate(-7deg)[#sym.triangle.filled]]
-#v(-15em)
+#v(-5em)
 #QED
+#pagebreak()
 ==== \
 Soit $x in RR$
 Avec ce qui a été fait à la question précédente on a:
