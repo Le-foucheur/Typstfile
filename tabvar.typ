@@ -5,7 +5,6 @@
 
 #let tabvar(
   //parameter
-  aligne: center, //alignement of the table
   content: (), //the content
   init: ( 
    "variable": [],  //the variable of the table
@@ -34,7 +33,7 @@
             }
           ),
         ),
-        edge((-0.74,1),(T.len()+0.1,1), stroke: stroke), // ligne de séparation x du reste
+        edge((-0.86,0.87),(T.len()+0.13,0.87), stroke: stroke), // ligne de séparation x du reste
         edge((0.36,-4),(0.36,init.at("label").len()*3+0.9 + if init.at("label").last().last() == signe{3.5}), stroke: stroke), // ligne de séparation des label, des varations
         node((-0.19,0), (init.at("variable")), width: 2cm), for i in range(T.len()-1){
           node((i+2/3, 0), T.at(i), width: (2/3)*1cm)
@@ -91,7 +90,7 @@
   content: (
     ((top,$t 101$),(center,$c 111$),(bottom,$b 121$),(bottom,$b 231$),(center,$c 241$), (bottom, $b 251$)),
     ($-$, $-$, $+$,$-$,$-$),
-    ((top,$t 1 02$),(center,$c 112$),(bottom,$b 122$),(top,$t 232$),(center,$c 242$), (bottom, $b 252$)), 
+    ((top,$t 1 02$),(center,$c 112$),(bottom,$b 122$),(top,$t 232$),(bottom,$b 242$), (bottom, $b 252$)), 
     ($+$, $-$, $+$, $-$, $+$),
     ),
   arrow: "->",

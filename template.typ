@@ -29,6 +29,13 @@
   }
   (l,)
 })
+#let M0(n) = math.mat(..for x in range(n){
+  let l = ()
+  for y in range(n){
+    l.push(0)
+  }
+  (l,)
+})
 #let tend(n, val) = $limits(-->)_(#n -> #val)$
 #let undermath(body, col: red)= {
   style(styles => {

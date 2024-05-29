@@ -1,6 +1,7 @@
 #import "/template.typ": *
 #import "/transposition.typ": *
 #import "@preview/drafting:0.2.0":*
+#import "/tabvar.typ": *
 
 #set heading(
   numbering: (..numbers) => {
@@ -316,46 +317,46 @@ cases(
 ) 
 $\
 Ainsi, à l'aide de la question précédente, on obtient les tableaux de variation suivant:
+
+// #tabvar(
+//   init:(
+//     "variable": $x$,
+//     "label": (([variation de $s$], variation))
+//   ),
+//   T: ($0$, $p/2$, $p$, $(3p)/2$, $2p$),
+//   content: (
+//     ((top, $1$), (center,$0$), (bottom, $-1$), (center, $0$), (top, $1$))
+//   ),
+// )
+
 #align(center)[
-  #table(
-    columns: (5em, 30em),
-    align: center,
-    $x$, $0$ +h(6.35em)+ $p/2$ + h(6.35em) + $p$ + h(6.35em) + $(3p)/2$ + h(6.35em) + $2p$,
-    [Variation de $s$], []
+#tabvar(
+    init: (
+      "variable":$x$,
+      "label":(([varation de $s$], variation),)
+    ),
+    T: ($0$, $p/2$, $p$, $(3p)/2$, $2p$),
+    content: (
+      ((center,$0$),(top,$1$),(center,$0$),(bottom,$-1$), (center, $0$)),
+    ),
   )
 ]
-#move(dx:8.5em, dy: -2.2em, $0$)
-#move(dx:15.5em, dy: -5.8em, $1$)
-#move(dx:22.5em, dy: -6.8em, $0$)
-#move(dx:29em, dy: -7.8em, $-1$)
-#move(dx:37.1em, dy: -11.5em, $0$)
-#line(start :(9.2em,-11.27em), end :(14.8em,-12.77em))
-#move(dx:14.68em, dy:-14.458em)[#rotate(-15deg)[#sym.triangle.filled]]
-#line(start :(16.3em,-16em), end :(28.3em,-14.37em))
-#move(dx:28.2em, dy:-16em)[#rotate(7deg)[#sym.triangle.filled]]
-#line(start :(9.2em+21.5em,-11.27em-6em), end :(14.8em+21.5em,-12.77em-6em))
-#move(dx:14.68em+21.5em, dy:-14.458em-6em)[#rotate(-15deg)[#sym.triangle.filled]]
-#v(-19em)
+
 Et
 #align(center)[
-  #table(
-    columns: (5em, 30em),
-    align: center,
-    $x$, $0$ +h(6.35em)+ $p/2$ + h(6.35em) + $p$ + h(6.35em) + $(3p)/2$ + h(6.35em) + $2p$,
-    [Variation de $c$], []
+  #tabvar(
+    init:(
+      "variable":$x$,
+      "label":(([variation de $c$], variation),)
+    ),
+    T: ($0$, $p/2$, $p$, $(3p)/2$, $2p$),
+    content: (
+      ((top, $1$),(center, $0$),(bottom, $-1$),(center, $0$),(top, $1$)),
+    ),
   )
 ]
-#move(dx:8.5em, dy: -4em, $1$)
-#move(dx:15.5em, dy: -4.97em, $0$)
-#move(dx:22em, dy: -6em, $-1$)
-#move(dx:29.5em, dy: -8.67em, $0$)
-#move(dx:37.1em, dy: -11.5em, $1$)
-#line(start :(16.3em-7.3em,-16.07em+3em), end :(28.3em-7.3em,-14.4em+3em))
-#move(dx:28.2em-7.3em, dy:-16.03em+3em)[#rotate(7deg)[#sym.triangle.filled]]
-#line(start :(28.3em+8.2em,-15.98em), end :(16.3em+7.4em,-14.37em))
-#move(dx:28.3em+8.1em, dy:-17.658em)[#rotate(-7deg)[#sym.triangle.filled]]
-#v(-5em)
 #QED
+
 #pagebreak()
 ==== \
 Soit $x in RR$
