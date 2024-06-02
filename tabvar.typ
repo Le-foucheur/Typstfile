@@ -3,6 +3,25 @@
 #let signe = "Signe"
 #let variation = "Variation"
 
+#let prochainNonVideSigne(x, i) = {
+  let k = 0
+  let j = i + 1
+  while j < x.len() and type(x.at(j)) == array {
+    k += 1
+    j += 1
+  }
+  k
+}
+#let prochainNonVideVar(x, i) = {
+  let k = 0
+  let j = i + 1
+  while j < x.len() and x.at(j).len() == 0 {
+    k += 1
+    j += 1
+  }
+  k
+}
+
 #let lastele(x, interval, j, stroke) = {
   // pour gérer le dernier élément
   if x.first() == top {
@@ -40,7 +59,8 @@
   arrow : "->", //what kind of arrow
   debug: false, //just for development
   stroke: 1pt + black, //stroke of the entier table exept arrows
-  stroke-arrow: 0.6pt+black //stroke of arrows
+  stroke-arrow: 0.6pt+black, //stroke of arrows
+  lign-0: true //s'il y a des zéro ou non sur les ligne entre les signes
 
   ) = {
 
@@ -61,22 +81,36 @@
         ),
         edge((-0.86,0.87),(interval.len()+0.12,0.87), stroke: stroke), // ligne de séparation x du reste
         edge((0.36,-4),(0.36,init.at("label").len()*3+0.9 + if init.at("label").last().last() == signe{3.5}), stroke: stroke), // ligne de séparation des label, des varations
-        node((-0.19,0), (init.at("variable")), width: 2cm), for i in range(interval.len()-1){
+        node((-0.19,0), (init.at("variable")), width: 2cm), // affichage de la variable
+
+        for i in range(interval.len()-1){ // affichage de l’intervalle
           node((i+2/3, 0), interval.at(i), width: (2/3)*1cm)
         },
-        node((interval.len()-1/3,0), interval.at(interval.len()-1), width: (2/3)*1cm),
+        node((interval.len()-1/3,0), interval.at(interval.len()-1), width: (2/3)*1cm),// affichage du dernier élément de l’intervale
 
-        ..for j in range(init.at("label").len()){(
+        ..for j in range(init.at("label").len()){(// affichage des label
           node((-0.19,2+j*3), bo(init.at("label").at(j).first()), height: calc.max(measure(bo(init.at("label").at(j).first())).height, 45pt)),)
         },
+
         ..for j in range(init.at("label").len()){(
           if init.at("label").at(j).last() == signe{( //tableau de signe
-            for i in range(1,content.at(j).len()){
-              node((i+1.2, 2+(j)*3),content.at(j).at(i))
+
+            for i in range(1,content.at(j).len()){ //les labels + et -
+              if type(content.at(j).at(i))== array{}
+              else{
+                let decalage = prochainNonVideSigne(content.at(j), i)
+                node((i + 1.2 + decalage*0.5, 2+(j)*3),content.at(j).at(i))
+              }
             },
-            node((1.05, 2+(j)*3),content.at(j).at(1)),
-            for i in range(1,interval.len()-1){ // ligne de séparation
-              edge((i+2/3, 1+(j)*3), (i+2/3,3+(j)*3 + if j == init.at("label").len()-1{4.5}), stroke: stroke.thickness/2 + stroke.paint)
+            node((1.05 + prochainNonVideSigne(content.at(j), 0)*0.48, 2+(j)*3),content.at(j).first()),
+
+            // ligne de séparation
+            for i in range(1,interval.len()-1){
+
+              if type(content.at(j).at(i)) == array{}
+              else{
+              edge((i+2/3, 1+(j)*3), (i+2/3,3+(j)*3 + if j == init.at("label").len()-1{4.5}),label-sep: -7pt, stroke: stroke.thickness/2 + stroke.paint, if lign-0{box(fill: white,outset: 1pt,$0$)})
+              }
             },
             if j != init.at("label").len()-1{edge((-0.74,3+(j)*3), (interval.len()+0.1, 3+(j)*3), stroke: stroke)} // ligne sous les tableaux de contente
           )},
@@ -94,13 +128,15 @@
 
               if content.at(j).at(i).len()>2 and i != 0 and content.at(j).at(i).at(2) == "u"{ // cas de l'ajout d'une ligne indéfine
 
-                node((i +2/3 - decalindef, prochainIndef +(j)*3+0.25), content.at(j).at(i).at(3))
+                node((i +2/3 - decalindef*1.06, prochainIndef +(j)*3+0.25), content.at(j).at(i).at(3))
 
                 //la double ligne de l'indéfine
                 edge((i +2/3 -0.015 ,3*j + if j == 0{0.9} ),(i +2/3 - 0.015 ,3*j+4), stroke: stroke.thickness/2 + stroke.paint)
                 edge((i +2/3 + 0.015,3*j + if j == 0{0.9} ),(i +2/3 + 0.015,3*j+4), stroke: stroke.thickness/2 + stroke.paint)
               }
-              else if content.at(j).at(i).len()>2 and content.at(j).at(i).at(1) == "u"{ //traite le premier cas s'il est non défine
+
+              //traite le premier cas s'il est non défine
+              else if content.at(j).at(i).len()>2 and content.at(j).at(i).at(1) == "u"{
 
                 //le node qui contient l'élément
                 if content.at(j).at(i).first() == top{
@@ -121,28 +157,45 @@
               }
 
               // les nodes contenants les éléments
-              if content.at(j).at(i).at(if content.at(j).at(i).len()>2{1} else{0}) == top{
-                node((i +2/3 + decalindef, 1+(j)*3+0.25), content.at(j).at(i).last())
-                proch = 1+(j)*3+0.25
-              }
-              else if content.at(j).at(i).at(if content.at(j).at(i).len()>2{1} else{0}) == center{
-                node((i +2/3 + decalindef, 2+(j)*3), content.at(j).at(i).last())
-                proch = 2+(j)*3
-              }
-              else if content.at(j).at(i).at(if content.at(j).at(i).len()>2{1} else{0}) == bottom{
-                node((i +2/3 + decalindef, 3+(j)*3-0.25), content.at(j).at(i).last())
-                proch = 3+(j)*3-0.25
+              if content.at(j).at(i).len()!=0{
+                if content.at(j).at(i).at(if content.at(j).at(i).len()>2{1} else{0}) == top{
+                  node((i +2/3 + decalindef*1.06, 1+(j)*3+0.25), content.at(j).at(i).last())
+                  proch = 1+(j)*3+0.25
+                }
+                else if content.at(j).at(i).at(if content.at(j).at(i).len()>2{1} else{0}) == center{
+                  node((i +2/3 + decalindef*1.06, 2+(j)*3), content.at(j).at(i).last())
+                  proch = 2+(j)*3
+                }
+                else if content.at(j).at(i).at(if content.at(j).at(i).len()>2{1} else{0}) == bottom{
+                  node((i +2/3 + decalindef*1.06, 3+(j)*3-0.25), content.at(j).at(i).last())
+                  proch = 3+(j)*3-0.25
+                }
               }
 
-              // les flèches entre les éléments
-              if content.at(j).at(i+1).first() == top{
-                edge((i +2/3 + decalindef ,proch),(i+5/3 - edgeprochindef ,3*(j)+1+0.25), arrow, stroke: stroke-arrow)
+              // les flèches entre les éléments s'il n'y a pas d'élément à skip
+              if content.at(j).at(i+1).len()!=0 and content.at(j).at(i).len()!=0{
+                if content.at(j).at(i+1).first() == top{
+                  edge((i +2/3 + decalindef ,proch),(i+5/3 - edgeprochindef ,3*(j)+1+0.25), arrow, stroke: stroke-arrow)
+                }
+                else if content.at(j).at(i+1).first() == bottom{
+                  edge((i +2/3 + decalindef ,proch),(i+5/3 - edgeprochindef,3*(j)+3-0.25), arrow, stroke: stroke-arrow)
+                }
+                else if content.at(j).at(i+1).first() == center{
+                  edge((i +2/3 + decalindef ,proch),(i+5/3 - edgeprochindef ,3*(j)+2), arrow, stroke: stroke-arrow)
+                }
               }
-              else if content.at(j).at(i+1).first() == bottom{
-                edge((i +2/3 + decalindef ,proch),(i+5/3 - edgeprochindef,3*(j)+3-0.25), arrow, stroke: stroke-arrow)
-              }
-              else if content.at(j).at(i+1).first() == center{
-                edge((i +2/3 + decalindef ,proch),(i+5/3 - edgeprochindef ,3*(j)+2), arrow, stroke: stroke-arrow)
+
+              // élément a skip
+              if content.at(j).at(i+1).len()==0 and content.at(j).at(i).len()!=0 {
+                if content.at(j).at(i+prochainNonVideVar(content.at(j), i)+1).first() == top{
+                  edge((i +2/3 + decalindef ,proch),(i + (prochainNonVideVar(content.at(j), i)+1)+ 1/3 + 0.3  - edgeprochindef ,3*(j)+1+0.25), arrow, stroke: stroke-arrow)
+                }
+                else if content.at(j).at(i+prochainNonVideVar(content.at(j), i)+1).first() == bottom{
+                  edge((i +2/3 + decalindef ,proch),(i + (prochainNonVideVar(content.at(j), i)+1)+ 1/3 + 0.3 - edgeprochindef,3*(j)+3-0.25), arrow, stroke: stroke-arrow)
+                }
+                else if content.at(j).at(i+prochainNonVideVar(content.at(j), i)+1).first() == center{
+                  edge((i +2/3 + decalindef ,proch),(i + (prochainNonVideVar(content.at(j), i)+1)+ 1/3 + 0.3- edgeprochindef ,3*(j)+2), arrow, stroke: stroke-arrow)
+                }
               }
             },
             lastele(content.at(j).last(), interval, j, stroke), // pour gérer le dernier élément
@@ -168,22 +221,22 @@
   content: (
     (
       (top, "u", $t 101$),
-      (center, bottom, "u", $c 1111$, $c 1112$),
-      (top, top, "u", "oui", $b 121$),
-      (bottom, $b 231$),
-      (center, $c 241$),
-      (bottom, "u", $b 251$),
+      (),
+      (bottom, top, "u", $-oo$, $sqrt(pi/3)$),
+      (),
+      (),
+      (bottom, $b 251$),
     ),
-    ($-$, $-$, $+$, $-$, $-$),
+    ($-$, $+$, $-$, (), ()),
     (
-      (center, "u", $t 1 02$),
-      (center, center, "u", $c 33$, $c 112$),
-      (bottom, $b 122$),
-      (top, $t 232$),
-      (bottom, $b 242$),
-      (bottom, "u", $b 252$),
+      (bottom, "u", $t 1 02$),
+      (top, top, "u", $1$),
+      (bottom, $3$),
+      (),
+      (),
+      (top, "u", $b 252$),
     ),
-    ($+$, $-$, $+$, $-$, $+$),
+    ($+$, $-$, $+$, (), ()),
   ),
   arrow: "->",
   debug: false,
@@ -191,6 +244,7 @@
 
 #scale(x: 90%, y: 80%)[
   #tabvar(
+    lign-0: false,
     init: (
       "variable": $x$,
       "label": (
@@ -210,13 +264,13 @@
         (center, $c 241$),
         (bottom, "u", $b 251$),
       ),
-      ($-$, $-$, $+$, $-$, $-$),
+      ($-$, $-$, $+$, $-$, ()),
       (
         (top, "u", $t 1 02$),
         (bottom, top, "u", $h$, $c 112$),
         (bottom, $b 122$),
         (top, $t 232$),
-        (center, $c 242$),
+        (),
         (bottom, $b 252$),
       ),
       ($+$, $-$, $+$, $-$, $+$),
@@ -225,4 +279,5 @@
     stroke-arrow: blue,
     debug: false,
     stroke: red + 3pt,
-  )]
+  )
+]
