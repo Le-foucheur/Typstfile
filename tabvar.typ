@@ -22,7 +22,7 @@
   k
 }
 
-#let lastele(x, interval, j, stroke) = {
+#let lastele(x, interval, j, init, stroke) = {
   // pour gérer le dernier élément
   if x.first() == top {
     node((interval.len() - 1 / 3, 1 + (j) * 3 + 0.25), x.last())
@@ -37,11 +37,15 @@
         interval.len() + 0.06,
         j * 3 + if j == 0 {
           0.85
+        } + if j == 0 and j == init.at("label").len() - 1 {
+          -0.05
         },
       ),
       (
         interval.len() + 0.06,
-        j * 3 + 4,
+        j * 3 + 4 + if j == init.at("label").len() - 1 {
+          -0.1
+        },
       ),
       stroke: stroke.thickness / 2 + stroke.paint,
     )
@@ -112,7 +116,7 @@
               edge((i+2/3, 1+(j)*3), (i+2/3,3+(j)*3 + if j == init.at("label").len()-1{4.5}),label-sep: -7pt, stroke: stroke.thickness/2 + stroke.paint, if lign-0{box(fill: white,outset: 1pt,$0$)})
               }
             },
-            if j != init.at("label").len()-1{edge((-0.74,3+(j)*3), (interval.len()+0.1, 3+(j)*3), stroke: stroke)} // ligne sous les tableaux de contente
+            if j != init.at("label").len()-1{edge((-0.74,3+(j)*3), (interval.len()+0.11, 3+(j)*3), stroke: stroke)} // ligne sous les tableaux de contente
           )},
 
           if init.at("label").at(j).last() == variation{( // tableau de variation
@@ -131,8 +135,16 @@
                 node((i +2/3 - decalindef*1.06, prochainIndef +(j)*3+0.25), content.at(j).at(i).at(3))
 
                 //la double ligne de l'indéfine
-                edge((i +2/3 -0.015 ,3*j + if j == 0{0.9} ),(i +2/3 - 0.015 ,3*j+4), stroke: stroke.thickness/2 + stroke.paint)
-                edge((i +2/3 + 0.015,3*j + if j == 0{0.9} ),(i +2/3 + 0.015,3*j+4), stroke: stroke.thickness/2 + stroke.paint)
+                edge(
+                  (i +2/3 -0.02 * calc.sqrt(stroke.thickness.pt()) ,3*j + if j == 0{0.9} + if j == 0 and j == init.at("label").len() - 1 {-0.03}),
+                  (i +2/3 - 0.02 * calc.sqrt(stroke.thickness.pt()) ,3*j+4 + if j == init.at("label").len() - 1 {-0.1}),
+                  stroke: stroke.thickness/2 + stroke.paint
+                )
+                edge(
+                  (i +2/3 + 0.02 * calc.sqrt(stroke.thickness.pt()),3*j + if j == 0{0.9} + if j == 0 and j == init.at("label").len() - 1 {-0.03}),
+                  (i +2/3 + 0.02 * calc.sqrt(stroke.thickness.pt()),3*j+4 + if j == init.at("label").len() - 1 {-0.1}),
+                  stroke: stroke.thickness/2 + stroke.paint
+                )
               }
 
               //traite le premier cas s'il est non défine
@@ -153,7 +165,11 @@
                 }
 
                 // la ligne de l'indéfine
-                edge((0.4 ,3*j + if j == 0{0.9} ),(0.4 ,3*j+4), stroke: stroke.thickness/2 + stroke.paint)
+                edge(
+                  (0.4 * calc.pow(stroke.thickness.pt(), 1/20) ,3*j + if j == 0{0.9} + if j == 0 and j == init.at("label").len() - 1 {-0.01}),
+                  (0.4 * calc.pow(stroke.thickness.pt(), 1/20) ,3*j+4 + if j == init.at("label").len() - 1 {-0.1})
+                  , stroke: stroke.thickness/2 + stroke.paint
+                )
               }
 
               // les nodes contenants les éléments
@@ -198,7 +214,7 @@
                 }
               }
             },
-            lastele(content.at(j).last(), interval, j, stroke), // pour gérer le dernier élément
+            lastele(content.at(j).last(), interval, j,init , stroke), // pour gérer le dernier élément
 
             if j  != init.at("label").len()-1{edge((-0.74,3*(j)+4), (interval.len()+0.11, 3*(j)+4), stroke: stroke)} // ligne sous les tableaux de variation
           )}
@@ -215,6 +231,7 @@
       ([signe de $c$], signe),
       ([var de $c$], variation),
       ([signe de s], signe),
+      ([les problème], variation),
     ),
   ),
   interval: ($0$, $2$, $3$, $4$, $5$, $6$),
@@ -225,7 +242,7 @@
       (bottom, top, "u", $-oo$, $sqrt(pi/3)$),
       (),
       (),
-      (bottom, $b 251$),
+      (bottom, "u", $b 251$),
     ),
     ($-$, $+$, $-$, (), ()),
     (
@@ -237,6 +254,14 @@
       (top, "u", $b 252$),
     ),
     ($+$, $-$, $+$, (), ()),
+    (
+      (bottom, "u", $3$),
+      (),
+      (top, bottom, "u", $1$),
+      (),
+      (),
+      (top, "u", $4$),
+    ),
   ),
   arrow: "->",
   debug: false,

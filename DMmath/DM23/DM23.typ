@@ -362,7 +362,7 @@ Ainsi, à l'aide de la question précédente, on obtient les tableaux de variati
       "label": (([varation de $s$], variation),),
     ),
     interval: ($0$, $p / 2$, $p$, $(3p) / 2$, $2p$),
-    content: (((center, $0$), (top, $1$), (), (bottom, $-1$), (center, $0$)),),
+    content: (((center, "u", $0$), (top, top, "u", $1$), (center, $0$), (bottom, $-1$), (center, "u", $0$)),),
   )
 ]
 
