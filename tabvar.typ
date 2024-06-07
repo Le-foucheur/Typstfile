@@ -77,20 +77,24 @@
         debug: debug,
         node((0,0), stroke: stroke,enclose:  (//contour du tableau
           ..for i in range(interval.len()+1){
-              for j in range(init.at("label").len()*3+1){
+              for j in range(-2 ,init.at("label").len()*3+1){
                 ((i,j),)
               }
             }
           ),
         ),
-        edge((-0.86,0.87),(interval.len()+0.12,0.87), stroke: stroke), // ligne de séparation x du reste
-        edge((0.36,-4),(0.36,init.at("label").len()*3+0.9 + if init.at("label").last().last() == signe{3.5}), stroke: stroke), // ligne de séparation des label, des varations
-        node((-0.19,0), (init.at("variable")), width: 2cm), // affichage de la variable
+        edge( // ligne de séparation x du reste
+          (-0.86,0.87 + if init.at("label").first().last() == signe{0.1}),
+          (interval.len()+0.12,0.87 + if init.at("label").first().last() == signe{0.1}),
+           stroke: stroke
+        ),
+        edge((0.36,-6),(0.36,init.at("label").len()*3+0.9 + if init.at("label").last().last() == signe{3.5}), stroke: stroke), // ligne de séparation des label, des varations
+        node((-0.19,-1), (init.at("variable")), width: 2cm), // affichage de la variable
 
         for i in range(interval.len()-1){ // affichage de l’intervalle
-          node((i+2/3, 0), interval.at(i), width: (2/3)*1cm)
+          node((i+2/3, -1), interval.at(i), width: (2/3)*1cm)
         },
-        node((interval.len()-1/3,0), interval.at(interval.len()-1), width: (2/3)*1cm),// affichage du dernier élément de l’intervale
+        node((interval.len()-1/3,-1), interval.at(interval.len()-1), width: (2/3)*1cm),// affichage du dernier élément de l’intervale
 
         ..for j in range(init.at("label").len()){(// affichage des label
           node((-0.19,2+j*3), bo(init.at("label").at(j).first()), height: calc.max(measure(bo(init.at("label").at(j).first())).height, 45pt)),)
@@ -307,3 +311,12 @@
     stroke: red + 3pt,
   )
 ]
+
+#tabvar(
+  init: (
+    "variable": $t$,
+    label: (([signe], signe),),
+  ),
+  interval: ($0$, $1$, $2$),
+  content: (($+$, $-$),),
+)
