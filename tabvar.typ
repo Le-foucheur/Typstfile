@@ -224,6 +224,7 @@
 }
 
 #tabvar(
+  lign-0: true,
   init: (
     "variable": $x$,
     "label": (
@@ -300,7 +301,7 @@
       ),
       ($+$, $-$, $+$, $-$, $+$),
     ),
-    arrow: "<>--|>",
+    arrow: "X--O-->>>",
     stroke-arrow: blue,
     debug: false,
     stroke: red + 3pt,
