@@ -88,7 +88,10 @@
           (interval.len()+0.12,0.87 + if init.at("label").first().last() == signe{0.1}),
            stroke: stroke
         ),
-        edge((0.36,-6),(0.36,init.at("label").len()*3+0.9 + if init.at("label").last().last() == signe{3.5}), stroke: stroke), // ligne de séparation des label, des varations
+        edge(  // ligne de séparation des label, des varations
+          (0.36,-6),(0.36,init.at("label").len()*3+0.9 + if init.at("label").last().last() == signe{3.5})
+          , stroke: stroke
+        ),
         node((-0.19,-1), (init.at("variable")), width: 2cm), // affichage de la variable
 
         for i in range(interval.len()-1){ // affichage de l’intervalle
