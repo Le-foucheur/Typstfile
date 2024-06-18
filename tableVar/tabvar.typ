@@ -7,7 +7,7 @@
 #let prochainNonVideSigne(x, i) = {
   let k = 0
   let j = i + 1
-  while j < x.len() and type(x.at(j)) == array {
+  while j < x.len() and type(x.at(j)) == array and x.at(j).len() == 0 {
     k += 1
     j += 1
   }
@@ -28,7 +28,7 @@
 #let lastele(x, interval, j, init, stroke) = {
   // le placement de l’élément
   if x.first() == top {
-    node((interval.len() - 1 / 3, 1 + (j) * 3 + 0.25), x.last())
+    node((interval.len() - 1 / 3, 1 + (j) * 3 + 0.32), x.last())
   } else if x.first() == center {
     node((interval.len() - 1 / 3, 2 + (j) * 3), x.last())
   } else if x.first() == bottom {
@@ -112,7 +112,7 @@
           if init.at("label").at(j).last() == signe{( //tableau de signe
 
             for i in range(1,content.at(j).len()){ //les labels + et -
-              if type(content.at(j).at(i))== array{}
+              if type(content.at(j).at(i))== array and content.at(j).at(i).len() == 0{}
               else{
                 let decalage = prochainNonVideSigne(content.at(j), i)
                 node((i + 1.2 + decalage*0.5, 2+(j)*3),content.at(j).at(i))
@@ -123,7 +123,7 @@
             // ligne de séparation
             for i in range(1,interval.len()-1){
 
-              if type(content.at(j).at(i)) == array{}
+              if type(content.at(j).at(i)) == array and content.at(j).at(i).len() == 0{}
               else{
               edge((i+2/3, 1+(j)*3), (i+2/3,3+(j)*3 + if j == init.at("label").len()-1{4.5}),label-sep: -7pt, stroke: stroke.thickness/2 + stroke.paint, if lign-0{box(fill: white,outset: 1pt,$0$)})
               }
@@ -144,7 +144,7 @@
 
               if content.at(j).at(i).len()>2 and i != 0 and content.at(j).at(i).at(2) == "u"{ // cas de l'ajout d'une ligne indéfine
 
-                node((i +2/3 - decalindef*1.06, prochainIndef +(j)*3+0.25), content.at(j).at(i).at(3))
+                node((i +2/3 - decalindef*1.06, prochainIndef +(j)*3+0.32), content.at(j).at(i).at(3))
 
                 //la double ligne de l'indéfine
                 edge(
@@ -164,8 +164,8 @@
 
                 //le node qui contient l'élément
                 if content.at(j).at(i).first() == top{
-                  node((2/3, 1+(j)*3+0.25), content.at(j).first().last())
-                  proch = 1+(j)*3+0.25
+                  node((2/3, 1+(j)*3+0.32), content.at(j).first().last())
+                  proch = 1+(j)*3+0.32
                 }
                 else if content.at(j).at(i).first() == center{
                   node((2/3, 2+(j)*3), content.at(j).first().last())
@@ -187,8 +187,8 @@
               // les nodes contenants les éléments
               if content.at(j).at(i).len()!=0{
                 if content.at(j).at(i).at(if content.at(j).at(i).len()>2{1} else{0}) == top{
-                  node((i +2/3 + decalindef*1.06, 1+(j)*3+0.25), content.at(j).at(i).last())
-                  proch = 1+(j)*3+0.25
+                  node((i +2/3 + decalindef*1.06, 1+(j)*3+0.32), content.at(j).at(i).last())
+                  proch = 1+(j)*3+0.32
                 }
                 else if content.at(j).at(i).at(if content.at(j).at(i).len()>2{1} else{0}) == center{
                   node((i +2/3 + decalindef*1.06, 2+(j)*3), content.at(j).at(i).last())
@@ -203,7 +203,7 @@
               // les flèches entre les éléments s'il n'y a pas d'élément à skip
               if content.at(j).at(i+1).len()!=0 and content.at(j).at(i).len()!=0{
                 if content.at(j).at(i+1).first() == top{
-                  edge((i +2/3 + decalindef ,proch),(i+5/3 - edgeprochindef ,3*(j)+1+0.25), arrow, stroke: stroke-arrow)
+                  edge((i +2/3 + decalindef ,proch),(i+5/3 - edgeprochindef ,3*(j)+1+0.32), arrow, stroke: stroke-arrow)
                 }
                 else if content.at(j).at(i+1).first() == bottom{
                   edge((i +2/3 + decalindef ,proch),(i+5/3 - edgeprochindef,3*(j)+3-0.25), arrow, stroke: stroke-arrow)
@@ -216,7 +216,7 @@
               // élément a skip
               if content.at(j).at(i+1).len()==0 and content.at(j).at(i).len()!=0 {
                 if content.at(j).at(i+prochainNonVideVar(content.at(j), i)+1).first() == top{
-                  edge((i +2/3 + decalindef ,proch),(i + (prochainNonVideVar(content.at(j), i)+1)+ 1/3 + 0.3  - edgeprochindef ,3*(j)+1+0.25), arrow, stroke: stroke-arrow)
+                  edge((i +2/3 + decalindef ,proch),(i + (prochainNonVideVar(content.at(j), i)+1)+ 1/3 + 0.3  - edgeprochindef ,3*(j)+1+0.32), arrow, stroke: stroke-arrow)
                 }
                 else if content.at(j).at(i+prochainNonVideVar(content.at(j), i)+1).first() == bottom{
                   edge((i +2/3 + decalindef ,proch),(i + (prochainNonVideVar(content.at(j), i)+1)+ 1/3 + 0.3 - edgeprochindef,3*(j)+3-0.25), arrow, stroke: stroke-arrow)
@@ -328,8 +328,8 @@
     "variable": $t$,
     label: (([signe], signe),),
   ),
-  interval: ($0$, $1$, $2$),
-  content: (($+$, $-$),),
+  interval: ($0$, $1$, $2$, $3$),
+  content: (($+$, $-$, ()),),
 )
 
 #tabvar(
@@ -337,12 +337,13 @@
     "variable": $t$,
     label: (([signe], variation),),
   ),
-  interval: ($0$, $1$, $2$),
+  interval: ($0$, $1$, $2$, $2$),
   content: (
     (
       (top, "u", $1$),
-      (bottom, top, "u", $2$),
-      (bottom, "u", $0$),
+      (bottom, top, "u", $0$),
+      (bottom, bottom, "u", $-1$, $2$),
+      (top, $1$),
     ),
   ),
 )
