@@ -3,6 +3,7 @@
 #let signe = "Signe"
 #let variation = "Variation"
 
+// les deux prochaine fonctions son pour connaitre le nombre d’éléments à skip
 #let prochainNonVideSigne(x, i) = {
   let k = 0
   let j = i + 1
@@ -21,9 +22,11 @@
   }
   k
 }
+// fin des deux fonctions
 
+// pour gérer le dernier élément
 #let lastele(x, interval, j, init, stroke) = {
-  // pour gérer le dernier élément
+  // le placement de l’élément
   if x.first() == top {
     node((interval.len() - 1 / 3, 1 + (j) * 3 + 0.25), x.last())
   } else if x.first() == center {
@@ -31,6 +34,7 @@
   } else if x.first() == bottom {
     node((interval.len() - 1 / 3, 3 + (j) * 3 - 0.25), x.last())
   }
+  // pour géré le cas de l’indèfinie
   if x.at(1) == "u" {
     edge(
       (
@@ -39,6 +43,8 @@
           0.85
         } + if j == 0 and j == init.at("label").len() - 1 {
           -0.05
+        } + if j == 0 and init.at("label").len() == 1 {
+          0.05
         },
       ),
       (
@@ -70,7 +76,6 @@
 
   //start of function
   context {
-    //tableau de varation + signe + naïf
     diagram(
         spacing: ((4/3)*1cm, 1.3pt),
         cell-size: 0pt,
@@ -230,6 +235,9 @@
   }
 }
 
+
+// test
+
 #tabvar(
   lign-0: true,
   init: (
@@ -322,4 +330,19 @@
   ),
   interval: ($0$, $1$, $2$),
   content: (($+$, $-$),),
+)
+
+#tabvar(
+  init: (
+    "variable": $t$,
+    label: (([signe], variation),),
+  ),
+  interval: ($0$, $1$, $2$),
+  content: (
+    (
+      (top, "u", $1$),
+      (bottom, top, "u", $2$),
+      (bottom, "u", $0$),
+    ),
+  ),
 )
