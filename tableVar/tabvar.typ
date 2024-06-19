@@ -38,7 +38,7 @@
   if x.at(1) == "u" {
     edge(
       (
-        interval.len() + 0.06,
+        interval.len() + 0.137 - 0.067 * calc.pow(stroke.thickness.pt(), 1 / 2),
         j * 3 + if j == 0 {
           0.85
         } + if j == 0 and j == init.at("label").len() - 1 {
@@ -48,7 +48,7 @@
         },
       ),
       (
-        interval.len() + 0.06,
+        interval.len() + 0.137 - 0.067 * calc.pow(stroke.thickness.pt(), 1 / 2),
         j * 3 + 4 + if j == init.at("label").len() - 1 {
           -0.1
         },
@@ -70,7 +70,7 @@
   debug: false, //just for development
   stroke: 1pt + black, //stroke of the entier table exept arrows
   stroke-arrow: 0.6pt+black, //stroke of arrows
-  lign-0: true //s'il y a des zéro ou non sur les ligne entre les signes
+  lign-0: true, //s'il y a des zéro ou non sur les ligne entre les signes
 
   ) = {
 
@@ -111,24 +111,77 @@
         ..for j in range(init.at("label").len()){(
           if init.at("label").at(j).last() == signe{( //tableau de signe
 
-            for i in range(1,content.at(j).len()){ //les labels + et -
+            // le cas s’il y a une ligne indèf à la fin
+            if content.at(j).len() != interval.len()-1{
+              edge(
+                (
+                  interval.len() + 0.137 - 0.067 * calc.pow(stroke.thickness.pt(), 1/2),
+                  j * 3 + 1
+                ),
+                (
+                  interval.len() + 0.137 - 0.067 * calc.pow(stroke.thickness.pt(), 1/2),
+                  j * 3 + 3 + if j == init.at("label").len() - 1 {
+                    4
+                  },
+                ),
+                stroke: stroke.thickness / 2 + stroke.paint,
+              )
+            },
+
+            for i in range(1,interval.len()-1){ //les labels + et -
               if type(content.at(j).at(i))== array and content.at(j).at(i).len() == 0{}
+              else if type(content.at(j).at(i))== array and content.at(j).at(i).len() != 0{
+                let decalage = prochainNonVideSigne(content.at(j), i)
+                node((i + 1.2 + decalage*0.5, 2+(j)*3),content.at(j).at(i).last())
+              }
               else{
                 let decalage = prochainNonVideSigne(content.at(j), i)
                 node((i + 1.2 + decalage*0.5, 2+(j)*3),content.at(j).at(i))
               }
             },
-            node((1.05 + prochainNonVideSigne(content.at(j), 0)*0.48, 2+(j)*3),content.at(j).first()),
+            if type(content.at(j).first()) == array and content.at(j).first().len() != 0 {// premier signe
+              node((1.05 + prochainNonVideSigne(content.at(j).first().first(), 0)*0.48, 2+(j)*3),content.at(j).first().last())
+              edge(
+                (0.4 * calc.pow(stroke.thickness.pt(), 1/20), 1+j*3),
+                (0.4 * calc.pow(stroke.thickness.pt(), 1/20), 3+j*3 + if j == init.at("label").len()-1{4.5} ),
+                stroke: stroke.thickness/2 + stroke.paint,
+              )
+            }
+            else {
+              node((1.05 + prochainNonVideSigne(content.at(j), 0)*0.48, 2+(j)*3),content.at(j).first())
+            },
 
             // ligne de séparation
             for i in range(1,interval.len()-1){
 
-              if type(content.at(j).at(i)) == array and content.at(j).at(i).len() == 0{}
-              else{
-              edge((i+2/3, 1+(j)*3), (i+2/3,3+(j)*3 + if j == init.at("label").len()-1{4.5}),label-sep: -7pt, stroke: stroke.thickness/2 + stroke.paint, if lign-0{box(fill: white,outset: 1pt,$0$)})
+              if type(content.at(j).at(i)) == array and content.at(j).at(i).len() == 0{} // pas de ligne de séparation.
+              else if type(content.at(j).at(i)) == array and content.at(j).at(i).len() != 0{ // ligne de séparation custom
+                if content.at(j).at(i).first() == "0"{
+                  edge((i+2/3, 1+(j)*3), (i+2/3,3+(j)*3 + if j == init.at("label").len()-1{4.5}),label-sep: -7pt, stroke: stroke.thickness/2 + stroke.paint, box(fill: white,outset: 1pt,$0$))
+                }
+                else if content.at(j).at(i).first() == "|"{
+                  edge((i+2/3, 1+(j)*3), (i+2/3,3+(j)*3 + if j == init.at("label").len()-1{4.5}),label-sep: -7pt, stroke: stroke.thickness/2 + stroke.paint)
+                }
+                else if content.at(j).at(i).first() == "u"{
+                  edge(
+                    (i+2/3 + 0.02 * calc.sqrt(stroke.thickness.pt()) ,1+(j)*3),
+                    (i+2/3 + 0.02 * calc.sqrt(stroke.thickness.pt()) ,3+(j)*3 + if j == init.at("label").len()-1{4.5}),
+                    label-sep: -7pt,
+                    stroke: stroke.thickness/2 + stroke.paint
+                  )
+                  edge(
+                    (i+2/3- 0.02 * calc.sqrt(stroke.thickness.pt()) ,1+(j)*3),
+                    (i+2/3- 0.02 * calc.sqrt(stroke.thickness.pt()) ,3+(j)*3 + if j == init.at("label").len()-1{4.5}),
+                    label-sep: -7pt,
+                    stroke: stroke.thickness/2 + stroke.paint
+                  )
+                }
+              }
+              else{ // ligne de séparation par défaut
+                edge((i+2/3, 1+(j)*3), (i+2/3,3+(j)*3 + if j == init.at("label").len()-1{4.5}),label-sep: -7pt, stroke: stroke.thickness/2 + stroke.paint, if lign-0{box(fill: white,outset: 1pt,$0$)})
               }
             },
-            if j != init.at("label").len()-1{edge((-0.74,3+(j)*3), (interval.len()+0.11, 3+(j)*3), stroke: stroke)} // ligne sous les tableaux de contente
+            if j != init.at("label").len()-1{edge((-0.74,3+(j)*3), (interval.len()+0.11, 3+(j)*3), stroke: stroke)} // ligne sous les tableaux de content
           )},
 
           if init.at("label").at(j).last() == variation{( // tableau de variation
@@ -179,8 +232,8 @@
                 // la ligne de l'indéfine
                 edge(
                   (0.4 * calc.pow(stroke.thickness.pt(), 1/20) ,3*j + if j == 0{0.9} + if j == 0 and j == init.at("label").len() - 1 {-0.01}),
-                  (0.4 * calc.pow(stroke.thickness.pt(), 1/20) ,3*j+4 + if j == init.at("label").len() - 1 {-0.1})
-                  , stroke: stroke.thickness/2 + stroke.paint
+                  (0.4 * calc.pow(stroke.thickness.pt(), 1/20) ,3*j+4 + if j == init.at("label").len() - 1 {-0.1}),
+                  stroke: stroke.thickness/2 + stroke.paint
                 )
               }
 
@@ -305,7 +358,7 @@
         (center, $c 241$),
         (bottom, "u", $b 251$),
       ),
-      ($-$, $-$, $+$, $-$, ()),
+      ($-$, $-$, $+$, $-$, (), "u"),
       (
         (top, "u", $t 1 02$),
         (bottom, top, "u", $h$, $c 112$),
@@ -314,7 +367,7 @@
         (),
         (bottom, $b 252$),
       ),
-      ($+$, $-$, $+$, $-$, $+$),
+      (("u", $+$), ("0", $-$), $+$, (), $+$),
     ),
     arrow: "X--O-->>>",
     stroke-arrow: blue,
@@ -328,8 +381,8 @@
     "variable": $t$,
     label: (([signe], signe),),
   ),
-  interval: ($0$, $1$, $2$, $3$),
-  content: (($+$, $-$, ()),),
+  interval: ($0$, $1$, $2$, $3$, $4$),
+  content: ((("u", $+$), $-$, ("u", $+$), ("|", $-$), "u"),),
 )
 
 #tabvar(
