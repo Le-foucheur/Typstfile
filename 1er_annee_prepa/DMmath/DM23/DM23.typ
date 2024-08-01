@@ -1,33 +1,9 @@
 #import "/template.typ": *
 #import "/transposition.typ": *
 #import "@preview/drafting:0.2.0": *
-#import "/tabvar.typ": *
+#import "@preview/vartable:0.1.0": *
 
-#set heading(numbering: (..numbers) => {
-  let n = numbers.pos().len()
-  if n == 1 {
-    question.update(1)
-  } else if n == 2 {
-    [Partie ]
-    numbering("I", numbers.pos().at(1) - 1)
-    "."
-  } else if n == 3 {
-    question.step()
-    if question.get().last() < 10 {
-      margin-note(side: left, dy: -16.4pt, stroke: none)[#h(14pt)N=° #question.display().]
-    } else {
-      margin-note(side: left, dy: -16.4pt, stroke: none)[#h(8pt)N=° #question.display().]
-    }
-  } else if n == 4 {
-    margin-note(side: left, dy: -16.5pt, stroke: none)[#h(34pt)#numbering("a.", numbers.pos().at(3) + 1) ]
-  } else if n == 5 {
-    numbering("i.", numbers.pos().at(4))
-  }
-})
-#set underline(stroke: red + 1pt)
-#set par(leading: 0.8em)
-#set page(numbering: (..nums) => nums.pos().map(na).join("/"), number-align: right)
-#set math.cancel(stroke: red)
+#show: template
 
 Gaspar Daguet
 #align(center, text(20pt)[Maths : DM 21])
@@ -355,28 +331,28 @@ Ainsi, à l'aide de la question précédente, on obtient les tableaux de variati
 //   ),
 // )
 
-#align(center)[
-  #tabvar(
-    init: (
-      "variable": $x$,
-      "label": (([varation de $s$], variation),),
-    ),
-    interval: ($0$, $p / 2$, $p$, $(3p) / 2$, $2p$),
-    content: (((center, "u", $0$), (top, top, "u", $1$), (center, $0$), (bottom, $-1$), (center, "u", $0$)),),
-  )
-]
+// #align(center)[
+//   #tabvar(
+//     init: (
+//       "variable": $x$,
+//       "label": (([varation de $s$], variation),),
+//     ),
+//     interval: ($0$, $p / 2$, $p$, $(3p) / 2$, $2p$),
+//     content: (((center, "u", $0$), (top, top, "u", $1$), (center, $0$), (bottom, $-1$), (center, "u", $0$)),),
+//   )
+// ]
 
-Et
-#align(center)[
-  #tabvar(
-    init: (
-      "variable": $x$,
-      "label": (([variation de $c$], variation),),
-    ),
-    interval: ($0$, $p / 2$, $p$, $(3p) / 2$, $2p$),
-    content: (((top, $1$), (), (bottom, $-1$), (), (top, $1$)),),
-  )
-]
+// Et
+// #align(center)[
+//   #tabvar(
+//     init: (
+//       "variable": $x$,
+//       "label": (([variation de $c$], variation),),
+//     ),
+//     interval: ($0$, $p / 2$, $p$, $(3p) / 2$, $2p$),
+//     content: (((top, $1$), (), (bottom, $-1$), (), (top, $1$)),),
+//   )
+// ]
 #QED
 
 #pagebreak()
@@ -406,3 +382,5 @@ ce qui est Absurde\
 Donc $n = 1$ et donc $T = 2p$\
 Ainsi $2p$ est la plus petite période de $s$
 #QED
+
+$  $
