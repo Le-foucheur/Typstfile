@@ -1,5 +1,5 @@
-#import "./template.typ": *
-#import "./transposition.typ" : *
+#import "/template.typ": *
+#import "/transposition.typ" : *
 
 #set heading(numbering: (..numbers) => {
   let n=numbers.pos().len();
@@ -360,13 +360,13 @@ $
 #pagebreak()
 
 #let oui(s,n) = for i in range(s,n+1){
-  (text(font: "FreeMono")[#str.from-unicode(i)],)
+  (text(font: "Futhark A")[#str.from-unicode(i)],)
 }
 
 #grid(
   columns: 25,
   gutter: 5pt,
-  ..oui(119808,120831)
+  ..oui(5790,5890)
 )
 
 // ==== \

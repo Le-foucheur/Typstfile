@@ -105,5 +105,6 @@
   #set par(leading: 0.8em)
   #set page(numbering: (..nums) => nums.pos().map(na).join("/"),  number-align: right)
   #set math.cancel(stroke: red)
+  #set text(font:"FreeMono")
   #doc
 ]
