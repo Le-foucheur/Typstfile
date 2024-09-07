@@ -9,6 +9,12 @@ Gaspar Daguet
 #align(center, text(20pt)[Maths : ES 1])
 #set-page-properties()
 
-= Groupe
+= Groupe \
+\
+=== \
+
+Comme $Q$ est non commutatif, alors $Q$ est nécessairement non monogène
 
 === \
+
+$soietn( x , Q ) tq x !=e != e’$,
