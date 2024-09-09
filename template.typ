@@ -71,7 +71,7 @@
 #let QED = align(right, text[*Q.E.D.*]) // Quod erat demonstratum
 #let LAF = align(center, text(17pt)[*L.A.F.*]) //Labor ad facio
 #let a = text[#h(-16pt) a.]
-
+#let card = "Card"
 
 
 
