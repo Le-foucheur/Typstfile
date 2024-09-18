@@ -65,13 +65,25 @@
 #let G = $#text(font: "LT Perfume")[G]$+ h(4pt)
 #let C = $#text(font: "LT Perfume")[C]$+ h(4pt)
 #let ar(body) = $arrow(#body)$
-#let ve(..body) = {grid(columns: 1,row-gutter: 3pt ,grid.vline(), ..body)}
+#let ve(..body) = {
+  grid(columns: 1,row-gutter: 3pt ,grid.vline(), ..for i in range(body.pos().len()){
+    (h(3pt)+body.pos().at(i),)
+  })
+}
 #let equi(n : $n$, k : $+oo$) = $ tilde_(#n -> #k) $
 #let po(ele : $x$ , vers : $0$ ) = $ =_(#ele -> #vers) $
 #let QED = align(right, text[*Q.E.D.*]) // Quod erat demonstratum
-#let LAF = align(center, text(17pt)[*L.A.F.*]) //Labor ad facio
+#let LAF = align(center, text(17pt,fill: red)[*L.A.F.*]) //Labor ad facio
 #let a = text[#h(-16pt) a.]
 #let card = "Card"
+#let ux = $u_x$
+#let uy = $u_y$
+#let uz = $u_z$
+#let Ur = $u_r$
+#let ut = $u_theta$
+#let up = $u_phi$
+#let l2LN = "la seconde lois de Newton"
+
 
 
 
@@ -86,8 +98,7 @@
       question.update(1)
     } else if n == 2 {
       [Partie ]
-      numbering("I", numbers.pos().at(1) - 1)
-      "."
+      numbering("I.", numbers.pos().at(1))
     } else if n == 3 {
       question.step()
       if question.get().last() < 10 {
