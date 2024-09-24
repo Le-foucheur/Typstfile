@@ -4,8 +4,11 @@
 #import "@preview/vartable:0.1.0": *
 #import "@preview/cetz:0.2.2": *
 
+#show: template
+
 Gaspar Daguet
 #align(center, text(20pt)[Physique : DM1])
+
 #set-page-properties()
 
 = Un modèle simplifié de génératrice linéaire : le rail de Laplace \
@@ -24,7 +27,9 @@ $
 
 === \
 
-#v(6cm)
+#image(
+  "système.png"
+)
 
 == Étude temporelle \
 
