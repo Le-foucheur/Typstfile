@@ -82,7 +82,7 @@
 #let Ur = $u_r$
 #let ut = $u_theta$
 #let up = $u_phi$
-#let l2LN = "la seconde lois de Newton"
+#let l2LN = "la seconde loi de Newton"
 
 
 
