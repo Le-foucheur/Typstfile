@@ -55,7 +55,7 @@ Gaspar Daguet
   [*Lemme 2*] + 
   proof-tree(
     rule(
-      name: $->_"ax"$,
+      name: $ab(->, "ax")$,
       $Gamma, phi -> psi, phi tack psi$,
     )
   ),
@@ -203,11 +203,11 @@ Gaspar Daguet
         )
       ),
       rule(
-        name: $->_"ax"$, 
+        name: $ab(->, "ax")$, 
         $Gamma, p, q tack s$,
       ),
       rule(
-        name: $->_"ax"$,
+        name: $ab(->, "ax")$,
         $Gamma, p, r tack s$
       )
     )
@@ -272,7 +272,7 @@ Avec $Gamma = {p->q,r-> s, p and r}$
       name: $or_i^g$,
       rule(
         $Gamma, p tack q$,
-        name: $->_"ax"$
+        name: $ab(->, "ax")$
       )
     ),
     rule(
@@ -280,7 +280,7 @@ Avec $Gamma = {p->q,r-> s, p and r}$
       name: $or_i$,
       rule(
         $Gamma, r tack s$,
-        name: $->_"ax"$
+        name: $ab(->, "ax")$
       )
     )
   )
@@ -670,3 +670,42 @@ rule(
 )
 Avec $Gamma = {p -> (q or r)} et Gamma_2 = Gamma union {not q, p}$
 
+===
+#proof-tree(
+  rule(
+    undermath[$q -> r, not q -> not p tack p -> r$],
+    name: $ab(->, i)$,
+    rule(
+      $Gamma tack r$,
+      name: $ab(->, e)$, 
+      rule(
+        $Gamma tack q -> r$, 
+        name: "ax"
+      ),
+      rule(
+        $Gamma tack q $,
+        name:"raa", 
+        rule(
+          $Gamma, not q tack bot$,
+          name: $not_e$,
+          rule(
+            $Gamma, not q tack p$, 
+            name: "ax"
+          ),
+          rule(
+            $Gamma, not q tack not p$,
+            name: $ab(->, e)$,
+            rule(
+              $Gamma, not q tack not q -> not p$,
+              name: "ax"
+            ),
+            rule(
+              $Gamma, not q tack not q$,
+              name: "ax"
+            )
+          )
+        )
+      )
+    )
+  )
+)
