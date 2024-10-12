@@ -83,6 +83,7 @@
 #let ut = $u_theta$
 #let up = $u_phi$
 #let l2LN = "la seconde loi de Newton"
+#let ab(body, attache) = math.attach(body, br:attache)
 
 
 

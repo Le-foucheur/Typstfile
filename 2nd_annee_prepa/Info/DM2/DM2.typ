@@ -16,6 +16,7 @@ Gaspar Daguet
 \
 
 == Lemme : \
+- *Lemme Minimaliste*
 #grid(
   columns: 2,
   align: center+horizon,
@@ -38,7 +39,7 @@ Gaspar Daguet
         $Gamma tack not phi_1$,
       rule(
         name: $not_"e"$, 
-        $Gamma, phi_1 tack tack.t$,
+        $Gamma, phi_1 tack bot$,
         rule(
           $Gamma, phi_1 tack phi_2$,
           "hypp"
@@ -62,7 +63,7 @@ Gaspar Daguet
   "preuve : " + 
   proof-tree(
     rule(
-      name:$->_e$,
+      name:$ab(->, e)$,
       $Gamma, phi -> psi, phi tack psi$,
       rule(
         name: "ax",
@@ -74,6 +75,46 @@ Gaspar Daguet
       )
     )
   ) 
+)
+
+- *Lemme Classique*
+
+#grid(
+  columns: 2,
+  align: center+horizon,
+  column-gutter: 50mm,
+  row-gutter: 10mm,
+  [*Lemme 1*] + 
+  proof-tree(
+    rule(
+      $Gamma tack phi$,
+      name: $not not_e$,
+      $Gamma tack not not phi$
+    )
+  ),
+  [preuve :]+
+  proof-tree(
+    rule(
+      $Gamma tack phi$,
+      name: "raa",
+      rule(
+        $Gamma, not phi tack bot$,
+        name: $not_e$,
+        rule(
+          $Gamma, not phi tack not phi$,
+          name:"ax"
+        ),
+        rule(
+          $Gamma, not phi tack not not  phi$,
+          name: "aff",
+          rule(
+            $Gamma tack not not phi$,
+            "hypp"
+          )
+        )
+      )
+    )
+  )
 )
 
 == Logique minimale :
@@ -123,7 +164,7 @@ Gaspar Daguet
         $Gamma tack p$
       ),
       rule(
-        name: $->_e$,
+        name: $ab(->, e)$,
         $Gamma tack not p$,
         rule(
           name: "ax", 
@@ -144,13 +185,13 @@ Gaspar Daguet
 
 #proof-tree(
   rule(
-    name: $->_i$,
+    name: $ab(->, i)$,
     undermath[$p -> (q or r), q -> s, r -> s tack p ->s$],
     rule(
       name: $or_e$,
       $Gamma, p tack s$,
       rule(
-        name: $->_e$, 
+        name: $ab(->, e)$, 
         $Gamma, p tack q or r$,
         rule( 
           name:"ax", 
@@ -182,7 +223,7 @@ Avec $Gamma = {p -> (q or r), q -> s, r -> s}$
     name: $and_i$,
     undermath[$Gamma tack q and s$],
     rule(
-      name: $->_e$,
+      name: $ab(->, e)$,
       $Gamma tack q$,
       rule(
         name: "ax",
@@ -198,7 +239,7 @@ Avec $Gamma = {p -> (q or r), q -> s, r -> s}$
       )
     ),
     rule(
-      name: $->_e$,
+      name: $ab(->, e)$,
       $Gamma tack s$,
       rule(
         name: "ax",
@@ -250,10 +291,10 @@ Avec $Gamma = {p -> q, r -> s, p or r}$
 #proof-tree(
   rule(
     undermath[$(p or q) -> r tack (p->r) and (q -> r)$],
-    name: $and_i + ->_i$,
+    name: $and_i + ab(->, i)$,
     rule(
       $Gamma_1 tack r$,
-      name:$->_e$,
+      name:$ab(->, e)$,
       rule(
         $Gamma_1 tack (p or q) -> r$,
         name: "ax"
@@ -269,7 +310,7 @@ Avec $Gamma = {p -> q, r -> s, p or r}$
     ),
     rule(
       $Gamma_2 tack r$,
-      name:$->_e$,
+      name:$ab(->, e)$,
       rule(
         $Gamma_2 tack (p or q) -> r$,
         name: "ax"
@@ -336,10 +377,10 @@ Avec $Gamma_1 = {not(p or q), p} et Gamma_2 = {not(p or q), q}$
     undermath[$not p and not q tack (p or q)$],
     name: $not_i$,
     rule(
-      $not p and not q, p or q tack tack.t$,
+      $not p and not q, p or q tack bot$,
       name: $or_e$,
       rule(
-        $Gamma, q tack tack.t$,
+        $Gamma, q tack bot$,
         name: $not_e$, 
         rule(
           $Gamma, q tack not q$,
@@ -359,7 +400,7 @@ Avec $Gamma_1 = {not(p or q), p} et Gamma_2 = {not(p or q), q}$
         name: "ax"
       ),
       rule(
-        $Gamma, p tack tack.t$,
+        $Gamma, p tack bot$,
         name: $not_e$, 
         rule(
           $Gamma, p tack p$, 
@@ -385,10 +426,10 @@ Avec $Gamma = {not p and not q, p or q}$
     undermath[$not p or not q tack not(p and q)$],
     name: $not_i$,
     rule(
-      $not p or not q, p and q tack tack.t$,
+      $not p or not q, p and q tack bot$,
       name: $or_e$,
       rule(
-        $Gamma, not q tack tack.t$,
+        $Gamma, not q tack bot$,
         name: $not_e$, 
         rule(
           $Gamma, not q tack q$,
@@ -408,7 +449,7 @@ Avec $Gamma = {not p and not q, p or q}$
         name: "ax"
       ),
       rule(
-        $Gamma, not p tack tack.t$,
+        $Gamma, not p tack bot$,
         name: $not_e$, 
         rule(
           $Gamma, not p tack not p$, 
@@ -427,3 +468,205 @@ Avec $Gamma = {not p and not q, p or q}$
   )
 )
 Avec $Gamma = {not p or not q, p and q}$
+
+===
+#proof-tree(
+  rule(
+    undermath[$not (p and q) tack not p or not q$],
+    name: "raa",
+    rule(
+      $Gamma tack bot$,
+      name: $not_e$,
+      rule(
+        $Gamma tack not(p and q)$,
+        name: "ax"
+      ),
+      rule(
+        $Gamma tack p and q$,
+        name: $and_i$,
+        rule(
+          $Gamma tack p$,
+          name: $not not_e$,
+          rule(
+            $Gamma tack not not p$,
+            name: $and_e^g$,
+            rule(
+              $Gamma tack not not p and not not q$,
+              name: "q.7"
+            )
+          )
+        ),
+        rule(
+          $Gamma tack q$,
+          name: $not not_e$,
+          rule(
+            $Gamma tack not not q$,
+            name: $and_e^d$,
+            rule(
+              $Gamma tack not not p and not not q$,
+              name: "q.7"
+            )
+          )
+        )
+      )
+    )
+  )
+)
+Avec $Gamma = {not (p and q), not (not p or not q)}$
+
+== Logique intuitionniste
+\
+===
+#proof-tree(
+  rule(
+    undermath[$not p tack p -> q$],
+    name: $ab(->, i)$,
+    rule(
+      $not p, p tack q$,
+      name:$ab(bot, e)$,
+      rule(
+        $not p, p tack bot$,
+        name: $not_e$,
+        rule(
+          $not p ,p tack p$,
+          name: "ax"
+        ),
+        rule(
+          $not p, p tack not p$,
+          name: "ax"
+        )
+      )
+    )
+  )
+)
+
+===
+#proof-tree(
+  rule(
+    undermath[$p or q, not q tack p$],
+    name: $or_e$,
+    rule(
+      $Gamma tack p or q$,
+      name: "ax"
+    ),
+    rule(
+      $Gamma , p tack p$,
+      name: "ax"
+    ),
+    rule(
+      $Gamma, q tack p$, 
+      name: $ab(bot, e)$,
+      rule(
+        $Gamma, q tack bot$, 
+        name: $not_e$, 
+        rule(
+          $Gamma, q tack q$, 
+          name: "ax"
+        ), 
+        rule(
+          $Gamma, q tack not q$, 
+          name: "ax"
+        )
+      )
+    )
+  )
+)
+Avec $Gamma = {p or q, not q}$
+
+===
+#proof-tree(
+  rule(
+    $not (p -> q) tack q -> p$, 
+    name: $ab(->, i)$,
+    rule(
+      $Gamma tack p$,
+      name: $ab(bot, e)$,
+      rule(
+        $Gamma tack bot$,
+        name: $not_e$,
+        rule(
+          $Gamma tack not (p -> q)$
+        ),
+        rule(
+          $Gamma tack p -> q$,
+          name: $ab(->, i)$,
+          rule(
+            $Gamma , p tack q$, 
+            name: "ax"
+          )
+        )
+      )
+    )
+  )
+)
+Avec $Gamma = {not (p -> q), q}$
+
+== logique classique
+
+===
+#proof-tree(
+  rule(
+    undermath[$p -> (q or r) tack (p -> q) or ( p -> r)$],
+    name: $or_e$,
+    rule(
+      $Gamma tack q or not q$,
+      name: "t.e."
+    ),
+    rule(
+      $Gamma, q tack (p -> q) or (p -> r)$,
+      name: $or_i^g + ab(->, i)$,
+      rule(
+        $Gamma, q,p tack q$,
+        name: "ax"
+      )
+    ),
+    rule(
+      $Gamma, not q tack (p -> q) or (p -> r)$, 
+      name: $or_i^d + ab(->, i)$,
+      rule(
+        $Gamma, not q, p tack r$,
+        name: "ax",
+        "Voir ci-dessous"
+      )
+    )
+  )
+)
+
+
+Le ci-dessous en question :
+#proof-tree(
+rule(
+  $Gamma, not q, p tack r$,
+  name: $or_e$,
+  rule(
+      $Gamma_2 tack q or r$,
+      name: $ab(->, e)$, 
+      rule(
+        $Gamma_2 tack p -> (q or r)$, 
+        name: "ax"
+      ),
+      rule(
+        $Gamma_2 tack p$, 
+        name: "ax"
+      )
+    ), 
+    rule(
+      $Gamma, r tack r$, 
+      name: "ax"
+  ),
+    rule(
+      $Gamma_2, q tack r$, 
+      name:$not_e$,
+      rule(
+        $Gamma_2, q tack q$,
+        name: "ax"
+      ),
+      rule(
+        $Gamma_2, q tack not q$,
+        name: "ax"
+      )
+    )
+  )
+)
+Avec $Gamma = {p -> (q or r)} et Gamma_2 = Gamma union {not q, p}$
+
