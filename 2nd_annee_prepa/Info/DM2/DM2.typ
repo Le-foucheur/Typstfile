@@ -374,7 +374,7 @@ Avec $Gamma_1 = {not(p or q), p} et Gamma_2 = {not(p or q), q}$
 ===
 #proof-tree(
   rule(
-    undermath[$not p and not q tack (p or q)$],
+    undermath[$not p and not q tack not (p or q)$],
     name: $not_i$,
     rule(
       $not p and not q, p or q tack bot$,
