@@ -180,7 +180,7 @@ Gaspar Daguet
   [Avec $Gamma = {p -> not p, p}$]
 )
 
-
+#pagebreak()
 ===
 
 #proof-tree(
@@ -420,6 +420,7 @@ Avec $Gamma_1 = {not(p or q), p} et Gamma_2 = {not(p or q), q}$
 )
 Avec $Gamma = {not p and not q, p or q}$
 
+#pagebreak()
 ===
 #proof-tree(
   rule(
@@ -600,6 +601,8 @@ Avec $Gamma = {p or q, not q}$
   )
 )
 Avec $Gamma = {not (p -> q), q}$
+
+#pagebreak()
 
 == logique classique
 
