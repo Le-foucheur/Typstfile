@@ -66,7 +66,7 @@
 #let C = $#text(font: "LT Perfume")[C]$+ h(4pt)
 #let ar(body) = $arrow(#body)$
 #let ve(..body) = {
-  grid(columns: 1,row-gutter: 3pt ,grid.vline(), ..for i in range(body.pos().len()){
+  grid(columns: 1,row-gutter: 2.5mm ,grid.vline(), ..for i in range(body.pos().len()){
     (h(3pt)+body.pos().at(i),)
   })
 }
@@ -84,6 +84,7 @@
 #let up = $u_phi$
 #let l2LN = "la seconde loi de Newton"
 #let ab(body, attache) = math.attach(body, br:attache)
+#let dS = $d"S"$
 
 
 
