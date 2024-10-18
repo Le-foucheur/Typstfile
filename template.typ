@@ -65,15 +65,22 @@
 #let G = $#text(font: "LT Perfume")[G]$+ h(4pt)
 #let C = $#text(font: "LT Perfume")[C]$+ h(4pt)
 #let ar(body) = $arrow(#body)$
-#let ve(..body) = {
-  grid(columns: 1,row-gutter: 2.5mm ,grid.vline(), ..for i in range(body.pos().len()){
+#let ve(..body) = context{
+  let max = 0mm
+  for i in (body.pos()){
+    let tmp = measure(i).height
+    if tmp >= max {
+      max = tmp
+    }
+  }
+  grid(columns: 1,row-gutter: max+0.7mm ,grid.vline(), ..for i in range(body.pos().len()){
     (h(3pt)+body.pos().at(i),)
   })
 }
 #let equi(n : $n$, k : $+oo$) = $ tilde_(#n -> #k) $
 #let po(ele : $x$ , vers : $0$ ) = $ =_(#ele -> #vers) $
 #let QED = align(right, text[*Q.E.D.*]) // Quod erat demonstratum
-#let LAF = align(center, text(17pt,fill: red)[*L.A.F.*]) //Labor ad facio
+#let AFL = align(center, text(17pt,fill: red)[*A.F.L.*]) //ad facio labor
 #let a = text[#h(-16pt) a.]
 #let card = "Card"
 #let ux = $u_x$

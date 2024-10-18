@@ -3,6 +3,8 @@
 #import "@preview/drafting:0.2.0": *
 #import "@preview/cetz:0.2.2": *
 
+#show math.equation : mat => math.display(mat)
+
 #show: template
 
 Gaspar Daguet
@@ -55,8 +57,6 @@ $
 Donc $ar(cal(L)) = m_p C$ avec $C$ un constante, qui est la constante des aire, et le mouvement est plan\
 Et on a particulièrement $r dot(theta)^2 = C$
 
-#pagebreak()
-
 ===
 
 Par #l2LN on a : $(dif ar(v))/dt = - #G m_a/r^2 hat(Ur)$
@@ -91,6 +91,8 @@ Donc $p/(1+e) <= p/(1 + e cos theta) = r <= p/(1 - e)$\
 Donc le mouvement est bornée
 et la trajectoire est elipsoïdal
 
+#pagebreak()
+
 #text(size: 16pt)[*I.B Période du mouvement*]
 
 ===
@@ -104,8 +106,6 @@ Donc T = p^(3/2)/sqrt(#G m_a) integral_0^(2 pi)(dif theta)/(1+e cos theta)^2 = p
 "avec" cal(I) = integral_0^(2 pi)(dif theta)/(1+e cos theta)^2 
 $
 
-#pagebreak()
-
 ===
 
 Si $e = 0$, alors la trajectoire est circulaire, et 
@@ -116,6 +116,8 @@ $
 $
 On retrouve ainsi la troisième lois de Kepler, #text(style: "italic")[i.e.] : \
 le rapport du carré la période par le cube du demi grand axe est égale au rapport du le carré du périmètre du cercle unité par le produit de la constante de gravitation universel avec la masse de l'astre $A$ attracteur
+
+#pagebreak()
 
 ===
 
@@ -139,9 +141,6 @@ plot(X,Y)
 show()
 ```
 Avec N le nombre de points et precision la précisision de l'intégrale (ici calculé par la méthode de riemann)
-
-#pagebreak()
-
 
 #text(size: 16pt)[*I.C Mesure de l'unité astronomique*]
 
@@ -181,6 +180,7 @@ On a par des considératin géométrique : $tan(alpha/2) = l/(2(a_1 - a_0)) $, 
 Donc $alpha approx l/(a_1 - a_0)$ donc $ a_1 = a_0 + l/alpha$\
 \
 Et par la 3ième loi de Kepler : $T_0^2/a_0^3 = T_1^2/a_1^3$\
+#pagebreak()
 Donc
 $
   a_0 /T_0^(2/3) &= a_1 /T_1^(2/3) = 1/T_1^(2/3) (a_0 + l/alpha)\
@@ -194,10 +194,75 @@ On trouve également pour que $a_0 = 1 "a.u."$ : $(l)/(a_0 alpha) 1/((T_1/T_0)^
 
 Donc la valeur est compatible a 33% près
 
-#pagebreak()
-
 #text(size: 18pt)[*II Structure et énergie des étoiles*]\
 \
 #text(size: 16pt)[*II.A L'énergie gravitationnelle*]
 
 ===
+
+On a $W_g = -W(ar(F)) < 0$ car la force est opposée au déplacement
+
+===
+On a $rho = M/(4/3 pi R^3) = (3M)/(4 pi R^3)$\
+Et donc $m = rho . 4/3 pi r^3 = M (r/R)^3$\
+Et $dif m$ correspond à la masse de la sphère d'épaisseur $dif r$\
+Donc 
+$
+dif m &= rho . 4/3 pi (r + dif r)^3  - m = M(r/R)^3(1+ (dif r)/r)^3 - m\
+dif m & = m(cancel(1)+3 (dif r)/r) - cancel(m) = 3m (dif r)/r
+$
+
+===
+Comme $W = -W_g = - Delta E_p donc dif W_g = dif E_p$\
+\
+Or $ar(F) = - ar(nabla) . E_p = ve((diff E_p) / (diff r), 1/r (diff E_p)/ (diff theta), 1 / (r sin theta) (diff E_p)/(diff phi)) = ve( - #G (m dif m) / r^2, 0, 0) $\
+\
+Donc $E_p = #G (m dif m)/r$
+Ainsi la variation de $E_p$ entre $r et +oo$ vaut : $dif E_p = -#G (m dif m)/r$\
+\
+Donc $W_g =  - #G (m dif m)/r$\
+Et donc
+$
+  dif W_g = -3#G m^2 (dif r)/r = -3 M^2 (r/R)^6 (dif r)/r^2 = -3 M^2 r^4/R^6 dif r 
+$
+Et donc en intégrant :
+$
+  W_g = - 3/5 #G M^2 R^5/R^6 = -3/5 #G M^2/R
+$
+
+#text(size: 16pt)[*II.B Pression cinétique*]
+
+===
+Sur ce volume il y a le poid et les forces de préssion qui s'exerce\
+Ainsi en prenand $z_1 = z et z_2 = z + dif z$\
+Donc comme le système est à l'équilibre :
+$
+  P(z)S - P(z + dif z) S - rho(z) S dif z G(z) = 0\
+  Donc (diff P)/(diff z) - rho G = 0
+  Donc (diff P)/(diff z) = rho G
+$
+
+===
+Dans le modèle des gaz parfaits
+
+===
+Par le théorème de Gauss, on obtient : $ar(G) = - #G rho 4/3 pi r^3 hat(Ur) = - #G M r/R^3$\
+par la question 16 :
+$
+  (diff P)/(diff r) = -rho #G M r/R^3 = - 3/(4pi) (#G M)/R^3 M r/R^3 =  - 3/(4pi)  (#G M^2)/R^6 r\
+  Donc P(r) =  - 3/(8pi)  (#G M^2)/R^6 r^2 + K "avec K une constante"
+$
+On sait que $P(R) = 0$ donc $K =  3/(8pi)  (#G M^2)/R^6 R^2 $,\
+D'où 
+$
+  P(r) = 3/(8pi)  M^2/R^6 (R^2 - r^2)
+$ 
+
+===
+Par la question précédente $P(r) = 3/(8pi)  (#G M^2)/R^6 (R^2 - r^2)$ et on a $dif V = 4 pi r^2 dif r$\
+Donc 
+$
+  dif E_c = P dif V = 9/(4)  (#G M^2)/R^6 (R^2 - r^2) r^2\
+  donc E_c = 9/(4)  (#G M^2)/R^6 underbrace(integral_0^R (R^2 - r^2)r^2 dif r, = 2/5 R^2) = 3/10 (#G M^2)/R
+$
+On retrouve $W_g$ : $E_c = - W_g/2$ et donc que $E_c et |W_g|$ sont de même ordre de grandeur
