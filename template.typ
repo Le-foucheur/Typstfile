@@ -126,5 +126,6 @@
   #set page(numbering: (..nums) => nums.pos().map(na).join("/"),  number-align: right)
   #set math.cancel(stroke: red)
   #set text(font:"Linux Libertine")
+  #show math.equation : mat => math.display(mat)
   #doc
 ]

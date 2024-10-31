@@ -3,8 +3,6 @@
 #import "@preview/drafting:0.2.0": *
 #import "@preview/cetz:0.2.2": *
 
-#show math.equation : mat => math.display(mat)
-
 #show: template
 
 Gaspar Daguet
