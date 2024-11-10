@@ -20,6 +20,7 @@
 #let tq = "tel que" + h(3pt)
 #let et = "et" + h(3pt)
 #let dt = math.dif + "t"
+#let ddt = math.diff + $t$
 #let Id(n) = math.mat(..for x in range(n){
   let l = ()
   for y in range(n){
@@ -59,7 +60,7 @@
 #let vect(body) = "Vect("+ body + ")"
 #let ateb = math.beta.alt
 #let Ker(body) = if (body.fields().keys() == ("text",)) {[Ker #body]} else {[Ker(#body) ]}
-#let Im(body) = if (body.fields().keys() == ("text",)) {[Im #body]} else {[Im(#body) ]}
+#let ImE(body) = if (body.fields().keys() == ("text",)) {[Im #body]} else {[Im(#body) ]}
 #let Vect = "Vect"
 #let ou = "ou" + h(3pt)
 #let G = $#text(font: "LT Perfume")[G]$+ h(4pt)
@@ -127,5 +128,6 @@
   #set math.cancel(stroke: red)
   #set text(font:"Linux Libertine")
   #show math.equation : mat => math.display(mat)
+  #show math.equation : set block(breakable: true)
   #doc
 ]
