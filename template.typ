@@ -90,9 +90,12 @@
 #let Ur = $u_r$
 #let ut = $u_theta$
 #let up = $u_phi$
+#let dx = $dif x$
+#let ddx = $diff x$
 #let l2LN = "la seconde loi de Newton"
 #let ab(body, attache) = math.attach(body, br:attache)
 #let dS = $d"S"$
+#let cal(body, _font: "LT Perfume") = $text(font: #_font, body)$ + h(5pt)
 
 
 
