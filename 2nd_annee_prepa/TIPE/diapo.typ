@@ -1,10 +1,10 @@
 #set page(
-    paper: "presentation-16-9",
+    paper: "presentation-4-3",
     header: context [
         #set text(15pt, fill: white)
         #place(
             dx:-20mm,
-            box(fill: rgb("#171568"), height: 15mm, width: 109%)[
+            box(fill: rgb("#171568"), height: 15mm, width: 110%)[
                 #place(dx: -5mm, right+horizon,[#h(18mm) Gaspar Daguet, n=°XXXXXXX])
             ]
         )
@@ -13,10 +13,10 @@
         #set align(right)
         #set text(20pt, fill: rgb("#ffffff"), weight: "extrabold")
         #place(
-            dx:-7mm,
-            box(height: 100%, width: 104%)[
-                #scale(place(image("./image/methamorphose.jpg")),x: 148%)
-                #place(dx: 94%, horizon,counter(page).display(
+            dx:-5mm,
+            box(height: 100%, width: 105%)[
+                #scale(place(image("./image/methamorphose.jpg")),x: 111%)
+                #place(dx: -7mm, right+horizon,counter(page).display(
                     "1 / 1",
                     both: true
                     )
@@ -38,7 +38,7 @@
     } else if n == 5 {
     }
 })
-#show heading.where(level: 2): it => place(dy:-17.5mm, text(fill: white)[#it])
+#show heading.where(level: 2): it => place(dy:-21mm, text(fill: white)[#it])
 #show heading.where(level: 1): it => place(dy: -10mm,center+horizon, text()[#it])
 #set enum(numbering: "1)")
 #set figure(kind: "", supplement: none)
@@ -56,28 +56,85 @@
 #pagebreak()
 
 == Table des Matières
-#place(center+horizon, dx: -70mm)[
+#place(center+horizon, dx: -60mm)[
 #set align(left)
 
++ Introduction & Problématique
 + La pseudosphère
 + La projection
-+ projeté des droites et (des cercles ?)
++ projeté des droites et des cercles
 + non conservation des longueurs
 + conservation des angles
 
 ]
 
-#place(dx: -10mm,horizon+right, scale(figure(image("./image/cercle limite.jpg"), caption: [Cercle Limite III — M. C. Escher]), x: 10cm, y:10cm))
+#place(dx: 19mm,horizon+right, scale(figure(image("./image/cercle limite.jpg"), caption: [Cercle Limite III — M. C. Escher]), x: 10cm, y:10cm))
 
 #pagebreak()
 
-#place(dx:45mm,center+horizon)[= 1) La Pseudosphère]
+= 1) Introduction & Problématique
+
+#pagebreak()
+
+== 1) Introduction & Problématique
+
+#grid(
+    columns: 4,
+    column-gutter: 3mm,
+    row-gutter: 1.1cm,
+    figure(caption: [Cahill-Keyes],image("image/diffprojS/300px-World_Map,_Political,_2012,_Cahill-Keyes_Projection.jpg")),
+    figure(caption: [Rétro-azimutale de Craig],image("image/diffprojS/Craig_projection_SW.jpg")),
+    figure(caption: [Équirectangulaire],image("image/diffprojS/Equirectangular_projection_SW.jpg")),
+    figure(caption: [Goode],image("image/diffprojS/Goode_homolosine_projection_SW.jpg")),
+    figure(caption: [Transverse Universelle de Mercator],image("image/diffprojS/MercTranEll.png")),
+    figure(caption: [Globulaire de Nicolosi],image("image/diffprojS/Nicolosi_globular_projections_SW.jpg")),
+    figure(caption: [Stéréographique],image("image/diffprojS/Stereographic_projection_SW.JPG", format: "jpg")),
+    figure(caption: [Rétro-azimutale de Hammer],image("image/diffprojS/Hammer_retroazimuthal_projection_back_SW.JPG")),
+)
+
+#pagebreak()
+
+#place(
+    center+horizon,
+    dy: -3.5cm,
+    text(30pt)[
+        *Problématique :*\
+        Comment projeter une surface hyperbolique\
+        sur le plan
+    ]
+)
+
+#place(
+    dy: 6cm,
+    figure(scale(image("./image/pringels.png"), x: 80%, y: 80%), caption: place(center+bottom, dy: -7mm,text(20pt)[un pringle]))
+)
+
+#place(
+    dy: 5.5cm,
+    dx: 11cm,
+    figure(scale(image("./image/carte_vielle.jpeg"), x: 50%, y: 60%), caption: place(center+bottom, dy: -1.5cm, text(20pt)[une carte]))
+)
+
+#place(
+    center+horizon,
+    dy: 3.5cm,
+    dx: -3mm,
+    text(60pt)[
+        $
+            ==>
+          $
+    ]
+)
+
+#pagebreak()
+
+#place(dx:45mm,center+horizon)[= 2) La Pseudosphère]
 
 #place(dx: 8mm, dy: 7mm, scale(image("./image/ps1.jpg"), x: 9cm, y:9cm))
 
 #pagebreak()
 
-== 1) La Pseudosphère
+== 2) La Pseudosphère
 
 #{
     set text(size: 30pt)
@@ -104,54 +161,54 @@
 
 #pagebreak()
 
-== 1) La Pseudosphère
+== 2) La Pseudosphère
 
 #place(
     horizon+left,
-    dx:3cm,
+    dx:1.5cm,
     [L’application Normale :] + 
     $
       N:& [0; 2pi] times RR_+ --> RR^3\
-      &"    "(u,v) "" arrow.long.bar  (P_u and P_v)/norm(P_u and P_v)
+      &"    "p "" arrow.long.bar  (P_u (p) and P_v (p))/norm(P_u (p) and P_v (p))
     $
 )
 
 #place(
     horizon+right,
-    dx:-3cm,
+    dx:-1.5cm,
     $
-      E(u,v) = norm(f_u)^2 \
+      E(p) = norm(f_u)^2 \
       \
-      F(u,v) = <f_u | f_v> \
+      F(p) = <f_u | f_v> \
       \
-      G(u,v) = norm(f_v)^2 \
+      G(p) = norm(f_v)^2 \
       \
-      cal(L)(u,v) = - <N_u | f_u> \
+      cal(L)(p) = - <N_u | f_u> \
       \
-      cal(M)(u,v) = - <N_v | f_u> \
+      cal(M)(p) = - <N_v | f_u> \
       \
-      cal(N)(u,v) = - <N_v | f_v> \
+      cal(N)(p) = - <N_v | f_v> \
     $
 )
 
 #pagebreak()
 
-== 1) La Pseudosphère
+== 2) La Pseudosphère
 
 #place(
     center,
-    dy: 3mm,
+    dy: 13mm,
     [La courbure en $p in [0; 2pi] times RR_+$] + 
     $
       K(p) = (cal(L)(p)cal(N)(p) - cal(M)(p)^2)/(E(p)G(p) - F^2)
     $
 )
-#v(5.5cm)
+#v(7cm)
 Pour la pseudosphère :
 #place(
     left+bottom,
     dx: 1cm,
-    dy: 0mm,
+    dy: -20mm,
     grid(
         columns: 2, 
         align: horizon + center,
@@ -176,24 +233,140 @@ Pour la pseudosphère :
 #place(
     right+bottom,
     dx: -2cm,
-    dy: -1cm,
+    dy: -3cm,
     $ forall p in [0; 2pi] times RR_+, K(p) = -1 $ + 
     [Donc surface hyperbolique]
 )
 
 #pagebreak()
 
-== 2) La projection
-
-projection de mercator, même idée : on présèreve les surface élémentaire
-
-dèf surface élémentaire
-
-les calcules !
+= 2) La projection
 
 #pagebreak()
 
-== 3) projeté des droites et des sphère 
+== 2) La projection
+
+Idée de la projection de Mercator :
+
+#place(
+    top+center,
+    dx: 0cm,
+    dy: 2mm,
+    figure(
+        scale(image("./image/eleSphere.png"), x: 80%, y: 80%)
+    )
+)
+
+#place(
+    center+bottom,
+    dy:-2cm,
+    $
+    (diff y)/(diff x)  = A/B
+    $
+)
+
+#pagebreak()
+
+== 2) La projection
+
+#place(
+    center+horizon,
+    dy: -4cm,
+    grid(
+        columns: 2,
+        column-gutter: 6cm,
+        "Surface élémentaire :" + 
+        $
+        cal(E) = norm(f_u and f_v)
+        $, 
+        "Pour la pseudosphère :"+ 
+        $
+          cal(E) = (sh(v))/(ch^2(v)) diff u diff v
+        $
+    )
+)
+#place(
+    bottom+left,
+    dx: 12cm,
+    dy: -3cm,
+    grid(
+        columns: 2,
+        column-gutter: 2cm,
+        align: horizon,
+        [
+            Or : $ A = (diff u)/ch(v) $
+        ],
+        [
+            Donc 
+            $
+            B = cal(E)/A = th(v) diff v
+            $
+        ]
+    
+    )
+)
+
+#place(
+    bottom+left,
+    dx: -4cm,
+    dy: 3cm,
+    scale(image("image/elePS.png"), x:60%, y:60%)
+)
+
+#pagebreak()
+
+== 2) La projection
+
+#place(
+    center+horizon,
+    grid(
+        columns: 2,
+        column-gutter: 5cm,
+        row-gutter: 5cm,
+        align: center+horizon,
+        "On pose" + 
+        $
+            (diff x)/(diff u) = 1
+        $,
+        $
+            "Donc" \
+            (diff y)/(diff x) = (sh(v) diff v)/(diff u)
+        $,
+        $
+            "Donc"\
+            (diff y)/(diff v) = sh(v) (diff x)/(diff u) = sh(v)
+        $,
+        $
+            "Ainsi :"\
+            y = ch(v)
+        $
+    )
+)
+
+#pagebreak()
+
+== 2) La projection
+
+#{
+    set text(30pt)
+    place(
+        center + horizon,
+        [
+            La projection :
+            $
+            C : cases([0; 2pi] times RR_+--> RR^2, " " p = (u,v) arrow.long.bar vec(u,ch(v)))
+            $
+        ]
+    )
+}
+
+#pagebreak()
+
+Plein d'image de projection !!
+
+#pagebreak()
+
+== 3) projeté des droites et des sphères
 
 dèf droites et cercle
 

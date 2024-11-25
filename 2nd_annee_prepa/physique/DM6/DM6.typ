@@ -87,17 +87,33 @@ ce qui correspond au graphe précédent
 ===
 À partir d’un certain $b$, il existe un $c in [0; b]$ tel que toute la partie supérieure à $c$ soit à la température $T_a$, et donc ne participe en rien à la diffusion de la chaleur, d’où l’existence d’un $R_th$ limite
 
-===
 On a que, pour $cal(C)$la surface du cylindre :
 $
   Phi &= integral.double_cal(C) arrow(dotless.j)_(C C) . arrow(dS)\
   &= h integral_0^b (T(x) - T_a) times 2 pi a dx\
-  &= 2 pi a h integral_0^b delta^2 (dif^2 T)/dx^2 dx "par l’équation de la q.2"\
-  &= 2 pi a h delta^2 T'(x) ??
+  &= 2 pi a h integral_0^b (T_d - T_a) e^(-x/delta) dx \
+  &= 2 pi a h delta (T_d - T_a) ( 1- e^(-b/delta))
 $
-#AFL
+Donc pour $b << delta$
+$
+  R_th &= (T_d - T_a)/Phi = 1/(2 pi a h delta (1 - e^(-b/delta)))\
+  &approx  delta/(2 pi a h (1 − (1 − b/delta))) approx 1/(2pi a b h)\
+  
+$
 
 ===
+
+D’après les calculs précédents
+
+$
+  R_th &= 1/(2 pi a h delta (1 - underbrace(e^(-b/delta), approx 0 ", pour" b >> delta)))\
+  &approx  1/(2 pi a h delta)\
+  
+$
+
+===
+
+Les ailettes sont le plus efficace pour $b/delta approx 1$, donc pour $b approx delta approx 1,6 "cm"$
 #AFL
 
 ===
@@ -124,4 +140,5 @@ $
   D_m approx 1,2 times 830 approx 958,5 "kg" dot.c "h"^(-1) approx 0,266 "kg" dot.c "s"^(-1)
 $
 
-===
+=== 
+#AFL
