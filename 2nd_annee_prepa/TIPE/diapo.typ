@@ -177,17 +177,17 @@
     horizon+right,
     dx:-1.5cm,
     $
-      E(p) = norm(f_u)^2 \
+      E(p) = norm(P_u)^2 \
       \
-      F(p) = <f_u | f_v> \
+      F(p) = <P_u | P_v> \
       \
-      G(p) = norm(f_v)^2 \
+      G(p) = norm(P_v)^2 \
       \
-      cal(L)(p) = - <N_u | f_u> \
+      cal(L)(p) = - <N_u | P_u> \
       \
-      cal(M)(p) = - <N_v | f_u> \
+      cal(M)(p) = - <N_v | P_u> \
       \
-      cal(N)(p) = - <N_v | f_v> \
+      cal(N)(p) = - <N_v | P_v> \
     $
 )
 
@@ -277,7 +277,7 @@ Idée de la projection de Mercator :
         column-gutter: 6cm,
         "Surface élémentaire :" + 
         $
-        cal(E) = norm(f_u and f_v)
+        cal(E) = norm(f_u and f_v) diff u diff v
         $, 
         "Pour la pseudosphère :"+ 
         $
@@ -294,12 +294,12 @@ Idée de la projection de Mercator :
         column-gutter: 2cm,
         align: horizon,
         [
-            Or : $ A = (diff u)/ch(v) $
+            Or : $ B = (diff u)/ch(v) $
         ],
         [
             Donc 
             $
-            B = cal(E)/A = th(v) diff v
+            A = cal(E)/B = th(v) diff v
             $
         ]
     
@@ -318,9 +318,10 @@ Idée de la projection de Mercator :
 == 2) La projection
 
 #place(
-    center+horizon,
+    center+top,
+    dy: 2cm,
     grid(
-        columns: 2,
+        columns: 3,
         column-gutter: 5cm,
         row-gutter: 5cm,
         align: center+horizon,
@@ -328,13 +329,9 @@ Idée de la projection de Mercator :
         $
             (diff x)/(diff u) = 1
         $,
+        "Et comme"+
         $
-            "Donc" \
-            (diff y)/(diff x) = (sh(v) diff v)/(diff u)
-        $,
-        $
-            "Donc"\
-            (diff y)/(diff v) = sh(v) (diff x)/(diff u) = sh(v)
+          (diff y)/(diff x) = (sh(v) diff v)/(diff u)
         $,
         $
             "Ainsi :"\
@@ -343,14 +340,12 @@ Idée de la projection de Mercator :
     )
 )
 
-#pagebreak()
-
-== 2) La projection
 
 #{
     set text(30pt)
     place(
-        center + horizon,
+        center + bottom,
+        dy: -2cm,
         [
             La projection :
             $
