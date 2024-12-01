@@ -1,0 +1,34 @@
+ens:
+  type: web
+  title: "Courbes et surfaces dans R3 : Theorema Egregium de Gauss Surfaces minimales"
+  author: Marie Trin
+  url: https://perso.eleves.ens-rennes.fr/~mtrin953/pdf/memoire_m1.pdf
+
+wikiliste:
+  type: web
+  title: List of Map Projection
+  url: https://en.wikipedia.org/wiki/List_of_map_projections
+
+surface:
+  type: web
+  title: Surfaces paramétrées
+  url: https://math.univ-lyon1.fr/~borrelli/Oran/Cours2.pdf
+  author: Vincent Borrelli
+
+courbure:
+  type: web
+  title: Courbure
+  url: https://math.univ-lyon1.fr/~borrelli/Oran/Cours3.pdf
+  author: Vincent Borrelli
+
+mathcurve:
+  type: web
+  title: PSEUDO-SPHÈRE
+  author: Robert FERRÉOL
+  url: https://mathcurve.com/surfaces/pseudosphere/pseudosphere.shtml
+
+mercat:
+  type: web
+  title: Mercator et sa projection
+  autor: D. Hestroffer
+  url: https://www.imcce.fr/newsletter/docs/2016_07_mercator.pdf
