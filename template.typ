@@ -63,8 +63,10 @@
 #let ImE(body) = if (body.fields().keys() == ("text",)) {[Im #body]} else {[Im(#body) ]}
 #let Vect = "Vect"
 #let ou = "ou" + h(3pt)
-#let G = $#text(font: "LT Perfume")[G]$+ h(4pt)
-#let C = $#text(font: "LT Perfume")[C]$+ h(4pt)
+#let scr(it) = text(
+  features: ("ss01",),
+  box($cal(it)$),
+)
 #let ar(body) = $arrow(#body)$
 #let ve(..body) = context{
   let max = 0mm
