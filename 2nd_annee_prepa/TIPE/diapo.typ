@@ -11,14 +11,14 @@
     ],
     footer: context [
         #set align(right)
-        #set text(20pt, fill: rgb("#ffffff"), weight: "extrabold")
+        #set text(20pt, fill: rgb("#ffffff"), weight: "extrabold", stroke: 1pt, font: "FreeSans")
         #place(
             dx:-5mm,
             box(height: 100%, width: 105%)[
                 #scale(place(image("./image/methamorphose.jpg")),x: 111%)
                 #place(dx: -7mm, right+horizon,counter(page).display(
                     "1 / 1",
-                    both: true
+                    both: true,
                     )
                 )
             ]

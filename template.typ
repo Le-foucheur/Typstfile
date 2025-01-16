@@ -129,7 +129,7 @@
   #set par(leading: 0.8em)
   #set page(numbering: (..nums) => nums.pos().map(na).join("/"),  number-align: right)
   #set math.cancel(stroke: red)
-  #set text(font:"Linux Libertine")
+  #set text(font:"Linux Libertine", lang: "fr")
   #show math.equation : mat => math.display(mat)
   #show math.equation : set block(breakable: true)
   #doc
