@@ -505,6 +505,9 @@ Trouver un moyen pour proj’ter une image
 
 #pagebreak()
 
+= 5) Conservation des angles
+
+#pagebreak()
 
 == 5) conservation des angles
 
