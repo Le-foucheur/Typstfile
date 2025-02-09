@@ -76,7 +76,7 @@
       max = tmp
     }
   }
-  grid(columns: 1,row-gutter: max+0.7mm ,grid.vline(), ..for i in range(body.pos().len()){
+  grid(columns: 1,row-gutter: max ,grid.vline(stroke: 0.5pt), ..for i in range(body.pos().len()){
     (h(3pt)+body.pos().at(i),)
   })
 }
@@ -131,8 +131,8 @@
   #set par(leading: 0.8em)
   #set page(numbering: (..nums) => nums.pos().map(na).join("/"),  number-align: right)
   #set math.cancel(stroke: red)
+  #show math.equation: set text(13pt) 
   #set text(font:"Linux Libertine", lang: "fr")
-  #show math.equation : mat => math.display(mat)
   #show math.equation : set block(breakable: true)
   #doc
 ]

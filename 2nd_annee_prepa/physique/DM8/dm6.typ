@@ -78,27 +78,90 @@ $
   omega = sqrt( (G M) / r^3)
 $
 
-#pagebreak()
-
 #text(14pt)[*Partie I.B — Les points de Lagrange*]
 
 ===
-Si l'on ne considère que les champs de gravité de la terre et du soleil, alors 
+#AFL
+
+===
+
+Pour vérifier que l'équation (I.1) est symétrique par rapport à l'axe $(A x)$, on remplace $y$ par $-y$, ainsi :
 $
-  arrow(scr(G)) = arrow(scr(G))_T (r_t) + arrow(scr(G))_S (r_s) = 0
+  cases(
+    -(a(x-(1-a)D))/((x-(1-a)D)^2 + (-y)^2)^(3\/2) - ((1-a)(x+a D))/(((x+a D)^2 + (-y)^2)^(3\/2)) + x/D^3 = 0,
+    -(a (-y))/((x-(1-a)D)^2 + (-y)^2)^(3\/2) - ((1-a)(-y))/(((x+a D)^2 + (-y)^2)^(3\/2)) + (-y)/D^3 = 0,
+  )\
+  <==>\
+  cases(
+    -(a(x-(1-a)D))/((x-(1-a)D)^2 + y^2)^(3\/2) - ((1-a)(x+a D))/(((x+a D)^2 + y^2)^(3\/2)) + x/D^3 = 0,
+    -(a y)/((x-(1-a)D)^2 + y^2)^(3\/2) - ((1-a)y)/(((x+a D)^2 + y^2)^(3\/2)) + y/D^3 = 0,
+  )
 $
-avec $r_t$ et $r_s$ les rayons des orbites depuis la terre et le soleil.\
-Or :
+
+#question.step()
+
+#text(14pt)[*Partie I.C — Dynamique des flyers au voisinage de $upright(L)_1$*]
+
+#text(13pt)[*Partie I.C 1) — Position de $upright(L)_1$*]
+
+===
+AN :
 $
-  r_s = sqrt(x^2 + y^2)\
-  r_t = sqrt((D-x)^2 + y^2)
+  a = M_T/M = (6 dot.c 10^24) / (2 dot.c 10^30 + 6 dot.c 10^24) ) approx 3 dot.c 10^-6
 $
-Ainsi :
+De plus pour $a = 0$ :
 $
-  arrow(scr(G))_T (r_t) = - G( a M) / r_t^2 arrow(Ur) = - G (a M) / ((D-x)^2 + y^2) arrow(Ur)\
-  arrow(scr(G))_S (r_s) = - G ((1-a)M) / r_s^2 arrow(Ur) = - G ((1-a)M) / (x^2 + y^2) arrow(Ur)
+  0 =1/(D - epsilon)^2 - 1/D^2 + epsilon/D^3 = (D^3 - (D - epsilon)^3 ) / (D^3 (D - epsilon)^2)\
+  Donc cancel(D^3) - cancel(D^3) + 3 D^2 epsilon - 3epsilon^2 D + epsilon^3 = epsilon underbrace((epsilon^2 - 3D epsilon + 3D^2), Delta = -3 D^2 < 0) = 0\
 $
-Donc :
+Donc $epsilon = 0$, ainsi la terre et $upright(L)_1$ sont confondus, donc on ne peut pas prendre $a = 0$
+
+===
+Pour $epsilon << D$, alors
 $
-  arrow(scr(G)) = -G M ((a)/((D - x)^2 + y^2) + ((1 - a))/(x^2 + y^2)) arrow(Ur) = 0
+  (1-a)/(D^2(1 - epsilon/D)^2) - a/epsilon^2 - (1-a)/D^2 + underbrace((epsilon/D^3), = 0", car " epsilon << D) = 0\
+  (1-a)/D^2 (cancel(1)+(2 epsilon)/D) - cancel((1 - a)/D^2) = a/epsilon^2\
+  2 epsilon (1-a)/D^3 = a/epsilon^2\
+  epsilon^3/D^3 = a/(2(1-a))\
+  epsilon/D = root(3 , a/(2(1-a))) approx root(3, a/2)\
+  "car " a << 1\
 $
+
+AN :
+$epsilon/D approx root(3, (3 dot.c 10^(-6))/2) approx 1.1 dot.c 10^(-2)$
+
+===
+
+On peut lire sur la figure 2 que $epsilon/D approx 1 dot.c 10^(-2)$\
+Ce qui est très proche de la valeur calculée précédemment
+
+#text(13pt)[*Partie I.C 2) — Dynamique des flyers au voisinage de $upright(L)_1$*]
+
+===
+
+$
+  underbrace((dif^2 u)/(dif tau^2), "viens de "\ l2LN) = underbrace(4pi (dif v)/(dif tau), "dû à" \ "la force centrifuge") + underbrace( pi^2 (1 + (2a)/epsilon.alt^2 + (2(1-a))/(1-epsilon.alt)^3)u, "dû à" \ "l'influance gravitationelle" \ "dus autres astres")\
+$
+
+=== 
+
+
+Posons $ateb = 4 pi^2 (a/epsilon.alt^3 + (1-a)/(1-epsilon.alt)^3)$, ainsi
+$
+  (dif^2 w)/(dif tau^2) + ateb w = 0
+$
+On reconais une équation différentielle du second ordre homogène, dont le polynome caractéristique $X^2 + ateb = 0$, a pour racine : $plus.minus i sqrt(ateb)$.\
+Ainsi le mouvement du flayer suivant $z$ est périodique, de pulsation $omega_0 = sqrt(ateb)$
+
+===
+Le système (I.3) devient :
+$
+  cases(
+    (dif u_p)/(dif tau) = 4pi v_p + 4pi^2 A u,
+    (dif v_p)/(dif tau) = -4pi u_p + 4pi^2 B v,
+    (dif w_p)/(dif tau) = - 4pi^2 C w,
+  )
+$
+
+===
+#AFL

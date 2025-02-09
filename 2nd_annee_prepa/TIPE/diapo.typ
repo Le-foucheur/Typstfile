@@ -28,7 +28,7 @@
     margin: (x:5mm),
     numbering: ("1/1"),
 )
-#set text(25pt, font: "Linux Libertine")
+#set text(25pt, font: "Linux Biolinum")
 #set heading(numbering: (..numbers) => {
     let n = numbers.pos().len()
     if n == 1 {
@@ -166,6 +166,13 @@
 #place(
     horizon+left,
     dx:1.5cm,
+    dy: -4cm,
+    [On note ] + $display((diff P)/(diff u) = P_u)$
+)
+#place(
+    horizon+left,
+    dx:1.5cm,
+    dy: 2cm,
     [L’application Normale :] + 
     $
       N:& [0; 2pi] times RR_+ --> RR^3\
@@ -240,11 +247,11 @@ Pour la pseudosphère :
 
 #pagebreak()
 
-= 2) La projection
+= 3) La projection
 
 #pagebreak()
 
-== 2) La projection
+== 3) La projection
 
 Idée de la projection de Mercator :
 
@@ -267,7 +274,7 @@ Idée de la projection de Mercator :
 
 #pagebreak()
 
-== 2) La projection
+== 3) La projection
 
 #place(
     center+horizon,
@@ -315,39 +322,17 @@ Idée de la projection de Mercator :
 
 #pagebreak()
 
-== 2) La projection
+== 3) La projection
 
-#place(
-    center+top,
-    dy: 2cm,
-    grid(
-        columns: 3,
-        column-gutter: 5cm,
-        row-gutter: 5cm,
-        align: center+horizon,
-        "On pose" + 
-        $
-            (diff x)/(diff u) = 1
-        $,
-        "Et comme"+
-        $
-          (diff y)/(diff x) = (sh(v) diff v)/(diff u)
-        $,
-        $
-            "Ainsi :"\
-            y = ch(v)
-        $
-    )
-)
 
 
 #{
     set text(30pt)
     place(
-        center + bottom,
-        dy: -2cm,
+        center + horizon,
+
         [
-            La projection :
+            La projection :
             $
             C : cases([0; 2pi] times RR_+--> RR^2, " " p = (u,v) arrow.long.bar vec(u,ch(v)))
             $
@@ -357,17 +342,140 @@ Idée de la projection de Mercator :
 
 #pagebreak()
 
-Plein d'image de projection !!
+== 3) La projection
+
+#place()[Droites Quelconques :]
+
+#place(
+    bottom,
+    figure(
+        image("./image/carre.png", width: 40%),
+    )
+)
+
+#place(
+    right + bottom,
+    figure(
+        image("./image/carrePS.png"),
+    )
+)
 
 #pagebreak()
 
-== 3) projeté des droites et des sphères
+Trouver un moyen pour proj’ter une image
 
-dèf droites et cercle
+#pagebreak()
 
-calcule par la projection
+= 4) Projeté des droites
 
-joli dessin
+#pagebreak()
+
+== 4) projeté des droites
+
+#place(
+    dx: 7.5cm,
+    dy: 6cm,
+    [
+        Équation des droites :
+         - Méridiens : $g : t |-> P(u,t)$
+         - Autres : $
+            g : t |-> P(t, ch(sqrt(k^2 - (t + c)^2)))
+                    $
+    ]
+)
+
+#pagebreak()
+
+== 4)  projeté des droites
+
+#place()[Méridiens :]
+
+#place(
+    bottom,
+    figure(
+        image("./image/DroiteM.png", width: 40%),
+    )
+)
+
+#place(
+    right + bottom,
+    figure(
+        image("./image/DroiteMPS.png"),
+    )
+)
+
+#pagebreak()
+
+== 4)  projeté des droites
+
+#place()[Droites Quelconques :]
+
+#place(
+    bottom,
+    figure(
+        image("./image/DroiteCK.png", width: 40%),
+    )
+)
+
+#place(
+    right + bottom,
+    figure(
+        image("./image/DroiteCKPS.png"),
+    )
+)
+
+#pagebreak()
+
+== 4) projeté des droites
+
+#place(
+    horizon,
+    dx: 1cm,
+
+    [
+        Longueur d'arc :
+        $
+        d(A, B) = integral_(t_A)^t_B norm(g'(t)) dif t
+        $
+    ]
+)
+
+#place(
+    horizon,
+    dx: 14cm,
+    dy: -3.5cm,
+    [
+        Sur la pseudosphère :
+        $
+        d(A,B) = ln(ch(u_B) / ch(u_A))
+        $
+    ]
+)
+
+#place(
+    dx: 18.5cm,
+    horizon,
+    text(40pt,$eq.not$)
+)
+
+#place(
+    horizon,
+    dx: 14cm,
+    dy: 3.5cm,
+    [
+        Sur la carte :
+        $
+        d(A,B) = ch(u_B) - ch(u_A)
+        $
+    ]
+)
+
+#place(
+    bottom + center,
+    [
+        Donc la projection n'est pas équivalente
+    ]
+)
 
 #pagebreak()
 

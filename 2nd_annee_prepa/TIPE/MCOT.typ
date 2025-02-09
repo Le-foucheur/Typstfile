@@ -35,7 +35,7 @@ MATHÉMATIQUE (géométrie), MATHÉMATIQUE (géométrie différentielle)
 
 = Bibliographie commentée:
 
-Les projections cartographiques sont un type de projection spatial très connu des mathématiciens @wikiliste, 
+Les projections cartographiques sont un type de projection spatial très connu des mathématiciens [1], 
 mais l’étude de ce type de projections en reste néanmoins intéressante,
 dans un but artistique comme avec l’artiste M.C. Escher, ou dans un but de compréhension et
 d’étude de certaines surfaces comme le disque de Poincaré qui n’est qu’une projection
@@ -43,19 +43,19 @@ azimutale de l’Hyperboloïde.\
 Pour cela différents types de projections existent, des azimutales aux coniques en passant
 par les cylindriques. Ces dernières ont retenu mon attention avec la plus connue : La Projection de Mercator.\
 Pour réaliser une projection il faut déjà avoir une surface à projeter. J’ai choisi
-la pseudosphère @mathcurve étudiée en premier par Ferdinand Minding (1806 — 1885) puis Eugène Beltrami
+la pseudosphère [2] étudiée en premier par Ferdinand Minding (1806 — 1885) puis Eugène Beltrami
 en 1868 qui a montré son caractère hyperbolique et l’a baptisée : « pseudosphère »,
-dont la courbure est constante négative @ens @courbure.\
+dont la courbure est constante négative [3] [4].\
 Pour réaliser la projection de type Mercator il faut s’intéresser à la géométrie de la surface,
 et plus particulièrement aux éléments de surface. En effet, le principe de la projection de Mercator
-est de préserver le rapport des cotés d’un élément de surface@mercat, pour ainsi préserver les angles
+est de préserver le rapport des cotés d’un élément de surface [5], pour ainsi préserver les angles
 de la surface sur la carte ainsi faite\
 Une projection est intéressante dans ce quelle conserve,
 par exemple la projection de Mercator est utilisée par des marins,
 car elle conserve les angles. Le projet build the earth, projet qui a pour but de reproduire
 la terre dans le jeu Minecraft dont le monde est plat, a utilisé une projection qui
 ne conserve rien mais dont la distorsion des angles et des longueurs est la plus minime possible,
-d’où l’étude des longueurs et des angles des projections @surface @ens
+d’où l’étude des longueurs et des angles des projections [6] [3]
 
 = Problématique retenu :
 
@@ -71,8 +71,6 @@ Et quelles en seraient les grandeurs conservées ?
 + étudier les grandeurs conservées
     - les longueurs
     - les angles
-
-#bibliography("biblio.yml")
 
 = DOT :
 

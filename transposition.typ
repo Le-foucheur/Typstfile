@@ -12,22 +12,22 @@
 #let je = text(font: "FreeMono")[#str.from-unicode(0x16C3)]+ h(0.5pt)
 #let ei = text(font: "FreeMono")[#str.from-unicode(0x16C7)]+ h(0.5pt)
 //symbole math
-#let ing = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16DD)] + h(2pt)
-#let ti = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16CF)] + h(2pt)
-#let al = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16C9)] + h(2pt)
-#let dag = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16DE)] + h(2pt)
-#let lag = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16DA)] + h(2pt)
-#let so = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16CA)] + h(2pt)
-#let man = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16D7)] + h(2pt)
-#let eh = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16D6)] + h(2pt)
-#let per = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16C8)] + h(2pt)
-#let ber = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16D2)] + h(2pt)
-#let uber = h(2pt) + "!" + text(font: "FreeMono")[#str.from-unicode(0x16D2)] + h(2pt)
-#let naing = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16DC)] + h(2pt)
-#let ehwing =  h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16D6)] + text(font: "FreeMono")[#str.from-unicode(0x16DD)] + h(2pt)
-#let maning =  h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16D7)] + text(font: "FreeMono")[#str.from-unicode(0x16DD)] + h(2pt)
-#let suz = h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16AD)] + h(2pt)
-#let zus =h(2pt) + rotate(180deg)[#text(font: "FreeMono")[#str.from-unicode(0x16AD)]]+ h(2pt)
+#let ing = math.class("relation", text(font: "FreeMono")[#str.from-unicode(0x16DD)])
+#let ti = math.class("vary", text(font: "FreeMono")[#str.from-unicode(0x16CF)])
+#let al = math.class("vary", text(font: "FreeMono")[#str.from-unicode(0x16C9)])
+#let dag = math.class("vary", text(font: "FreeMono")[#str.from-unicode(0x16DE)])
+#let lag = math.class("vary", text(font: "FreeMono")[#str.from-unicode(0x16DA)])
+#let so = math.class("binary", text(font: "FreeMono")[#str.from-unicode(0x16CA)])
+#let man = math.class("relation", text(font: "FreeMono")[#str.from-unicode(0x16D7)])
+#let eh = math.class("relation", text(font: "FreeMono")[#str.from-unicode(0x16D6)])
+#let per = math.class("unary", text(font: "FreeMono")[#str.from-unicode(0x16C8)])
+#let ber = math.class("unary", text(font: "FreeMono")[#str.from-unicode(0x16D2)])
+#let uber = math.class("unary", [!] + h(-1pt) + text(font: "FreeMono")[#str.from-unicode(0x16D2)])
+#let naing = math.class("relation",text(font: "FreeMono")[#str.from-unicode(0x16DC)])
+#let ehwing =  math.class("relation", text(font: "FreeMono")[#str.from-unicode(0x16D6)] + text(font: "FreeMono")[#str.from-unicode(0x16DD)])
+#let maning =  math.class("relation", text(font: "FreeMono")[#str.from-unicode(0x16D7)] + text(font: "FreeMono")[#str.from-unicode(0x16DD)])
+#let suz = math.class("relation", h(2pt) + text(font: "FreeMono")[#str.from-unicode(0x16AD)] + h(2pt))
+#let zus = math.class("relation", h(2pt) + rotate(180deg)[#text(font: "FreeMono")[#str.from-unicode(0x16AD)]]+ h(2pt))
 //variable
 #let inc = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10901) #h(0.5pt)]
 #let v1 = text(font: "Noto Sans Phoenician")[#str.from-unicode(0x10907) #h(0.5pt)]
@@ -44,21 +44,21 @@
 
 #let rac(body) = context {
   let taille = measure(dm(body))
-  line(start: (-1pt,5.6pt), end: (-1pt, -taille.height)) 
+  line(start: (-1pt,5.6pt), end: (-1pt, -taille.height), stroke: 0.5pt) 
   body
-  line(start: (1pt,5.6pt), end: (1pt, -taille.height)) 
-  line(start: (-taille.width -2pt,-taille.height+2pt), end: (0pt, -taille.height -2.34pt)) 
-  line(start: (-taille.width -2pt,-taille.height -2.34pt), end: (0pt, -taille.height +2pt)) 
+  line(start: (1pt,5.6pt), end: (1pt, -taille.height), stroke: 0.5pt) 
+  line(start: (-taille.width -2pt,-taille.height+2pt), end: (0pt, -taille.height -2.34pt), stroke: 0.5pt) 
+  line(start: (-taille.width -2pt,-taille.height -2.34pt), end: (0pt, -taille.height +2pt), stroke: 0.5pt) 
 }
 #let nrac(body, n) = context {
   let taille = measure(dm(body))
   let taillen = measure(dm(n))
-  line(start: (-1pt,5.6pt), end: (-1pt, -taille.height)) 
+  line(stroke: 0.5pt, start: (-1pt,5.6pt), end: (-1pt, -taille.height)) 
   body
-  line(start: (1pt,5.6pt), end: (1pt, -taille.height)) 
-  line(start: (-taille.width -2pt,-taille.height+2pt), end: (0pt, -taille.height -2.34pt)) 
-  line(start: (-taille.width -2pt,-taille.height -2.34pt), end: (0pt, -taille.height +2pt)) 
-  move(text(taille.height/1.4)[#n], dx: -(taille.width + taillen.width -3pt)/2, dy: -taille.height -3.5pt)
+  line(stroke: 0.5pt, start: (1pt,5.6pt), end: (1pt, -taille.height)) 
+  line(stroke: 0.5pt, start: (-taille.width -2pt,-taille.height+2pt), end: (0pt, -taille.height -2.34pt)) 
+  line(stroke: 0.5pt, start: (-taille.width -2pt,-taille.height -2.34pt), end: (0pt, -taille.height +2pt)) 
+  move(text(taille.height/1.4)[#n], dx: 0pt - (taille.width + taillen.width/2)/2 , dy: -taille.height -3.5pt)
   h(-taillen.width + 1.5pt)
 }
 
@@ -90,6 +90,7 @@
   $in$,$so$,[so],
   $forall$,$per$,[per],
   $exists$,$ber$,[ber],
+  $exists!$,$uber$,[uber],
   $>$,$man$,[man],
   $<$,$eh$,[e],
   $>=$,$man ing$,[maning],
@@ -98,6 +99,9 @@
   $subset$,$suz$, [suz],
   $supset$,$zus$, [zus],
 )
+$
+  ur ti ur ing tur
+$
 
 #let b12(n) ={ let rep = ""
 let tmp = 0
