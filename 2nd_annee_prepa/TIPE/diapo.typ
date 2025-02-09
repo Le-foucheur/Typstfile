@@ -509,4 +509,21 @@ Trouver un moyen pour proj’ter une image
 == 5) conservation des angles
 
 faut que je travaille
-#place(dx:-30mm,dy:0mm, scale(x: 80%,y: 80%,image("./image/notlikethis.jpg")))
+
+#pagebreak()
+
+#place(
+    image("image/Tissot.png")
+)
+#place(
+    right,
+    image("image/TissotPS.png")
+)
+
+#place(
+    center+horizon,
+    [
+        Merci\
+        De vortre attention
+    ]
+)
