@@ -388,7 +388,10 @@ Trouver un moyen pour proj’ter une image
 
 == 4)  projeté des droites
 
-#place()[Méridiens :]
+#place(
+    dx: 6cm,
+    dy:1cm,
+)[Méridiens :]
 
 #place(
     bottom,
@@ -408,7 +411,10 @@ Trouver un moyen pour proj’ter une image
 
 == 4)  projeté des droites
 
-#place()[Droites Quelconques :]
+#place(
+    dx: 6cm,
+    dy:1cm,
+)[Droites Quelconques :]
 
 #place(
     bottom,
@@ -479,11 +485,26 @@ Trouver un moyen pour proj’ter une image
 
 #pagebreak()
 
-== 4) non conservation des longueurs
+#place(
+    left + horizon,
+    dx: 1.5cm,
+    figure(
+        image("./image/distAB.png", width: 40%),
+        caption: $d(A,B) = 1,99$
+    ),
+)
 
-calcule de la distance sur S et sur P voir que diff
+#place(
+    right + horizon,
+    dx: -1.5cm,
+    figure(
+        image("./image/distABPS.png", width: 40%),
+        caption: $d(A,B) = 0,57$
+    ),
+)
 
 #pagebreak()
+
 
 == 5) conservation des angles
 
