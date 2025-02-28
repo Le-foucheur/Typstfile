@@ -1,6 +1,6 @@
 #import "/template.typ": *
 #import "/transposition.typ": *
-#import "@preview/drafting:0.2.0":*
+#import "@preview/drafting:0.2.2":*
 
 #set heading(
   numbering: (..numbers) => {

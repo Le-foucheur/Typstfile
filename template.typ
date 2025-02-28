@@ -38,13 +38,11 @@
   (l,)
 })
 #let tend(n, val) = $limits(-->)_(#n -> #val)$
-#let undermath(body, col: red)= {
-  style(styles => {
-    let size = measure(dm(body), styles);
-    let size2 = measure(body, styles);
+#let undermath(body, col: red)= context{
+    let size = measure(dm(body));
+    let size2 = measure(body);
     let offshet = ((size.height) - (size2.height)) / 1.1 + 1.3pt;
     box(stroke: (bottom: col + 1pt), outset: (bottom: offshet), body);
-  })
 }
 #let th = "th"
 #let t(x) = for i in range(x) {
@@ -101,7 +99,7 @@
 
 
 
-
+#undermath($sum_(i = 0)^3 i$)
 
 
 
