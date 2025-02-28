@@ -49,7 +49,7 @@
 
 #place(center+horizon, dy: -2cm)[
 = Projection cartographique \ de la Pseudosphère sur le plan
-#place(dy: 10mm,center+horizon)[Gaspar Daguet, n=° XXXXXXX]
+#place(dy: 10mm,center+horizon)[Gaspar Daguet, n=° 21528]
 ]
 
 #place(center+bottom, scale(x: 80%, y:  80%,figure( image("./image/seaChase.png"), caption:  [Sea Chase - Xkcd])))
@@ -60,11 +60,12 @@
 #set align(left)
 
 + Introduction & Problématique
+
 + La pseudosphère
 + La projection
-+ projeté des droites et des cercles
-+ non conservation des longueurs
-+ conservation des angles
++ Projeté des droites
++ Non conservation des longueurs
++ Conservation des angles
 
 ]
 
@@ -284,7 +285,7 @@ Idée de la projection de Mercator :
         column-gutter: 6cm,
         "Surface élémentaire :" + 
         $
-        cal(E) = norm(f_u and f_v) diff u diff v
+        cal(E) = norm(P_u and P_v) diff u diff v
         $, 
         "Pour la pseudosphère :"+ 
         $
@@ -344,25 +345,54 @@ Idée de la projection de Mercator :
 
 == 3) La projection
 
-#place()[Droites Quelconques :]
-
 #place(
-    bottom,
+    horizon,
+    dx: 2cm,
     figure(
-        image("./image/carre.png", width: 40%),
+        image("./image/cadir.png", width: 40%),
     )
 )
 
 #place(
-    right + bottom,
+        horizon,
+    dx: 2cm,
+    align(center,text(red, stroke: 0.1pt)[
+        Mettre les bornes de la carte !!\
+        genre $0 ->  2 pi$ et $arrow.t_1^(+oo)$
+    ])
+)
+
+#place(
+    right + horizon,
+    dx: -2cm,
     figure(
-        image("./image/carrePS.png"),
+        image("./image/cadirPS.png"),
     )
 )
 
 #pagebreak()
 
-Trouver un moyen pour proj’ter une image
+== 3) La projection
+
+#place(
+    horizon,
+    dx: 2cm,
+    figure(
+        image("./image/Cercle.png", width: 40%),
+    )
+)
+
+#place(
+    right + horizon,
+    dx: -2cm,
+    figure(
+        image("./image/CerclePS.png"),
+    )
+)
+
+#pagebreak()
+
+Trouver un moyen pour projter une image
 
 #pagebreak()
 
@@ -378,7 +408,7 @@ Trouver un moyen pour proj’ter une image
     [
         Équation des droites :
          - Méridiens : $g : t |-> P(u,t)$
-         - Autres : $
+         - Autres droites : $
             g : t |-> P(t, ch(sqrt(k^2 - (t + c)^2)))
                     $
     ]
@@ -443,6 +473,14 @@ Trouver un moyen pour proj’ter une image
         $
         d(A, B) = integral_(t_A)^t_B norm(g'(t)) dif t
         $
+    ]
+)
+
+#place(
+    right,
+    dx: -3cm,
+    [
+        Sur les méridiens ($v_A = v_B$) :
     ]
 )
 
@@ -527,6 +565,6 @@ faut que je travaille
     center+horizon,
     [
         Merci\
-        De vortre attention
+        De votre attention
     ]
 )

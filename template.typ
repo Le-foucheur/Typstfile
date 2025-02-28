@@ -1,5 +1,5 @@
 #import "transposition.typ": *
-#import "@preview/drafting:0.2.0": *
+#import "@preview/drafting:0.2.2": *
 
 #let question = counter("questions")
 #let nonumeq = math.equation.with(block: true, numbering: none)

@@ -1,7 +1,7 @@
 #import "../../../template.typ": *
 #import "../../../transposition.typ": *
-#import "@preview/drafting:0.2.0": *
-#import "@preview/cetz:0.2.2": *
+#import "@preview/drafting:0.2.2": *
+#import "@preview/cetz:0.3.2": *
 
 #show: template
 
