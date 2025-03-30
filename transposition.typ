@@ -231,8 +231,8 @@ $
 #pagebreak()
 #set par(leading: -3pt)
 
-#let oui(s, n) = for i in range(s, n + 1) {
+#let _oui(s, n) = for i in range(s, n + 1) {
   ($#i _10 = #b12(i)_(12) ing #nrac(na(i), na(i))$,)
 }
 
-#grid(columns: 1, gutter: 5pt, ..oui(0, 300))
+#grid(columns: 1, gutter: 5pt, .._oui(0, 300))

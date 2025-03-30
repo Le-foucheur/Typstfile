@@ -14,6 +14,10 @@
 
 #let frame(x) = rect(stroke: 1pt + red, outset: (x: -2pt, y: 2pt))[#x]
 #let dframe(x) = frame(dm(x))
+#let scr(it) = text(
+  features: ("ss01",),
+  box($cal(it)$),
+)
 #let donc = "donc" + h(3pt)
 #let Donc = "Donc" + h(3pt)
 #let onA = "On a" + h(3pt)
@@ -57,14 +61,10 @@
 #let ssi = "si et seulement si" + h(1pt)
 #let vect(body) = "Vect("+ body + ")"
 #let ateb = math.beta.alt
-#let Ker(body) = if (body.fields().keys() == ("text",)) {[Ker #body]} else {[Ker(#body) ]}
-#let ImE(body) = if (body.fields().keys() == ("text",)) {[Im #body]} else {[Im(#body) ]}
+#let Ker(body) = if (body.fields().keys() == ("text",)) {[#scr[K]er #body]} else {[#scr[K]er(#body) ]}
+#let ImE(body) = if (body.fields().keys() == ("text",)) {[#scr[I]m #body]} else {[#scr[I]m(#body) ]}
 #let Vect = "Vect"
 #let ou = "ou" + h(3pt)
-#let scr(it) = text(
-  features: ("ss01",),
-  box($cal(it)$),
-)
 #let ar(body) = $arrow(#body)$
 #let ve(..body) = context{
   let max = 0mm
