@@ -5,7 +5,7 @@
     #place(
       dx: -20mm,
       box(fill: rgb("#171568"), height: 15mm, width: 110%)[
-        #place(dx: -5mm, right + horizon, [#h(18mm) Gaspar Daguet, n=°XXXXXXX])
+        #place(dx: -5mm, right + horizon, [#h(18mm) Gaspar Daguet, n=°21528])
       ],
     )
   ],
@@ -15,7 +15,7 @@
     #place(
       dx: -5mm,
       box(height: 100%, width: 105%)[
-        #scale(place(image("./image/methamorphose.jpg")), x: 111%)
+        #scale(place(image("./image/methamorphose.jpg"), dx: -1mm), x: 111%)
         #place(
           dx: -7mm,
           right + horizon,
@@ -63,9 +63,7 @@
 
   + La pseudosphère
   + La projection
-  + Projeté des droites
-  + Non conservation des longueurs
-  + Conservation des angles
+  + Projection des droites
 
 ]
 
@@ -117,7 +115,7 @@
   dy: 6cm,
   figure(
     scale(image("./image/pringels.png"), x: 80%, y: 80%),
-    caption: place(center + bottom, dy: -7mm, text(20pt)[un pringle]),
+    caption: place(center + bottom, dy: -7mm, text(20pt)[une chips]),
   ),
 )
 
@@ -158,9 +156,10 @@
     dx: 7mm,
     dy: 0mm,
     $
-      P : cases([0; 2pi] times RR_+ &--> "    " RR^3,
-            "    "(u,v) &arrow.r.long.bar vec( cos(u)/ch(v), sin(u)/ch(v), v - th(v))
-        )
+      P : cases(
+        [0; 2pi] times RR_+ &--> "    " RR^3,
+        "    "(u,v) &arrow.r.long.bar vec(cos(u) / ch(v), sin(u) / ch(v), v - th(v))
+      )
     $,
   )
 }
@@ -180,7 +179,7 @@
   horizon + left,
   dx: 1.5cm,
   dy: -4cm,
-  [On note ] + $display((diff P)/(diff u) = P_u)$,
+  [On note ] + $display((diff P) / (diff u) = P_u)$,
 )
 #place(
   horizon + left,
@@ -220,7 +219,7 @@
   dy: 13mm,
   [La courbure en $p in [0; 2pi] times RR_+$]
     + $
-      K(p) = (cal(L)(p)cal(N)(p) - cal(M)(p)^2) / (E(p)G(p) - F^2)
+      K(p) = (cal(L)(p)cal(N)(p) - cal(M)(p)^2) / (E(p)G(p) - F(p)^2)
     $,
 )
 #v(7cm)
@@ -311,12 +310,12 @@ Idée de la projection de Mercator :
     column-gutter: 2cm,
     align: horizon,
     [
-      Or : $ B = (diff u)/ch(v) $
+      Or : $ B = (diff u) / ch(v) $
     ],
     [
       Donc
       $
-        A = cal(E) / B = th(v) diff v
+        A / B = cal(E) / B^2 = sh(v) diff v
       $
     ],
   ),
@@ -338,16 +337,36 @@ Idée de la projection de Mercator :
 #{
   set text(30pt)
   place(
-    center + horizon,
+    dy: 15mm,
+    dx: 2cm,
+    left + top,
 
     [
       La projection :
       $
-        C : cases([0; 2pi] times RR_+--> RR^2, " " p = (u,v) arrow.long.bar vec(u,ch(v)))
+        C : cases([0; 2pi] times RR_+--> RR^2, " " p = (u,v) arrow.long.bar vec(u, ch(v)))
       $
     ],
   )
 }
+#{
+  set text(30pt)
+  place(
+    dy: -15mm,
+    dx: 2cm,
+    left + bottom,
+    [
+      Celle de Mercator :
+      $
+        M: cases([0;2pi] times [-pi;pi] --> RR^2, p = (u,v) arrow.long.bar vec(u, ln(tan(v / 2 + pi / 4))))
+      $
+    ],
+  )
+}
+#place(
+  right + horizon,
+  image("image/projTerrePS.png", height: 18cm),
+)
 
 #pagebreak()
 
@@ -359,17 +378,11 @@ Idée de la projection de Mercator :
   figure(image("./image/cadir.png", width: 40%)),
 )
 
-#place(
-  horizon,
-  dx: 2cm,
-  align(
-    center,
-    text(red, stroke: 0.1pt)[
-      Mettre les bornes de la carte !!\
-      genre $0 ->  2 pi$ et $arrow.t_1^(+oo)$
-    ],
-  ),
-)
+#place($ 1 $, dx: 1.5cm, dy: 15cm)
+#place(sym.arrow.t, dx: 1.2cm)
+#place($ +oo $, dx: 0.5cm, dy: 0.9cm)
+#place($0$, dx: 2.04cm, dy: 15.7cm)
+#place($ 2pi $, dx: 12.2cm, dy: 15.7cm)
 
 #place(
   right + horizon,
@@ -395,10 +408,6 @@ Idée de la projection de Mercator :
 
 #pagebreak()
 
-Trouver un moyen pour projter une image
-
-#pagebreak()
-
 = 4) Projeté des droites
 
 #pagebreak()
@@ -411,9 +420,7 @@ Trouver un moyen pour projter une image
   [
     Équation des droites :
     - Méridiens : $g : t |-> P(u,t)$
-    - Autres droites : $
-            g : t |-> P(t, ch(sqrt(k^2 - (t + c)^2)))
-                    $
+    - Autres droites : $ g : t |-> P(t, ch(sqrt(k^2 - (t + c)^2))) $
   ],
 )
 
@@ -518,6 +525,9 @@ Trouver un moyen pour projter une image
 
 #pagebreak()
 
+== 4) projeté des droites
+
+
 #place(
   left + horizon,
   dx: 1.5cm,
@@ -536,28 +546,34 @@ Trouver un moyen pour projter une image
   ),
 )
 
-#pagebreak()
 
-= 5) Conservation des angles
 
 #pagebreak()
 
-== 5) conservation des angles
+== 4) projeté des droites
 
-faut que je travaille
 
-#pagebreak()
-
-#place(image("image/Tissot.png"))
 #place(
+  dx: 2cm,
+  image("image/Tissot.png"),
+)
+#place(
+  dx: -2cm,
   right,
   image("image/TissotPS.png"),
 )
 
+#pagebreak()
+
 #place(
   center + horizon,
-  [
-    Merci\
-    De votre attention
-  ],
+  image("prog/merci.png", width: 200%),
 )
+
+#pagebreak()
+
+= Annexes
+
+#pagebreak()
+
+== Annexes
