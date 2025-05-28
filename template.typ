@@ -25,28 +25,28 @@
 #let et = "et" + h(3pt)
 #let dt = math.dif + "t"
 #let ddt = math.diff + $t$
-#let Id(n) = math.mat(..for x in range(n){
+#let Id(n) = math.mat(..for x in range(n) {
   let l = ()
-  for y in range(n){
+  for y in range(n) {
     if y == x {
       l.push(1)
     } else { l.push(0) }
   }
   (l,)
 })
-#let M0(n) = math.mat(..for x in range(n){
+#let M0(n) = math.mat(..for x in range(n) {
   let l = ()
-  for y in range(n){
+  for y in range(n) {
     l.push(0)
   }
   (l,)
 })
 #let tend(n, val) = $limits(-->)_(#n -> #val)$
-#let undermath(body, col: red)= context{
-    let size = measure(dm(body));
-    let size2 = measure(body);
-    let offshet = ((size.height) - (size2.height)) / 1.1 + 1.3pt;
-    box(stroke: (bottom: col + 1pt), outset: (bottom: offshet), body);
+#let undermath(body, col: red) = context {
+  let size = measure(dm(body))
+  let size2 = measure(body)
+  let offshet = ((size.height) - (size2.height)) / 1.1 + 1.3pt
+  box(stroke: (bottom: col + 1pt), outset: (bottom: offshet), body)
 }
 #let th = "th"
 #let t(x) = for i in range(x) {
@@ -59,29 +59,29 @@
 #let Soitn(body, ens) = [Soit $#body in #ens$]
 #let Soietn(body, ens) = [Soient $#body in #ens$]
 #let ssi = "si et seulement si" + h(1pt)
-#let vect(body) = "Vect("+ body + ")"
+#let vect(body) = "Vect(" + body + ")"
 #let ateb = math.beta.alt
-#let Ker(body) = if (body.fields().keys() == ("text",)) {[#scr[K]er #body]} else {[#scr[K]er(#body) ]}
-#let ImE(body) = if (body.fields().keys() == ("text",)) {[#scr[I]m #body]} else {[#scr[I]m(#body) ]}
+#let Ker(body) = if (body.fields().keys() == ("text",)) { [#scr[K]er #body] } else { [#scr[K]er(#body) ] }
+#let ImE(body) = if (body.fields().keys() == ("text",)) { [#scr[I]m #body] } else { [#scr[I]m(#body) ] }
 #let Vect = "Vect"
 #let ou = "ou" + h(3pt)
 #let ar(body) = $arrow(#body)$
-#let ve(..body) = context{
+#let ve(..body) = context {
   let max = 0mm
-  for i in (body.pos()){
+  for i in (body.pos()) {
     let tmp = measure(i).height
     if tmp >= max {
       max = tmp
     }
   }
-  grid(columns: 1,row-gutter: max ,grid.vline(stroke: 0.5pt), ..for i in range(body.pos().len()){
-    (h(3pt)+body.pos().at(i),)
-  })
+  grid(columns: 1, row-gutter: max, grid.vline(stroke: 0.5pt), ..for i in range(body.pos().len()) {
+      (h(3pt) + body.pos().at(i),)
+    })
 }
-#let equi(n : $n$, k : $+oo$) = $ tilde_(#n -> #k) $
-#let po(ele : $x$ , vers : $0$ ) = $ =_(#ele -> #vers) $
+#let equi(n: $n$, k: $+oo$) = $ tilde_(#n -> #k) $
+#let po(ele: $x$, vers: $0$) = $ =_(#ele -> #vers) $
 #let QED = align(right, text[*Q.E.D.*]) // Quod erat demonstratum
-#let AFL = align(center, text(17pt,fill: red)[*A.F.L.*]) //ad facio labor
+#let AFL = align(center, text(17pt, fill: red)[*A.F.L.*]) //ad facio labor
 #let a = text[#h(-16pt) a.]
 #let card = "Card"
 #let ux = $u_x$
@@ -93,9 +93,10 @@
 #let dx = $dif x$
 #let ddx = $diff x$
 #let l2LN = "la seconde loi de Newton"
-#let ab(body, attache) = math.attach(body, br:attache)
+#let ab(body, attache) = math.attach(body, br: attache)
 #let dS = $d"S"$
 #let cal(body, _font: "LT Perfume") = $text(font: #_font, body)$ + h(5pt)
+#let scal(x, y) = math.op($< #x | #y >$)
 
 
 
@@ -105,32 +106,34 @@
 
 //tout les set rule :
 #let template(doc) = [
-  #set heading(numbering: (..numbers) => {
-    let n = numbers.pos().len()
-    if n == 1 {
-      question.update(1)
-    } else if n == 2 {
-      [Partie ]
-      numbering("I.", numbers.pos().at(1))
-    } else if n == 3 {
-      question.step()
-      if question.get().last() < 10 {
-        margin-note(side: left, dy: -16.4pt, stroke: none)[#h(14pt)N=° #question.display().]
-      } else {
-        margin-note(side: left, dy: -16.4pt, stroke: none)[#h(8pt)N=° #question.display().]
+  #set heading(
+    numbering: (..numbers) => {
+      let n = numbers.pos().len()
+      if n == 1 {
+        question.update(1)
+      } else if n == 2 {
+        [Partie ]
+        numbering("I.", numbers.pos().at(1))
+      } else if n == 3 {
+        question.step()
+        if question.get().last() < 10 {
+          margin-note(side: left, dy: -16.4pt, stroke: none)[#h(14pt)N=° #question.display().]
+        } else {
+          margin-note(side: left, dy: -16.4pt, stroke: none)[#h(8pt)N=° #question.display().]
+        }
+      } else if n == 4 {
+        margin-note(side: left, dy: -16.5pt, stroke: none)[#h(34pt)#numbering("a.", numbers.pos().at(3) + 1) ]
+      } else if n == 5 {
+        numbering("i.", numbers.pos().at(4))
       }
-    } else if n == 4 {
-      margin-note(side: left, dy: -16.5pt, stroke: none)[#h(34pt)#numbering("a.", numbers.pos().at(3) + 1) ]
-    } else if n == 5 {
-      numbering("i.", numbers.pos().at(4))
-    }
-  })
+    },
+  )
   #set underline(stroke: red + 1pt)
   #set par(leading: 0.8em)
-  #set page(numbering: (..nums) => nums.pos().map(na).join("/"),  number-align: right)
+  #set page(numbering: (..nums) => nums.pos().map(na).join("/"), number-align: right)
   #set math.cancel(stroke: red)
-  #show math.equation: set text(13pt) 
-  #set text(font:"Linux Libertine", lang: "fr")
-  #show math.equation : set block(breakable: true)
+  #show math.equation: set text(13pt)
+  #set text(font: "Linux Libertine", lang: "fr")
+  #show math.equation: set block(breakable: true)
   #doc
 ]
