@@ -1,23 +1,16 @@
 #import "transposition.typ": *
 #import "@preview/drafting:0.2.2": *
 
+#let cal(body, _font: "LT Perfume") = $text(font: #_font, body)$ + h(5pt)
 #let question = counter("questions")
 #let nonumeq = math.equation.with(block: true, numbering: none)
 #let dm(x) = box[#nonumeq[#x]]
 #let dfrac(x, y) = math.frac(dm(x), dm(y))
-#let lbar(..args) = math.display(math.cases(delim: "|", ..args))
 #let ubar(body, col: red) = rect(
   inset: 0pt,
   outset: (bottom: 3pt, rest: 0pt),
   stroke: (bottom: (0.5pt + col), rest: 0pt),
 )[#body]
-
-#let frame(x) = rect(stroke: 1pt + red, outset: (x: -2pt, y: 2pt))[#x]
-#let dframe(x) = frame(dm(x))
-#let scr(it) = text(
-  features: ("ss01",),
-  box($cal(it)$),
-)
 #let donc = "donc" + h(3pt)
 #let Donc = "Donc" + h(3pt)
 #let onA = "On a" + h(3pt)
@@ -42,48 +35,26 @@
   (l,)
 })
 #let tend(n, val) = $limits(-->)_(#n -> #val)$
-#let undermath(body, col: red) = context {
-  let size = measure(dm(body))
-  let size2 = measure(body)
-  let offshet = ((size.height) - (size2.height)) / 1.1 + 1.3pt
-  box(stroke: (bottom: col + 1pt), outset: (bottom: offshet), body)
-}
-#let th = "th"
-#let t(x) = for i in range(x) {
-  h(1em)
-}
+#let th = math.op([th])
 #let cv = "converge" + h(3pt)
-#let bi = math.beta.alt
 #let soitn(body, ens) = [soit $#body in #ens$]
 #let soietn(body, ens) = [soient $#body in #ens$]
 #let Soitn(body, ens) = [Soit $#body in #ens$]
 #let Soietn(body, ens) = [Soient $#body in #ens$]
 #let ssi = "si et seulement si" + h(1pt)
-#let vect(body) = "Vect(" + body + ")"
 #let ateb = math.beta.alt
-#let Ker(body) = if (body.fields().keys() == ("text",)) { [#scr[K]er #body] } else { [#scr[K]er(#body) ] }
-#let ImE(body) = if (body.fields().keys() == ("text",)) { [#scr[I]m #body] } else { [#scr[I]m(#body) ] }
-#let Vect = "Vect"
+#let Ker = math.class("unary", [#cal("K") #h(-01mm) er])
+#let ImE = math.class("unary", [#cal("I")#h(-0.5mm)m])
+#let Vect = math.class("unary", "Vect")
 #let ou = "ou" + h(3pt)
 #let ar(body) = $arrow(#body)$
-#let ve(..body) = context {
-  let max = 0mm
-  for i in (body.pos()) {
-    let tmp = measure(i).height
-    if tmp >= max {
-      max = tmp
-    }
-  }
-  grid(columns: 1, row-gutter: max, grid.vline(stroke: 0.5pt), ..for i in range(body.pos().len()) {
-      (h(3pt) + body.pos().at(i),)
-    })
-}
+#let vec(..body) = math.cases(delim: "|", ..body)
 #let equi(n: $n$, k: $+oo$) = $ tilde_(#n -> #k) $
 #let po(ele: $x$, vers: $0$) = $ =_(#ele -> #vers) $
 #let QED = align(right, text[*Q.E.D.*]) // Quod erat demonstratum
 #let AFL = align(center, text(17pt, fill: red)[*A.F.L.*]) //ad facio labor
 #let a = text[#h(-16pt) a.]
-#let card = "Card"
+#let card = math.class("unary", "Card")
 #let ux = $u_x$
 #let uy = $u_y$
 #let uz = $u_z$
@@ -95,12 +66,7 @@
 #let l2LN = "la seconde loi de Newton"
 #let ab(body, attache) = math.attach(body, br: attache)
 #let dS = $d"S"$
-#let cal(body, _font: "LT Perfume") = $text(font: #_font, body)$ + h(5pt)
 #let scal(x, y) = math.op($< #x | #y >$)
-
-
-
-#undermath($sum_(i = 0)^3 i$)
 
 
 
@@ -132,7 +98,6 @@
   #set par(leading: 0.8em)
   #set page(numbering: (..nums) => nums.pos().map(na).join("/"), number-align: right)
   #set math.cancel(stroke: red)
-  #show math.equation: set text(13pt)
   #set text(font: "Linux Libertine", lang: "fr")
   #show math.equation: set block(breakable: true)
   #doc
