@@ -47,6 +47,33 @@
 #let th = math.op($"th"$, limits: false)
 #let cal(body, _font: "LT Perfume") = $text(font: #_font, body)$ + h(7pt)
 #let scal(x, y) = math.op($< #x | #y >$)
+#import "@preview/cetz:0.3.2"
+
+#let code(file, step: 30, langue: none, siz: 11pt, title: "code") = {
+  let content = read(file)
+  let size = content.split("\n").len()
+
+  if langue == none {
+    langue = file.split(".").at(-1)
+  }
+
+  for i in range(0, size, step: step) {
+    let end = if i + step > size { size } else { i + step }
+    let code = content.split("\n").slice(i, end).join("\n")
+    [
+      #pagebreak()
+      == Annexe - #title
+      #place(
+        center + horizon,
+        box(height: 200%, width: 90%)[
+          #set align(left)
+          #set text(size: siz)
+          #raw(code, lang: langue)
+        ],
+      )
+    ]
+  }
+}
 
 #place(center + horizon, dy: -2cm)[
   = Projection cartographique \ de la pseudosphère sur le plan
@@ -71,7 +98,7 @@
 #place(
   dx: 19mm,
   horizon + right,
-  scale(figure(image("./image/cercle limite.jpg"), caption: [Cercle Limite III — M. C. Escher]), x: 10cm, y: 10cm),
+  scale(figure(image("./image/cercle limite.jpg"), caption: [Cercle Limite III — M.C. Escher]), x: 10cm, y: 10cm),
 )
 
 #pagebreak()
@@ -83,26 +110,28 @@
 == 1) Introduction et problématique
 
 #grid(
-  columns: 4,
-  column-gutter: 3mm,
-  row-gutter: 1.3cm,
+  align: center + horizon,
+  columns: 3,
+  column-gutter: 20mm,
+  row-gutter: 2.6mm,
   figure(
-    caption: [Cahill-Keyes : 1975],
-    image("image/diffprojS/300px-World_Map,_Political,_2012,_Cahill-Keyes_Projection.jpg"),
+    caption: [Stéréographique : \~200 av J.C. conforme],
+    image("image/diffprojS/Stereographic_projection_SW.JPG", format: "jpg", width: 50%),
   ),
-  figure(caption: [Rétro-azimutale de Craig : 1909], image("image/diffprojS/Craig_projection_SW.jpg")),
-  figure(caption: [Équirectangulaire : 120], image("image/diffprojS/Equirectangular_projection_SW.jpg")),
-  figure(caption: [Goode : 1923], image("image/diffprojS/Goode_homolosine_projection_SW.jpg")),
+  figure(
+    caption: [Globulaire de Nicolosi : \~1000 \ compromise],
+    image("image/diffprojS/Nicolosi_globular_projections_SW.jpg"),
+  ),
+  figure(caption: [Mercator : 1569 conforme], image("image/Mercator.JPG", width: 60%)),
 
-  figure(caption: [Transverse Universelle de Mercator : 1822], image("image/diffprojS/MercTranEll.png", width: 80%)),
-  figure(caption: [Globulaire de Nicolosi : ~1000], image("image/diffprojS/Nicolosi_globular_projections_SW.jpg")),
   figure(
-    caption: [Stéréographique : ~200 av J.C.],
-    image("image/diffprojS/Stereographic_projection_SW.JPG", format: "jpg", width: 80%),
+    caption: [Rétro-azimutale de Hammer : 1910 équivalente],
+    image("image/diffprojS/Hammer_retroazimuthal_projection_back_SW.JPG", width: 65%),
   ),
+  figure(caption: [Goode : 1923 équivalente], image("image/diffprojS/Goode_homolosine_projection_SW.jpg")),
   figure(
-    caption: [Rétro-azimutale de Hammer : 1910],
-    image("image/diffprojS/Hammer_retroazimuthal_projection_back_SW.JPG", width: 80%),
+    caption: [Cahill-Keyes : 1975 compromis],
+    image("image/diffprojS/300px-World_Map,_Political,_2012,_Cahill-Keyes_Projection.jpg"),
   ),
 )
 
@@ -122,7 +151,7 @@
   dy: 6cm,
   figure(
     scale(image("./image/pringels.png"), x: 80%, y: 80%),
-    caption: place(center + bottom, dy: -7mm, text(20pt)[une chips]),
+    caption: place(center + bottom, dy: -7mm, text(20pt)[Paraboloïde hyperbolique \ ( une chips )]),
   ),
 )
 
@@ -246,16 +275,21 @@
   center + horizon,
   grid(
     columns: 4,
-    [Sphèrique : $K > 0$],
+    [Sphèrique : $K > 0$\ Sphére : $K = 1 / R$],
     image("image/courbure/sphere.jpg", width: 70%),
-    [Plan : $K = 0$],
+    [Planne : $K = 0$\ Cylindre, Plan],
     image("image/courbure/cylindre.jpg", width: 70%),
 
     [Hyperbolique: $K < 0$],
     image("image/courbure/hyperboloide1nape.jpg", width: 70%),
-    [Pseudosphère : $K = -1$],
+    [Pseudosphère : $K = -1 / R$],
     image("image/courbure/pseudosphere2.jpg", width: 70%),
   ),
+)
+#place(
+  bottom,
+  [Paraboloïde hyperbolique\
+    $K = - (4a^2b^2) / ((4(b^2 / a^2x^2 + a^2 / b^2 y^2) + a^2b^2)) < 0$],
 )
 
 #place(
@@ -404,13 +438,20 @@ Idée de la projection de Mercator :
 #place(
   horizon,
   dx: 2cm,
-  figure(image("./image/Cercle.png", width: 40%)),
+  dy: -9mm,
+  figure(image("./image/cercle.png", width: 40%)),
 )
 
 #place(
   right + horizon,
   dx: -2cm,
-  figure(image("./image/CerclePS.png")),
+  dy: -9mm,
+  figure(image("./image/cerclePS.png")),
+)
+
+#place(
+  bottom + center,
+  [Cercle sur la pseudosphère, avec un de ses rayons],
 )
 
 #pagebreak()
@@ -421,13 +462,15 @@ Idée de la projection de Mercator :
 
 == 4) Projection des droites
 
+#let arcch = math.class("unary", [arcch])
+
 #place(
   dx: 7.5cm,
   dy: 6cm,
   [
     Équation des droites ( géodésique ) :
     - Méridiens : $g : t |-> P(u,t)$
-    - Autres droites : $ g : t |-> P(t, ch(sqrt(k^2 - (t + c)^2))) $
+    - Autres droites : $ g : t |-> P(t, arcch(sqrt(k^2 - (t + c)^2))) $
   ],
 )
 
@@ -562,15 +605,25 @@ Idée de la projection de Mercator :
 
 #place(
   dx: 2cm,
+  dy: -2.5mm,
   image("image/Tissot.png"),
 )
 #place(
   dx: -2cm,
+  dy: -2.5mm,
   right,
   image("image/TissotPS.png"),
 )
 
+#place(
+  bottom + center,
+  dy: 3mm,
+  [Indicatrice de Tissot sur la pseudosphère],
+)
+
 #pagebreak()
+
+== Merci de votre attention
 
 #place(
   center + horizon,
@@ -704,29 +757,6 @@ $
   y(v) = ch(v)
 $
 
-
-
-#pagebreak()
-
-== Annexes - Calculs
-
-#place(
-  center + horizon,
-  grid(
-    columns: 1,
-    column-gutter: 1cm,
-    row-gutter: 1.5cm,
-    $ E = norm(P_u)^2 = 1 / ch(v)^2 $,
-    $
-      F = <P_u | P_v > = cos(u) sin(u) sh(v) / ch(v)^3 - cos(u) sin(u) sh(v) / ch(v)^3 = 0
-    $,
-
-    $
-      G = norm(P_v)^2 = sh(v)^2 / ch(v)^4 + sh(v)^4 / ch(v)^4 = sh(v)^2 / ch(v)^4 underbrace((1 + sh(v)^2), = ch(v)^2) = sh(v)^2 / ch(v)^2
-    $,
-  ),
-)
-
 #pagebreak()
 
 == Annexes - Calculs des Dérivés
@@ -747,6 +777,27 @@ $
 
     $
       P_(u v) = vec(sin(u) sh(v) / ch(v)^2, - cos(u) sh(v) / ch(v)^2, 0)
+    $,
+  ),
+)
+
+#pagebreak()
+
+== Annexes - Calculs
+
+#place(
+  center + horizon,
+  grid(
+    columns: 1,
+    column-gutter: 1cm,
+    row-gutter: 1.5cm,
+    $ E = norm(P_u)^2 = 1 / ch(v)^2 $,
+    $
+      F = <P_u | P_v > = cos(u) sin(u) sh(v) / ch(v)^3 - cos(u) sin(u) sh(v) / ch(v)^3 = 0
+    $,
+
+    $
+      G = norm(P_v)^2 = sh(v)^2 / ch(v)^4 + sh(v)^4 / ch(v)^4 = sh(v)^2 / ch(v)^4 underbrace((1 + sh(v)^2), = ch(v)^2) = sh(v)^2 / ch(v)^2
     $,
   ),
 )
@@ -849,16 +900,20 @@ Tout d’abord on peut définir la métrique sur notre surface par :
 $
   dif s^2 = E dif x^2 + 2 F dif x dif y + G dif y^2
 $
-Sur notre surface, la métrique s’écrit :
+Donc sur notre surface, la métrique s’écrit :
 $
-  dif s^2 = (dif u^2) / ch(v)^2 + sh(v)^2 / ch(v)^2 dif v^2 = (dif u^2 + sh(v)^2 dif y^2) / ch(v)^2
+  dif s^2 = (dif u^2) / ch(v)^2 + sh(v)^2 / ch(v)^2 dif v^2 = (dif u^2 + sh(v)^2 dif v^2) / ch(v)^2
 $
 En appliquant notre porjection sur la métrique :
 $
-  cases(delim: "{", x = u, y = ch(v)) <=> cases(delim: "{", dif x = dif y, dif y = sh(v) dif v)
+  cases(delim: "{", x = u, y = ch(v)) <=> cases(delim: "{", dif x = dif u, dif y = sh(v) dif v)
 $
 donc :
 #v(-11mm)
 $
   dif s^2 = (dif x^2 + dif y^2) / y^2
 $
+
+
+
+#code("prog/proj.py")
