@@ -276,7 +276,7 @@
   center + horizon,
   grid(
     columns: 4,
-    [Sphérique : $K > 0$\ Sphére : $K = 1 / R$],
+    [Sphérique : $K > 0$\ Sphère : $K = 1 / R$],
     image("image/courbure/sphere.jpg", width: 70%),
     [Plane : $K = 0$\ Cylindre, Plan],
     image("image/courbure/cylindre.jpg", width: 70%),
@@ -659,7 +659,7 @@ $
 
 Dans le repère $(P_u(p), P_v(p), N(p))$, on peut faire un dévelopement limité de la surface de la forme :
 $
-  z = underbrace(<P_(u u) | N >, = cal("L")) x^2 / 2 + underbrace(<P_(u v) | N >, cal("M")) + underbrace(<P_(v v) | N >, = cal("N")) x^2 / 2
+  z = underbrace(<P_(u u) | N >, = cal("L")) x^2 / 2 + underbrace(<P_(u v) | N >, cal("M")) + underbrace(<P_(v v) | N >, = cal("N")) y^2 / 2
 $
 Ainsi on définit la seconde forme fondamentale par :
 $
@@ -727,7 +727,7 @@ $
 Donc
 $mat(cal(L), cal(M); cal(M), cal(N)) - lambda mat(E, F; F, G) = mat(cal(L) - lambda E, cal(M) - lambda F; cal(M) - lambda F, cal(N) - lambda G)$ est non inversible\
 \
-Et donc $mat(cal(L) - lambda E, cal(M) - lambda F; cal(M) - lambda F, cal(N) - lambda G) = 0$\
+Et donc $mat(delim: "|", cal(L) - lambda E, cal(M) - lambda F; cal(M) - lambda F, cal(N) - lambda G) = 0$\
 
 Soit $(E G - F^2) lambda^2 + (E cal(N) + G cal(L) - 2 cal(M)F)lambda + cal(L) cal(N) - cal(M)^2 = 0$\
 
