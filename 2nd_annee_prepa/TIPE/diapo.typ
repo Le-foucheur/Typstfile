@@ -148,10 +148,11 @@
 )
 
 #place(
-  dy: 6cm,
+  dy: 8.5cm,
+  dx: 2cm,
   figure(
-    scale(image("./image/pringels.png"), x: 80%, y: 80%),
-    caption: place(center + bottom, dy: -7mm, text(20pt)[Paraboloïde hyperbolique \ ( une chips )]),
+    scale(image("image/pringels.jpg"), x: 80%, y: 80%),
+    caption: place(center + bottom, dy: 9mm, text(20pt)[Paraboloïde hyperbolique \ ( une chips )]),
   ),
 )
 
@@ -167,7 +168,7 @@
 #place(
   center + horizon,
   dy: 3.5cm,
-  dx: -3mm,
+  dx: -0.5cm,
   text(60pt)[
     $
       ==>
@@ -275,17 +276,18 @@
   center + horizon,
   grid(
     columns: 4,
-    [Sphèrique : $K > 0$\ Sphére : $K = 1 / R$],
+    [Sphérique : $K > 0$\ Sphére : $K = 1 / R$],
     image("image/courbure/sphere.jpg", width: 70%),
-    [Planne : $K = 0$\ Cylindre, Plan],
+    [Plane : $K = 0$\ Cylindre, Plan],
     image("image/courbure/cylindre.jpg", width: 70%),
 
     [Hyperbolique: $K < 0$],
-    image("image/courbure/hyperboloide1nape.jpg", width: 70%),
+    image("image/pringels.jpg", width: 70%),
     [Pseudosphère : $K = -1 / R$],
     image("image/courbure/pseudosphere2.jpg", width: 70%),
   ),
 )
+
 #place(
   bottom,
   [Paraboloïde hyperbolique\
@@ -532,7 +534,7 @@ Idée de la projection de Mercator :
   right,
   dx: -3cm,
   [
-    Sur les méridiens ($v_A = v_B$) :
+    Sur les méridiens ($u_A = u_B$) :
   ],
 )
 
@@ -543,7 +545,7 @@ Idée de la projection de Mercator :
   [
     Sur la pseudosphère :
     $
-      d(A,B) = ln(ch(u_B) / ch(u_A))
+      d(A,B) = ln(ch(v_B) / ch(v_A))
     $
   ],
 )
@@ -561,7 +563,7 @@ Idée de la projection de Mercator :
   [
     Sur la carte :
     $
-      d(A,B) = ch(u_B) - ch(u_A)
+      d(A,B) = ch(v_B) - ch(v_A)
     $
   ],
 )
@@ -904,7 +906,7 @@ Donc sur notre surface, la métrique s’écrit :
 $
   dif s^2 = (dif u^2) / ch(v)^2 + sh(v)^2 / ch(v)^2 dif v^2 = (dif u^2 + sh(v)^2 dif v^2) / ch(v)^2
 $
-En appliquant notre porjection sur la métrique :
+En appliquant notre projection sur la métrique :
 $
   cases(delim: "{", x = u, y = ch(v)) <=> cases(delim: "{", dif x = dif u, dif y = sh(v) dif v)
 $
