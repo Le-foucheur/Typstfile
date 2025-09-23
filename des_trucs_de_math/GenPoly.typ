@@ -13,7 +13,6 @@ $
  - on appelle magnitude, et note $mag P$ = $limits(card)_(k in KK) {alpha_k, alpha_k != 0}$
  - $P = Q$ ssi ${(alpha_n, beta_n), n in NN} = {(a_n, beta_n), n in NN}$
  - $forall lambda in LL, lambda P = sum_n lambda alpha_n X^(beta_n)$
- - $P Q = sum_(i=0)^n alpha_i Q^n$
  - $((KK, LL), +, *)$ est un anneaux sans diviseur de zéro
 
 *Def* : On dit qu’un polynôme $P in (KK,LL)_n [X]$, de magnitude m, est condensé ssi $forall i in [|0;m|], alpha_i != 0$
