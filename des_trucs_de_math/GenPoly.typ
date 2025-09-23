@@ -33,10 +33,10 @@ $
   P’ = sum_(i = 0)^n alpha_i beta_i X^(beta_i - 1)
 $
 \
-*Prop :* Soit $P, Q in (KK, LL)_n [X]$, alors pour $k in NN$ :
+*Prop :* Soit $P, Q in (KK, LL)_n [X]$, alors pour $k in [|0, n|]$ :
 - $deg P’ = deg P - 1$
 
 - $deg P Q = deg P times deg Q$
 - $forall lambda in KK, deg lambda P = deg P$
 - $deg (P + Q) = max(deg P, deg Q)$
-- $mag P’ = mag P - card {beta_k = 0} + card({alpha_k = 0} inter {beta_k = 0})$, de plus si $P$ est condensé : $mag P’ = mag P - card {beta_k = 0}$
+- $mag P’ = mag P - card {beta_k = 0} + card({alpha_k = 0} inter {beta_k = 0})$, de plus si $P$ est condensé : $mag P’ = mag P - limits(card)_(i in [|0, mag P|]) {beta_i = 0}$
