@@ -35,7 +35,12 @@ $
 *Prop :* Soit $P, Q in (KK, LL)_n [X]$, alors pour $k in [|0, n|]$ :
 - $deg P’ = deg P - 1$
 
-- $deg P Q = deg P times deg Q$
+- $deg P Q = deg P + deg Q$
+- $deg P compose Q = deg P times deg Q$
 - $forall lambda in KK, deg lambda P = deg P$
 - $deg (P + Q) = max(deg P, deg Q)$
 - $mag P’ = mag P - card {beta_k = 0} + card({alpha_k = 0} inter {beta_k = 0})$, de plus si $P$ est condensé : $mag P’ = mag P - limits(card)_(i in [|0, mag P|]) {beta_i = 0}$
+- $mag P + Q = mag P + mag Q - card {beta_i = b_i, i in [|0; n|]}$
+- $mag P Q = min(mag P, mag Q)$
+- $forall lambda in KK, mag lambda P = mag P$
+- $mag P compose Q = ?$
