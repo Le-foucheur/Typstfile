@@ -18,7 +18,7 @@ $
 *Def* : On dit qu’un polynôme $P in (KK,LL)_n [X]$, de magnitude m, est condensé ssi $forall i in [|0;m|], alpha_i != 0$
 
 *Théorème 1 :* 
-Pour tout polynôme $P = sum_(i = 0)^n alpha_i X^(beta_i)$ de magnitude $m$, il existe un unique polynôme condensé $tilde(P)$, tel que $P = tilde(P)$
+Pour tout polynôme $P = sum_(i = 0)^n alpha_i X^(beta_i)$ de magnitude $m$, il existe un polynôme condensé $tilde(P)$, tel que $P = tilde(P)$
 
 Preuve :\
 Soit $phi in frak(S)$ tq $forall i in [|0;m|], alpha_(phi(i)) != 0$, \
