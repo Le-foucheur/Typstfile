@@ -44,3 +44,11 @@ $
 - $mag P Q = min(mag P, mag Q)$
 - $forall lambda in KK, mag lambda P = mag P$
 - $mag P compose Q = ?$
+
+#pagebreak()
+
+pour $k in NN^*$ et $n in [|k p; (k + 1 ) p|]$
+
+$
+  F_n^((p)) = sum_(i_1 =1 )^(n - k p) sum_(i_2 =1)^(i_1) dots.c sum_(i_k = 1)^(i_(k-1)) 1 + F_(k p)^((p))
+$
