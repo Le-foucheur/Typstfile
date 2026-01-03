@@ -11,13 +11,14 @@
   outset: (bottom: 3pt, rest: 0pt),
   stroke: (bottom: (0.5pt + col), rest: 0pt),
 )[#body]
+#let diff = sym.partial
 #let donc = "donc" + h(3pt)
 #let Donc = "Donc" + h(3pt)
 #let onA = "On a" + h(3pt)
 #let tq = "tel que" + h(3pt)
 #let et = "et" + h(3pt)
 #let dt = math.dif + "t"
-#let ddt = math.diff + $t$
+#let ddt = diff + $t$
 #let Id(n) = math.mat(..for x in range(n) {
   let l = ()
   for y in range(n) {
@@ -62,16 +63,19 @@
 #let ut = $u_theta$
 #let up = $u_phi$
 #let dx = $dif x$
-#let ddx = $diff x$
+#let ddx = $partial x$
 #let l2LN = "la seconde loi de Newton"
 #let ab(body, attache) = math.attach(body, br: attache)
 #let dS = $d"S"$
 #let scal(x, y) = math.op($< #x | #y >$)
+#let kb = $k_B$
+#let Ham = cal[H]
+#let cov = math.class("unary", "cov")
 
 
 
 //tout les set rule :
-#let template(doc) = [
+#let template_exo(doc) = [
   #set heading(
     numbering: (..numbers) => {
       let n = numbers.pos().len()
@@ -94,11 +98,15 @@
       }
     },
   )
+  #doc
+]
+
+#let template(ancienne_lig: false, doc) = [
   #set underline(stroke: red + 1pt)
   #set par(leading: 0.8em)
   #set page(numbering: (..nums) => nums.pos().map(na).join("/"), number-align: right)
   #set math.cancel(stroke: red)
-  #set text(font: "Linux Libertine", lang: "fr")
+  #set text(font: "Linux Libertine", lang: "fr", historical-ligatures: ancienne_lig, ligatures: not ancienne_lig)
   #show math.equation: set block(breakable: true)
   #doc
 ]
