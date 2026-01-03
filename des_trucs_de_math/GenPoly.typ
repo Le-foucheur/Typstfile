@@ -8,7 +8,7 @@ $
 $
 
 *Def* : Pour $P, Q in (KK,LL)_n [X]$, avec $P = sum_(i = 0)^n alpha_i X^(beta_i)$ et $Q = sum_(i = 0)^n a_i X^(b_i)$
- - Si $LL$ possède un ordre totale, alors on appelle $deg P = limits(max)_(k in NN) {beta_k, alpha_k != 0}$
+ - Si $LL$ possède une relation d’ordre totale, alors on appelle $deg P = limits(max)_(k in NN) {beta_k, alpha_k != 0}$
 
  - on appelle magnitude, et note $mag P$ = $limits(card)_(k in KK) {alpha_k, alpha_k != 0}$
  - $P = Q$ ssi $exists phi in frak(S), forall n in NN, (alpha_n, beta_n) = (a_phi(n), b_phi(n))$ 
@@ -33,14 +33,19 @@ $
 $
 \
 *Prop :* Soit $P, Q in (KK, LL)_n [X]$, alors pour $k in [|0, n|]$ :
+- $mag P’ = mag P - card {beta_k = 0} + card({alpha_k = 0} inter {beta_k = 0})$, de plus si $P$ est condensé : $mag P’ = mag P 
+
+- limits(card)_(i in [|0, mag P|]) {beta_i = 0}$
+
+- $mag P + Q = mag P + mag Q - card {beta_i = b_i, i in [|0; n|]}$
+- $mag P Q = min(mag P, mag Q)$
+- $forall lambda in KK, mag lambda P = mag P$
+- $mag P compose Q = ?$
+De plus si $LL$ possède une relation d’odre totale :
+
 - $deg P’ = deg P - 1$
 
 - $deg P Q = deg P + deg Q$
 - $deg P compose Q = deg P times deg Q$
 - $forall lambda in KK, deg lambda P = deg P$
 - $deg (P + Q) = max(deg P, deg Q)$
-- $mag P’ = mag P - card {beta_k = 0} + card({alpha_k = 0} inter {beta_k = 0})$, de plus si $P$ est condensé : $mag P’ = mag P - limits(card)_(i in [|0, mag P|]) {beta_i = 0}$
-- $mag P + Q = mag P + mag Q - card {beta_i = b_i, i in [|0; n|]}$
-- $mag P Q = min(mag P, mag Q)$
-- $forall lambda in KK, mag lambda P = mag P$
-- $mag P compose Q = ?$
