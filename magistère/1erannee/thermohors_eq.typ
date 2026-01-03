@@ -48,6 +48,50 @@ $
   S dif T + sum_(i in I) X_i dif Y_i = 0
 $
 
+#align(center)[= Formalisme de la physique statistique]
+
+#sym.star distribution de proba, #underline(stroke: black)[sans] échange de chaleur et de travaille :
+$
+  p_e = 1/Z e^(-beta E_l)
+$
+où :
+- $beta = 1/(kb T)$
+- $Z = sum_("les états" l) e^(-beta E_l)$
+
+energie libre :
+$
+  F = <E> - T S = -kb T ln(Z)  
+$
+
+$
+  dif F = -S dif T - <p> dif V + <mu> dif N
+$
+
+Fluctuation d’energie :
+$
+  V_E = <E^2> - <E>^2 = (diff^2 ln(Z))/(diff beta^2)
+$
+
+#sym.star distribution de proba, #underline(stroke: black)[avec] échange de chaleur et de travaille :
+$
+  p_l = 1/Z e^(-beta(E_l + p V_l))
+$
+où :
+- $Z = sum_("les états "l) e^(-beta(E_l + p V_l))$
+
+Entalpie libre :
+$
+  G = <E> - T S + p <V>\
+  dif G = <mu> dif N - S dif T + <V> dif p = - kb T ln(Z)
+$
+
+Les fluctuation :
+$
+  V_V = 1/beta^2 (diff^2 ln(Z))/(diff beta^2) = - 1/beta diff_p <V> = kb T <V> chi_T\
+  V_H = (diff^2 ln(Z))/(diff beta^2) = kb T^2 C_P\
+  V_E = kb T^2 C_P + p^2 <V> kb T chi_T - 2p kb T^2 diff_T <V>
+$
+
 #align(center)[= Théorème de la réponse linéaire]
 
 Soit un système à l'équilibre dépendent des paramètres $p, q$ et du hamiltonien $Ham_0(p, q)$.\
