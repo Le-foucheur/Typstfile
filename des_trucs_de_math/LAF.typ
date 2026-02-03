@@ -9,9 +9,6 @@ $
   H_k (1) &= 1 " & " underbrace(H_k (0) = delta_k^0, "facile")
 $
 avec $(B_i)$ les nombres de Bernoulli, avec la convention $B_1 = 1/2$
-$
-  forall k in NN, forall n in [|k p, (k+1)p|], F_n^((p)) &= H_k (n-k p) + F_(k p)^((p)) "     " (3)\
-$
 
 == Preuve de $(0) => (2)$ :\
  - Pour $k= 0 :$ \
@@ -49,6 +46,15 @@ Il suffie de « remonter » la preuve précédente, sans faire de récurance
 
 == Propriété sur $(alpha_i^k)$ :
 - $forall k in NN^*, alpha_1 ^k = 1/k$ (1)
-- $forall i in NN, alpha_i^i = 1/k!$ (2)
+- $forall i in NN, alpha_i^i = 1/i!$ (2)
 
 === preuve :
+
+$
+"Comme pour" forall p in NN^*,forall k in NN, forall n in [|k p, (k+1)p|], F^((p))_n = P^(p)_k (n) \
+ "avec" P_k^((p)) = sum_(i = 0)^(k-1) P_(k-1)^((p)) ((i+1)p) S_(k-1-i) (X-k p) + S_k (X-k p) \
+ "Donc" \
+ forall p in NN^*, forall n in NN, F_n^((p)) = P^((p))_floor(n/p) (n) \
+ "alors"\
+  forall n in NN, lim_(p --> 0^+) P_floor(n/p)^((p))(n) = lim_(p--> 0^+) F^((p))_n = F^((0))_n = 2^n "  ?"
+$

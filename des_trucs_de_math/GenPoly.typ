@@ -4,14 +4,14 @@
 
 *Def* : Pour un corps $KK$ commutatif où l’exponentiation est définis et pour $LL$ un sous corps de $KK$, on définis pour n in $NN$ :
 $
-  (KK, LL)_n [X] = {sum_(k = 0)^n alpha_k X^( beta_k ), forall i > n, alpha_i = 0, (alpha_n) in KK^NN, (beta_n) in LL^NN}
+  (KK, LL)_n [X] = {sum_(k = 0)^n alpha_k X^( beta_k ), forall i > n, alpha_i = 0, forall i,j in NN, i != j => beta_i != beta_j, (alpha_n) in KK^NN, (beta_n) in LL^NN}
 $
 
-*Def* : Pour $P, Q in (KK,LL)_n [X]$, avec $P = sum_(i = 0)^n alpha_i X^(beta_i)$ et $Q = sum_(i = 0)^n a_i X^(beta_i)$
- - Si $LL$ possède un ordre totale, alors on appelle $deg P = limits(max)_(k in NN) {beta_k, alpha_k != 0}$
+*Def* : Pour $P, Q in (KK,LL)_n [X]$, avec $P = sum_(i = 0)^n alpha_i X^(beta_i)$ et $Q = sum_(i = 0)^n a_i X^(b_i)$
+ - Si $LL$ possède une relation d’ordre totale, alors on appelle $deg P = limits(max)_(k in NN) {beta_k, alpha_k != 0}$
 
  - on appelle magnitude, et note $mag P$ = $limits(card)_(k in KK) {alpha_k, alpha_k != 0}$
- - $P = Q$ ssi ${(alpha_n, beta_n), n in NN} = {(a_n, beta_n), n in NN}$
+ - $P = Q$ ssi $exists phi in frak(S), forall n in NN, (alpha_n, beta_n) = (a_phi(n), b_phi(n))$ 
  - $forall lambda in LL, lambda P = sum_n lambda alpha_n X^(beta_n)$
  - $((KK, LL), +, *)$ est un anneaux sans diviseur de zéro
 
@@ -23,7 +23,7 @@ Pour tout polynôme $P = sum_(i = 0)^n alpha_i X^(beta_i)$ de magnitude $m$, il 
 Preuve :\
 Soit $phi in frak(S)$ tq $forall i in [|0;m|], alpha_(phi(i)) != 0$, \
 Posons $tilde(P) = sum_(i= 0)^n alpha_(phi(i)) X^(beta_(phi(i)))$\
-Alors nous avons bien ${(alpha_n, beta_n), n in NN} = {(alpha_phi(i), beta_phi(i)), i in NN}$ car un ensemble est invariant par permutation, donc $P = tilde(P)$\
+Alors nous avons bien $forall n in NN, (alpha_n, beta_n) = (alpha_(phi^(-1) (phi(n))), beta_(phi^(-1) (phi(n))))$ avec $phi^(-1)$ la premutation inverse de $phi$, donc $P = tilde(P)$\
 De plus $tilde(P)$ est bien condensé par définition de $phi$ *Q.E.D.*\
 \
 
@@ -33,22 +33,19 @@ $
 $
 \
 *Prop :* Soit $P, Q in (KK, LL)_n [X]$, alors pour $k in [|0, n|]$ :
+- $mag P’ = mag P - card {beta_k = 0} + card({alpha_k = 0} inter {beta_k = 0})$, de plus si $P$ est condensé : $mag P’ = mag P 
+
+- limits(card)_(i in [|0, mag P|]) {beta_i = 0}$
+
+- $mag P + Q = mag P + mag Q - card {beta_i = b_i, i in [|0; n|]}$
+- $mag P Q = min(mag P, mag Q)$
+- $forall lambda in KK, mag lambda P = mag P$
+- $mag P compose Q = ?$
+De plus si $LL$ possède une relation d’odre totale :
+
 - $deg P’ = deg P - 1$
 
 - $deg P Q = deg P + deg Q$
 - $deg P compose Q = deg P times deg Q$
 - $forall lambda in KK, deg lambda P = deg P$
 - $deg (P + Q) = max(deg P, deg Q)$
-- $mag P’ = mag P - card {beta_k = 0} + card({alpha_k = 0} inter {beta_k = 0})$, de plus si $P$ est condensé : $mag P’ = mag P - limits(card)_(i in [|0, mag P|]) {beta_i = 0}$
-- $mag P + Q = mag P + mag Q - card {beta_i = b_i, i in [|0; n|]}$
-- $mag P Q = min(mag P, mag Q)$
-- $forall lambda in KK, mag lambda P = mag P$
-- $mag P compose Q = ?$
-
-#pagebreak()
-
-pour $k in NN^*$ et $n in [|k p; (k + 1 ) p|]$
-
-$
-  F_n^((p)) = sum_(i_1 =1 )^(n - k p) sum_(i_2 =1)^(i_1) dots.c sum_(i_k = 1)^(i_(k-1)) 1 + F_(k p)^((p))
-$
