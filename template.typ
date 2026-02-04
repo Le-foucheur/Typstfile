@@ -1,7 +1,7 @@
 #import "transposition.typ": *
 #import "@preview/drafting:0.2.2": *
 
-#let cal(body, _font: "LT Perfume") = $text(font: #_font, body)$ + h(5pt)
+//#let cal(body, _font: "LT Perfume") = $text(font: #_font, body)$ + h(5pt)
 #let question = counter("questions")
 #let nonumeq = math.equation.with(block: true, numbering: none)
 #let dm(x) = box[#nonumeq[#x]]
@@ -44,8 +44,8 @@
 #let Soietn(body, ens) = [Soient $#body in #ens$]
 #let ssi = "si et seulement si" + h(1pt)
 #let ateb = math.beta.alt
-#let Ker = math.class("unary", [#cal("K") #h(-01mm) er])
-#let ImE = math.class("unary", [#cal("I")#h(-0.5mm)m])
+#let Ker = math.class("unary", [#math.scr("K") #h(-01mm) er])
+#let ImE = math.class("unary", [#math.scr("I")#h(-0.5mm)m])
 #let Vect = math.class("unary", "Vect")
 #let ou = "ou" + h(3pt)
 #let ar(body) = $arrow(#body)$
@@ -69,7 +69,7 @@
 #let dS = $d"S"$
 #let scal(x, y) = math.op($< #x | #y >$)
 #let kb = $k_B$
-#let Ham = cal[H]
+#let Ham = math.scr("H")
 #let cov = math.class("unary", "cov")
 
 
