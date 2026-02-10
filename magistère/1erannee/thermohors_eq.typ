@@ -26,10 +26,10 @@ $
 $
 *N.B.*: c'est juste la règle de la chaine
 
-#align(center)[= Formalisme d’#cal[E]instein]
+#align(center)[= Formalisme d’#[E]instein]
 
 
-Postulat d'#cal[E]instein:
+Postulat d'#[E]instein:
 $
   #rect(stroke: 0pt, width: 4cm)[distrib de la proba d'être dans l'état d'hors équilibre] = w = e^((diff S_c)/(k_B T))
 $
@@ -43,7 +43,7 @@ $
   w = e^(-1/(2 kb T) (delta S delta T - sum_(i in I) delta X_i delta Y_i))
 $
 
-Relation de #cal[G]ibbs-#cal[D]uhem
+Relation de #[G]ibbs-#[D]uhem
 $
   S dif T + sum_(i in I) X_i dif Y_i = 0
 $
@@ -117,7 +117,7 @@ $
 *Attetion, Achtung*:
 - La fonction de réponse doit être causale: $chi_(A B)(t-t') = 0$ pour $t < t'$
 
-On peut écrire la réponse linéaire dans l'espace de #cal[F]ourier:
+On peut écrire la réponse linéaire dans l'espace de #[F]ourier:
 $ <tilde(B)(omega)> = tilde(chi)_(A B)(omega) tilde(f)(omega) $
 
 avec:
@@ -133,9 +133,9 @@ $
 
 avec: $tilde(chi)_"AA" = tilde(chi)'_"AA" - i tilde(chi)''_"AA"$
 
-#align(center)[= Relation de #cal[K]ramer-#cal[K]ronig]
+#align(center)[= Relation de #[K]ramer-#[K]ronig]
 
-Les parties réelle et imaginaire de la fonction de réponse sont liées par les relations de #cal[K]ramer-#cal[K]ronig:
+Les parties réelle et imaginaire de la fonction de réponse sont liées par les relations de #[K]ramer-#[K]ronig:
 $
   tilde(chi)'_(A B)(omega) = 1/pi upright(V P) (integral_(-oo)^(+oo) (tilde(chi)''_(A B)(omega')) / (omega' - omega) d omega')\
   tilde(chi)''_(A B)(omega) = 1/pi upright(V P)( integral_(-oo)^(+oo) (tilde(chi)'_(A B)(omega')) / (omega' - omega) d omega')
@@ -147,5 +147,5 @@ A partir de l'équation de Liouville, on peut montrer que la fonction de répons
 $
   (dif C_"A B" (t)) / (dif t) = -1/(k_B T) chi_(A B)(t) "espace réel"\
   <=>\
-  tilde(chi)''_(A B)(omega) = - omega / (2 k_B T) tilde(C)_(A B)(omega) "espace de "#cal[F]"ourier"
+  tilde(chi)''_(A B)(omega) = - omega / (2 k_B T) tilde(C)_(A B)(omega) "espace de "#[F]"ourier"
 $
