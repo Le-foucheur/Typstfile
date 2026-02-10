@@ -36,7 +36,7 @@ $
 
 pour toute la suite $i in [|1,r|] = I$; $r in NN^*$ et on pose $X_(i in [|1,r|])$ les coords thérmodynamique
 
-On dèf $F_i = diff_X_i S$ et $Y_i = T F_i = diff_X_i E$
+On dèf $F_i = diff_X_i S$ et $Y_i = - T F_i = diff_X_i E$
 
 On peut montrer alors:
 $

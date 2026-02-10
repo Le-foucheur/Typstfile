@@ -2,9 +2,9 @@
 #let mag = $class("unary","mag")$
 #let card = $class("unary","card")$
 
-*Def* : Pour un corps $KK$ commutatif où l’exponentiation est définis et pour $LL$ un sous corps de $KK$, on définis pour n in $NN$ :
+*Def* : Pour un corps $KK$ commutatif où l’exponentiation est définis et pour $LL$ un sous corps de $KK$, on définis pour $n in NN$ :
 $
-  (KK, LL)_n [X] = {sum_(k = 0)^n alpha_k X^( beta_k ), forall i > n, alpha_i = 0, forall i,j in NN, i != j => beta_i != beta_j, (alpha_n) in KK^NN, (beta_n) in LL^NN}
+  (KK, LL)_n [X] = {sum_(k = 0)^n alpha_k X^( beta_k ), forall i > n, alpha_i = 0, forall i,j in NN, i != j => beta_i != beta_j "ou" beta_i = beta_j = 0, (alpha_n) in KK^NN, (beta_n) in LL^NN}
 $
 
 *Def* : Pour $P, Q in (KK,LL)_n [X]$, avec $P = sum_(i = 0)^n alpha_i X^(beta_i)$ et $Q = sum_(i = 0)^n a_i X^(b_i)$
@@ -37,7 +37,7 @@ $
 
 - limits(card)_(i in [|0, mag P|]) {beta_i = 0}$
 
-- $mag P + Q = mag P + mag Q - card {beta_i = b_i, i in [|0; n|]}$
+- $mag (P + Q) = mag P + mag Q - card {beta_i = b_j, i, j in [|0; max(mag P, mag Q)|]}$
 - $mag P Q = min(mag P, mag Q)$
 - $forall lambda in KK, mag lambda P = mag P$
 - $mag P compose Q = ?$
