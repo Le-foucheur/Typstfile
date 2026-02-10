@@ -29,7 +29,7 @@ end
 
 Gamma
 
-gd = det(g);
+gd := det(g);
 
 Ri = g;
 
