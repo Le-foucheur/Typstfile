@@ -51,3 +51,11 @@ end
 
 Ri
 
+courbureScalaire = 0;
+for mu = 1:n
+    for nu = 1:n
+        courbureScalaire = courbureScalaire + ig(mu, nu) * Ri(mu, nu);
+    end
+end
+
+courbureScalaire
