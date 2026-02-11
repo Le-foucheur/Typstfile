@@ -1,10 +1,21 @@
-n = 2;
+%Met la dimention ici 
+n = 4;
 
 x = sym("x", [1 n])
 
+%les constantes/variables
+G = sym("G");
+M = sym("M");
+c = sym("c");
+Rs = sym("Rs");
 
 %Rentre la métrique ici
-g = [1, 0;0, x(1)^2]
+g = [
+    -(1-Rs/x(2)), 0, 0, 0;
+    0, 1/(1-Rs/x(2)), 0, 0;
+    0, 0, x(2)^2, 0;
+    0, 0, 0, x(2)^2 * sin(x(3))^2;
+]
 
 ig = inv(g)
 
@@ -21,15 +32,17 @@ for gamma = 1:n
             for m = 1:n
                 tmp0 = tmp0 + 0.5 * ig(gamma, m) * (diff(g(m,alpha), x(beta)) + diff(g(m, beta), x(alpha)) - diff(g(alpha, beta), x(m)));
             end
-            Gamma(gamma, alpha, beta) = simplify(tmp0);
+            Gamma(alpha, beta, gamma) = simplify(tmp0);
         end
     end
 end
 
-
 Gamma
 
-gd := det(g);
+
+gd = det(g)
+
+
 
 Ri = g;
 
@@ -38,14 +51,15 @@ for mu = 1:n
         tmp1 = 0;
         tmp2 = 0;
         tmp3 = 0;
+        tmp4 = 0;
         for alpha = 1:n
-            tmp1 = tmp1 + diff(Gamma(alpha, mu, nu), x(alpha));
-            tmp3 = tmp3 + Gamma(alpha, mu, nu) * diff(log(sqrt(-gd)), x(alpha));
+            tmp1 = tmp1 + diff(Gamma(mu, nu, alpha), x(alpha));
+            tmp3 = tmp3 + Gamma(mu, nu, alpha) * diff(log(sqrt(-gd)), x(alpha));
             for beta = 1:n
-                tmp2 = tmp2 + Gamma(beta, alpha, mu) * Gamma(alpha, beta, nu);
+                tmp2 = tmp2 + Gamma(alpha, mu, beta) * Gamma(beta, nu, alpha);
             end
         end
-        Ri(mu,nu) = simplify(- diff(diff(log(sqrt(-gd)),x(nu)), (mu)) + tmp1 - tmp2);
+        Ri(mu,nu) = simplify(- diff(diff(log(sqrt(-gd)),x(nu)), x(mu)) + tmp1 - tmp2 + tmp3);
     end
 end
 
