@@ -132,11 +132,69 @@ $
 $
 alors en dérivant :
 $
-  diff_lambda g_(alpha beta) &= eta_(mu nu) diff/(diff x^lambda) ((diff xi^mu)/(diff x^alpha) (diff xi^nu)/(diff x^beta))\
-  &= underbrace(eta_(mu nu) (diff xi^mu)/(diff x^alpha), = g_(alpha mu) (diff x^mu)/(diff xi^nu)) (diff^2 xi^nu)/(diff x^beta diff x^lambda) + underbrace(eta_(mu nu) (diff xi^nu)/(diff x^beta), = g_(alpha nu) (diff x^nu)/(diff xi^mu)) (diff^2 xi^mu)/(diff x^alpha diff x^lambda)\
+  g_(alpha beta, lambda) = diff_lambda g_(alpha beta) &= eta_(mu nu) diff/(diff x^lambda) ((diff xi^mu)/(diff x^alpha) (diff xi^nu)/(diff x^beta))\
+  &= underbrace(eta_(mu nu) (diff xi^mu)/(diff x^alpha), = g_(alpha mu) (diff x^mu)/(diff xi^nu)) (diff^2 xi^nu)/(diff x^beta diff x^lambda) + underbrace(eta_(mu nu) (diff xi^nu)/(diff x^beta), = g_(beta nu) (diff x^nu)/(diff xi^mu)) (diff^2 xi^mu)/(diff x^alpha diff x^lambda)\
   &= g_(alpha mu) underbrace((diff x^mu)/(diff xi^nu) (diff^2 xi^nu)/(diff x^beta diff x^lambda), = croh(l: mu, m: beta, n: lambda))
   +
-  g_(alpha nu) underbrace((diff x^nu)/(diff xi^mu) (diff^2 xi^mu)/(diff x^beta diff x^lambda), = croh(l: nu, m: beta, n: lambda))\
-  &= croh(m: beta, n: lambda, l: mu) g_(mu alpha) + croh(m: beta, n: lambda, l: nu) g_(nu alpha)\
+  g_(beta nu) underbrace((diff x^nu)/(diff xi^mu) (diff^2 xi^mu)/(diff x^alpha diff x^lambda), = croh(l: nu, m: alpha, n: lambda))\
+  &= croh(m: beta, n: lambda, l: mu) g_(mu alpha) + croh(m: alpha, n: lambda, l: nu) g_(nu beta)\
+$
+Donc en sommant pour difféante dérivé :
+$
+  g_(alpha beta, lambda) + g_(lambda beta, alpha) - g_(alpha lambda, beta) &= croh(l: mu, m: alpha, n: lambda) g_(mu beta) + cancel(croh(m: beta, n: lambda, l: nu) g_(nu alpha))\
+  &+ cancel(croh(l: mu, m: beta, n: alpha) g_(mu lambda)) + croh(m: lambda, n: alpha, l: nu) g_(nu beta)\
+  &- cancel(croh(l: mu, m: alpha, n: beta) g_(mu lambda)) cancel(- croh(m: lambda, n: beta, l: nu) g_(nu alpha))\
+  &= croh(l: mu, m: alpha, n: lambda) g_(mu beta) + croh(m: lambda, n: alpha, l: nu) g_(nu beta) = 2 croh(l: mu, n: lambda, m: alpha)g_(mu beta)
+$
+Ainsi :
+$
+  Gamma^(gamma)_(alpha lambda) &= 1/2 g^(gamma beta) (g_(alpha beta, lambda) + g_(lambda beta, alpha) - g_(alpha lambda, beta)) = 1/2 g^(gamma beta) times 2 croh(l: mu, n: lambda, m: alpha) g_(mu beta)\
+  &= croh(l: mu, n: lambda, m: alpha) delta^gamma_(mu) = croh(l: gamma, n: lambda, m: alpha)
+$
+On trouve que : $Gamma^(mu)_(alpha beta) = croh(l: mu, m: alpha, n: beta)$, et pas concéquant : $Gamma_(alpha beta)^mu = (diff x^mu)/(diff xi^nu) (diff^2 xi^nu)/(diff x^alpha diff x^beta)$
+
+==== Transformation de $Gamma_(mu nu)^lambda$
+
+$
+  Gamma_(mu nu)^lambda ' &= croh()' = (diff x'^lambda)/(diff xi^beta) (diff^2 xi^beta)/(diff x'^mu diff x'^nu)\
+  &= (diff x^k)/(diff xi^beta) (diff x'^lambda)/(diff x^k) (diff^2 xi^beta)/(diff x^gamma diff x^alpha) (diff x^gamma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu)\
+  &= (diff x'^lambda)/(diff x^k) (diff x^gamma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu) underbrace((diff x^k)/(diff xi^beta) (diff^2 xi^beta)/(diff x^gamma diff x^alpha), = croh(l: k, m: gamma, n: alpha))\
+  &= (diff x'^lambda)/(diff x^k) (diff x^gamma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu) croh(l: k, m: gamma, n: alpha) ?\
 $
 
+#AFL
+
+#align(center)[= Solution de Schwwarzschild]
+
+
+== Équation sur $R_(mu nu)$
+
+On se place dans un espace de dimension $n$\
+D’après l’équation de Einstein :
+$
+  R_(mu nu) - 1/2 g_(mu nu) R = kappa T_(mu nu)
+$
+On recherche une solution pour un espace vide, statique et à symétrie sphérique\
+donc $T_(mu nu) = 0$, ainsi l’équation devient :
+$
+                                                                        R_(mu nu) - 1/2 g_(mu nu) R & = 0 \
+                                                       donc g^(mu nu) (R_(mu nu) - 1/2 g_(mu nu) R) & = 0 \
+  donc underbrace(g^(mu nu) R_(mu nu), = R) - 1/2 underbrace(g^(mu nu)g_(mu nu), = delta_mu^mu = n) & = 0 \
+                                                                                   donc R(1 - 1/2n) & = 0 \
+                                                                                      donc R(2 - n) & = 0
+$
+
+Ainsi on a deux cas particulier :
+- Soit $n = 2$, dans ce cas la gravité est topologique
+- Soit $R = 0$
+
+Or on recherche une solution pour un espace à 4 dimension (espace-temps), ainsi $R = 0$\
+En injectant dans l’équation d’Einstein :
+$
+  R_(mu nu) - 1/2 g_(mu nu) underbrace(R, = 0) = 0\
+  Donc R_(mu nu) = 0
+$
+
+== Écriture de la métrique
+
+On sait que dans un espace
