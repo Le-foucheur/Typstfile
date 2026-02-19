@@ -1,7 +1,11 @@
-x#import "../../../template.typ": *
+#import "../../../template.typ": *
 #import "../../../transposition.typ": *
 
 #show: template
+
+#set math.equation(numbering: "(1)", supplement: [l’équation])
+
+#set heading(numbering: "1.1.a")
 
 #align(center)[= Équation des géodésiques]
 
@@ -73,7 +77,7 @@ En introduisant les symboles de Christoffel $Gamma^beta_(mu nu) = 1/2 g^(beta al
 $
   dot.double(x)^beta = - Gamma^beta_(mu nu) dot(x)^mu dot(x)^nu\
   "Soit" dot.double(x)^beta + Gamma^(beta)_(mu nu) dot(x)^mu dot(x)^nu = 0
-$
+$ <eqgeo>
 
 #align(center)[= Commuteur des Co-dérivés covariante]
 
@@ -193,11 +197,11 @@ En injectant dans l’équation d’Einstein :
 $
   R_(mu nu) - 1/2 g_(mu nu) underbrace(R, = 0) = 0\
   Donc R_(mu nu) = 0
-$
+$ <Ricci>
 
-== Écriture de la métrique
+== Écriture de la métrique dans un espace isotropique statique
 
-On sait que dans un espace isotropique, la métrique doit ressemblé à :
+On sait que dans un espace isotropique, la métrique doit ressembler à :
 $
   dif s^2 = A(r,t)dif t^2 - B(r, t) dif t (arrow(x) dot.c dif arrow(x)) - C(r, t) (arrow(x) dot.c dif arrow(x))^2 - D(r, t) dif arrow(x)^2
 $
@@ -221,8 +225,115 @@ On pose $dash(r)^2 = D'$, alors :
 $
   ds^2 = A(t, dash(r)) dt^2 - B'(t, dash(r)) dt dif dash(r) - C'(t, dash(r)) dif dash(r)^2 - dash(r)^2 dif^2 Omega
 $
-On pose également $dif dash(t) = Phi(t, dash(r))[A(t, dash(r)) dt - 1/2 B'(t, dash(r)) dif dash(r)]$, donc
+On pose également un nouveau temps : $dif dash(t) = Phi(t, dash(r))[A(t, dash(r)) dt - 1/2 B'(t, dash(r)) dif dash(r)]$, donc
 $
   dif dash(r)^2 = Phi(t, dash(r)) [A^2 dt^2 + 1/4 B'^2 dif dash(r)^2 - A B' dt dif dash(r) ]\
   Donc A dt^2 - B' dt dif dash(r) = 1/(A Phi) dif dash(t)^2 - B/(4 A) dif dash(r)^2
+$
+la métrique devient :
+$
+  ds^2 = 1/(A Phi) dif dash(t)^2 -(B/(4A) + C')dif dash(r)^2 - dash(r)^2 dif^2 Omega
+$
+Ainsi en posant deux nouvelles fonctions $dash(A) = 1/(A Phi) et dash(B) = B/(4A) + C'$, la métrique devient :
+$
+  ds^2 = dash(A)(dash(t), dash(r)) dif dash(t)^2 - dash(B)(dash(t), dash(r)) dif dash(r)^2 - dash(r)^2 dif^2 Omega
+$
+Comme à partir de maintenant l’on ne travaillera qu’avec les quantités avec une barre : $dash(A), dash(B), dash(t), dash(r)$, on les renotera sans la barre, pour plus de claireté\
+De plus comme l’on imposse au système d’être statique, alors les grandeurs $A et B$ sont indépendantes du temps \
+ainsi la métrique s’écrit finalement : 
+$
+  ds^2 = A(r) dt^2 - B(r)dr^2 - r^2 dif^2 Omega
+$
+== Solution de Schwwarzschild
+
+D’après @Ricci, $R_(mu nu) = 0$, or 
+$
+  R_(mu nu) = diff_nu Gamma^sigma_(mu sigma) - diff_sigma Gamma^sigma_(mu nu) + Gamma^(rho)_(mu sigma) Gamma^sigma_(rho nu) - Gamma^(rho)_(mu nu) Gamma^(sigma)_(rho sigma) 
+$ 
+Ainsi en calculant les symboles de Christoffel, on obtiendra des équations sur $A et B$
+
+=== Calcule des Christoffel
+Pour calculer les symboles de Christoffel, on pourrait partir de la définition :
+$
+  Gamma^mu_(alpha beta) = 1/2 g^(mu rho)(g_(alpha rho, beta) + g_(beta rho, alpha) - g_(alpha beta, rho))
+$
+Cependant, ceci demande de calculer indépendament chaque coefficient, or en dimension $4$ il y en a $4^3 = #calc.pow(4,3)$, rendant les calcules longs et éreintant.\
+Or, il existe une méthode plus rapide pour les calculer, celle-ci ce base sur le faits que l’équation des géodésiques, @eqgeo, dépend directement des symboles de Christoffel.\
+Donc pour les calculer, on prend le lagrangien $cal(L) = g_(mu nu)dot(x)^mu dot(x)^nu$, que l’on insère dans les équations d’Euleur-La Grange, pour retomber sur l’équation des géodésiques.\
+Ici nous ne ferons que le calcule pour la variable $r$, le reste à été faits par un programme en MatLab (`cristofell.m`, présent dans le même dossier).\
+Ainsi, le lagrangien s’écrit : $cal(L) = A(r)dot(t)^2 - B(r) dot(r)^2 - r^2 dot(theta)^2 - r^2 sin(theta)^2 dot(phi)^2$, alors on a :
+$
+  diff_(dot(r)) cal(L) = -2B(r)dot(r)\
+  donc dif/(dif cal(s)) diff_(dot(r)) cal(L) = -2 dif/(dif cal(s)) (dot(r) B(r)) = -2 (dif dot(r))/(dif cal(s)) B - 2dot(r) dr/(dif cal(s)) (dif B(r))/dr = -2 dot.double(r) B - 2 dot(r)^2 B'(r)
+$
+Où on note les dérivés par un point les dérivés par à $cal(s)$ et $B'(r) et A'(r)$ les dérivés par rapport à $r$.\
+Nous avons également :
+$
+  diff_r cal(L) = A'(r)dot(t)^2 - B'(r) dot(r)^2 - 2r dot(theta)^2 - 2 r sin(theta)^2 dot(phi)^2
+$
+Donc d’après les équations d’Euleur-La Grange :
+$
+  -2 dot.double(r) B(r) - 2 dot(r)^2 B' = A'dot(t)^2 - B' dot(r)^2 - 2r dot(theta^2) - 2r sin(theta)^2 dot(phi)^2
+$
+$
+  donc dot.double(r) + A'/(2B) dot(t)^2 + B'/(2B) dot(r)^2 - r/(B) dot(theta)^2 - (r sin(theta)^2)/(B) dot(phi)^2
+$ <eqr>
+Or comme l’équation des géodésiques s’écrit : $dot.double(x)^mu + Gamma^mu_(alpha beta) dot(x)^alpha dot(x)^beta = 0$, alors en identifiant avec @eqr, on trouve :
+$
+  Gamma^1_(mu nu) = mat(
+    A'/(2B), 0, 0, 0;
+    0, B'/(2B), 0, 0;
+    0, 0, -r/B, 0;
+    0, 0, 0, - (r sin(theta)^2)/B
+  )
+$
+Donc après calcule, on touve que :
+$
+  Gamma^0_(mu nu) = mat(
+    0, A'/(2A), 0, 0;
+    A'/(2A), 0, 0, 0;
+    0, 0, 0, 0;
+    0, 0, 0, 0
+  )
+$
+$
+  Gamma^2_(mu nu) = mat(
+    0, 0, 0, 0;
+    0, 0, 1/r, 0;
+    0, 1/r, 0, 0;
+    0, 0, 0, -sin(theta) cos(theta);
+  )
+$
+$
+  Gamma^3_(mu nu) = mat(
+    0, 0, 0, 0;
+    0, 0, 0, 1/r;
+    0, 0, 0, cot(theta);
+    0, 1/r, cot(theta), 0; 
+  )
+$
+
+=== Équation sur $A$ et $B$
+
+De la même manière les différent coefficient de $R_(mu nu)$ on été calculé par le même programme, ainsi on obtient comme seul coefficient non nul :
+$
+  R_(0 0) = A'/(r B) + A''/(2B) - A'/(4B) (A'/A + B'/B)\
+  R_(1 1) = B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B)\
+  R_(2 2) = (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1\
+  R_(3 3) = sin(theta)^2 ((r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1)
+$ 
+Ainsi par @Ricci, on obtient le système suivant :
+$
+  cases(R_(0 0) = A'/(r B) + A''/(2B) - A'/(4B) (A'/A + B'/B) = 0,
+  R_(1 1) = B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B) = 0,
+  R_(2 2) = (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1 = 0,
+  R_(3 3) = sin(theta)^2 ((r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1) = 0)
+$
+On remarque que les deux dernières équations sont redontantes, donc le système ce réduit à :
+$
+    cases(
+      A'/(r B) + A''/(2B) - A'/(4B) (A'/A + B'/B) = 0,
+      B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B) = 0,
+      (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1 = 0
+    )
 $
