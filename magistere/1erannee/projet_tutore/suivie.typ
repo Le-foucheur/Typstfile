@@ -3,21 +3,56 @@
 
 #show: template
 
-#set math.equation(numbering: "(1)", supplement: [l’équation])
+#let equa = counter("equa")
+#equa.step()
 
-#set heading(numbering: "1.1.a")
+#set math.equation( supplement: [l’équation],
+  numbering: (..num) => context {
+    "("
+    let nb = counter(heading).get()
+    str(nb.first()) + if nb.len() >= 2 { "." + str(nb.at(1))} + "." + str(equa.display())
+    equa.step()
+    ")"
+  }
+)
+
+#set heading(numbering: (..num) => {
+  if num.pos().len() <= 2 {
+    equa.update(1)
+  }
+  for j in range(num.pos().len()){
+    if j == 0 or j == 1 {
+      str(num.pos().at(j))
+    } else {
+      str.from-unicode(num.pos().at(j) + 96)
+    }
+    if j != num.pos().len() - 1 {"."}
+  }
+})
+
+#show ref: it => {
+  let eq = math.equation
+  let el = it.element
+  if el == none or el.func() != eq {return it}
+  let fun = {
+    let nb = counter(heading).at(el.label)
+    "("
+    str(nb.first()) + if nb.len() >= 2 { "." + str(nb.at(1))} + "." + str(equa.at(el.label).last())
+    ")"
+  }
+  link(el.location(), [#el.supplement #fun])
+}
 
 #align(center)[= Équation des géodésiques]
 
-Soit le lagrangiens suivant :
+Soit, le lagrangien suivant :
 $
   cal(L)(x^alpha, dot(x)^alpha) = [g_(mu nu)(x) dot(x)^mu dot(x)^nu]^(1/2)
 $
 avec $dot(x)^alpha = (dif x^alpha)/(dif s)$\
-Ainsi on n’a :
+Ainsi on a :
 $
   (partial cal(L))/(partial x^alpha) & = 1/2 [g_(mu nu)dot(x)^mu dot(x)^nu]^(- 1/2) diff/(diff x^alpha) (g_(mu nu) dot(x)^mu dot(x)^nu)\
-  #box(width: 2.5cm)[car $dot(x)^mu$ et $dot(x)^nu$ sont constant face à $x^alpha ->$];
   &= 1/2 [g_(mu nu)dot(x)^mu dot(x)^nu]^(- 1/2) (partial g_(mu nu))/(diff x^alpha) dot(x)^mu dot(x)^nu\
   &= 1/2 [g_(mu nu)dot(x)^mu dot(x)^nu]^(- 1/2) g_(mu nu, alpha) dot(x)^mu dot(x)^nu
 $
@@ -37,7 +72,7 @@ $
 \
 En posant :
 $
-             dif lambda & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(1/2) dif s \
+  dif lambda & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(1/2) dif s \
   Donc dif/(dif lambda) & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(-1/2) dif/(dif s)
 $
 Ainsi, en réécrivant l’équation précédente :
@@ -157,7 +192,7 @@ $
 $
 On trouve que : $Gamma^(mu)_(alpha beta) = croh(l: mu, m: alpha, n: beta)$, et pas concéquant : $Gamma_(alpha beta)^mu = (diff x^mu)/(diff xi^nu) (diff^2 xi^nu)/(diff x^alpha diff x^beta)$
 
-==== Transformation de $Gamma_(mu nu)^lambda$
+== Transformation de $Gamma_(mu nu)^lambda$
 
 $
   Gamma_(mu nu)^lambda ' &= croh()' = (diff x'^lambda)/(diff xi^beta) (diff^2 xi^beta)/(diff x'^mu diff x'^nu)\
@@ -168,7 +203,7 @@ $
 
 #AFL
 
-#align(center)[= Solution de Schwwarzschild]
+#align(center)[= Solution de Schwarzschild]
 
 
 == Équation sur $R_(mu nu)$
@@ -244,7 +279,7 @@ ainsi la métrique s’écrit finalement :
 $
   ds^2 = A(r) dt^2 - B(r)dr^2 - r^2 dif^2 Omega
 $
-== Solution de Schwwarzschild
+== Solution de Schwarzschild
 
 D’après @Ricci, $R_(mu nu) = 0$, or 
 $
@@ -328,7 +363,7 @@ $
   R_(1 1) = B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B) = 0,
   R_(2 2) = (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1 = 0,
   R_(3 3) = sin(theta)^2 ((r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1) = 0)
-$
+$<sys>
 On remarque que les deux dernières équations sont redontantes, donc le système ce réduit à :
 $
     cases(
@@ -336,4 +371,62 @@ $
       B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B) = 0,
       (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1 = 0
     )
+$
+Si on multiplie la première ligne avec $B/A$ puis que l’on la somme avec la seconde, on obtient :
+$
+  R_(0 0) times B/A + R_(1 1) = A'/(r A) + B'/(r B) = 0
+$
+$
+  Donc A'B + B' A = 0 = dif/dr (A B)
+$ <AB0>
+$
+  Donc A B = alpha in RR
+$
+Or, on veut que la métrique tende vers celle de minkovski (univers plat) à grande distance, i.e. $A(r) tend(r, +oo) 1 et B(r) tend(r, +oo) 1$, donc :
+$
+  A B tend(r, +oo) alpha = 1
+$
+donc $alpha = 1$ et donc :
+$
+  B = 1/A
+$ <B1A>
+
+En métant sur le même dénominateur la première équation du système à @sys :
+$
+  (4A' A B + 2 A'' A B r - A'^2 B r - A' B' A r)/(4r A B^2) = 0
+$
+donc
+$
+  4A' A B + 2 A'' A B r - A'r underbrace(cancel(A' B + B'A), #[selon @AB0]) = 0
+$
+alors :
+$
+  A'' + 2/r A' = 0
+$
+on reconnait une équation du premier ordre par rapport à $A'$, soit :
+$
+  A' = K e^(-2 ln(r)) = K/r^2
+$
+avec $K in RR$\
+on trouve enfin que :
+$
+  A(r) = C - K/r\
+  et C in RR
+$
+Or comme $A tend(r, +oo) C = 1$
+alors :
+$
+  A(r) = 1-K/r \
+  et\
+  B(r) = 1/A = (1 - K/r)^(-1)
+$
+De plus à la limite des champs faible, on a :
+$
+  A(r) = 1 + 2phi.alt
+$
+avec $phi.alt = -(G M)/r$ le potentiel gravitationnel\
+Donc $K = 2G M = R_s$ avec $R_s$ le rayon de Schwarzschild\
+On peut finalement écrire la métrique final :
+$
+  ds^2 = (1 - R_s/r) dt^2 - (1-R_s/r)^(-1) dr^2 - r^2 dif^2 Omega
 $

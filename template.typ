@@ -75,6 +75,18 @@
 #let dt = $dif t$
 #let dr = $dif r$
 
+#let numbering_joli(..num) = {
+  let res = ""
+  for j in range(num.pos().len()){
+    if j == 0 or j == 1 {
+      str(num.pos().at(j))
+    } else {
+      str.from-unicode(num.pos().at(j) + 96)
+    }
+    if j != num.pos().len() - 1 {"."}
+  }
+}
+
 
 
 //tout les set rule :
