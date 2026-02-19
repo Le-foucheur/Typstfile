@@ -197,4 +197,32 @@ $
 
 == Écriture de la métrique
 
-On sait que dans un espace
+On sait que dans un espace isotropique, la métrique doit ressemblé à :
+$
+  dif s^2 = A(r,t)dif t^2 - B(r, t) dif t (arrow(x) dot.c dif arrow(x)) - C(r, t) (arrow(x) dot.c dif arrow(x))^2 - D(r, t) dif arrow(x)^2
+$
+En opérant le changement de variables en coordonnées sphérique :
+$
+  x^1 & = r sin(theta) cos(phi) \
+  x^2 & = r sin(theta) sin(phi) \
+  x^3 & = r cos(theta)
+$
+Dans ce cas on a :
+$
+  arrow(x) dot.c arrow(x) = r^2, "    " arrow(x) dot.c arrow(x) = r dr, "    "dif arrow(x) dot.c dif arrow(x) = dr^2 + r^2 dif theta^2 + r^2 sin(theta)^2 dif phi^2
+$
+Ainsi la métrique devient :
+$
+  ds^2 & = A(t,r)dt^2 - B(t, r) r dt dr - C(t,r) r^2 dr^2 - D(t, r) dr^2 - D(t,r) r^2 dif^2 Omega \
+       & = A(t,r)dt^2 - B'(t,r) dt dr - C'(r,t) dr^2 - D' dif^2 Omega
+$
+avec $dif^2 Omega = dif theta^2 + sin(theta)^2 dif phi^2$ l’angle solide et $B' = B r;" " C' = C r^2 + D et D' = D$\
+On pose $dash(r)^2 = D'$, alors :
+$
+  ds^2 = A(t, dash(r)) dt^2 - B'(t, dash(r)) dt dif dash(r) - C'(t, dash(r)) dif dash(r)^2 - dash(r)^2 dif^2 Omega
+$
+On pose également $dif dash(t) = Phi(t, dash(r))[A(t, dash(r)) dt - 1/2 B'(t, dash(r)) dif dash(r)]$, donc
+$
+  dif dash(r)^2 = Phi(t, dash(r)) [A^2 dt^2 + 1/4 B'^2 dif dash(r)^2 - A B' dt dif dash(r) ]\
+  Donc A dt^2 - B' dt dif dash(r) = 1/(A Phi) dif dash(t)^2 - B/(4 A) dif dash(r)^2
+$

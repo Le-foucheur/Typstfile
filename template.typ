@@ -71,6 +71,9 @@
 #let kb = $k_B$
 #let Ham = math.scr("H")
 #let cov = math.class("unary", "cov")
+#let ds = $dif s$
+#let dt = $dif t$
+#let dr = $dif r$
 
 
 
