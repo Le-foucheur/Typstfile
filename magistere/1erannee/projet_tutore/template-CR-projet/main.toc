@@ -1,0 +1,8 @@
+\babel@toc {french}{}\relax 
+\contentsline {chapter}{Introduction}{4}{}%
+\contentsline {chapter}{\numberline {1}Bases théoriques / Connaissances de base / ....}{5}{}%
+\contentsline {chapter}{\numberline {2}Algorithmes / Système expérimental / ....}{6}{}%
+\contentsline {chapter}{\numberline {3}Résultats / Analyse}{7}{}%
+\contentsline {chapter}{Conclusions}{8}{}%
+\contentsline {chapter}{Bibliographie}{9}{}%
+\contentsline {chapter}{\numberline {A}Détails additionnels}{10}{}%

@@ -1,49 +1,154 @@
 #import "../../../template.typ": *
 #import "../../../transposition.typ": *
 
-#show: template
-
 #let equa = counter("equa")
 #equa.step()
 
-#set math.equation( supplement: [l’équation],
+#show outline.entry: set block(above: 5mm)
+#set outline(depth: 3)
+#show math.equation: set block(breakable: true)
+
+#set math.equation(
+  supplement: [l’équation],
   numbering: (..num) => context {
     "("
     let nb = counter(heading).get()
-    str(nb.first()) + if nb.len() >= 2 { "." + str(nb.at(1))} + "." + str(equa.display())
+    (
+      str(nb.first())
+        + if nb.len() >= 2 { "." + str(nb.at(1)) }
+        + if nb.len() >= 3 { "." + str(nb.at(2)) }
+        + "."
+        + str(equa.display())
+    )
     equa.step()
     ")"
-  }
+  },
+  number-align: bottom,
 )
 
 #set heading(numbering: (..num) => {
-  if num.pos().len() <= 2 {
+  if num.pos().len() <= 3 {
     equa.update(1)
   }
-  for j in range(num.pos().len()){
-    if j == 0 or j == 1 {
+  for j in range(num.pos().len()) {
+    if j == 0 or j == 1 or j == 2 {
       str(num.pos().at(j))
     } else {
       str.from-unicode(num.pos().at(j) + 96)
     }
-    if j != num.pos().len() - 1 {"."}
+    if j != num.pos().len() - 1 { "." }
   }
 })
 
 #show ref: it => {
   let eq = math.equation
   let el = it.element
-  if el == none or el.func() != eq {return it}
+  if el == none or el.func() != eq { return it }
   let fun = {
     let nb = counter(heading).at(el.label)
     "("
-    str(nb.first()) + if nb.len() >= 2 { "." + str(nb.at(1))} + "." + str(equa.at(el.label).last())
+    (
+      str(nb.first())
+        + if nb.len() >= 2 { "." + str(nb.at(1)) }
+        + if nb.len() >= 3 { "." + str(nb.at(2)) }
+        + "."
+        + str(equa.at(el.label).last())
+    )
     ")"
   }
   link(el.location(), [#el.supplement #fun])
 }
 
-#align(center)[= Équation des géodésiques]
+//Pour simili le Latex
+
+#set page(margin: (y: 1.75in), number-align: center, numbering: (it, ..) => {
+  if it != 1 { if it != 2 { it } }
+})
+
+#set par(leading: 0.55em, spacing: 0.55em, justify: true)
+#set text(font: "New Computer Modern")
+#show raw: set text(font: "New Computer Modern Mono")
+#show heading: set block(above: 1.4em, below: 1em)
+#set document(title: text(20pt)[Résolution de Schwarzschild])
+#set text(size: 11pt)
+
+#align(center, title())
+#v(1.5cm)
+#align(center, text(
+  16pt,
+  weight: "bold",
+)[Gaspar Daguet\ #v(5pt) #text(11pt, weight: "thin")[gaspar.daguet\@etu.unistra.fr]])
+
+#align(bottom + center)[
+  UFR de Physique et Ingénierie\
+  \
+
+  Université de Strasbourg\
+  \
+
+  Année académique 2025-26
+]
+
+#pagebreak()
+
+#align(center)[*Résumé*]\
+#v(1mm)
+Résume (maximum 1/2 page) du travail effectue (contexte, résultats).
+
+#let pagenub = context {
+  let nbpage = counter(page)
+  if nbpage != 1 or nbpage != 2 { counter(page).display("1") } else {}
+}
+
+#pagebreak()
+
+#context counter(page).update(3)
+#outline(title: [Table des matières])
+
+#pagebreak()
+
+#show heading.where(body: [Introduction]): set heading(numbering: none)
+= Introduction
+
+L'introduction (maximum 2 pages) sert à donner le cadre du travail
+(domaine de recherche dans lequel il se situe) et l'état de l'art. Il est normal de citer les références associées: articles @Article01, livres @Livre01, chapitres de livres @Chapitre01, conférences @Proceeding01 ou thèses @These01.
+Elle spécifie aussi comment les chapitres suivants sont structurés.
+Tout comme le chapitre final ``Conclusions'', l'Introduction est
+rédigée après tout le reste.
+
+#pagebreak()
+
+= Bases Théoriques
+
+La première partie du texte a comme objectif de fournir un rappel des
+connaissances nécessaires pour comprendre le travail effectue.  Le
+titre tout comme son contenu dépendent du type de travail effectue.
+Dans le cas d'un travail théorique ou de simulation, il est important de fournir les équations qui seront utilises dans les calculs ou simulations.  Si on s'appuie sur des travaux précédents, il faut (logiquement) les citer\cite{Article01}.  Pour un travail expérimental, il est important de
+rappeler ici les phénomènes physiques qui seront utilisés.  Dans le
+cas ou on s'appuie sur un système expérimental déjà existant, on
+utilise ce chapitre pour en donner une description.
+
+= Théorie & Algorithmes
+
+Le cadre théorique défini, on passe a une description plus précise du
+travail spécifique effectué.  Tout comme dans les sections précédentes, il est normal de faire référence @Livre01 @Chapitre01 aux textes d'où on a pris les méthodes utilisées.
+
+- Dans le cas d'un travail théorique on montre ici les calculs
+effectues et les étapes pour traiter / simplifier / résoudre les
+équations.
+
+- item Pour des simulations, on discute des algorithmes numériques,
+des choix effectues, approximations, etc.
+
+- item Pour un travail expérimental on présente la mise en place du
+système (si elle fait partie du travail), les procédures de mesure
+et de traitement des données.
+
+Le chapitre sert a montrer la démarche utilisée pour arriver aux
+résultats qui seront ensuite analyses et discutes dans le chapitre
+suivant.
+
+#align(center)[== Équation des géodésiques]
 
 Soit, le lagrangien suivant :
 $
@@ -72,7 +177,7 @@ $
 \
 En posant :
 $
-  dif lambda & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(1/2) dif s \
+             dif lambda & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(1/2) dif s \
   Donc dif/(dif lambda) & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(-1/2) dif/(dif s)
 $
 Ainsi, en réécrivant l’équation précédente :
@@ -114,7 +219,7 @@ $
   "Soit" dot.double(x)^beta + Gamma^(beta)_(mu nu) dot(x)^mu dot(x)^nu = 0
 $ <eqgeo>
 
-#align(center)[= Commuteur des Co-dérivés covariante]
+#align(center)[== Commuteur des Co-dérivés covariante]
 
 On définit les dérivés covariantes par :
 $
@@ -140,7 +245,7 @@ $
   [nabla_mu; nabla_nu]v^rho = R^rho_(alpha mu nu) v^alpha
 $
 
-#align(center)[= Dérivé covariante]
+#align(center)[== Dérivé covariante]
 
 On se place dans un système de coordonnée $xi^alpha$, et on s’intérèse à un changement de coordonée vers $x^alpha$\
 Tout d’abord :
@@ -178,7 +283,7 @@ $
   g_(beta nu) underbrace((diff x^nu)/(diff xi^mu) (diff^2 xi^mu)/(diff x^alpha diff x^lambda), = croh(l: nu, m: alpha, n: lambda))\
   &= croh(m: beta, n: lambda, l: mu) g_(mu alpha) + croh(m: alpha, n: lambda, l: nu) g_(nu beta)\
 $
-Donc en sommant pour difféante dérivé :
+Donc en sommant pour différante dérivé :
 $
   g_(alpha beta, lambda) + g_(lambda beta, alpha) - g_(alpha lambda, beta) &= croh(l: mu, m: alpha, n: lambda) g_(mu beta) + cancel(croh(m: beta, n: lambda, l: nu) g_(nu alpha))\
   &+ cancel(croh(l: mu, m: beta, n: alpha) g_(mu lambda)) + croh(m: lambda, n: alpha, l: nu) g_(nu beta)\
@@ -192,21 +297,57 @@ $
 $
 On trouve que : $Gamma^(mu)_(alpha beta) = croh(l: mu, m: alpha, n: beta)$, et pas concéquant : $Gamma_(alpha beta)^mu = (diff x^mu)/(diff xi^nu) (diff^2 xi^nu)/(diff x^alpha diff x^beta)$
 
-== Transformation de $Gamma_(mu nu)^lambda$
+=== Transformation de $Gamma_(mu nu)^lambda$
 
+Regardons comment $Gamma$ se transforme, pour voir si c’est un tenseur\
+\
+
+#align(center, math.equation(numbering: none, block: true)[
+  $
+    Gamma_(mu nu)^lambda ' &= croh()' = (diff x'^lambda)/(diff xi^beta) (diff^2 xi^beta)/(diff x'^mu diff x'^nu)\
+    &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff xi^beta)/(diff x'^nu))\
+    &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff x^alpha)/(diff x'^nu) (diff xi^beta)/(diff x^alpha))\
+    &= (diff x'^lambda)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
+    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^gamma)/(diff xi^beta) diff/(diff x^alpha) ((diff xi^beta)/(diff x'^mu))
+    + (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu)\
+    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^gamma)/(diff xi^beta) diff/(diff x^alpha) ((diff x^rho)/(diff x'^mu)(diff xi^beta)/(diff x^rho))
+    + (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu)\
+    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^rho)/(diff x'^mu) underbrace((diff x^gamma)/(diff xi^beta) (diff^2 xi^beta)/(diff x^alpha diff x^rho), = croh(l: gamma, m: alpha, n: rho))
+    + (diff x'^lambda)/(diff xi^beta) (diff x^alpha)/(diff x'^nu) (diff xi^beta)/( diff x^rho) (diff^2 x^rho)/(diff x^alpha diff x'^mu)
+    + (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu)\
+    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^rho)/(diff x'^mu) croh(l: gamma, m: alpha, n: rho)
+    + (diff x'^lambda)/(diff xi^beta) ( (diff xi^beta)/( diff x^alpha) (diff^2 x^alpha)/(diff x'^mu diff x'^nu)
+      + (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu))\
+    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^rho)/(diff x'^mu) croh(l: gamma, m: alpha, n: rho)
+    + underbrace(2 (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/( diff x^alpha) (diff^2 x^alpha)/(diff x'^mu diff x'^nu), != 0)\
+  $
+])
+Ainsi $ Gamma_(mu nu)^lambda ' = (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^rho)/(diff x'^mu) croh(l: gamma, m: alpha, n: rho) + underbrace(2 (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/( diff x^alpha) (diff^2 x^alpha)/(diff x'^mu diff x'^nu), != 0) $ <pasbontenseur>
+
+Donc d’après @pasbontenseur, $Gamma^alpha_(mu nu)$ n’est pas un tenseur
+
+=== Définition de la dérivé covariante
+
+Comme la dérivé d’un tenseur n’en est pas un, alors, on définis la dérivé covariante pour un vecteur $v^nu$ par :
 $
-  Gamma_(mu nu)^lambda ' &= croh()' = (diff x'^lambda)/(diff xi^beta) (diff^2 xi^beta)/(diff x'^mu diff x'^nu)\
-  &= (diff x^k)/(diff xi^beta) (diff x'^lambda)/(diff x^k) (diff^2 xi^beta)/(diff x^gamma diff x^alpha) (diff x^gamma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu)\
-  &= (diff x'^lambda)/(diff x^k) (diff x^gamma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu) underbrace((diff x^k)/(diff xi^beta) (diff^2 xi^beta)/(diff x^gamma diff x^alpha), = croh(l: k, m: gamma, n: alpha))\
-  &= (diff x'^lambda)/(diff x^k) (diff x^gamma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu) croh(l: k, m: gamma, n: alpha) ?\
+  nabla_mu v^nu = diff_mu v^nu + Gamma^nu_(mu rho) v^rho
 $
+
+Vérifions que c’est bien un tenseur, soit un vecteur $x^nu$ :\
+\
+#align(center, math.equation(numbering: none)[
+  $
+    nabla_mu ' x'^nu & = diff/(diff x'^mu) x'^nu + croh(l: nu, n: rho)' x'^rho \
+                     & = (diff x^alpha)/(diff x'^mu) diff/(diff x^alpha) ( (diff x'^nu)/(diff x^beta) diff x^beta )
+  $
+])
 
 #AFL
 
-#align(center)[= Solution de Schwarzschild]
+#align(center)[== Solution de Schwarzschild]
 
 
-== Équation sur $R_(mu nu)$
+=== Équation sur $R_(mu nu)$
 
 On se place dans un espace de dimension $n$\
 D’après l’équation de Einstein :
@@ -234,7 +375,7 @@ $
   Donc R_(mu nu) = 0
 $ <Ricci>
 
-== Écriture de la métrique dans un espace isotropique statique
+=== Écriture de la métrique dans un espace isotropique statique
 
 On sait que dans un espace isotropique, la métrique doit ressembler à :
 $
@@ -275,24 +416,24 @@ $
 $
 Comme à partir de maintenant l’on ne travaillera qu’avec les quantités avec une barre : $dash(A), dash(B), dash(t), dash(r)$, on les renotera sans la barre, pour plus de claireté\
 De plus comme l’on imposse au système d’être statique, alors les grandeurs $A et B$ sont indépendantes du temps \
-ainsi la métrique s’écrit finalement : 
+ainsi la métrique s’écrit finalement :
 $
   ds^2 = A(r) dt^2 - B(r)dr^2 - r^2 dif^2 Omega
 $
-== Solution de Schwarzschild
+=== Solution de Schwarzschild
 
-D’après @Ricci, $R_(mu nu) = 0$, or 
+D’après @Ricci, $R_(mu nu) = 0$, or
 $
-  R_(mu nu) = diff_nu Gamma^sigma_(mu sigma) - diff_sigma Gamma^sigma_(mu nu) + Gamma^(rho)_(mu sigma) Gamma^sigma_(rho nu) - Gamma^(rho)_(mu nu) Gamma^(sigma)_(rho sigma) 
-$ 
+  R_(mu nu) = diff_nu Gamma^sigma_(mu sigma) - diff_sigma Gamma^sigma_(mu nu) + Gamma^(rho)_(mu sigma) Gamma^sigma_(rho nu) - Gamma^(rho)_(mu nu) Gamma^(sigma)_(rho sigma)
+$
 Ainsi en calculant les symboles de Christoffel, on obtiendra des équations sur $A et B$
 
-=== Calcule des Christoffel
+==== Calcule des Christoffel
 Pour calculer les symboles de Christoffel, on pourrait partir de la définition :
 $
   Gamma^mu_(alpha beta) = 1/2 g^(mu rho)(g_(alpha rho, beta) + g_(beta rho, alpha) - g_(alpha beta, rho))
 $
-Cependant, ceci demande de calculer indépendament chaque coefficient, or en dimension $4$ il y en a $4^3 = #calc.pow(4,3)$, rendant les calcules longs et éreintant.\
+Cependant, ceci demande de calculer indépendament chaque coefficient, or en dimension $4$ il y en a $4^3 = #calc.pow(4, 3)$, rendant les calcules longs et éreintant.\
 Or, il existe une méthode plus rapide pour les calculer, celle-ci ce base sur le faits que l’équation des géodésiques, @eqgeo, dépend directement des symboles de Christoffel.\
 Donc pour les calculer, on prend le lagrangien $cal(L) = g_(mu nu)dot(x)^mu dot(x)^nu$, que l’on insère dans les équations d’Euleur-La Grange, pour retomber sur l’équation des géodésiques.\
 Ici nous ne ferons que le calcule pour la variable $r$, le reste à été faits par un programme en MatLab (`cristofell.m`, présent dans le même dossier).\
@@ -344,11 +485,11 @@ $
     0, 0, 0, 0;
     0, 0, 0, 1/r;
     0, 0, 0, cot(theta);
-    0, 1/r, cot(theta), 0; 
+    0, 1/r, cot(theta), 0;
   )
 $
 
-=== Équation sur $A$ et $B$
+==== Équation de $A$ et $B$
 
 De la même manière les différent coefficient de $R_(mu nu)$ on été calculé par le même programme, ainsi on obtient comme seul coefficient non nul :
 $
@@ -356,21 +497,23 @@ $
   R_(1 1) = B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B)\
   R_(2 2) = (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1\
   R_(3 3) = sin(theta)^2 ((r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1)
-$ 
+$
 Ainsi par @Ricci, on obtient le système suivant :
 $
-  cases(R_(0 0) = A'/(r B) + A''/(2B) - A'/(4B) (A'/A + B'/B) = 0,
-  R_(1 1) = B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B) = 0,
-  R_(2 2) = (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1 = 0,
-  R_(3 3) = sin(theta)^2 ((r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1) = 0)
+  cases(
+    R_(0 0) = A'/(r B) + A''/(2B) - A'/(4B) (A'/A + B'/B) = 0,
+    R_(1 1) = B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B) = 0,
+    R_(2 2) = (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1 = 0,
+    R_(3 3) = sin(theta)^2 ((r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1) = 0
+  )
 $<sys>
 On remarque que les deux dernières équations sont redontantes, donc le système ce réduit à :
 $
-    cases(
-      A'/(r B) + A''/(2B) - A'/(4B) (A'/A + B'/B) = 0,
-      B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B) = 0,
-      (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1 = 0
-    )
+  cases(
+    A'/(r B) + A''/(2B) - A'/(4B) (A'/A + B'/B) = 0,
+    B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B) = 0,
+    (r B')/(2 B^2) - 1/B - (r A')/(2A B) + 1 = 0
+  )
 $
 Si on multiplie la première ligne avec $B/A$ puis que l’on la somme avec la seconde, on obtient :
 $
@@ -430,3 +573,34 @@ On peut finalement écrire la métrique final :
 $
   ds^2 = (1 - R_s/r) dt^2 - (1-R_s/r)^(-1) dr^2 - r^2 dif^2 Omega
 $
+
+
+= Résultats
+
+Dans ce dernier chapitre on fournit les résultats obtenus et on les
+analyse afin de mettre en évidence les nouvelles connaissances
+générées et acquises lors du stage.
+
+#set heading(numbering: none)
+
+= Conclusions
+
+Les conclusions sont le symétrique de l'Introducion: on résume ici le
+chemin effectue, les résultats marquants et les éventuels
+développements futurs que ces résultats vont permettre.
+
+#pagebreak()
+
+#bibliography("biblio.bib")
+
+Le travail scientifique n'existe pas dans le vide et s'appuie toujours
+sur des connaissances préexistantes.  On liste ici les textes (livres,
+articles, conférences) auxquels on a fait référence dans le texte.
+
+#pagebreak()
+
+= Annexe
+
+Les annexes (une ou plusieurs) servent à indiquer des détails qui
+sont importants pour reproduire le travail mais qui alourdiraient trop
+le texte principal.
