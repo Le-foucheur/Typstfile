@@ -1,4 +1,4 @@
-%Met la dimention ici 
+    %Met la dimention ici 
 n = 4;
 
 x = sym("x", [1 n])
@@ -43,7 +43,7 @@ Gamma
 gd = det(g)
 
 
-
+3
 Ri = g;
 
 for mu = 1:n
