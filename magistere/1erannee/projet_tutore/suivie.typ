@@ -128,26 +128,6 @@ rappeler ici les phénomènes physiques qui seront utilisés.  Dans le
 cas ou on s'appuie sur un système expérimental déjà existant, on
 utilise ce chapitre pour en donner une description.
 
-= Théorie & Algorithmes
-
-Le cadre théorique défini, on passe a une description plus précise du
-travail spécifique effectué.  Tout comme dans les sections précédentes, il est normal de faire référence @Livre01 @Chapitre01 aux textes d'où on a pris les méthodes utilisées.
-
-- Dans le cas d'un travail théorique on montre ici les calculs
-effectues et les étapes pour traiter / simplifier / résoudre les
-équations.
-
-- item Pour des simulations, on discute des algorithmes numériques,
-des choix effectues, approximations, etc.
-
-- item Pour un travail expérimental on présente la mise en place du
-système (si elle fait partie du travail), les procédures de mesure
-et de traitement des données.
-
-Le chapitre sert a montrer la démarche utilisée pour arriver aux
-résultats qui seront ensuite analyses et discutes dans le chapitre
-suivant.
-
 #align(center)[== Équation des géodésiques]
 
 Soit, le lagrangien suivant :
@@ -308,21 +288,16 @@ Regardons comment $Gamma$ se transforme, pour voir si c’est un tenseur\
     &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff xi^beta)/(diff x'^nu))\
     &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff x^alpha)/(diff x'^nu) (diff xi^beta)/(diff x^alpha))\
     &= (diff x'^lambda)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
-    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^gamma)/(diff xi^beta) diff/(diff x^alpha) ((diff xi^beta)/(diff x'^mu))
-    + (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu)\
-    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^gamma)/(diff xi^beta) diff/(diff x^alpha) ((diff x^rho)/(diff x'^mu)(diff xi^beta)/(diff x^rho))
-    + (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu)\
-    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^rho)/(diff x'^mu) underbrace((diff x^gamma)/(diff xi^beta) (diff^2 xi^beta)/(diff x^alpha diff x^rho), = croh(l: gamma, m: alpha, n: rho))
-    + (diff x'^lambda)/(diff xi^beta) (diff x^alpha)/(diff x'^nu) (diff xi^beta)/( diff x^rho) (diff^2 x^rho)/(diff x^alpha diff x'^mu)
-    + (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu)\
-    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^rho)/(diff x'^mu) croh(l: gamma, m: alpha, n: rho)
-    + (diff x'^lambda)/(diff xi^beta) ( (diff xi^beta)/( diff x^alpha) (diff^2 x^alpha)/(diff x'^mu diff x'^nu)
-      + (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu))\
-    &= (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^rho)/(diff x'^mu) croh(l: gamma, m: alpha, n: rho)
-    + underbrace(2 (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/( diff x^alpha) (diff^2 x^alpha)/(diff x'^mu diff x'^nu), != 0)\
+    &= (diff x'^lambda)/(diff x^rho) (diff x^rho)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) 
+    + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
+    &= (diff x'^lambda)/(diff x^rho) (diff x^alpha)/(diff x'^nu) (diff x^sigma)/(diff x'^mu) underbrace( (diff x^rho)/(diff xi^beta) (diff^2 xi^beta)/(diff x^sigma diff x^alpha), = croh(m: sigma, l: rho, n: alpha) )
+    +  (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
+    &= (diff x'^lambda)/(diff x^rho) croh(m: sigma, l: rho, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu) 
+    + (diff x'^lambda)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
   $
 ])
-Ainsi $ Gamma_(mu nu)^lambda ' = (diff x'^lambda)/(diff x^gamma) (diff x^alpha)/(diff x'^nu) (diff x^rho)/(diff x'^mu) croh(l: gamma, m: alpha, n: rho) + underbrace(2 (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/( diff x^alpha) (diff^2 x^alpha)/(diff x'^mu diff x'^nu), != 0) $ <pasbontenseur>
+Ainsi $ Gamma_(mu nu)^lambda ' = (diff x'^lambda)/(diff x^rho) croh(m: sigma, l: rho, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu) 
+    + (diff x'^lambda)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \ $ <pasbontenseur>
 
 Donc d’après @pasbontenseur, $Gamma^alpha_(mu nu)$ n’est pas un tenseur
 
@@ -338,11 +313,37 @@ Vérifions que c’est bien un tenseur, soit un vecteur $x^nu$ :\
 #align(center, math.equation(numbering: none)[
   $
     nabla_mu ' x'^nu & = diff/(diff x'^mu) x'^nu + croh(l: nu, n: rho)' x'^rho \
-                     & = (diff x^alpha)/(diff x'^mu) diff/(diff x^alpha) ( (diff x'^nu)/(diff x^beta) diff x^beta )
+    &= (diff x^alpha)/(diff x'^mu) diff/(diff x^alpha) ((diff x'^nu)/(diff x^beta) x^beta) + ((diff x'^nu)/(diff x^omega) croh(m: sigma, l: omega, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^rho) 
+    - (diff x^alpha)/(diff x'^mu) (diff x^sigma)/(diff x'^rho) (diff^2 x'^nu)/( diff x^alpha diff x^sigma)) (diff x'^rho)/(diff x^beta) x^beta\
+    &= cancel((diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/(diff x^alpha diff x^beta) x^beta) + (diff x^alpha)/(diff x'^mu) (diff x'^nu)/(diff x^beta)  (diff x^beta)/(diff x^alpha)  \
+    &+ (diff x'^nu)/(diff x^omega) croh(m: alpha, l: omega, n: beta) (diff x^alpha)/(diff x'^mu) x^beta
+    cancel(- (diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/( diff x^alpha diff x^beta) x^beta) \
+    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) (underbrace((diff x^beta) / (diff x^alpha) + croh(m:alpha, l: beta, n: tau) x^tau, = nabla_alpha x^beta))\
+    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu)  nabla_alpha x^beta
   $
 ])
 
-#AFL
+Ainsi $nabla_mu$ se transforme comme il faut, et donc $nabla_mu$ est un (1,0)–tenseur.
+
+= Théorie & Algorithmes
+
+Le cadre théorique défini, on passe a une description plus précise du
+travail spécifique effectué. Tout comme dans les sections précédentes, il est normal de faire référence @Livre01 @Chapitre01 aux textes d'où on a pris les méthodes utilisées.
+
+- Dans le cas d'un travail théorique on montre ici les calculs
+effectues et les étapes pour traiter / simplifier / résoudre les
+équations.
+
+- item Pour des simulations, on discute des algorithmes numériques,
+des choix effectues, approximations, etc.
+
+- item Pour un travail expérimental on présente la mise en place du
+système (si elle fait partie du travail), les procédures de mesure
+et de traitement des données.
+
+Le chapitre sert à montrer la démarche utilisée pour arriver aux
+résultats qui seront ensuite analysées et discutes dans le chapitre
+suivant.
 
 #align(center)[== Solution de Schwarzschild]
 
@@ -368,7 +369,7 @@ Ainsi on a deux cas particulier :
 - Soit $n = 2$, dans ce cas la gravité est topologique
 - Soit $R = 0$
 
-Or on recherche une solution pour un espace à 4 dimension (espace-temps), ainsi $R = 0$\
+Or on recherche une solution pour un espace à 4 dimension ( 3 d’espace + 1 de temps), ainsi $R = 0$\
 En injectant dans l’équation d’Einstein :
 $
   R_(mu nu) - 1/2 g_(mu nu) underbrace(R, = 0) = 0\
