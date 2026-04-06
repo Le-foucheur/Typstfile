@@ -68,7 +68,7 @@
 })
 
 #set par(leading: 0.55em, spacing: 0.55em, justify: true)
-#set text(font: "New Computer Modern")
+#set text(font: "Linux Libertine")
 #show raw: set text(font: "Linux Libertine")
 #show heading: set block(above: 1.4em, below: 1em)
 #set document(title: text(20pt)[Résolution de Schwarzschild])
