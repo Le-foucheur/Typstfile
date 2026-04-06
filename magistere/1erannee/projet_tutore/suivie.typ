@@ -1,5 +1,7 @@
 #import "../../../template.typ": *
 #import "../../../transposition.typ": *
+#import "@preview/cetz:0.4.2"
+#import "@preview/cetz-plot:0.1.3": plot
 
 #let equa = counter("equa")
 #equa.step()
@@ -288,16 +290,16 @@ Regardons comment $Gamma$ se transforme, pour voir si c’est un tenseur\
     &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff xi^beta)/(diff x'^nu))\
     &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff x^alpha)/(diff x'^nu) (diff xi^beta)/(diff x^alpha))\
     &= (diff x'^lambda)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
-    &= (diff x'^lambda)/(diff x^rho) (diff x^rho)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) 
-    + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
-    &= (diff x'^lambda)/(diff x^rho) (diff x^alpha)/(diff x'^nu) (diff x^sigma)/(diff x'^mu) underbrace( (diff x^rho)/(diff xi^beta) (diff^2 xi^beta)/(diff x^sigma diff x^alpha), = croh(m: sigma, l: rho, n: alpha) )
-    +  (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
-    &= (diff x'^lambda)/(diff x^rho) croh(m: sigma, l: rho, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu) 
+    &= (diff x'^lambda)/(diff x^rho) (diff x^rho)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu)
+      + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
+    &= (diff x'^lambda)/(diff x^rho) (diff x^alpha)/(diff x'^nu) (diff x^sigma)/(diff x'^mu) underbrace((diff x^rho)/(diff xi^beta) (diff^2 xi^beta)/(diff x^sigma diff x^alpha), = croh(m: sigma, l: rho, n: alpha))
+    + (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
+    &= (diff x'^lambda)/(diff x^rho) croh(m: sigma, l: rho, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu)
     + (diff x'^lambda)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
   $
 ])
-Ainsi $ Gamma_(mu nu)^lambda ' = (diff x'^lambda)/(diff x^rho) croh(m: sigma, l: rho, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu) 
-    + (diff x'^lambda)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \ $ <pasbontenseur>
+Ainsi $ Gamma_(mu nu)^lambda ' = (diff x'^lambda)/(diff x^rho) croh(m: sigma, l: rho, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu)
++ (diff x'^lambda)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \ $ <pasbontenseur>
 
 Donc d’après @pasbontenseur, $Gamma^alpha_(mu nu)$ n’est pas un tenseur
 
@@ -313,13 +315,13 @@ Vérifions que c’est bien un tenseur, soit un vecteur $x^nu$ :\
 #align(center, math.equation(numbering: none)[
   $
     nabla_mu ' x'^nu & = diff/(diff x'^mu) x'^nu + croh(l: nu, n: rho)' x'^rho \
-    &= (diff x^alpha)/(diff x'^mu) diff/(diff x^alpha) ((diff x'^nu)/(diff x^beta) x^beta) + ((diff x'^nu)/(diff x^omega) croh(m: sigma, l: omega, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^rho) 
-    - (diff x^alpha)/(diff x'^mu) (diff x^sigma)/(diff x'^rho) (diff^2 x'^nu)/( diff x^alpha diff x^sigma)) (diff x'^rho)/(diff x^beta) x^beta\
-    &= cancel((diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/(diff x^alpha diff x^beta) x^beta) + (diff x^alpha)/(diff x'^mu) (diff x'^nu)/(diff x^beta)  (diff x^beta)/(diff x^alpha)  \
+    &= (diff x^alpha)/(diff x'^mu) diff/(diff x^alpha) ((diff x'^nu)/(diff x^beta) x^beta) + ((diff x'^nu)/(diff x^omega) croh(m: sigma, l: omega, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^rho)
+      - (diff x^alpha)/(diff x'^mu) (diff x^sigma)/(diff x'^rho) (diff^2 x'^nu)/( diff x^alpha diff x^sigma)) (diff x'^rho)/(diff x^beta) x^beta\
+    &= cancel((diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/(diff x^alpha diff x^beta) x^beta) + (diff x^alpha)/(diff x'^mu) (diff x'^nu)/(diff x^beta) (diff x^beta)/(diff x^alpha) \
     &+ (diff x'^nu)/(diff x^omega) croh(m: alpha, l: omega, n: beta) (diff x^alpha)/(diff x'^mu) x^beta
     cancel(- (diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/( diff x^alpha diff x^beta) x^beta) \
-    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) (underbrace((diff x^beta) / (diff x^alpha) + croh(m:alpha, l: beta, n: tau) x^tau, = nabla_alpha x^beta))\
-    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu)  nabla_alpha x^beta
+    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) (underbrace((diff x^beta) / (diff x^alpha) + croh(m: alpha, l: beta, n: tau) x^tau, = nabla_alpha x^beta))\
+    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) nabla_alpha x^beta
   $
 ])
 
@@ -573,7 +575,7 @@ Donc $K = 2G M = R_s$ avec $R_s$ le rayon de Schwarzschild\
 On peut finalement écrire la métrique final :
 $
   ds^2 = (1 - R_s/r) dt^2 - (1-R_s/r)^(-1) dr^2 - r^2 dif^2 Omega
-$
+$ <metswart>
 
 
 = Résultats
@@ -581,6 +583,192 @@ $
 Dans ce dernier chapitre on fournit les résultats obtenus et on les
 analyse afin de mettre en évidence les nouvelles connaissances
 générées et acquises lors du stage.
+
+== À trouvé #AFL
+
+On s’intérèse maintenant au géodésique radial, i.e. $dif theta = dif phi = 0$, ainsi la métrique donné par @metswart devinet :
+$
+  dif s^2 = (1 - R_s/r)dif t^2 - (1 - R_s/r)^(-1) dif r^2
+$
+Or comme l’on s’intérèse au géodésique : $ds = 0$, donc :
+$
+  dt = plus.minus (1 - R_s/r)^(-1) dr
+$<georadialdiff>
+Ainsi on obtient deux solutions, une pour les rayons sortant ( signe $+$ ) et une pour les rayons entrant (signe $-$)\
+On va s’intérésser, pour l’instant, seulement au rayon entrant, alors en intégrant @georadialdiff de $R_0 > R_s$ à $r$ :
+$
+  t (r) & = - integral_(R_0)^r dr'/(1 - R_s/r') \
+        & = - integral_(R_0)^r (r' - R_s + R_s)/(r' - R_s) dr' \
+        & = - integral_(R_0)^r dr' + integral_(R_0)^(r) R_s/(r' - R_s) dr' \
+        & = R_0 - r + R_s ln((R_0 - R_s)/(r - R_s))
+$
+On obtient la figure suivante :
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    let R0 = 2
+    let Rs = 0.75
+    let georad(x) = R0 - x + Rs * calc.ln((R0 - Rs) / (x - Rs))
+    plot.plot(
+      size: (10, 10),
+      x-max: R0 + 0.1,
+      x-min: 0,
+      y-max: 6,
+      x-tick-step: none,
+      y-tick-step: none,
+      axis-style: "left",
+      x-label: $r$,
+      y-label: $t$,
+      {
+        plot.add(
+          domain: (Rs + 0.0001, R0),
+          samples: 1000,
+          georad,
+        )
+        plot.add-vline(
+          Rs,
+          style: (stroke: (paint: black, dash: "dashed")),
+        )
+      },
+    )
+
+    content((3.635, -0.35), $R_s$)
+    content((9.6, -0.35), $R_0$)
+  }),
+  caption: [temps que mets un photon à atteindre\ un observateur placé en $R_0$],
+)
+Ainsi on remarque que plus le photon est émis proche de l’horizon des évènements ( $R_s$ ) plus celuis ci mets du temps à atteindre un observateur distant ( $R_0$ ), jusqu’à divergé quand celui-ci est émis au niveau de l’horizon des évènements.\
+En effet :
+$
+  t(r) tend(r, +oo) +oo
+$
+Ainsi du point de vue d’un observateur distant, si un objet tombe dans le trou noir, on le verras s’approcher de l’horizon des évènements sans jamais l’atteindre\
+\
+De plus on peut remarquer que plus le photon est émis loin du trou noir, plus on reviens à un comportement non-relativiste.\
+En effet pour $R_s << r$ :\
+
+#align(center, math.equation(numbering: none)[$
+  t(r) & = R_0 - r + R_s ln((R_0 - R_s)/(r - R_s)) \
+       & = R_0 - r + R_s (ln(R_0 - R_s) - ln(r) - underbrace(ln(1 - R_s/r), = - R_s/r = o(r))) \
+$])\
+$
+  & = R_0 - r - R_s ln(r/(R_0 - R_s)) + o(r) \
+  & = R_0 - r + o(r) \
+$
+
+== Temps de chute d’un corps
+
+Intérésons-nous, maintenant au temps de chute de deux points de vue : premièrement du point de vue de l’objet lui-même, puis du point de vue d’un observateur lointain.\
+On note $tau$ le temps propre de l’objet tombant,\
+alors si l’on prend le lagrangien : $cal(L) = g_(mu nu) dot(x)^mu dot(x)^nu = (1 - R_s/r) ((dif t)/(dif tau))^2 - (1 - R_s/r)^(-1) ((dif r)/(dif tau))^2$\
+Alors d’après les équation d’Euleur-La Grange par rapport à $t$ :
+$
+               dif/(dif tau) diff_(dot(t)) cal(L) & = underbrace(diff_t cal(L), = 0) \
+  dif/(dif tau) (2 (1 - R_s/r) (dif t)/(dif tau)) & = 0
+$
+Donc
+$
+  (dif t)/(dif tau) = k/(1 - R_s/r)
+$ <constanteducul>
+Or on a :
+$
+  g_(mu nu) dot(x)^mu dot(x)^nu = c^2 = 1\
+  (1 - R_s/r) dot(t)^2 - (1 - R_s/r)^(-1) dot(r)^2 = 1
+$
+Ainsi en injéctant @constanteducul :
+$
+  (1 - R_s/r)^(-1) (k^2 - dot(r)^2) = 1 \
+  dot(r)^2 = k^2 -1 + R_s/r
+$<eq324>
+donc en dérivant :
+#align(center, math.equation(numbering: none)[$
+  2 dot(r) dot.double(r) & = - R_s dot(r)/r^2 \
+$])
+Ainsi en ré-intégrant de $r$ à $R_0$
+$
+  dot(r)^2 = -R_s [1/r]_r^(R_0) = R_s/r - R_s/R_0
+$
+On en déduis :
+$
+  k = sqrt(1 - R_s/R_0)\
+$
+Pour s’implifier les calcules on considèras un objet laché depuis l’infinie.\
+ainsi $k = 1$\
+
+On s’intéreseras d’abord au point de vue de l’objet luis même, alors @eq324 devient :
+$
+  dr/(dif tau) = - sqrt(R_s/r)
+$
+donc
+$
+  (dif tau)/dr = - sqrt(r/R_s)
+$
+alors en intégrant de $R_0$ à $r$ :
+$
+  tau (r) & = - integral_(R_0)^(r) sqrt(r'/R_s) dr' \
+          & = integral_r^(R_0) sqrt(r' /R_s)dr' \
+          & = 2/3[sqrt(r'^3/R_s)]^(R_0)_r \
+          & = 2/3sqrt(R_0^3/R_s) - 2/3sqrt(r^3/R_s)
+$
+Ainsi pour un objet tombant d’un point distant à l’horizon des évènements, alors il atteindras la singularité ($r = 0$) en :
+$
+  tau tend(r, 0) 2/3 sqrt(R_0^3/R_s)
+$
+
+Intérésons-nous maintenant au point de vue d’un observateur lointain, alors comme k = 1, @constanteducul devient:\
+$
+  dt/(dif tau) = (1 - R_s/r)^(-1)
+$
+Ainsi :
+$
+  dt/dr & = dt/(dif tau) (dif tau)/dr \
+        & = (1 - R_s/r)^(-1) times (- sqrt(r/R_s)) \
+        & = - (1 - R_s/r)^(-1)sqrt(r/R_s)
+$
+Alors en intégrant :
+$
+  t(r) & = integral_r^(R_0) sqrt(r'/R_s)/(1 - R_s/r') dr' \
+  & = 2R_s integral_(u(r))^(u(R_0)) u^2/(1 - 1/u^2) dif u " en posant " u = sqrt(r'/R_s) \
+  & = 2 R_s integral_(u(r))^(u(R_0)) u^4/(u^2 - 1) dif u \
+  & = 2 R_s integral_(u(r))^(u(R_0)) u^2 (u^2 - 1 + 1)/(u^2 - 1) dif u \
+  & = 2 R_s (integral_(u(r))^(u(R_0)) u^2 dif u + integral_(u(r))^(u(R_0)) u^2/(u^2 - 1) dif u) \
+  & = 2 R_s (integral_(u(r))^(u(R_0)) u^2 dif u + integral_(u(r))^(u(R_0)) dif u + integral_(u(r))^(u(R_0)) 1/(u^2 - 1) dif u)
+$
+Ainsi on obtient :
+
+#math.equation(
+  numbering: numbering_joli,
+  number-align: bottom,
+)[$
+  t(r) = 2/3 R_s ((R_0/R_s)^(2/3) - (r/R_s)^(2/3) ) + 2 R_s ((R_0/R_s)^(1/2) - (r/R_s)^(1/2) ) + R_s ln(((1 - sqrt(R_0/R_s)) (1 + sqrt(r/R_s)))/((1 + sqrt(R_0/R_s))(1 - sqrt(r/R_s))))
+$]\
+
+Or pour $r -> R_s$, on à
+$
+  ln(((1 - sqrt(R_0/R_s)) (1 + sqrt(r/R_s)))/((1 + sqrt(R_0/R_s))(1 - sqrt(r/R_s)))) tend(r, R_s) + oo
+$
+donc
+$
+  t(r) tend(r, R_s) + oo
+$
+
+Ainsi pour conclure nous avons les deux grandeur suivante :\
+\
+#align(
+  center,
+  grid(
+    columns: 1,
+    row-gutter: 1cm,
+    align: center + horizon,
+    $tau(r) tend(r, 0) 2/3 sqrt(R_0^3/R_s)$,
+    $t(r) tend(r, R_s) + oo$,
+  ),
+)\
+On a donc que de sont point de vue l’objet atteind la singularité en un temps finis,\
+mais du point de vue d’un observateur lointain l’objet met un temps infinis avant d’atteindre l’horizon des évènements
+
 
 #set heading(numbering: none)
 
