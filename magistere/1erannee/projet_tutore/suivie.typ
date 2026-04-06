@@ -584,7 +584,7 @@ Dans ce dernier chapitre on fournit les résultats obtenus et on les
 analyse afin de mettre en évidence les nouvelles connaissances
 générées et acquises lors du stage.
 
-== À trouvé #AFL
+== Géodésique Radial d’un photon <géoradphot>
 
 On s’intérèse maintenant au géodésique radial, i.e. $dif theta = dif phi = 0$, ainsi la métrique donné par @metswart devinet :
 $
@@ -604,12 +604,12 @@ $
 $
 On obtient la figure suivante :
 
+#let R0 = 2
+#let Rs = 0.75
 #figure(
   cetz.canvas({
     import cetz.draw: *
 
-    let R0 = 2
-    let Rs = 0.75
     let georad(x) = R0 - x + Rs * calc.ln((R0 - Rs) / (x - Rs))
     plot.plot(
       size: (10, 10),
@@ -644,10 +644,10 @@ En effet :
 $
   t(r) tend(r, +oo) +oo
 $
-Ainsi du point de vue d’un observateur distant, si un objet tombe dans le trou noir, on le verras s’approcher de l’horizon des évènements sans jamais l’atteindre\
+Ainsi du point de vue d’un observateur distant, si un objet tombe dans la singularité, on le verra s’approcher de l’horizon des évènements sans jamais l’atteindre\
 \
-De plus on peut remarquer que plus le photon est émis loin du trou noir, plus on reviens à un comportement non-relativiste.\
-En effet pour $R_s << r$ :\
+De plus on peut remarquer que plus le photon est émis loin de la singularité, plus on revient à un comportement non-relativiste.\
+En effet, pour $R_s << r$ :\
 
 #align(center, math.equation(numbering: none)[$
   t(r) & = R_0 - r + R_s ln((R_0 - R_s)/(r - R_s)) \
@@ -712,12 +712,12 @@ $
           & = 2/3[sqrt(r'^3/R_s)]^(R_0)_r \
           & = 2/3sqrt(R_0^3/R_s) - 2/3sqrt(r^3/R_s)
 $
-Ainsi pour un objet tombant d’un point distant à l’horizon des évènements, alors il atteindras la singularité ($r = 0$) en :
+Ainsi pour un objet tombant d’un point distant à l’horizon des évènements, alors il atteindra la singularité ($r = 0$) en :
 $
   tau tend(r, 0) 2/3 sqrt(R_0^3/R_s)
 $
 
-Intérésons-nous maintenant au point de vue d’un observateur lointain, alors comme k = 1, @constanteducul devient:\
+Intérésons-nous maintenant au point de vue d’un observateur lointain, alors comme $k = 1$, @constanteducul devient :\
 $
   dt/(dif tau) = (1 - R_s/r)^(-1)
 $
@@ -769,6 +769,140 @@ Ainsi pour conclure nous avons les deux grandeur suivante :\
 On a donc que de sont point de vue l’objet atteind la singularité en un temps finis,\
 mais du point de vue d’un observateur lointain l’objet met un temps infinis avant d’atteindre l’horizon des évènements
 
+== Cônes de lumière 
+
+Nous avons déjà vu dans la @géoradphot que les géodésique pour un photons était régis par l’équation :
+$
+  dt/dr = plus.minus (1- R_s/r)^(-1)
+$
+où le signe correspond à un photon tantôt entrant ($-$), tantôt sortant ($+$), en intégrant, on obtient deux solutions :
+#let lna(x) = $"ln"abs(#x)$
+$
+  "Rayon entrant :" t = -r - R_s lna(r/R_s - 1) + p_1\
+  "Rayon sortant :" t = r + R_s lna(r/R_s - 1) +p_2
+$
+où $p_1$ & $p_2$ sont des constantes\
+En tracant ces deux solutions pour des $p$ différents, on obtient le diagramme $(t,r)$ suivant :
+
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    let entr(r,p) = r + Rs * calc.ln(calc.abs(r/Rs - 1)) + p
+    let sort(r,p) = - r - Rs * calc.ln(calc.abs(r/Rs - 1)) - p
+    plot.plot(
+      size: (10,10),
+      x-min: 0,
+      x-max: 2 * Rs,
+      y-min: 0,
+      y-max: 3,
+      x-tick-step: none,
+      y-tick-step: none,
+      axis-style: "left",
+      x-label: $r$,
+      y-label: $t$,
+      {
+        for i in (1,2,3) {
+          plot.add(
+            samples: 200,
+            domain: (0,2 * Rs),
+            x => (x,entr(x,i)),
+            style: (stroke : blue, marks: ">"),
+          )
+        }
+
+        for i in (-0.5,-1.5,-2.5) {
+          plot.add(
+            samples: 200,
+            domain: (0,2 * Rs),
+            x => (x,sort(x,i)),
+            style: (stroke : red),
+          )
+        }
+        
+        plot.add-vline(
+          Rs,
+          style: (stroke :(paint: black, dash: "dashed"),)
+        )
+      }
+
+
+    )
+
+    
+
+    //les cones avant Rs
+    circle((2.7,2.5), radius: (0.7mm, 2mm))
+    circle((2.7,5.834), radius: (0.7mm, 2.03mm))
+    circle((2.7,9.17), radius: (0.7mm, 2mm))
+
+    circle((3.9,4.15), radius: (0.7mm, 6mm))
+    circle((3.9,7.52), radius: (0.7mm, 6mm))
+
+    circle((4.39,5.85), radius: (0.9mm, 9mm))
+
+    //les cones apres Rs
+    circle((6.08,3), radius: (1.5mm, 0.5mm))
+    circle((6.08,6.35), radius: (1.5mm, 0.5mm))
+    circle((6.08,9.65), radius: (1.5mm, 0.5mm))
+
+    circle((5.62,4.8), radius: (1.3mm, 0.5mm))
+    circle((5.62,8.15), radius: (1.3mm, 0.5mm))
+
+    circle((5.34,6.7), radius: (1mm, 0.5mm))
+
+    circle((6.805,4.6), radius: (2mm, 0.6mm))
+    circle((6.805,7.93), radius: (2mm, 0.6mm))
+
+    circle((7.848,6.17), radius: (2.1mm, 0.6mm))
+
+    //les tetes de fleches
+    let tetfle(x,y, angl, color) = {
+
+      let rotat(x,y, angl) = (calc.cos(angl) * x - calc.sin(angl) * y, calc.sin(angl) * x + calc.cos(angl) * y)
+
+      let cood1 = (0,0)
+      let deucood1 = (0.33, 0)
+      let cood2 = (0,0)
+      let deucood2 = rotat(0.33, 0, 50deg)
+      deucood1 = rotat(deucood1.first(), deucood1.last(), angl)
+      deucood2 = rotat(deucood2.first(), deucood2.last(), angl)
+      cood1 = (cood1.first() + x, cood1.last() + y)
+      deucood1 = (deucood1.first() + x, deucood1.last() + y)
+      cood2 = (cood2.first() + x, cood2.last() + y)
+      deucood2 = (deucood2.first() + x, deucood2.last() + y)
+      line(cood1, deucood1, stroke: color)
+      line(cood2, deucood2, stroke: color)
+    }
+
+    //rouge
+    tetfle(3.41,9.5, 22deg, red)
+    tetfle(4.52,8.6, 53deg, red)
+    tetfle(4.74,6.7, 58deg, red)
+
+    tetfle(6.71,1, -89deg, red)
+    tetfle(8,2.27, -78deg, red)
+    tetfle(8.5,4.96, -72deg, red)
+
+    //bleu
+    tetfle(3.7,1.8, -80deg, blue)
+    tetfle(4.58,2.7, -102deg, blue)
+    tetfle(4.8,4.3, -108deg, blue)
+
+    tetfle(6.387,9.99, -138deg, blue)
+    tetfle(7.51,8.7, -147deg, blue)
+    tetfle(9.02,7.3, -156deg, blue)
+
+    content((5.06,-0.3), $R_s$)
+
+  }),
+  caption: [
+    structure des cones de lumière pour la métrique de Schwarzschild\
+    en bleu les rayons sortant, et en rouge les rayons entrant
+  ]
+)
+On observe que dans la zone ${0<r<R_s}$ les cônes de lumière sont entièrement retourné vers la singularité, ainsi les photons présent dans cette zone finirons au niveau de la singularité quelque soit leur nature de départ. Ainsi toute particule massive doit également finir au niveau de la singularité.
 
 #set heading(numbering: none)
 
@@ -780,10 +914,10 @@ développements futurs que ces résultats vont permettre.
 
 #pagebreak()
 
-#bibliography("biblio.bib")
+#bibliography("biblio.bib", title: [Bibliographie])
 
 Le travail scientifique n'existe pas dans le vide et s'appuie toujours
-sur des connaissances préexistantes.  On liste ici les textes (livres,
+sur des connaissances préexistantes. On liste ici les textes (livres,
 articles, conférences) auxquels on a fait référence dans le texte.
 
 #pagebreak()
