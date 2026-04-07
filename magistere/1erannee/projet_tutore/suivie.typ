@@ -1100,19 +1100,19 @@ $
       y-label: $t'$,
 
       {
-        for i in range(0, 4) {
+        for i in (0, 1, -1, 2) {
           plot.add(
             domain: (0, 2 * Rs),
             x => ent(x, i),
-            style: (stroke: red),
+            style: (stroke: blue),
           )
         }
 
-        for i in (0.5, 1.5, 2.5, 3.5) {
+        for i in (0.5, 1.5, 2.5, -0.5) {
           plot.add(
             domain: (0, 2 * Rs),
             x => sort(x, i),
-            style: (stroke: blue),
+            style: (stroke: red),
           )
         }
 
@@ -1123,35 +1123,30 @@ $
       },
     )
 
-    rotate(-30deg)
-    circle((1.1, 3.2499), radius: (1mm, 2mm))
-    circle((-0.6, 6.156), radius: (1mm, 2mm))
-    circle((-2.25, 9.04), radius: (1mm, 2mm))
+    rotate(37deg)
+    circle((2.2, -0.2), radius: (1mm, 2mm))
+    circle((4.2, 2.465), radius: (1mm, 2mm))
+    circle((6.25, 5.135), radius: (1mm, 2mm))
 
-    rotate(-12deg)
-    circle((1.8, 3.85), radius: (1mm, 2.4mm))
-    circle((-0.4, 6.32), radius: (1mm, 2.4mm))
-    circle((2.5, 3.925), radius: (0.5mm, 1.2mm))
+    rotate(10deg)
+    circle((6.25, 1.07), radius: (1mm, 2mm))
+    circle((8.65, 3.329), radius: (1mm, 2mm))
 
-    rotate(-20deg)
-    circle((2.97, 6.01), radius: (0.8mm, 2mm))
-    circle((-0, 7.572), radius: (0.8mm, 2.1mm))
-    circle((-2.94, 9.14), radius: (0.8mm, 2mm))
+    rotate(5deg)
+    circle((9.77, 2.17), radius: (1mm, 2mm))
 
-    circle((2.35, 5.51), radius: (0.6mm, 1.6mm))
-    circle((-0.6, 7.07), radius: (0.6mm, 1.6mm))
-    circle((-1.06, 6.767), radius: (0.6mm, 1.6mm))
-    circle((-3.57, 8.64), radius: (0.6mm, 1.6mm))
+    rotate(15deg)
+    circle((11.43, -1.73), radius: (0.5mm, 1.5mm))
 
-    rotate(-10deg)
+    rotate(5deg)
+    circle((8.9, -4.45), radius: (1.1mm, 3mm))
 
-    circle((-0.5, 8.29), radius: (0.8mm, 2.5mm))
-    circle((-3.67, 9.32), radius: (0.8mm, 2.5mm))
+    rotate(10deg)
+    circle((9.14, -7.46), radius: (1.2mm, 5mm))
+    circle((5.83, -7.92), radius: (1.2mm, 5mm))
 
-    rotate(-5deg)
-    circle((-3.46, 10.16), radius: (1mm, 2.5mm))
 
-    rotate((30 + 12 + 20 + 10 + 5) * 1deg)
+    rotate(-82deg)
     content((5.06, -0.3), $R_s$)
   }),
   caption: [diagramme $(t',r)$, avec les cônes de lumière,\ avec en rouge les photons entrant, et en bleu les photons sortant],
