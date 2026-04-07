@@ -68,11 +68,12 @@
 })
 
 #set par(leading: 0.55em, spacing: 0.55em, justify: true)
-#set text(font: "Linux Libertine")
+#set text(font: "Linux Libertine", historical-ligatures: true)
 #show raw: set text(font: "Linux Libertine")
 #show heading: set block(above: 1.4em, below: 1em)
 #set document(title: text(20pt)[Résolution de Schwarzschild])
 #set text(size: 11pt)
+#set math.cancel(stroke: red)
 
 #align(center, title())
 #v(1.5cm)
@@ -639,12 +640,12 @@ On obtient la figure suivante :
   }),
   caption: [temps que mets un photon à atteindre\ un observateur placé en $R_0$],
 )
-Ainsi on remarque que plus le photon est émis proche de l’horizon des évènements ( $R_s$ ) plus celuis ci mets du temps à atteindre un observateur distant ( $R_0$ ), jusqu’à divergé quand celui-ci est émis au niveau de l’horizon des évènements.\
+Ainsi on remarque que plus le photon est émis proche de $r = R_s$ plus celuis ci mets du temps à atteindre un observateur distant ( $R_0$ ), jusqu’à divergé quand celui-ci est émis au niveau de $r = R_s$.\
 En effet :
 $
   t(r) tend(r, +oo) +oo
 $
-Ainsi du point de vue d’un observateur distant, si un objet tombe dans la singularité, on le verra s’approcher de l’horizon des évènements sans jamais l’atteindre\
+Ainsi du point de vue d’un observateur distant, si un objet tombe dans la singularité, on le verra s’approcher de $R_s$ sans jamais l’atteindre\
 \
 De plus on peut remarquer que plus le photon est émis loin de la singularité, plus on revient à un comportement non-relativiste.\
 En effet, pour $R_s << r$ :\
@@ -712,7 +713,7 @@ $
           & = 2/3[sqrt(r'^3/R_s)]^(R_0)_r \
           & = 2/3sqrt(R_0^3/R_s) - 2/3sqrt(r^3/R_s)
 $
-Ainsi pour un objet tombant d’un point distant à l’horizon des évènements, alors il atteindra la singularité ($r = 0$) en :
+Ainsi pour un objet tombant d’un point distant à $r = R_s$, alors il atteindra la singularité ($r = 0$) en :
 $
   tau tend(r, 0) 2/3 sqrt(R_0^3/R_s)
 $
@@ -767,9 +768,9 @@ Ainsi pour conclure nous avons les deux grandeur suivante :\
   ),
 )\
 On a donc que de sont point de vue l’objet atteind la singularité en un temps finis,\
-mais du point de vue d’un observateur lointain l’objet met un temps infinis avant d’atteindre l’horizon des évènements
+mais du point de vue d’un observateur lointain l’objet met un temps infinis avant d’atteindre $r = R_s$
 
-== Cônes de lumière 
+== Cônes de lumière
 
 Nous avons déjà vu dans la @géoradphot que les géodésique pour un photons était régis par l’équation :
 $
@@ -778,9 +779,11 @@ $
 où le signe correspond à un photon tantôt entrant ($-$), tantôt sortant ($+$), en intégrant, on obtient deux solutions :
 #let lna(x) = $"ln"abs(#x)$
 $
-  "Rayon entrant :" t = -r - R_s lna(r/R_s - 1) + p_1\
-  "Rayon sortant :" t = r + R_s lna(r/R_s - 1) +p_2
+  "Rayon entrant :" t = -r - R_s lna(r/R_s - 1) + p_1
+$ <rayentr>
 $
+  "Rayon sortant :" t = r + R_s lna(r/R_s - 1) +p_2
+$ <raysort>
 où $p_1$ & $p_2$ sont des constantes\
 En tracant ces deux solutions pour des $p$ différents, on obtient le diagramme $(t,r)$ suivant :
 
@@ -789,10 +792,10 @@ En tracant ces deux solutions pour des $p$ différents, on obtient le diagramme 
   cetz.canvas({
     import cetz.draw: *
 
-    let entr(r,p) = r + Rs * calc.ln(calc.abs(r/Rs - 1)) + p
-    let sort(r,p) = - r - Rs * calc.ln(calc.abs(r/Rs - 1)) - p
+    let entr(r, p) = r + Rs * calc.ln(calc.abs(r / Rs - 1)) + p
+    let sort(r, p) = -r - Rs * calc.ln(calc.abs(r / Rs - 1)) - p
     plot.plot(
-      size: (10,10),
+      size: (10, 10),
       x-min: 0,
       x-max: 2 * Rs,
       y-min: 0,
@@ -803,68 +806,64 @@ En tracant ces deux solutions pour des $p$ différents, on obtient le diagramme 
       x-label: $r$,
       y-label: $t$,
       {
-        for i in (1,2,3) {
+        for i in (1, 2, 3) {
           plot.add(
             samples: 200,
-            domain: (0,2 * Rs),
-            x => (x,entr(x,i)),
-            style: (stroke : blue, marks: ">"),
+            domain: (0, 2 * Rs),
+            x => (x, entr(x, i)),
+            style: (stroke: blue, marks: ">"),
           )
         }
 
-        for i in (-0.5,-1.5,-2.5) {
+        for i in (-0.5, -1.5, -2.5) {
           plot.add(
             samples: 200,
-            domain: (0,2 * Rs),
-            x => (x,sort(x,i)),
-            style: (stroke : red),
+            domain: (0, 2 * Rs),
+            x => (x, sort(x, i)),
+            style: (stroke: red),
           )
         }
-        
+
         plot.add-vline(
           Rs,
-          style: (stroke :(paint: black, dash: "dashed"),)
+          style: (stroke: (paint: black, dash: "dashed")),
         )
-      }
-
-
+      },
     )
 
-    
 
     //les cones avant Rs
-    circle((2.7,2.5), radius: (0.7mm, 2mm))
-    circle((2.7,5.834), radius: (0.7mm, 2.03mm))
-    circle((2.7,9.17), radius: (0.7mm, 2mm))
+    circle((2.7, 2.5), radius: (0.7mm, 2mm))
+    circle((2.7, 5.834), radius: (0.7mm, 2.03mm))
+    circle((2.7, 9.17), radius: (0.7mm, 2mm))
 
-    circle((3.9,4.15), radius: (0.7mm, 6mm))
-    circle((3.9,7.52), radius: (0.7mm, 6mm))
+    circle((3.9, 4.15), radius: (0.7mm, 6mm))
+    circle((3.9, 7.52), radius: (0.7mm, 6mm))
 
-    circle((4.39,5.85), radius: (0.9mm, 9mm))
+    circle((4.39, 5.85), radius: (0.9mm, 9mm))
 
     //les cones apres Rs
-    circle((6.08,3), radius: (1.5mm, 0.5mm))
-    circle((6.08,6.35), radius: (1.5mm, 0.5mm))
-    circle((6.08,9.65), radius: (1.5mm, 0.5mm))
+    circle((6.08, 3), radius: (1.5mm, 0.5mm))
+    circle((6.08, 6.35), radius: (1.5mm, 0.5mm))
+    circle((6.08, 9.65), radius: (1.5mm, 0.5mm))
 
-    circle((5.62,4.8), radius: (1.3mm, 0.5mm))
-    circle((5.62,8.15), radius: (1.3mm, 0.5mm))
+    circle((5.62, 4.8), radius: (1.3mm, 0.5mm))
+    circle((5.62, 8.15), radius: (1.3mm, 0.5mm))
 
-    circle((5.34,6.7), radius: (1mm, 0.5mm))
+    circle((5.34, 6.7), radius: (1mm, 0.5mm))
 
-    circle((6.805,4.6), radius: (2mm, 0.6mm))
-    circle((6.805,7.93), radius: (2mm, 0.6mm))
+    circle((6.805, 4.6), radius: (2mm, 0.6mm))
+    circle((6.805, 7.93), radius: (2mm, 0.6mm))
 
-    circle((7.848,6.17), radius: (2.1mm, 0.6mm))
+    circle((7.848, 6.17), radius: (2.1mm, 0.6mm))
 
     //les tetes de fleches
-    let tetfle(x,y, angl, color) = {
+    let tetfle(x, y, angl, color) = {
+      let rotat(x, y, angl) = (calc.cos(angl) * x - calc.sin(angl) * y, calc.sin(angl) * x + calc.cos(angl) * y)
 
-      let rotat(x,y, angl) = (calc.cos(angl) * x - calc.sin(angl) * y, calc.sin(angl) * x + calc.cos(angl) * y)
-
-      let cood1 = (0,0)
+      let cood1 = (0, 0)
       let deucood1 = (0.33, 0)
-      let cood2 = (0,0)
+      let cood2 = (0, 0)
       let deucood2 = rotat(0.33, 0, 50deg)
       deucood1 = rotat(deucood1.first(), deucood1.last(), angl)
       deucood2 = rotat(deucood2.first(), deucood2.last(), angl)
@@ -877,32 +876,286 @@ En tracant ces deux solutions pour des $p$ différents, on obtient le diagramme 
     }
 
     //rouge
-    tetfle(3.41,9.5, 22deg, red)
-    tetfle(4.52,8.6, 53deg, red)
-    tetfle(4.74,6.7, 58deg, red)
+    tetfle(3.41, 9.5, 22deg, red)
+    tetfle(4.52, 8.6, 53deg, red)
+    tetfle(4.74, 6.7, 58deg, red)
 
-    tetfle(6.71,1, -89deg, red)
-    tetfle(8,2.27, -78deg, red)
-    tetfle(8.5,4.96, -72deg, red)
+    tetfle(6.71, 1, -89deg, red)
+    tetfle(8, 2.27, -78deg, red)
+    tetfle(8.5, 4.96, -72deg, red)
 
     //bleu
-    tetfle(3.7,1.8, -80deg, blue)
-    tetfle(4.58,2.7, -102deg, blue)
-    tetfle(4.8,4.3, -108deg, blue)
+    tetfle(3.7, 1.8, -80deg, blue)
+    tetfle(4.58, 2.7, -102deg, blue)
+    tetfle(4.8, 4.3, -108deg, blue)
 
-    tetfle(6.387,9.99, -138deg, blue)
-    tetfle(7.51,8.7, -147deg, blue)
-    tetfle(9.02,7.3, -156deg, blue)
+    tetfle(6.387, 9.99, -138deg, blue)
+    tetfle(7.51, 8.7, -147deg, blue)
+    tetfle(9.02, 7.3, -156deg, blue)
 
-    content((5.06,-0.3), $R_s$)
-
+    content((5.06, -0.3), $R_s$)
   }),
   caption: [
     structure des cones de lumière pour la métrique de Schwarzschild\
     en bleu les rayons sortant, et en rouge les rayons entrant
-  ]
-)
+  ],
+) <fig2geolum>
 On observe que dans la zone ${0<r<R_s}$ les cônes de lumière sont entièrement retourné vers la singularité, ainsi les photons présent dans cette zone finirons au niveau de la singularité quelque soit leur nature de départ. Ainsi toute particule massive doit également finir au niveau de la singularité.
+
+=== Coordonnées d’Eddington–Finkelstein
+
+Nous pouvons remarquer en regardans la métrique (@metswart) et la @fig2geolum que nous avons deux singularité : une permière pour $r = 0$, qui est une #text(style: "italic")[vraie] singularité, car la courbure scalaire $R_(mu nu rho sigma)R^(mu mu rho sigma) = 12 R_s^2/r^6$ diverge en $0$,\
+une seconde en $r = R_s$, qui est une #text(style: "italic")[fausse] singularité, en effet, ici la courbure scalaire est finis $R_(mu nu rho sigma)R^(mu mu rho sigma) = 12/R_s^4$, pour « retirer » cette singularité on peut se mettre dans un système de coordonnée plus « naturel » et qui rend une meilleurs description des lignes-univers.\
+\
+On propose deux solutions dans les deux chapitre suivant
+
+==== Coordonnées d’Eddington–Finkelstein Avancé <CEFA>
+
+On chercheras d’abord à dévlopé une meilleurs déscription des photons entrant.\
+On à donc :
+$
+  t = -r -R_s lna(r/R_s - 1) + p
+$
+avec $p$ une constante d’intégration\
+L’idée pour construire le nouveau système de coordonée, est de prendre cette constante d’intégration comme nouvelle coordonnée, ainis :
+$
+  p = t + r + R_s lna(r/R_s - 1)
+$
+En différentiant :
+$
+  dif p = dt + r / (r - R_s) dr
+$
+donc
+$
+  dt = dif p - (1 - R_s/r)^(-1) dr
+$
+Ainsi :
+$
+  dt^2 = dif p^2 + (1 - R_s/r)^(-2) dr^2 - (2 dr dif p)/(1 - R_s/r)
+$
+Alors en remplacant $dt$ dans la métrique de Schwarzschild, on obtient :
+$
+  ds^2 = (1 - R_s/r) dif p - 2 dr dif p - r^2 (dif theta^2 + sin(theta) dif phi^2)
+$
+On remarqueras que la métrique est maintenant continue pour $r in RR^*_+$, résolvant, ainsi, la #text(style: "italic")[fausse]
+singularité en $r = R_s$\
+Ici on prend toujours le cas radial, donc $dif theta = dif phi = 0$, d’où :
+$
+  ds^2 = (1 - R_s/r) dif p^2 - 2 dr dif p
+$
+On remarque ainsi que la singularité en $r = R_s$ à disparu.\
+
+Si on regarde les géodésiques, donc $ds = 0$, on à :
+$
+  (1 - R_s/r) dif p^2 - 2 dr dif p = 0
+$
+Donc
+$
+  (1 - R_s/r) ((dif p)/dr)^2 - 2 (dif p)/dr = 0
+$
+On reconnait une équation du second degré, dont les deux solutions sont :
+$
+  (dif p)/dr = 0\
+  (dif p)/dr = 2(1 - R_s/r)^(-1)
+$
+On trouve ainsi ces deux solutions :
+$
+  p = "const"\
+  p = 2 r + 2 R_s lna(r/R_s - 1) + "const"
+$
+Pour se remener à un diagramme $(t,r)$, on définit la variable de genre temps suivante :
+$
+  t' = p - r = t + R_s lna(r/R_s - 1)
+$
+Les coordonnées $(t', r, theta, phi)$ sont appelées, les coordonnées d’Eddington–Finkelstein avancé\
+Ainsi on obtient les deux équations suivante :
+$
+  t' = -r + "const"\
+  t' = r + 2R_s lna(r/R_s - 1) + "const"
+$
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    let ent(x, p) = p - x
+    let sort(x, p) = x + 2 * Rs * calc.ln(calc.abs(x / Rs - 1)) + p
+    plot.plot(
+      size: (10, 10),
+      x-min: 0,
+      x-max: 2 * Rs,
+      y-min: 0,
+      y-max: 3,
+      x-tick-step: none,
+      y-tick-step: none,
+      axis-style: "left",
+      x-label: $r$,
+      y-label: $t'$,
+
+      {
+        for i in range(0, 4) {
+          plot.add(
+            domain: (0, 2 * Rs),
+            x => ent(x, i),
+            style: (stroke: red),
+          )
+        }
+
+        for i in (0.5, 1.5, 2.5, 3.5) {
+          plot.add(
+            domain: (0, 2 * Rs),
+            x => sort(x, i),
+            style: (stroke: blue),
+          )
+        }
+
+        plot.add-vline(
+          Rs,
+          style: (stroke: (paint: black, dash: "dashed")),
+        )
+      },
+    )
+
+    rotate(-30deg)
+    circle((1.1, 3.2499), radius: (1mm, 2mm))
+    circle((-0.6, 6.156), radius: (1mm, 2mm))
+    circle((-2.25, 9.04), radius: (1mm, 2mm))
+
+    rotate(-12deg)
+    circle((1.8, 3.85), radius: (1mm, 2.4mm))
+    circle((-0.4, 6.32), radius: (1mm, 2.4mm))
+    circle((2.5, 3.925), radius: (0.5mm, 1.2mm))
+
+    rotate(-20deg)
+    circle((2.97, 6.01), radius: (0.8mm, 2mm))
+    circle((-0, 7.572), radius: (0.8mm, 2.1mm))
+    circle((-2.94, 9.14), radius: (0.8mm, 2mm))
+
+    circle((2.35, 5.51), radius: (0.6mm, 1.6mm))
+    circle((-0.6, 7.07), radius: (0.6mm, 1.6mm))
+    circle((-1.06, 6.767), radius: (0.6mm, 1.6mm))
+    circle((-3.57, 8.64), radius: (0.6mm, 1.6mm))
+
+    rotate(-10deg)
+
+    circle((-0.5, 8.29), radius: (0.8mm, 2.5mm))
+    circle((-3.67, 9.32), radius: (0.8mm, 2.5mm))
+
+    rotate(-5deg)
+    circle((-3.46, 10.16), radius: (1mm, 2.5mm))
+
+    rotate((30 + 12 + 20 + 10 + 5) * 1deg)
+    content((5.06, -0.3), $R_s$)
+  }),
+  caption: [diagramme $(t',r)$, avec les cônes de lumière,\ avec en rouge les photons entrant, et en bleu les photons sortant],
+)
+
+On remarque ainsi, les rayons entrant sont continue en $r = R_s$. De plus, si on regarde la structure des cônes de lumière, on remarque que cecis sont entièrement tourné vers la singularité,
+ainsi le futur d’un photon est entièrement #text(style: "italic")[tourné] vers la singularité, donc un photon ne peut s’échapé de la régions $r < R_s$.\
+le rayon $R_s$ forme ainsi une frontière appelée #text(style: "italic")[horizon des évènements], et ainsi un photon émis en $r < R_s$ n’a aucune chance d’atteinder un observateur, l’objet nous apprait alors noir.\
+Un tel objet est appelée #text(style: "italic")[trou noir]
+
+==== Coordonnées d’Eddington–Finkelstein Retardé <CEFR>
+
+On cherche maintenant à fournir une meilleur déscription pour les rayon sortant.\
+\
+Pour celà, on peut remarquer que @rayentr et @raysort sont identique au signe près, alors les calcules seront identique, moyénnant un
+signe moins en facteur.
+On en déduis une nouvelle coordonnée, de la même manière que dans @CEFA, i.e. en prenant la constante d’intégration :
+$
+  q = t - r - R_s lna(r/R_s - 1)
+$
+la métrique devient ainsi :
+$
+  ds^2 = (1 - R_s/r) dif q^2 + 2 dif q dif r - r^2 (dif theta^2 + sin(theta) dif phi^2)
+$
+De même, on a bien résolut la singularité en $r = R_s$\
+Comme pour @CEFA, il est plus pratique de travailler avec la variable temporelle suivante:
+$
+  t' = q + r = t - R_s lna(r/R_s - 1)
+$
+les coordonnée $(t', r, theta, phi)$ sont elle appelées coordonnée d’Eddington–Finkelstein retardé.\
+Si on s’intérèsse au géodésique, on obtient les équations suivantes :
+$
+  t' = r + "const"\
+  t' = r - 2 R_s lna(r/R_s - 1) + "const"
+$
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    let ent(x, p) = p + x
+    let sort(x, p) = x - 2 * Rs * calc.ln(calc.abs(x / Rs - 1)) + p
+    plot.plot(
+      size: (10, 10),
+      x-min: 0,
+      x-max: 2 * Rs,
+      y-min: 0,
+      y-max: 3,
+      x-tick-step: none,
+      y-tick-step: none,
+      axis-style: "left",
+      x-label: $r$,
+      y-label: $t'$,
+
+      {
+        for i in range(0, 4) {
+          plot.add(
+            domain: (0, 2 * Rs),
+            x => ent(x, i),
+            style: (stroke: red),
+          )
+        }
+
+        for i in (0.5, 1.5, 2.5, 3.5) {
+          plot.add(
+            domain: (0, 2 * Rs),
+            x => sort(x, i),
+            style: (stroke: blue),
+          )
+        }
+
+        plot.add-vline(
+          Rs,
+          style: (stroke: (paint: black, dash: "dashed")),
+        )
+      },
+    )
+
+    rotate(-30deg)
+    circle((1.1, 3.2499), radius: (1mm, 2mm))
+    circle((-0.6, 6.156), radius: (1mm, 2mm))
+    circle((-2.25, 9.04), radius: (1mm, 2mm))
+
+    rotate(-12deg)
+    circle((1.8, 3.85), radius: (1mm, 2.4mm))
+    circle((-0.4, 6.32), radius: (1mm, 2.4mm))
+    circle((2.5, 3.925), radius: (0.5mm, 1.2mm))
+
+    rotate(-20deg)
+    circle((2.97, 6.01), radius: (0.8mm, 2mm))
+    circle((-0, 7.572), radius: (0.8mm, 2.1mm))
+    circle((-2.94, 9.14), radius: (0.8mm, 2mm))
+
+    circle((2.35, 5.51), radius: (0.6mm, 1.6mm))
+    circle((-0.6, 7.07), radius: (0.6mm, 1.6mm))
+    circle((-1.06, 6.767), radius: (0.6mm, 1.6mm))
+    circle((-3.57, 8.64), radius: (0.6mm, 1.6mm))
+
+    rotate(-10deg)
+
+    circle((-0.5, 8.29), radius: (0.8mm, 2.5mm))
+    circle((-3.67, 9.32), radius: (0.8mm, 2.5mm))
+
+    rotate(-5deg)
+    circle((-3.46, 10.16), radius: (1mm, 2.5mm))
+
+    rotate((30 + 12 + 20 + 10 + 5) * 1deg)
+    content((5.06, -0.3), $R_s$)
+  }),
+  caption: [diagramme $(t',r)$, avec les cônes de lumière,\ avec en rouge les photons entrant, et en bleu les photons sortant],
+)
 
 #set heading(numbering: none)
 
