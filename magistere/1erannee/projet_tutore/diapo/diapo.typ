@@ -1,12 +1,12 @@
 #set page(
-  paper: "presentation-4-3",
+  paper: "presentation-16-9",
   header: context [
     #set text(15pt, fill: white)
     #place(
       dx: -20mm,
       box(fill: rgb("#171568"), height: 15mm, width: 110%)[
         #place(dx: -5mm, right + horizon, [#h(18mm) Gaspar Daguet])
-        #place(left + horizon, [test])
+        #place(dx: 15mm, left + horizon, [#image("./image/btUnistra-logo.jpg")])
       ],
     )
   ],
@@ -16,7 +16,7 @@
     #place(
       dx: -5mm,
       box(height: 100%, width: 105%)[
-        #scale(place(image("./image/methamorphose.jpg"), dx: -1mm), x: 111%)
+        #scale(place(image("./image/methamorphose.jpg"), dx: -1mm), x: 149%)
         #place(
           dx: -7mm,
           right + horizon,
@@ -76,5 +76,10 @@
   }
 }
 
+
+#place(center + horizon, dy: -10mm)[
+  *Résolution de Schwarzschild\ à l’équation d’Einstein*\
+  Gaspar Daguet
+]
 
 #pagebreak()

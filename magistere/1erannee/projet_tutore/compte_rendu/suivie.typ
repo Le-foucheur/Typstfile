@@ -1,5 +1,5 @@
-#import "../../../template.typ": *
-#import "../../../transposition.typ": *
+#import "../../../../template.typ": *
+#import "../../../../transposition.typ": *
 #import "@preview/cetz:0.4.2"
 #import "@preview/cetz-plot:0.1.3": plot
 #import "@preview/zebraw:0.6.1": *
@@ -8,8 +8,6 @@
 #let equa = counter("equa")
 #equa.step()
 
-#show outline.entry: set block(above: 5mm)
-#set outline(depth: 3)
 #show math.equation: set block(breakable: true)
 
 #set math.equation(
@@ -46,7 +44,6 @@
 
 #show ref: it => {
   let eq = math.equation
-  let hed = heading
   let el = it.element
   if el == none or el.func() != eq {
     return it
@@ -110,8 +107,34 @@ Résume (maximum 1/2 page) du travail effectue (contexte, résultats).
 
 #pagebreak()
 
-#context counter(page).update(3)
-#outline(title: [Table des matières])
+#heading(outlined: false, numbering: none)[
+  Table des matières
+]
+#context {
+  let chapters = query(
+    heading.where(
+      outlined: true,
+    ),
+  )
+  for chapter in chapters {
+    let loc = chapter.location()
+    let num = if chapter.numbering == none {} else {
+      numbering(
+        chapter.numbering,
+        ..counter(heading).at(loc),
+      )
+    }
+    let nr = numbering(
+      loc.page-numbering(),
+      ..counter(page).at(loc),
+    )
+    if (chapter.level < 4 and (num != none and type(num) != int)) {
+      [#h(1cm * chapter.level) #num #chapter.body #box(width: 1fr, repeat[.]) #nr #v(2.5mm) ]
+    } else if (chapter.level < 2 and num == none) {
+      [#h(1cm * chapter.level) #num #chapter.body #box(width: 1fr, repeat[.]) #nr #v(2.5mm) ]
+    }
+  }
+}
 
 #pagebreak()
 
@@ -483,7 +506,7 @@ $
     0, 0, 0, - (r sin(theta)^2)/B
   )
 $
-À l’aide du programme de l’#ref(<programme>, supplement: []), on trouve :
+À l’aide du programme de l’#ref(<programme>), on trouve :
 $
   Gamma^0""_(mu nu) = mat(
     0, A'/(2A), 0, 0;
@@ -1192,9 +1215,9 @@ articles, conférences) auxquels on a fait référence dans le texte.
 
 #pagebreak()
 
-#set heading(numbering: (..num) => {
-  if num.pos().len() == 2 {
-    [Annexe ] + str(num.pos().at(1))
+#set heading(supplement: [Annexe], numbering: (..nums) => {
+  if nums.pos().len() == 2 {
+    nums.pos().at(1)
   }
 })
 
