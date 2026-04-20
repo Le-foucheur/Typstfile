@@ -129,9 +129,9 @@ Résume (maximum 1/2 page) du travail effectue (contexte, résultats).
       ..counter(page).at(loc),
     )
     if (chapter.level < 4 and (num != none and type(num) != int)) {
-      [#h(1cm * chapter.level) #num #chapter.body #box(width: 1fr, repeat[.]) #nr #v(2.5mm) ]
+      [#h(1cm * chapter.level) #link(loc)[#num #chapter.body] #box(width: 1fr, repeat[.]) #nr #v(2.5mm) ]
     } else if (chapter.level < 2 and num == none) {
-      [#h(1cm * chapter.level) #num #chapter.body #box(width: 1fr, repeat[.]) #nr #v(2.5mm) ]
+      [#h(1cm * chapter.level) #link(loc)[#num #chapter.body] #box(width: 1fr, repeat[.]) #nr #v(2.5mm) ]
     }
   }
 }
