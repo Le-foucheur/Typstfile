@@ -28,6 +28,7 @@ UFR de Phisique et Ingénierie #h(1fr) Université de Strasbourg
   \
   #text(20pt)[*Gaspar Daguet*]\
   gaspar.daguet\@etu.unistra.fr\
+  Github : #link("https://github.com/Le-foucheur")
   \
 ]
 #repeat[─]
@@ -49,69 +50,68 @@ Le projet se présente sous l’arborésance suivante :
       (edge((1,0), (i - if i <= 0 {0.5} else {0} + if i == 2 {1}, 1),"-|>"),)
     },
 
-    node((-2.5,1), [Makefile], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#e6e6ff")),
-    node((-1.5,1), [inputs], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
+    node((-2.5,1), [`Makefile`\ `Readme.nd`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#e6e6ff")),
+    node((-1.5,1), [`config`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
 
     edge("->"),
 
     node((-1.5,2), [
-      A rajouter
-      config.cfg
-      pendule.cfg
+      `config.cfg`
+      `pendule.cfg`
     ], corner-radius: 2pt, shape: "rect", width: 2.5cm, fill: rgb("#e6e6ff")),
 
-    node((-0.5,1), [includes], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
+    node((-0.5,1), [`includes`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
 
     edge("->"),
 
     node((-0.5,2), [
-      maestro.h
-      pendule.h
-      tui.h
+      `maestro.h`
+      `pendule.h`
+      `tui.h`
     ], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#e6e6ff")),
 
-    node((1,1), [src], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
+    node((1,1), [`src`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
 
     edge("->"),
 
-    node((1.5,2), [plotting], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
+    node((1.5,2), [`plotting`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
 
     edge((1.5, 2), (1.5, 3), "->"),
     node((1.5, 3), [
-      plot_energie.typ
-      plot_portrait_phase.typ
-      plottraj.typ
-    ], corner-radius: 2pt, shape: "rect", width: 4.2cm, fill: rgb("#e6e6ff")),
+      `plot_energie.typ`
+      `plot_portrait_phase.typ`
+      `plottraj.typ`
+    ], corner-radius: 2pt, shape: "rect", width: 4.5cm, fill: rgb("#e6e6ff")),
 
     edge((1,1), (0.5, 2),  "->"), 
     node((0.5,2), [
-      maestro.cpp
-      main.cpp
-      pendule.cpp
-      tui.cpp
+      `maestro.cpp`
+      `main.cpp`
+      `pendule.cpp`
+      `tui.cpp`
     ], corner-radius: 2pt, shape: "rect", width: 2.5cm, fill: rgb("#e6e6ff")),
 
 
 
-    node((3.5,1), [target], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
+    node((3.5,1), [`target`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
 
     edge((3.5, 1), (2.5, 2), "-|>"),
     edge((3.5, 1), (3.5, 2), "-|>"),
     edge((3.5, 1), (4.5, 2), "-|>"),
 
-    node((3.5, 2), [data], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
+    node((3.5, 2), [`data`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
 
     edge((3.5, 3), "->"),
 
     node((3.5, 3), [`*.csv`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#e6e6ff")),
 
-    node((4.5, 2), [plot], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
+    node((4.5, 2), [`plot`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#cdcdff")),
     
     edge((4.5, 3), "->"),
 
     node((4.5, 3), [`*.pdf`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#e6e6ff")),
 
-    node((2.5, 2), [main], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#e6e6ff"))
+    node((2.5, 2), [`main`], corner-radius: 2pt, shape: "rect", width: 2cm, fill: rgb("#e6e6ff"))
   ), 
   caption: [Arborescence du projet depuis la racine]
 )
@@ -124,31 +124,34 @@ Le projet se présente sous l’arborésance suivante :
   - `make run` : compile et éxécute le projet
   - `make plot` : compile les datas contenue dans `./target/data/`, et les plots via typst
   - `make run_et_plot` : effectue `make run` puis `make plot`
+- `Readme.md` : le fichier, qui compile toute les intructions d’utilisation, installation et de configuration 
 - Les sous-dossiers décrit ci-dessous
 
-== inputs
+== config/
 
-- `config.cfg` : les config générales du projet (voir @configgen)
+- `config.cfg` : les configuration générales du projet (voir @configgen)
 - `pendule.cfg` : les différents pendules (voir @configpend)
 
-== includes
+== includes/
 - `maestro.h` : définition de la classe `Maestro`, de ses attributs et du prototype de ses méthodes
 - `pendule.h` : définition de la classe `Pendule`, de ses attributs et du prototype de ses méthodes
 - `tui.`h : définition de la classe `TUI`, de ses attributs et du prototype de ses méthodes — Ainsi que de la classe `TUI_Pendule` dérivé de la classe `TUI`, de ses attributs et du prototype de ses méthodes
 
-== src
+== src/
 - `main.cpp` : Le programme principal 
 - `maestro.cpp` : définition des méthode de la classe `Maestro`  
 - `pendule.cpp` : définition des méthode de la classe `Pendule`  
 - `TUI.cpp` : définition des méthode des classes `TUI` & `TUI_Pendule`
 - `plotting/` : les sous-dossiers pour plot les données
 
-=== plotting
+=== plotting/
 - `plot_energie.typ`: permet de plot l’energie cinétique,  potentielle et mécanique dans le cas d’un double pendules
 - `plot_portrait_phase.typ`: permet de plot le prortrait de phase du dernier pendule
 - `plottraj.typ`: permet de plot la trajectoire du dernier pendule
 
-== target 
+== target/
+
+Ce sous fichier, est l’endroit où le programme stocke tout les fichiers produits, il est organisé comme suis :
 - `polyekkreme` : le binaire du projet
 - `data/` : les données produits par le projet, au format `.csv`
 - `plot/` : les plots produis par le projet
@@ -162,11 +165,24 @@ $ make run
 ```]) 
 Pour ploter les données, aller voir @plot
 
+Pour plus de détaille, je vous invite à aller voir mon #link("https://github.com/Le-foucheur/polyekkreme")[github], et/ou de lire le `Readme.md` présent à la racine
 
+== les configuration générales <configgen>
 
-== les config générales <configgen>
+Vous pouvez modifier les paramètres, comme le pas de temps $dt$ d’intégration ou le nombre de pendules, directement dans le fichier `config/config.cfg`.
+Pour plus de détails, consultez le fichier en question.
 
-== les pendules <configpend>
+=== Pendule personnalisé <configpend>
+Si vous souhaitez configurer individuellement chaque pendule, il faut mettre le paramètre `custom_pendulum` à `true` dans le fichier de configuration.
+Ensuite, vous pouvez éditer le fichier `config/pendule.csv`, où chaque ligne représente un pendule et chaque colonne un paramètre du pendule :
+
+#table(
+  columns: 5,
+  align: center,
+
+  [id] , [masse] , [longueur] , [theta0] , [omega0] ,
+  [L’identifiant du pendule\ il doit être un entier positif unique] , [la masse du pendule] , [la longueur du pendule] , [l’angle initial entre le pendule et la verticale] , [la vitesse radiale initiale du pendule] ,
+)
 
 == plot <plot>
 
@@ -180,3 +196,24 @@ De plus, vous pouvez éxécuter et plot directement avec :
 #rect(width: 100%, radius: 2mm, stroke: none, fill: rgb(0,0,0, 10%), [```bash
 $ make run_et_plot
 ```]) 
+
+= Troubleshooting
+
+== Mauvais affichage des pendules dans le TUI
+Il se peut que les pendules ne s’affiche pas correctement, c’est du au faits que les polices installées sont incapable de rendre certains caractères utilisés ( block unicode : #link("https://en.wikipedia.org/wiki/Symbols_for_Legacy_Computing_Supplement")[« Symbols for Legacy Computing Supplement »], block octant ).
+
+Sur linux vous pouvez vérifier si vous avez des polices capable d’y afficher via la commande :
+```
+fc-list :charset=1CD00
+```
+
+Pour régler celà, vous pouvez passer mettre à `false` le paramètre `resolution` dans le fichier de config\
+Celà auras pour effet de passer sur des caratère moins précis pour l’affichage mais plus supporté par les polices d’écriture ( block unicode : #link("https://en.wikipedia.org/wiki/Symbols_for_Legacy_Computing")[« Symbols for Legacy Computing »], block sextant ).
+
+Si celà ne marche toujours pas c’est que, soit votre terminal ne peut utilisé de telle police qui support au moins un des deux block unicode.
+Soit il vous faut installer une police qui les support, par exemple :
+
+ - Catrinity : #link("https://catrinity-font.de/characters.html")
+ - Cozette : #link("https://github.com/the-moonwitch/Cozette")
+ - Google Noto : #link("https://fonts.google.com/noto") (#link("https://fonts.google.com/noto/specimen/Noto+Sans+Symbols+2?preview.script=Latn&query=Symbols")[Noto Sans Symbols 2] avec `resolution` mis à `false`)
+
