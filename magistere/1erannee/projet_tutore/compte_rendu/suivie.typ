@@ -3,6 +3,7 @@
 #import "@preview/cetz:0.4.2"
 #import "@preview/cetz-plot:0.1.3": plot
 #import "@preview/zebraw:0.6.1": *
+#import "@preview/mitex:0.2.7": *
 #show: zebraw
 
 #set page(paper: "a4")
@@ -171,7 +172,7 @@ Dans un premier temps, nous avons cherché à déduire la trajectoire sur une su
 Nous ne donnerons pas de définition formelle de ce qu'est une géodésique, car ceci sort du cadre du stage effectué.\
 Pour en donner une intuition, on pourra considérer que c'est la généralisation d'une ligne droite pour une surface courbe.\
 \
-Considérons donc une métrique $g_(mu nu)$ pour une surface à $n$ dimensions, et soit une particule restreinte à cette surface de coordonnées $x^alpha$, avec $alpha in [|1;n|]$\
+Considérons donc une métrique $g_(mu nu)$ pour un espace à $n$ dimensions, et soit une particule restreinte à cette surface de coordonnées $x^alpha$, avec $alpha in [|1;n|]$\
 \
 D'après #text(style: "italic")[General Relativity, An Introduction for Physicists] @RGbook, pour déduire une équation des géodésiques, nous devons considérer le lagrangien suivant :\
 $
@@ -215,14 +216,14 @@ Si on écrit l'action par rapport à $s$, on a :\
 $
   S_1 = integral [g_(mu nu) dif/(dif s) x^mu dif/(dif s) x^nu]^(1/2) dif s
 $
+Or, comme $S_1$ est invariante par la transformation $s |-> lambda$ et que celle-ci est un difféomorphisme, on a alors :\
+$
+  dif/(dif s)(g_(alpha nu) dot(x)^nu) = 1/2 g_(mu nu, alpha) dot(x)^mu dot(x)^nu
+$
 Alors en opérant le changement de variable, $S_1$ devient :\
 $
   S_1 & = integral cancel([g_(mu nu) dot(x)^mu dot(x)^nu]^(1/2)) [g_(mu nu) dif/(dif lambda) x^mu dif/(dif lambda) x^nu]^(1/2) cancel([g_(mu nu) dot(x)^mu dot(x)^nu]^(-1/2)) dif lambda\
   &= integral [g_(mu nu) dif/(dif lambda) x^mu dif/(dif lambda) x^nu]^(1/2) dif lambda
-$
-Donc, comme $S_1$ est invariante par la transformation $s |-> lambda$ et que celle-ci est un difféomorphisme, on a alors :\
-$
-  dif/(dif s)(g_(alpha nu) dot(x)^nu) = 1/2 g_(mu nu, alpha) dot(x)^mu dot(x)^nu
 $
 Donc en calculant le terme de gauche :\
 $
@@ -262,8 +263,9 @@ $
 $
 #h(5mm) *Preuve :*
 
-On se place dans un système de coordonnées $xi^alpha$, et on s'intéresse à un changement de coordonnées vers $x^alpha$.\
-Tout d'abord :\
+On se place dans un système d’inertie de coordonnées $xi^alpha$, et on s'intéresse à un changement de coordonnées vers $x^alpha$.\
+Comme $xi^alpha$ d’écrit un système d’inertie, alors $(dif^2 xi^alpha)/(dif tau^2) = 0$\
+Ainsi :\
 $
   0 = (dif^2 xi^alpha)/(dif tau^2) &= dif/(dif tau) ((dif xi^alpha)/(dif tau))\
   &= dif/(dif tau) ((diff xi^alpha)/(diff x^mu) (dif x^mu)/(dif tau))\
@@ -281,27 +283,27 @@ $
 $
 \
 \
-En réécrivant le produit scalaire dans les coordonnées $x^alpha$ :\
+En réécrivant le produit scalaire dans les coordonnées $x^mu$ :\
 $
-  eta_(mu nu) dif xi^mu dif xi^nu = underbrace(eta_(mu nu) (diff xi^mu)/(diff x^alpha) (diff xi^nu)/(diff x^beta), = g_(alpha beta)) dif x^alpha dif x^beta
+  eta_(alpha beta) dif xi^alpha dif xi^beta = underbrace(eta_(alpha beta) (diff xi^alpha)/(diff x^mu) (diff xi^beta)/(diff x^nu), = g_(alpha beta)) dif x^mu dif x^nu
 $
 Donc :\
 $
-  g_(alpha beta) = eta_(mu nu) (diff xi^mu)/(diff x^alpha) (diff xi^nu)/(diff x^beta)
+  g_(mu nu) = eta_(alpha beta) (diff xi^alpha)/(diff x^mu) (diff xi^beta)/(diff x^nu)
 $
 Alors en dérivant :\
 $
-  g_(alpha beta, lambda) = diff_lambda g_(alpha beta) &= eta_(mu nu) diff/(diff x^lambda) ((diff xi^mu)/(diff x^alpha) (diff xi^nu)/(diff x^beta))\
-  &= underbrace(eta_(mu nu) (diff xi^mu)/(diff x^alpha), = g_(alpha mu) (diff x^mu)/(diff xi^nu)) (diff^2 xi^nu)/(diff x^beta diff x^lambda) + underbrace(eta_(mu nu) (diff xi^nu)/(diff x^beta), = g_(beta nu) (diff x^nu)/(diff xi^mu)) (diff^2 xi^mu)/(diff x^alpha diff x^lambda)\
-  &= g_(alpha mu) underbrace((diff x^mu)/(diff xi^nu) (diff^2 xi^nu)/(diff x^beta diff x^lambda), = croh(l: mu, m: beta, n: lambda)) + g_(beta nu) underbrace((diff x^nu)/(diff xi^mu) (diff^2 xi^mu)/(diff x^alpha diff x^lambda), = croh(l: nu, m: alpha, n: lambda))\
-  &= croh(m: beta, n: lambda, l: mu) g_(mu alpha) + croh(m: alpha, n: lambda, l: nu) g_(nu beta)\
+  g_(mu nu, lambda) = diff_lambda g_(mu nu) &= eta_(alpha beta) diff/(diff x^lambda) ((diff xi^alpha)/(diff x^mu) (diff xi^beta)/(diff x^nu))\
+  &= underbrace(eta_(alpha beta) (diff xi^alpha)/(diff x^mu), = g_(mu rho) (diff x^rho)/(diff xi^beta)) (diff^2 xi^beta)/(diff x^nu diff x^lambda) + underbrace(eta_(alpha beta) (diff xi^beta)/(diff x^nu), = g_(rho nu) (diff x^rho)/(diff xi^alpha)) (diff^2 xi^alpha)/(diff x^mu diff x^lambda)\
+  &= g_(mu rho) underbrace((diff x^rho)/(diff xi^beta) (diff^2 xi^beta)/(diff x^nu diff x^lambda), = croh(l: rho, m: nu, n: lambda)) + g_(rho nu) underbrace((diff x^rho)/(diff xi^alpha) (diff^2 xi^alpha)/(diff x^mu diff x^lambda), = croh(l: rho, m: mu, n: lambda))\
+  &= croh(m: nu, n: lambda, l: rho) g_(mu rho) + croh(m: mu, n: lambda, l: rho) g_(rho nu)\
 $
 Donc en sommant pour différentes dérivées :\
 $
-  g_(alpha beta, lambda) + g_(lambda beta, alpha) - g_(alpha lambda, beta) &= croh(l: mu, m: alpha, n: lambda) g_(mu beta) + cancel(croh(m: beta, n: lambda, l: nu) g_(nu alpha))\
-  &+ cancel(croh(l: mu, m: beta, n: alpha) g_(mu lambda)) + croh(m: lambda, n: alpha, l: nu) g_(nu beta)\
-  &- cancel(croh(l: mu, m: alpha, n: beta) g_(mu lambda)) cancel(- croh(m: lambda, n: beta, l: nu) g_(nu alpha))\
-  &= croh(l: mu, m: alpha, n: lambda) g_(mu beta) + croh(m: lambda, n: alpha, l: nu) g_(nu beta) = 2 croh(l: mu, n: lambda, m: alpha)g_(mu beta)
+  g_(mu nu, lambda) + g_(lambda nu, mu) - g_(mu lambda, nu) &= croh(l: rho, m: mu, n: lambda) g_(rho nu) + cancel(croh(m: nu, n: lambda, l: rho) g_(rho mu))\
+  &+ cancel(croh(l: rho, m: nu, n: mu) g_(rho lambda)) + croh(m: lambda, n: mu, l: rho) g_(rho nu)\
+  &- cancel(croh(l: rho, m: mu, n: nu) g_(rho lambda)) cancel(- croh(m: lambda, n: nu, l: rho) g_(rho mu))\
+  &= croh(l: rho, m: mu, n: lambda) g_(rho nu) + croh(m: lambda, n: mu, l: rho) g_(rho nu) = 2 croh(l: rho, n: lambda, m: mu)g_(rho nu)
 $
 Ainsi :\
 $
@@ -310,7 +312,7 @@ $
 $
 On trouve que :
 $
-  Gamma^(mu)""_(alpha beta) = croh(l: mu, m: alpha, n: beta) = (diff x^mu)/(diff xi^nu) (diff^2 xi^nu)/(diff x^alpha diff x^beta)
+  Gamma^(mu)""_(nu lambda) = croh(l: mu, m: nu, n: lambda) = (diff x^mu)/(diff xi^alpha) (diff^2 xi^alpha)/(diff x^nu diff x^lambda)
 $ <equchro>
 #QED
 
@@ -432,8 +434,8 @@ $
 $
 
 Ainsi, on a deux cas particuliers :
-- Soit $n = 2$, auquel cas la gravité est topologique.
-- Soit $R = 0$.
+- Soit $n = 2$, alors $R != 0$
+- Soit $R = 0$ et $n != 2$
 
 Or on recherche une solution pour un espace à 4 dimensions (3 d'espace + 1 de temps), ainsi $R = 0$. En injectant dans l'équation d'Einstein :\
 $
@@ -1235,60 +1237,167 @@ Pour le calcul des symboles de Christoffel de la @calcristo, on a fait un progra
 
 Pour exécuter ce programme, via Xcas, il faut se placer dans `cfg -> Mode (syntax) -> Xcas`
 ```
-X := [t, r, theta, phi];
+X:=copy([t,r,theta,phi]);
+print("%les coordonnées");
+print("x^\\mu = ");
+print(latex(X));
+print("\\newline");
 
-d := len(X);
+d:=len(X);
+print("%la dimension de l’espace");
+print("\\text{la dimension de l’espace  } n = ");
+print(latex(d));
+print("\\newline");
 
-g := [
-    [1 - Rs/r ,0, 0, 0],
-    [0,-(1 - Rs/r)^(-1), 0, 0],
-    [0,0,-r^2 , 0],
-    [0,0,0, -r^2 * sin(theta)^2]
-];
+g:=copy([
+      [1-R_s/r,0,0,0],
+      [0,-(1-R_s/r)^-1,0,0],
+      [0,0,-r^2,0],
+      [0,0,0,(-r^2)*sin(theta)^2]
+]);
+print("%la métrique");
+print("g_{\\mu \\nu} = ");
+print(latex(g));
+print("\\newline");
 
-ginv := g^-1;
+ginv:=g^-1;
+print("%la métrique inverse");
+print("g^{\\mu \\nu} = ");
+print(latex(ginv));
+print("\\newline");
 
-G := makemat( matrix(d), 0, d)[0];
-
-for ( j := 0; j < d; j++){
-    for ( k := 0; k < d; k++){
-        for( l:=0; l < d; l++){
-            tmp := 0;
-            for (m:=0; m < d; m++){
-              tmp = tmp + 1/2 * ginv[j][m] * ( diff( g[k][m], X[l]) + diff( g[l][m], X[k]) - diff( g[k][l], X[m]))
-            }
-            G[j][k][l] := simplify(tmp)
-        }
+G:=(makemat(matrix(d),0,d))[0];
+for (j:=0;j<d;j++) {
+  for (k:=0;k<d;k++) {
+    for (l:=0;l<d;l++) { 
+        tmp:=0;  
+        for (m:=0;m<d;m++) {
+          tmp=(tmp+1/2*(ginv[j])[m]*(diff((g[k])[m],X[l])+diff((g[l])[m],X[k])-(diff((g[k])[l],X[m]))))
+        };  
+        ((G[j])[k])[l]:=simplify(tmp);  
     }
-};
-
-dg := det(g);
-
-Ri := makemat(d);
-
-for (j := 0; j < d; j++){
-  for (k := 0; k < d; k++){
-    tmp1 := 0;
-    tmp2 := 0;
-    tmp3 := 0;
-    tmp4 := 0;
-    for(a := 0; a < d; a++){
-      tmp1 := tmp1 + diff( G[a][j][k], X[a]);
-      tmp3 := tmp3 + G[a][j][k] * diff( ln( sqrt(-dg) ), X[a]);
-      for ( b := 0; b < d; b++) {
-        tmp2 := tmp2 + G[b][a][j] * G[a][b][k];
-      }
-    }
-    Ri[j][k] := simplify( - diff( diff (ln(sqrt(-dg)), X[k]), X[j]) + tmp1 - tmp2 + tmp3)
   }
 };
+print("%les symboles de Christofell");
+for (j := 0; j < d; j++){
+  print("\\Gamma^" + j + "_{\\mu \\nu} = ");
+  print(latex(G[j]));
+  print("\\newline");
+};
 
-R := 0;
-
-for ( j := 0; j < d; j++){
-  for( k := 0; k < d; k++){
-    R = R + ginv[j][k] * Ri[j][k]
-    }
-}
-
+dg:=det(g);
+Ri:=makemat(d);
+for (j:=0;j<d;j++) {for (k:=0;k<d;k++) { 
+      tmp1:=0;  
+      tmp2:=0;  
+      tmp3:=0;  
+      tmp4:=0;  
+      for (a:=0;a<d;a++) { 
+          tmp1:=tmp1+diff(((G[a])[j])[k],X[a]);  
+          tmp3:=tmp3+((G[a])[j])[k]*diff(ln(sqrt(-dg)),X[a]);  
+          for (b:=0;b<d;b++) {
+            tmp2:=tmp2+((G[b])[a])[j]*((G[a])[b])[k]
+          };  
+        };  
+      (Ri[j])[k]:=simplify(-(diff(diff(ln(sqrt(-dg)),X[k]),X[j]))+tmp1-tmp2+tmp3);  
+    }};
+print("%Le tenseur de Ricci");
+print("R_{\\mu \\nu} = ");
+print(latex(Ri));
+print("\\newline");
+  
+R:=0;
+for (j:=0;j<d;j++) {
+  for (k:=0;k<d;k++) {
+    R=(R+(ginv[j])[k]*(Ri[j])[k])
+   }
+};
+print("%la courbure scalaire");
+print("R = ");
+print(latex(R));
 ```
+
+#assert.eq(mitex-convert("\alpha x"), "alpha  x ")
+
+Le programme vous sortiras un code LaTe#sym.Chi \
+
+par exemple ici le programme vous sortiras :
+```
+%les coordonnées
+x^\mu = 
+\left[t,r,\theta,\varphi\right]
+\newline
+%la dimension de l’espace
+\text{la dimension de l’espace  } n = 
+4
+\newline
+%la métrique
+g_{\mu \nu} = 
+\left[\begin{array}{cccc}1-\frac{R_{s}}{r}&0&0&0\\0&-\left(1-\frac{R_{s}}{r}\right)^{-1}&0&0\\0&0&-r^{2}&0\\0&0&0&-r^{2} \sin ^{2}\theta\end{array}\right]
+\newline
+%la métrique inverse
+g^{\mu \nu} = 
+\left[\begin{array}{cccc}-\frac{r}{R_{s}-r}&0&0&0\\0&\frac{R_{s}-r}{r}&0&0\\0&0&-\frac1{r^{2}}&0\\0&0&0&-\frac{1}{r^{2} \sin ^{2}\theta}\end{array}\right]
+\newline
+%les symboles de Christofell
+\Gamma^0_{\mu \nu} = 
+\left[\begin{array}{cccc}0&-\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0\\-\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
+\newline
+\Gamma^1_{\mu \nu} = 
+\left[\begin{array}{cccc}\frac{-R_{s}^{2}+R_{s} r}{2 r^{3}}&0&0&0\\0&\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0\\0&0&R_{s}-r&0\\0&0&0&R_{s} \sin ^{2}\theta-r \sin ^{2}\theta\end{array}\right]
+\newline
+\Gamma^2_{\mu \nu} = 
+\left[\begin{array}{cccc}0&0&0&0\\0&0&\frac1{r}&0\\0&\frac1{r}&0&0\\0&0&0&-\frac{\tan \theta}{\tan ^{2}\theta+1}\end{array}\right]
+\newline
+\Gamma^3_{\mu \nu} = 
+\left[\begin{array}{cccc}0&0&0&0\\0&0&0&\frac1{r}\\0&0&0&\frac1{\tan \theta}\\0&\frac1{r}&\frac1{\tan \theta}&0\end{array}\right]
+\newline
+%Le tenseur de Ricci
+R_{\mu \nu} = 
+\left[\begin{array}{cccc}0&0&0&0\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
+\newline
+%la courbure scalaire
+R = 
+0
+```
+
+qui une fois compiler en pdf nous donne :
+
+#mitex(
+```%les coordonnées
+x^\mu = 
+\left[t,r,\theta,\varphi\right]
+\newline
+%la dimension de l’espace
+\text{la dimension de l’espace  } n = 
+4
+\newline
+%la métrique
+g_{\mu \nu} = 
+\left[\begin{array}{cccc}1-\frac{R_{s}}{r}&0&0&0\\0&-\left(1-\frac{R_{s}}{r}\right)^{-1}&0&0\\0&0&-r^{2}&0\\0&0&0&-r^{2} \sin ^{2}\theta\end{array}\right]
+\newline
+%la métrique inverse
+g^{\mu \nu} = 
+\left[\begin{array}{cccc}-\frac{r}{R_{s}-r}&0&0&0\\0&\frac{R_{s}-r}{r}&0&0\\0&0&-\frac1{r^{2}}&0\\0&0&0&-\frac{1}{r^{2} \sin ^{2}\theta}\end{array}\right]
+\newline
+%les symboles de Christofell
+\Gamma^0_{\mu \nu} = 
+\left[\begin{array}{cccc}0&-\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0\\-\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
+\newline
+\Gamma^1_{\mu \nu} = 
+\left[\begin{array}{cccc}\frac{-R_{s}^{2}+R_{s} r}{2 r^{3}}&0&0&0\\0&\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0\\0&0&R_{s}-r&0\\0&0&0&R_{s} \sin ^{2}\theta-r \sin ^{2}\theta\end{array}\right]
+\newline
+\Gamma^2_{\mu \nu} = 
+\left[\begin{array}{cccc}0&0&0&0\\0&0&\frac1{r}&0\\0&\frac1{r}&0&0\\0&0&0&-\frac{\tan \theta}{\tan ^{2}\theta+1}\end{array}\right]
+\newline
+\Gamma^3_{\mu \nu} = 
+\left[\begin{array}{cccc}0&0&0&0\\0&0&0&\frac1{r}\\0&0&0&\frac1{\tan \theta}\\0&\frac1{r}&\frac1{\tan \theta}&0\end{array}\right]
+\newline
+%Le tenseur de Ricci
+R_{\mu \nu} = 
+\left[\begin{array}{cccc}0&0&0&0\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
+\newline
+%la courbure scalaire
+R = 
+0```
+)
