@@ -100,7 +100,9 @@
 
 #align(center)[*Résumé*]\
 #v(1mm)
-Résumé (maximum 1/2 page) du travail effectué (contexte, résultats).
+Ce rapport présente l’ensemble du travail qui a été fourni durant le stage. Celui-ci avait pour but de reproduire la solution de Schwarzschild, qui fut la première solution exacte des équations d’Einstein ( en 1916 ). Ce stage s’est articulé autour de trois grands axes, autant en termes de contenu que dans le temps.
+
+En effet, nous avons dans un premier temps développé les outils de la géométrie différentielle et riemannienne, notamment l’équation des géodésiques, ainsi que le tenseur de Riemann ou les symboles de Christoffel. Ensuite, nous avons dérivé la solution analytique de la métrique autour d’une masse ponctuelle statique, i.e. dans le cas de la symétrie sphérique. Enfin, nous nous sommes intéressés à la structure de l’espace-temps décrit par cette solution, dont un soin particulier a été donné à l’étude des géodésiques et à la levée de la singularité du système de coordonnées présente dans l’écriture « classique » de la métrique de Schwarzschild. Le passage aux coordonnées d’Eddington–Finkelstein nous a permis de décrire et d’étudier les trous noirs et les trous blancs.
 
 #let pagenub = context {
   let nbpage = counter(page)
@@ -143,21 +145,7 @@ Résumé (maximum 1/2 page) du travail effectué (contexte, résultats).
 #show heading.where(body: [Introduction]): set heading(numbering: none)
 = Introduction
 
-L'introduction (maximum 2 pages) sert à donner le cadre du travail (domaine de recherche dans lequel il se situe) et l'état de l'art.
-Il est normal de citer les références associées : articles Article01, livres Livre01, chapitres de livres Chapitre01, conférences Proceeding01 ou thèses These01.
-Elle spécifie aussi comment les chapitres suivants sont structurés.
-Tout comme le chapitre final « Conclusions », l'Introduction est rédigée après tout le reste.\
-\
-
-- Petite introduction historique : Schwarzschild
-- Présentation de l'ouvrage utilisé et du fait qu'il soit le seul
-- $c = h = G = 1$
-- Objectif : métrique de Schwarzschild + Trou Noir/Blanc
- - Bases Théoriques : définition des objets + quelques propriétés
- - Solution de Schwarzschild : dérivation de la solution de Schwarzschild
- - Étude de la métrique : étude de la métrique trouvée plus haut, jusqu'à arriver aux solutions Trou Noir/Blanc
-
-En 1916, alors sur le front russe, l'astronome Karl Schwarzschild trouve pour la première fois une solution exacte aux équations d'Einstein, décrivant la gravité dans le cadre de la théorie de la relativité générale aux abords d'une masse statique à symétrie sphérique.\
+En 1915, alors sur le front russe, l'astronome Karl Schwarzschild trouve pour la première fois une solution exacte aux équations d'Einstein, décrivant la gravité dans le cadre de la théorie de la relativité générale aux abords d'une masse statique à symétrie sphérique.\
 Il nous a été donné au cours de ce stage de redériver ainsi que d'étudier cette solution. Dans ce cadre, nous poserons que les constantes fondamentales de la physique $c$ et $G$ valent toutes deux $1$, nous plaçant dans un système d'unités dit « naturel », nous permettant d'omettre ces grandeurs dans nos équations.\
 De plus, comme cette solution est la première qui résout les équations d'Einstein, qui plus est dans l'un des cas les plus simples (symétrie sphérique, univers vide, etc.), la dérivation et l'étude de cette solution se retrouvent dans de nombreux ouvrages portant sur la théorie de la relativité générale. C'est pourquoi nous nous baserons uniquement sur #text(style: "italic")[General Relativity, An Introduction for Physicists] @RGbook de M. P. Hobson, G. P. Efstathiou et A. N. Lasenby, qui couvre l'ensemble de nos besoins dans les chapitres $9$ et $11$.\
 Ainsi, nous avons découpé notre travail en trois parties distinctes qui forment les trois chapitres de ce rapport : la première partie porte sur les bases théoriques dont nous avons besoin pour progresser dans la dérivation de la solution et de son étude ; la seconde partie porte exclusivement sur la redérivation de la solution, qui représentait le cœur de notre stage ; enfin, le dernier chapitre porte sur l'étude même de la métrique de Schwarzschild, notamment ses géodésiques et ses singularités à l'aide des coordonnées d'Eddington–Finkelstein, ce qui en fait le plus long des trois chapitres.
@@ -168,17 +156,20 @@ Ainsi, nous avons découpé notre travail en trois parties distinctes qui formen
 
 #align(center)[== Équation des géodésiques]
 
-Dans un premier temps, nous avons cherché à déduire la trajectoire sur une surface d'une particule soumise à aucune force. Cette trajectoire est appelée #text(style: "italic")[géodésique].\
+Dans un premier temps, nous avons cherché à déduire la trajectoire dans un espace d'une particule soumise à aucune force. Cette trajectoire est appelée #text(style: "italic")[géodésique].\
 Nous ne donnerons pas de définition formelle de ce qu'est une géodésique, car ceci sort du cadre du stage effectué.\
-Pour en donner une intuition, on pourra considérer que c'est la généralisation d'une ligne droite pour une surface courbe.\
+Pour en donner une intuition, on pourra considérer que c'est la généralisation d'une ligne droite pour un espace courbe.\
 \
-Considérons donc une métrique $g_(mu nu)$ pour un espace à $n$ dimensions, et soit une particule restreinte à cette surface de coordonnées $x^alpha$, avec $alpha in [|1;n|]$\
+Considérons donc une métrique $g_(mu nu)$ pour un espace à $n$ dimensions, et soit une particule restreinte à cette espace de coordonnées $x^alpha$, avec $alpha in [|1;n|]$\
 \
 D'après #text(style: "italic")[General Relativity, An Introduction for Physicists] @RGbook, pour déduire une équation des géodésiques, nous devons considérer le lagrangien suivant :\
 $
   cal(L)(x^alpha, dot(x)^alpha) = [g_(mu nu)(x) dot(x)^mu dot(x)^nu]^(1/2)
 $
 avec $dot(x)^alpha = (dif x^alpha)/(dif s)$\
+\
+pour rappelle la métrique est définis comme suis : $dif cal(s)^2 = g_(mu nu) dx^mu dx^nu$ ainsi en différentiant par $ds$ et en prenant la racine, nous optenons : $(diff cal(s))/(ds) = [g_(mu nu) dot(x)^mu dot(x)^nu]^(1/2) = cal(L) $ ce qui est exactement notre lagrangien, ainsi l’action définis par ce lagrangien $S = integral cal(L) dif cal(s) = integral ds$ ce qui correspond à une distance, donc par le principe de moindre action nous cherchons la distance qui extrémise la distance entre deux points.\
+\
 Ainsi on a :\
 $
   (partial cal(L))/(partial x^alpha) & = 1/2 [g_(mu nu)dot(x)^mu dot(x)^nu]^(- 1/2) diff/(diff x^alpha) (g_(mu nu) dot(x)^mu dot(x)^nu)\
@@ -204,6 +195,19 @@ $
              dif lambda & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(1/2) dif s \
   "Donc " dif/(dif lambda) & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(-1/2) dif/(dif s)
 $
+En écrivant l'action par rapport à $s$, on a :\
+$
+  S_1 = integral [g_(mu nu) dif/(dif s) x^mu dif/(dif s) x^nu]^(1/2) dif s
+$
+Alors en opérant le changement de variable, $S_1$ devient :\
+$
+  S_1 & = integral cancel([g_(mu nu) dot(x)^mu dot(x)^nu]^(1/2)) [g_(mu nu) dif/(dif lambda) x^mu dif/(dif lambda) x^nu]^(1/2) cancel([g_(mu nu) dot(x)^mu dot(x)^nu]^(-1/2)) dif lambda\
+  &= integral [g_(mu nu) dif/(dif lambda) x^mu dif/(dif lambda) x^nu]^(1/2) dif lambda
+$
+Alors, comme $S_1$ est invariante par la transformation $s |-> lambda$ et que celle-ci est un difféomorphisme, on a alors :\
+$
+  dif/(dif s)(g_(alpha nu) dot(x)^nu) = 1/2 g_(mu nu, alpha) dot(x)^mu dot(x)^nu
+$
 Ainsi, en réécrivant l'équation précédente :\
 $
   dif/(dif s) ( [g_(mu nu) dot(x)^mu dot(x)^nu]^(- 1/2) g_(alpha nu) dif/(dif s) x^nu) &= 1/2 [g_(mu nu)dot(x)^mu dot(x)^nu]^(- 1/2) g_(mu nu, alpha) dif/(dif s) x^mu dif/(dif s) x^nu\
@@ -212,19 +216,6 @@ $
   "donc " dif / (dif lambda) (g_(alpha nu) dif/(dif lambda) x^nu) &= 1/2 g_(mu nu, alpha) dif/(dif lambda) x^mu dif/(dif lambda) x^nu
 $
 \
-Si on écrit l'action par rapport à $s$, on a :\
-$
-  S_1 = integral [g_(mu nu) dif/(dif s) x^mu dif/(dif s) x^nu]^(1/2) dif s
-$
-Or, comme $S_1$ est invariante par la transformation $s |-> lambda$ et que celle-ci est un difféomorphisme, on a alors :\
-$
-  dif/(dif s)(g_(alpha nu) dot(x)^nu) = 1/2 g_(mu nu, alpha) dot(x)^mu dot(x)^nu
-$
-Alors en opérant le changement de variable, $S_1$ devient :\
-$
-  S_1 & = integral cancel([g_(mu nu) dot(x)^mu dot(x)^nu]^(1/2)) [g_(mu nu) dif/(dif lambda) x^mu dif/(dif lambda) x^nu]^(1/2) cancel([g_(mu nu) dot(x)^mu dot(x)^nu]^(-1/2)) dif lambda\
-  &= integral [g_(mu nu) dif/(dif lambda) x^mu dif/(dif lambda) x^nu]^(1/2) dif lambda
-$
 Donc en calculant le terme de gauche :\
 $
   d/(dif s)(g_(alpha nu)dot(x)^nu) &= dot(x)^nu dif/(dif s) g_(alpha nu) + g_(alpha nu) dot.double(x)^nu\
@@ -247,7 +238,7 @@ $
   &"Soit" &dot.double(x)^beta + Gamma^(beta)""_(mu nu) dot(x)^mu dot(x)^nu = 0
 $ <eqgeo>
 
-Ainsi, la trajectoire de toute particule ne subissant aucune force et naviguant sur une surface définie par une métrique est régie par l'équation précédente.
+Ainsi, la trajectoire de toute particule ne subissant aucune force et naviguant sur un espace de Riemann munie d’une métrique $g_(mu nu)$ est régie par l'équation précédente.
 
 #align(center)[== Dérivée covariante]
 
@@ -263,7 +254,7 @@ $
 $
 #h(5mm) *Preuve :*
 
-On se place dans un système d’inertie de coordonnées $xi^alpha$, et on s'intéresse à un changement de coordonnées vers $x^alpha$.\
+On se place dans un système d’inertie de coordonnées $xi^alpha$, et on s'intéresse à un changement de coordonnées vers $x^mu$.\
 Comme $xi^alpha$ d’écrit un système d’inertie, alors $(dif^2 xi^alpha)/(dif tau^2) = 0$\
 Ainsi :\
 $
@@ -285,7 +276,7 @@ $
 \
 En réécrivant le produit scalaire dans les coordonnées $x^mu$ :\
 $
-  eta_(alpha beta) dif xi^alpha dif xi^beta = underbrace(eta_(alpha beta) (diff xi^alpha)/(diff x^mu) (diff xi^beta)/(diff x^nu), = g_(alpha beta)) dif x^mu dif x^nu
+  eta_(alpha beta) dif xi^alpha dif xi^beta = underbrace(eta_(alpha beta) (diff xi^alpha)/(diff x^mu) (diff xi^beta)/(diff x^nu), = g_(mu nu)) dif x^mu dif x^nu
 $
 Donc :\
 $
@@ -318,7 +309,7 @@ $ <equchro>
 
 === Transformation de $Gamma^lambda""_(mu nu)$
 
-De plus, nous avons vérifié si $Gamma^(lambda)""_(mu nu)$ est un tenseur.
+Nous proposons de vérifier si $Gamma^(lambda)""_(mu nu)$ est un tenseur.
 Pour cela, regardons comment $Gamma$ se transforme d'après @equchro :\
 \
 
@@ -354,18 +345,18 @@ $
 
 *Preuve :*
 
-Vérifions que c'est bien un tenseur pour un vecteur $x^nu$ :\
+Vérifions que c'est bien un tenseur pour un vecteur $v^nu$ :\
 \
 #align(center, math.equation(numbering: none)[
   $
-    nabla_mu ' x'^nu & = diff/(diff x'^mu) x'^nu + croh(l: nu, n: rho)' x'^rho \
-    &= (diff x^alpha)/(diff x'^mu) diff/(diff x^alpha) ((diff x'^nu)/(diff x^beta) x^beta) + ((diff x'^nu)/(diff x^omega) croh(m: sigma, l: omega, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^rho)
-      - (diff x^alpha)/(diff x'^mu) (diff x^sigma)/(diff x'^rho) (diff^2 x'^nu)/( diff x^alpha diff x^sigma)) (diff x'^rho)/(diff x^beta) x^beta\
-    &= cancel((diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/(diff x^alpha diff x^beta) x^beta) + (diff x^alpha)/(diff x'^mu) (diff x'^nu)/(diff x^beta) (diff x^beta)/(diff x^alpha) \
-    &+ (diff x'^nu)/(diff x^omega) croh(m: alpha, l: omega, n: beta) (diff x^alpha)/(diff x'^mu) x^beta
-    cancel(- (diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/( diff x^alpha diff x^beta) x^beta) \
-    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) (underbrace((diff x^beta) / (diff x^alpha) + croh(m: alpha, l: beta, n: tau) x^tau, = nabla_alpha x^beta))\
-    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) nabla_alpha x^beta
+    nabla_mu ' v'^nu & = diff/(diff x'^mu) v'^nu + croh(l: nu, n: rho)' v'^rho \
+    &= (diff x^alpha)/(diff x'^mu) diff/(diff x^alpha) ((diff x'^nu)/(diff x^beta) v^beta) + ((diff x'^nu)/(diff x^omega) croh(m: sigma, l: omega, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^rho)
+      - (diff x^alpha)/(diff x'^mu) (diff x^sigma)/(diff x'^rho) (diff^2 x'^nu)/( diff x^alpha diff x^sigma)) (diff x'^rho)/(diff x^beta) v^beta\
+    &= cancel((diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/(diff x^alpha diff x^beta) v^beta) + (diff x^alpha)/(diff x'^mu) (diff x'^nu)/(diff x^beta) (diff v^beta)/(diff x^alpha) \
+    &+ (diff x'^nu)/(diff x^omega) croh(m: alpha, l: omega, n: beta) (diff x^alpha)/(diff x'^mu) v^beta
+    cancel(- (diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/( diff x^alpha diff x^beta) v^beta) \
+    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) (underbrace((diff v^beta) / (diff x^alpha) + croh(m: alpha, l: beta, n: tau) x^tau, = nabla_alpha v^beta))\
+    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) nabla_alpha v^beta
   $
 ])
 
@@ -402,7 +393,7 @@ $
 $
 Ainsi, on trouve que :\
 $
-  R^rho""_(mu nu kappa) = [nabla_mu, nabla_nu] v^rho = diff_nu Gamma^sigma""_(mu kappa) - diff_kappa Gamma^sigma""_(mu nu) + Gamma^sigma""_(nu lambda) Gamma^lambda""_(mu kappa) - Gamma^sigma""_(kappa lambda) Gamma^lambda""_(mu nu)
+  R^rho""_(mu nu kappa) = [nabla_mu, nabla_nu] = diff_nu Gamma^rho""_(mu kappa) - diff_kappa Gamma^rho""_(mu nu) + Gamma^rho""_(nu lambda) Gamma^lambda""_(mu kappa) - Gamma^rho""_(kappa lambda) Gamma^lambda""_(mu nu)
 $
 #QED
 
@@ -412,7 +403,7 @@ On définit également les deux contractions du tenseur de Riemann suivantes :
 
 = Solution de Schwarzschild
 
-Maintenant que la base théorique est faite, nous avons pu nous intéresser au cœur du stage, c'est-à-dire à la solution des équations d'Einstein que Karl Schwarzschild développe en 1916. Cette solution s'intéresse à la métrique produite aux abords d'une masse ponctuelle sans rotation, ce qui induit une symétrie sphérique.\
+Maintenant que la base théorique est faite, nous avons pu nous intéresser au cœur du stage, c'est-à-dire à la solution des équations d'Einstein que Karl Schwarzschild développe en 1915. Cette solution s'intéresse à la métrique produite aux abords d'une masse ponctuelle sans rotation, ce qui induit une symétrie sphérique.\
 
 == Équation sur $R_(mu nu)$
 
@@ -434,8 +425,8 @@ $
 $
 
 Ainsi, on a deux cas particuliers :
-- Soit $n = 2$, alors $R != 0$
-- Soit $R = 0$ et $n != 2$
+- Soit $n = 2$
+- Soit $R = 0$
 
 Or on recherche une solution pour un espace à 4 dimensions (3 d'espace + 1 de temps), ainsi $R = 0$. En injectant dans l'équation d'Einstein :\
 $
@@ -493,7 +484,7 @@ $
 
 D'après @Ricci, $R_(mu nu) = 0$, or\
 $
-  R_(mu nu) = diff_nu Gamma^sigma""_(mu sigma) - diff_sigma Gamma^sigma""_(mu nu) + Gamma^(rho)""_(mu sigma) Gamma^sigma""rho nu - Gamma^(rho)""_(mu nu) Gamma^(sigma)""rho sigma
+  R_(mu nu) = diff_nu Gamma^sigma""_(mu sigma) - diff_sigma Gamma^sigma""_(mu nu) + Gamma^(rho)""_(mu sigma) Gamma^sigma""_(rho nu) - Gamma^(rho)""_(mu nu) Gamma^(sigma)""_(rho sigma)
 $
 Ainsi, en calculant les symboles de Christoffel, on obtiendra des équations sur $A$ et $B$.
 
@@ -502,7 +493,7 @@ Pour calculer les symboles de Christoffel, on pourrait partir de la définition 
 $
   Gamma^mu""_(alpha beta) = 1/2 g^(mu rho)(g_(alpha rho, beta) + g_(beta rho, alpha) - g_(alpha beta, rho))
 $
-Cependant, ceci demande de calculer indépendamment chaque coefficient, or en dimension $4$, il y en a $4^3 = 64$, rendant les calculs longs et éreintants.\
+Cependant, ceci demande de calculer indépendamment chaque coefficient, or en dimension $4$, il y en a $(4^3 + 4^2)/2 = 40$, rendant les calculs longs et éreintants.\
 Or, il existe une méthode plus rapide pour les calculer. Celle-ci se base sur le fait que l'équation des géodésiques, @eqgeo, dépend directement des symboles de Christoffel.\
 Donc, pour les calculer, on prend le lagrangien $cal(L) = g_(mu nu)dot(x)^mu dot(x)^nu$, que l'on insère dans les équations d'Euler-Lagrange pour retomber sur l'équation des géodésiques.\
 Ici, nous ne ferons que le calcul pour la variable $r$, le reste a été fait par un programme pour Xcas (`christoffel.cxx`, présent dans @programme).\
@@ -627,13 +618,13 @@ $ <metswart>
 Maintenant que nous avons dérivé la métrique de Schwarzschild, nous allons nous intéresser au comportement 
 d’objets aux abords de la masse ponctuelle, jusqu’à arriver aux solutions trou noir et trou blanc en fin de chapitre.
 
-== Géodésique radiale d’un photon <géoradphot>
+== Cônes de Lumière <géoradphot>
 
-On s’intéresse maintenant aux géodésiques radiales, i.e. $dif theta = dif phi = 0$, ainsi la métrique donnée par @metswart devient :
+On s’intéresse maintenant aux cônes de lumière radiales, i.e. $dif theta = dif phi = 0$, ainsi la métrique donnée par @metswart devient :
 $
   ds^2 = (1 - R_s/r)dif t^2 - (1 - R_s/r)^(-1) dif r^2
 $
-de plus pour une géodésique, on a : $ds = 0$, alors :
+de plus pour un cône de lumière, on a : $ds = 0$, alors :
 $
   dt = plus.minus (1 - R_s/r)^(-1) dr
 $<georadialdiff>
@@ -703,7 +694,7 @@ $
 
 == Temps de chute d’un corps
 
-Intéressons-nous maintenant au temps de chute de deux points de vue : premièrement du point de vue de l’objet lui-même, puis du point de vue d’un observateur lointain.\
+Intéressons-nous maintenant au temps de chute d’un corps massif de deux points de vue : premièrement du point de vue de l’objet lui-même, puis du point de vue d’un observateur lointain.\
 On note $tau$ le temps propre de l’objet tombant,\
 alors si l’on prend le lagrangien : $cal(L) = g_(mu nu) dot(x)^mu dot(x)^nu = (1 - R_s/r) ((dif t)/(dif tau))^2 - (1 - R_s/r)^(-1) ((dif r)/(dif tau))^2$.\
 Alors d’après les équations d’Euler-Lagrange par rapport à $t$ :
@@ -757,7 +748,7 @@ $
 $
 Ainsi pour un objet tombant d’un point distant ($r = R_0$), il atteindra la singularité ($r = 0$) en :
 $
-  tau tend(r, 0) 2/3 sqrt(R_0^3/R_s)
+  tau tend(r, R_s) 2/3 (sqrt(R_0^3/R_s) - R_s)
 $
 
 Intéressons-nous maintenant au point de vue d’un observateur lointain ; comme $k = 1$, @constanteducul devient :
@@ -805,16 +796,16 @@ Ainsi pour conclure, nous avons les deux grandeurs suivantes :
     columns: 1,
     row-gutter: 1cm,
     align: center + horizon,
-    $tau(r) tend(r, 0) 2/3 sqrt(R_0^3/R_s)$,
+    $tau(r) tend(r, 0) 2/3 (sqrt(R_0^3/R_s) - R_s)$,
     $t(r) tend(r, R_s) + oo$,
   ),
 )\
-On a donc que de son point de vue, l’objet atteint la singularité en un temps fini,
-mais du point de vue d’un observateur lointain, l’objet met un temps infini avant d’atteindre $r = R_s$.
+On a donc que de son point de vue, l’objet atteint $r = R_s$ en un temps fini,
+mais du point de vue d’un observateur lointain, l’objet met un temps infini avant d’y arriver.
 
-== Cônes de lumière
+== Approfondisement de l’étude des cônes de lumière
 
-Comme la lumière suit les géodésiques, sa trajectoire est une géodésique.
+Comme vue dans le @géoradphot, la lumière suis la trajectoire des cônes de lumière
 
 Alors, nous avons déjà vu dans la @géoradphot que les géodésiques pour un photon étaient régies par l’équation :
 $
@@ -940,18 +931,29 @@ En traçant ces deux solutions pour des $p$ différents, on obtient le diagramme
     content((5.06, -0.3), $R_s$)
   }),
   caption: [
-    structure des cônes de lumière pour la métrique de Schwarzschild\
+    structure des cônes de lumière ( seul le coté future est montré )\ pour la métrique de Schwarzschild
     en bleu les rayons sortants, et en rouge les rayons entrants
   ],
 ) <fig2geolum>
-On observe que dans la zone ${0<r<R_s}$, les cônes de lumière sont entièrement retournés vers la singularité ; ainsi les photons présents dans cette zone finiront au niveau de la singularité quelle que soit leur nature de départ. Ainsi toute particule massive doit également finir au niveau de la singularité.\
-On aurait pu voir cette inversion temps $<=>$ espace via la métrique ; en effet pour $r < R_s$, $dt$ et $dr$ changent de signe, indiquant l’inversion temps $<=>$ espace.
+\
+On observe que dans la zone ${0<r<R_s}$, les cônes de lumière sont entièrement retournés vers la singularité ; ainsi les photons présents dans cette zone finiront au niveau de la singularité quelle que soit leur nature de départ, car le seul future indiqué par les cônes de lumière ( celuis indiqué par la @fig2geolum ) . Ainsi toute particule massive doit également finir au niveau de la singularité, ainsi l’objet d’écrit ici est un #text(style: "italic")[trou noir].\
+On aurait pu voir cette inversion temps $<=>$ espace via la métrique ; en effet si on s’intéresse au signe des composante temporelle et spacial, on obtient le tableau suivant :
+#align(center, 
+  table(
+    columns: 3,
+    $$, $r < R_s$, $r > R_s$,
+    [temps], $+$, $-$,
+    [espace], $-$, $+$
+
+  )
+)
+Ainsi ici, on vois très clairement l’inversion espace $<=>$ temps qui se produit, passé la limite $r = R_r$
 
 === Coordonnées d’Eddington–Finkelstein
 
 Nous pouvons remarquer en regardant la métrique (@metswart) et la @fig2geolum que nous avons deux singularités : 
-- en $r = 0$, qui est une #text(style: "italic")[vraie] singularité, car la courbure scalaire $R_(mu nu rho sigma)R^(mu mu rho sigma) = 12 R_s^2/r^6$ diverge en $0$,\
-- en $r = R_s$, qui est une #text(style: "italic")[fausse] singularité ; en effet, ici la courbure scalaire est finie $R_(mu nu rho sigma)R^(mu mu rho sigma) = 12/R_s^4$.\
+- en $r = 0$, qui est une #text(style: "italic")[vraie] singularité, car la courbure sectionnelle $R_(mu nu rho sigma)R^(mu mu rho sigma) = 12 R_s^2/r^6$ diverge en $0$,\
+- en $r = R_s$, qui est une #text(style: "italic")[fausse] singularité ; en effet, ici la courbure sectionnelle est finie $R_(mu nu rho sigma)R^(mu mu rho sigma) = 12/R_s^4$.\
 La seconde singularité est appelée #text(style: "italic")[singularité du système de coordonnées] ; comme son nom l’indique, il est possible de « retirer »
 cette singularité en se plaçant dans un système de coordonnées plus « naturel ».\
 
@@ -993,7 +995,7 @@ $
   ds^2 = (1 - R_s/r) dif p^2 - 2 dr dif p
 $
 
-Si on regarde les géodésiques, donc $ds = 0$, on a :
+Si on regarde les cônes de lumière, donc $ds = 0$, on a :
 $
   (1 - R_s/r) dif p^2 - 2 dr dif p = 0
 $
@@ -1200,6 +1202,8 @@ $
   caption: [diagramme $(t',r)$, avec les cônes de lumière,\ avec en rouge les photons entrants, et en bleu les photons sortants],
 )
 
+#pagebreak()
+
 On remarque, comme attendu, qu'ici ce sont les rayons sortants qui sont continus pour $r = R_s$. De même, si l’on regarde la structure des
 cônes de lumière : ceux-ci sont entièrement #text(style: "italic")[tournés] vers l’extérieur pour $r < R_s$, ainsi un rayon lumineux sera forcément éjecté de la région $r < R_s$.\
 Le rayon $R_s$ forme aussi une frontière, également appelée #text(style: "italic")[horizon des événements], et ainsi, au contraire de la solution trou noir,
@@ -1212,7 +1216,7 @@ Un tel objet est appelé #text(style: "italic")[trou blanc].
 
 Ainsi au cours de ce stage, nous avons pu dans un premier temps nous introduire aux mathématiques de la géométrie riemannienne, par l’introduction des différents tenseurs, tels que : le tenseur de Riemann, de Ricci, ou encore des symboles de Christoffel. Ce qui nous a permis, à l’aide de la mécanique lagrangienne, d’en déduire une équation pour les géodésiques d’une surface donnée.\
 Ensuite nous avons pu mettre en pratique, dans le cas de la relativité générale, ce que nous avons appris dans le premier chapitre, ce qui nous a permis d’en déduire la métrique de Schwarzschild, qui est la solution aux équations d’Einstein pour une masse ponctuelle statique à symétrie sphérique. Bien que cette solution présente un cas particulier, celui-ci est tout de même utilisable en astrophysique pour des astres avec une période de rotation faible face à la vitesse de la lumière, permettant d’approximer la métrique aux alentours de tels astres.\
-Enfin, nous avons poussé l’étude de la solution pour en déduire notamment ses géodésiques radiales, et donc du mouvement, réel et apparent, d’objets tombant dans une masse ponctuelle ; nous avons calculé que l’objet atteindra la singularité en un temps fini, mais paraîtra se stopper aux abords de l’horizon des événements pour un observateur lointain. Puis nous avons levé la singularité apparente présente au niveau du rayon de Schwarzschild, ce qui nous a permis d’en déduire deux solutions : les trous noirs et les trous blancs, qui forment une paire d’objets théoriques, dont le premier, les trous noirs, a été confirmé expérimentalement bien plus tard que la publication originale des travaux de Schwarzschild en 1916, jusqu’à en avoir une image courant 2019 du trou noir $upright(M)87^*$.\
+Enfin, nous avons poussé l’étude de la solution pour en déduire notamment ses géodésiques radiales, et donc du mouvement, réel et apparent, d’objets tombant dans une masse ponctuelle ; nous avons calculé que l’objet atteindra l’horizon des événements en un temps fini, mais paraîtra se stopper aux abords de cette horizon des événements pour un observateur lointain. Puis nous avons levé la singularité apparente présente au niveau du rayon de Schwarzschild, ce qui nous a permis d’en déduire deux solutions : les trous noirs et les trous blancs, qui forment une paire d’objets théoriques, dont le premier, les trous noirs, a été confirmé expérimentalement bien plus tard que la publication originale des travaux de Schwarzschild en 1915, jusqu’à en avoir une image courant 2019 du trou noir $upright(M)87^*$.\
 Nous aurions pu continuer l’étude de la métrique de Schwarzschild jusqu’aux coordonnées de Kruskal-Szekeres, qui permettent de réunir les solutions trou noir et trou blanc, et de voir apparaître un passage entre les deux solutions, appelé #text(style: "italic")[pont d’Einstein-Rosen].
 
 #pagebreak()
@@ -1250,8 +1254,8 @@ print(latex(d));
 print("\\newline");
 
 g:=copy([
-      [1-R_s/r,0,0,0],
-      [0,-(1-R_s/r)^-1,0,0],
+      [A(r),0,0,0],
+      [0,B(r),0,0],
       [0,0,-r^2,0],
       [0,0,0,(-r^2)*sin(theta)^2]
 ]);
@@ -1317,8 +1321,6 @@ print("R = ");
 print(latex(R));
 ```
 
-#assert.eq(mitex-convert("\alpha x"), "alpha  x ")
-
 Le programme vous sortiras un code LaTe#sym.Chi \
 
 par exemple ici le programme vous sortiras :
@@ -1333,18 +1335,18 @@ x^\mu =
 \newline
 %la métrique
 g_{\mu \nu} = 
-\left[\begin{array}{cccc}1-\frac{R_{s}}{r}&0&0&0\\0&-\left(1-\frac{R_{s}}{r}\right)^{-1}&0&0\\0&0&-r^{2}&0\\0&0&0&-r^{2} \sin ^{2}\theta\end{array}\right]
+\left[\begin{array}{cccc}A\left(r\right)&0&0&0\\0&B\left(r\right)&0&0\\0&0&-r^{2}&0\\0&0&0&-r^{2} \sin ^{2}\theta\end{array}\right]
 \newline
 %la métrique inverse
 g^{\mu \nu} = 
-\left[\begin{array}{cccc}-\frac{r}{R_{s}-r}&0&0&0\\0&\frac{R_{s}-r}{r}&0&0\\0&0&-\frac1{r^{2}}&0\\0&0&0&-\frac{1}{r^{2} \sin ^{2}\theta}\end{array}\right]
+\left[\begin{array}{cccc}\frac1{A\left(r\right)}&0&0&0\\0&\frac1{B\left(r\right)}&0&0\\0&0&-\frac1{r^{2}}&0\\0&0&0&-\frac{1}{r^{2} \sin ^{2}\theta}\end{array}\right]
 \newline
 %les symboles de Christofell
 \Gamma^0_{\mu \nu} = 
-\left[\begin{array}{cccc}0&-\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0\\-\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
+\left[\begin{array}{cccc}0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0\\\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
 \newline
 \Gamma^1_{\mu \nu} = 
-\left[\begin{array}{cccc}\frac{-R_{s}^{2}+R_{s} r}{2 r^{3}}&0&0&0\\0&\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0\\0&0&R_{s}-r&0\\0&0&0&R_{s} \sin ^{2}\theta-r \sin ^{2}\theta\end{array}\right]
+\left[\begin{array}{cccc}-\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 B\left(r\right)}&0&0&0\\0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right)}{2 B\left(r\right)}&0&0\\0&0&\frac{r}{B\left(r\right)}&0\\0&0&0&\frac{r \sin ^{2}\theta}{B\left(r\right)}\end{array}\right]
 \newline
 \Gamma^2_{\mu \nu} = 
 \left[\begin{array}{cccc}0&0&0&0\\0&0&\frac1{r}&0\\0&\frac1{r}&0&0\\0&0&0&-\frac{\tan \theta}{\tan ^{2}\theta+1}\end{array}\right]
@@ -1354,15 +1356,16 @@ g^{\mu \nu} =
 \newline
 %Le tenseur de Ricci
 R_{\mu \nu} = 
-\left[\begin{array}{cccc}0&0&0&0\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
+\left[\begin{array}{cccc}\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{4 r A\left(r\right) B\left(r\right)^{2}}&0&0&0\\0&\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{4 r A\left(r\right)^{2} B\left(r\right)}&0&0\\0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{2 A\left(r\right) B\left(r\right)^{2}}&0\\0&0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}}\end{array}\right]
 \newline
 %la courbure scalaire
 R = 
-0
+\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{A\left(r\right)\cdot 4 r A\left(r\right) B\left(r\right)^{2}}+\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{B\left(r\right)\cdot 4 r A\left(r\right)^{2} B\left(r\right)}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{r^{2}\cdot 2 A\left(r\right) B\left(r\right)^{2}}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{r^{2} \sin ^{2}\theta\cdot \left(2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}\right)}
 ```
 
 qui une fois compiler en pdf nous donne :
 
+#set page(width: auto)
 #mitex(
 ```%les coordonnées
 x^\mu = 
@@ -1374,18 +1377,18 @@ x^\mu =
 \newline
 %la métrique
 g_{\mu \nu} = 
-\left[\begin{array}{cccc}1-\frac{R_{s}}{r}&0&0&0\\0&-\left(1-\frac{R_{s}}{r}\right)^{-1}&0&0\\0&0&-r^{2}&0\\0&0&0&-r^{2} \sin ^{2}\theta\end{array}\right]
+\left[\begin{array}{cccc}A\left(r\right)&0&0&0\\0&B\left(r\right)&0&0\\0&0&-r^{2}&0\\0&0&0&-r^{2} \sin ^{2}\theta\end{array}\right]
 \newline
 %la métrique inverse
 g^{\mu \nu} = 
-\left[\begin{array}{cccc}-\frac{r}{R_{s}-r}&0&0&0\\0&\frac{R_{s}-r}{r}&0&0\\0&0&-\frac1{r^{2}}&0\\0&0&0&-\frac{1}{r^{2} \sin ^{2}\theta}\end{array}\right]
+\left[\begin{array}{cccc}\frac1{A\left(r\right)}&0&0&0\\0&\frac1{B\left(r\right)}&0&0\\0&0&-\frac1{r^{2}}&0\\0&0&0&-\frac{1}{r^{2} \sin ^{2}\theta}\end{array}\right]
 \newline
 %les symboles de Christofell
 \Gamma^0_{\mu \nu} = 
-\left[\begin{array}{cccc}0&-\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0\\-\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
+\left[\begin{array}{cccc}0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0\\\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
 \newline
 \Gamma^1_{\mu \nu} = 
-\left[\begin{array}{cccc}\frac{-R_{s}^{2}+R_{s} r}{2 r^{3}}&0&0&0\\0&\frac{R_{s}}{2 R_{s} r-2 r^{2}}&0&0\\0&0&R_{s}-r&0\\0&0&0&R_{s} \sin ^{2}\theta-r \sin ^{2}\theta\end{array}\right]
+\left[\begin{array}{cccc}-\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 B\left(r\right)}&0&0&0\\0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right)}{2 B\left(r\right)}&0&0\\0&0&\frac{r}{B\left(r\right)}&0\\0&0&0&\frac{r \sin ^{2}\theta}{B\left(r\right)}\end{array}\right]
 \newline
 \Gamma^2_{\mu \nu} = 
 \left[\begin{array}{cccc}0&0&0&0\\0&0&\frac1{r}&0\\0&\frac1{r}&0&0\\0&0&0&-\frac{\tan \theta}{\tan ^{2}\theta+1}\end{array}\right]
@@ -1395,9 +1398,13 @@ g^{\mu \nu} =
 \newline
 %Le tenseur de Ricci
 R_{\mu \nu} = 
-\left[\begin{array}{cccc}0&0&0&0\\0&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
+\left[\begin{array}{cccc}\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{4 r A\left(r\right) B\left(r\right)^{2}}&0&0&0\\0&\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{4 r A\left(r\right)^{2} B\left(r\right)}&0&0\\0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{2 A\left(r\right) B\left(r\right)^{2}}&0\\0&0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}}\end{array}\right]
 \newline
 %la courbure scalaire
 R = 
-0```
+\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{A\left(r\right)\cdot 4 r A\left(r\right) B\left(r\right)^{2}}+\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{B\left(r\right)\cdot 4 r A\left(r\right)^{2} B\left(r\right)}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{r^{2}\cdot 2 A\left(r\right) B\left(r\right)^{2}}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{r^{2} \sin ^{2}\theta\cdot \left(2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}\right)}
+```
 )
+
+#pagebreak()
+#set page(paper: "a4")
