@@ -168,7 +168,7 @@ $
 $
 avec $dot(x)^alpha = (dif x^alpha)/(dif s)$\
 \
-pour rappelle la métrique est définis comme suis : $dif cal(s)^2 = g_(mu nu) dx^mu dx^nu$ ainsi en différentiant par $ds$ et en prenant la racine, nous optenons : $(diff cal(s))/(ds) = [g_(mu nu) dot(x)^mu dot(x)^nu]^(1/2) = cal(L) $ ce qui est exactement notre lagrangien, ainsi l’action définis par ce lagrangien $S = integral cal(L) dif cal(s) = integral ds$ ce qui correspond à une distance, donc par le principe de moindre action nous cherchons la distance qui extrémise la distance entre deux points.\
+pour rappelle la métrique est définis comme suis : $dif cal(s)^2 = g_(mu nu) dx^mu dx^nu$ ainsi en différentiant par $ds$ et en prenant la racine, nous optenons : $(diff cal(s))/(ds) = [g_(mu nu) dot(x)^mu dot(x)^nu]^(1/2) = cal(L)$ ce qui est exactement notre lagrangien, ainsi l’action définis par ce lagrangien $S = integral cal(L) dif cal(s) = integral ds$ ce qui correspond à une distance, donc par le principe de moindre action nous cherchons la distance qui extrémise la distance entre deux points.\
 \
 Ainsi on a :\
 $
@@ -192,7 +192,7 @@ $
 \
 En posant :\
 $
-             dif lambda & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(1/2) dif s \
+                dif lambda & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(1/2) dif s \
   "Donc " dif/(dif lambda) & = [g_(mu nu)dot(x)^mu dot(x)^nu]^(-1/2) dif/(dif s)
 $
 En écrivant l'action par rapport à $s$, on a :\
@@ -234,8 +234,8 @@ $
 $
 On trouve alors :\
 $
-  &&dot.double(x)^beta = - Gamma^beta""_(mu nu) dot(x)^mu dot(x)^nu\
-  &"Soit" &dot.double(x)^beta + Gamma^(beta)""_(mu nu) dot(x)^mu dot(x)^nu = 0
+  &        &     dot.double(x)^beta = - Gamma^beta""_(mu nu) dot(x)^mu dot(x)^nu \
+  & "Soit" & dot.double(x)^beta + Gamma^(beta)""_(mu nu) dot(x)^mu dot(x)^nu = 0
 $ <eqgeo>
 
 Ainsi, la trajectoire de toute particule ne subissant aucune force et naviguant sur un espace de Riemann munie d’une métrique $g_(mu nu)$ est régie par l'équation précédente.
@@ -268,7 +268,7 @@ $
   &= (dif^2 x^rho)/(dif tau^2) + (diff x^rho)/(diff xi^alpha) (diff^2 xi^alpha)/(diff x^mu diff x^nu) (dif x^mu)/(dif tau) (dif x^nu)/(dif tau)
 $
 En posant : ${""_mu ""^lambda ""_(nu)} = (diff x^lambda)/(diff xi^beta) (diff^2 xi^beta)/(diff x^mu diff x^nu)$, on obtient finalement :
-#let croh(m: sym.mu, l: sym.lambda, n: sym.nu) = ${""_#m ""^#l ""_(#n)} $
+#let croh(m: sym.mu, l: sym.lambda, n: sym.nu) = ${""_#m ""^#l ""_(#n)}$
 $
   0 & = (dif^2 x^rho)/(dif tau^2) + croh(l: rho) (dif x^mu)/(dif tau) (dif x^nu)/(dif tau)
 $
@@ -307,34 +307,21 @@ $
 $ <equchro>
 #QED
 
-=== Transformation de $Gamma^lambda""_(mu nu)$
+Maintenant que nous avons une seconde écriture pour les symboles de Christoffel, nous pouvons regarder si cecis sont des tenseurs.\
+Malheuresement cecis se transforme comme suis :
+$
+  Gamma^lambda""_(mu nu) ' = (diff x'^lambda)/(diff x^rho) Gamma^rho""_(sigma alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu)
+  + (diff x'^lambda)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
+$ <pasbontenseur>
 
-Nous proposons de vérifier si $Gamma^(lambda)""_(mu nu)$ est un tenseur.
-Pour cela, regardons comment $Gamma$ se transforme d'après @equchro :\
-\
-
-#align(center, math.equation(numbering: none, block: true)[
-  $
-    Gamma^lambda""_(mu nu) ' &= croh()' = (diff x'^lambda)/(diff xi^beta) (diff^2 xi^beta)/(diff x'^mu diff x'^nu)\
-    &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff xi^beta)/(diff x'^nu))\
-    &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff x^alpha)/(diff x'^nu) (diff xi^beta)/(diff x^alpha))\
-    &= (diff x'^lambda)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
-    &= (diff x'^lambda)/(diff x^rho) (diff x^rho)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu)
-      + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
-    &= (diff x'^lambda)/(diff x^rho) (diff x^alpha)/(diff x'^nu) (diff x^sigma)/(diff x'^mu) underbrace((diff x^rho)/(diff xi^beta) (diff^2 xi^beta)/(diff x^sigma diff x^alpha), = croh(m: sigma, l: rho, n: alpha) = Gamma^rho""_(sigma alpha))
-    + (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
-    &= (diff x'^lambda)/(diff x^rho) Gamma^rho""_(sigma alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu)
-    + (diff x'^lambda)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
-  $
-])
-Ainsi $ Gamma^lambda""_(mu nu) ' = (diff x'^lambda)/(diff x^rho) Gamma^rho""_(sigma alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu)
-+ (diff x'^lambda)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \ $ <pasbontenseur>
-
-Donc d'après @pasbontenseur, on voit qu'après transformation il reste un terme additif.\
+Donc d'après @pasbontenseur (cf. @annexepasbontenseur), on voit qu'après transformation il reste un terme additif.\
 Ainsi $Gamma^alpha""_(mu nu)$ n'est pas un tenseur.
 
 === Définition de la dérivée covariante
 
+Nous pouvons voir les symboles de Christofell comme l’erreur commise quand dérive dans un espace de Riemann
+en supposant celui-ci plat, ainsi nous pouvons définir une nouvelle dérivé.\
+\
 Comme la dérivée d'un tenseur n'en est pas un, on définit la dérivée covariante pour un vecteur $v^nu$ par :\
 $
   nabla_mu v^nu = diff_mu v^nu + Gamma^nu""_(mu rho) v^rho
@@ -345,23 +332,7 @@ $
 
 *Preuve :*
 
-Vérifions que c'est bien un tenseur pour un vecteur $v^nu$ :\
-\
-#align(center, math.equation(numbering: none)[
-  $
-    nabla_mu ' v'^nu & = diff/(diff x'^mu) v'^nu + croh(l: nu, n: rho)' v'^rho \
-    &= (diff x^alpha)/(diff x'^mu) diff/(diff x^alpha) ((diff x'^nu)/(diff x^beta) v^beta) + ((diff x'^nu)/(diff x^omega) croh(m: sigma, l: omega, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^rho)
-      - (diff x^alpha)/(diff x'^mu) (diff x^sigma)/(diff x'^rho) (diff^2 x'^nu)/( diff x^alpha diff x^sigma)) (diff x'^rho)/(diff x^beta) v^beta\
-    &= cancel((diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/(diff x^alpha diff x^beta) v^beta) + (diff x^alpha)/(diff x'^mu) (diff x'^nu)/(diff x^beta) (diff v^beta)/(diff x^alpha) \
-    &+ (diff x'^nu)/(diff x^omega) croh(m: alpha, l: omega, n: beta) (diff x^alpha)/(diff x'^mu) v^beta
-    cancel(- (diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/( diff x^alpha diff x^beta) v^beta) \
-    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) (underbrace((diff v^beta) / (diff x^alpha) + croh(m: alpha, l: beta, n: tau) x^tau, = nabla_alpha v^beta))\
-    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) nabla_alpha v^beta
-  $
-])
-
-Ainsi $nabla_mu$ se transforme comme il faut, et donc $nabla_mu$ est un $(1,0)$-tenseur.
-#QED
+Voir @annexederivecov
 
 === Commutateur des dérivées covariantes & Tenseur de Riemann <CDCTR>
 
@@ -378,19 +349,19 @@ $
 *Preuve :*
 
 Soit $v^rho$ un vecteur :\
-$
+\
+#math.equation(numbering: none)[$
   [nabla_mu, nabla_nu] v^rho &= nabla_mu (nabla_nu v^rho) - nabla_nu (nabla_mu v^rho) \
   &= nabla_mu (partial_nu v^rho + Gamma^rho""_(nu alpha) v^alpha) - nabla_nu (partial_mu v^rho + Gamma^rho""_(mu alpha) v^alpha) \
-  &= partial_mu (partial_nu v^rho + Gamma^rho""_(nu alpha) v^alpha) + Gamma^rho""_(mu beta) (partial_nu v^beta + Gamma^beta""_(nu alpha) v^alpha)
-  -
-  partial_nu (partial_mu v^rho + Gamma^rho""_(mu alpha) v^alpha) - Gamma^rho""_(nu beta) (partial_mu v^beta + Gamma^beta""_(mu alpha) v^alpha)\
-  &= cancel(diff_(nu mu) v^rho) + diff_mu Gamma^rho""_(nu alpha) v^alpha + Gamma^rho""_(mu beta) diff_nu v^beta + Gamma^rho""_(mu beta) Gamma^beta""_(nu alpha) v^alpha
-  -
-  cancel(diff_(mu nu) v^rho) - diff_nu Gamma^rho""_(mu alpha) v^alpha - Gamma^rho""_(nu beta) diff_mu v^beta - Gamma^rho""_(nu beta) Gamma^beta""_(mu alpha) v^alpha\
+  &= partial_mu (partial_nu v^rho + Gamma^rho""_(nu alpha) v^alpha) - cancel(Gamma^(beta)""_(mu nu) (diff_beta v^rho + Gamma^rho""_(beta alpha) v^alpha)) + Gamma^rho""_(mu beta) (partial_nu v^beta + Gamma^beta""_(nu alpha) v^alpha)\
+  &"" - partial_nu (partial_mu v^rho + Gamma^rho""_(mu alpha) v^alpha) + cancel(Gamma^beta""_(nu mu) (diff_beta v^rho + Gamma^rho""_(beta alpha)v^alpha)) - Gamma^rho""_(nu beta) (partial_mu v^beta + Gamma^beta""_(mu alpha) v^alpha)\
+  &= cancel(diff_(nu mu) v^rho) + diff_mu Gamma^rho""_(nu alpha) v^alpha + Gamma^rho""_(mu beta) diff_nu v^beta + Gamma^rho""_(mu beta) Gamma^beta""_(nu alpha) v^alpha\
+  &"" - cancel(diff_(mu nu) v^rho) - diff_nu Gamma^rho""_(mu alpha) v^alpha - Gamma^rho""_(nu beta) diff_mu v^beta - Gamma^rho""_(nu beta) Gamma^beta""_(mu alpha) v^alpha\
   &= (Gamma^rho""_(mu beta) Gamma^beta""_(nu alpha)-Gamma^rho""_(nu beta) Gamma^beta""_(mu alpha)
     +
     diff_mu Gamma^rho""_(nu alpha) - diff_nu Gamma^rho""_(mu alpha)) v^alpha + underbrace(Gamma^rho""_(mu beta) diff_nu v^beta - Gamma^rho""_(nu beta) diff_mu v^beta, =0)
-$
+$]
+\
 Ainsi, on trouve que :\
 $
   R^rho""_(mu nu kappa) = [nabla_mu, nabla_nu] = diff_nu Gamma^rho""_(mu kappa) - diff_kappa Gamma^rho""_(mu nu) + Gamma^rho""_(nu lambda) Gamma^lambda""_(mu kappa) - Gamma^rho""_(kappa lambda) Gamma^lambda""_(mu nu)
@@ -417,11 +388,11 @@ où $g_(mu nu)$ est le tenseur métrique, $T_(mu nu)$ le tenseur énergie-impuls
 \
 On recherche une solution pour un espace vide, statique et à symétrie sphérique, donc $T_(mu nu) = 0$. L'équation devient :\
 $
-  R_(mu nu) - 1/2 g_(mu nu) R & = 0 \
-  "donc " g^(mu nu) (R_(mu nu) - 1/2 g_(mu nu) R) & = 0 \
+                                                                             R_(mu nu) - 1/2 g_(mu nu) R & = 0 \
+                                                         "donc " g^(mu nu) (R_(mu nu) - 1/2 g_(mu nu) R) & = 0 \
   "donc " underbrace(g^(mu nu) R_(mu nu), = R) - 1/2 underbrace(g^(mu nu)g_(mu nu), = delta_mu^mu = n) R & = 0 \
-  "donc " R(1 - 1/2n) & = 0 \
-  "donc " R(2 - n) & = 0
+                                                                                     "donc " R(1 - 1/2n) & = 0 \
+                                                                                        "donc " R(2 - n) & = 0
 $
 
 Ainsi, on a deux cas particuliers :
@@ -434,53 +405,12 @@ $
   "Donc " R_(mu nu) = 0
 $ <Ricci>
 
-== Écriture de la métrique dans un espace isotrope statique
+== Solution de Schwarzschild
 
-D'après #text(style: "italic")[General Relativity, An Introduction for Physicists] @RGbook, pour un espace isotrope, la métrique doit ressembler à :\
-$
-  dif s^2 = A(r,t)dif t^2 - B(r, t) dif t (arrow(x) dot.c dif arrow(x)) - C(r, t) (arrow(x) dot.c dif arrow(x))^2 - D(r, t) dif arrow(x)^2
-$
-En opérant le changement de variables en coordonnées sphériques :\
-$
-  x^1 & = r sin(theta) cos(phi) \
-  x^2 & = r sin(theta) sin(phi) \
-  x^3 & = r cos(theta)
-$
-Dans ce cas on a :\
-$
-  arrow(x) dot.c arrow(x) = r^2, "    " arrow(x) dot.c dif arrow(x) = r dr, "    "dif arrow(x) dot.c dif arrow(x) = dr^2 + r^2 dif theta^2 + r^2 sin(theta)^2 dif phi^2
-$
-Ainsi, la métrique devient :\
-$
-  ds^2 & = A(t,r)dt^2 - B(t, r) r dt dr - C(t,r) r^2 dr^2 - D(t, r) dr^2 - D(t,r) r^2 dif^2 Omega \
-       & = A(t,r)dt^2 - B'(t,r) dt dr - C'(r,t) dr^2 - D' dif^2 Omega
-$
-avec $dif^2 Omega = dif theta^2 + sin(theta)^2 dif phi^2$ l'angle solide et $B' = B r ; " " C' = C r^2 + D " et " D' = D$.\
-On pose $dash(r)^2 = D'$, alors :\
-$
-  ds^2 = A(t, dash(r)) dt^2 - B'(t, dash(r)) dt dif dash(r) - C'(t, dash(r)) dif dash(r)^2 - dash(r)^2 dif^2 Omega
-$
-On pose également un nouveau temps : $dif dash(t) = Phi(t, dash(r))[A(t, dash(r)) dt - 1/2 B'(t, dash(r)) dif dash(r)]$, donc\
-$
-  dif dash(r)^2 = Phi(t, dash(r)) [A^2 dt^2 + 1/4 B'^2 dif dash(r)^2 - A B' dt dif dash(r) ]\
-  "Donc " A dt^2 - B' dt dif dash(r) = 1/(A Phi) dif dash(t)^2 - B/(4 A) dif dash(r)^2
-$
-La métrique devient :\
-$
-  ds^2 = 1/(A Phi) dif dash(t)^2 -(B/(4A) + C')dif dash(r)^2 - dash(r)^2 dif^2 Omega
-$
-Ainsi, en posant deux nouvelles fonctions $dash(A) = 1/(A Phi)$ et $dash(B) = B/(4A) + C'$, la métrique devient :\
-$
-  ds^2 = dash(A)(dash(t), dash(r)) dif dash(t)^2 - dash(B)(dash(t), dash(r)) dif dash(r)^2 - dash(r)^2 dif^2 Omega
-$
-Comme à partir de maintenant l'on ne travaillera qu'avec les quantités avec une barre : $dash(A), dash(B), dash(t), dash(r)$, on les renotera sans la barre pour plus de clarté.\
-De plus, comme l'on impose au système d'être statique, alors les grandeurs $A$ et $B$ sont indépendantes du temps ;\
-ainsi la métrique s'écrit finalement :\
+Tout d’abord nous pouvons montré que la métrique pour un espace qui contient une masse ponctuelle, i.e. qui respecte les symétries sphériques et est statique, est de la forme (cf. @annexemetriqueisometriquestatique) :
 $
   ds^2 = A(r) dt^2 - B(r)dr^2 - r^2 dif^2 Omega
 $
-
-== Solution de Schwarzschild
 
 D'après @Ricci, $R_(mu nu) = 0$, or\
 $
@@ -514,22 +444,22 @@ $
 $ <eqr>
 Or, comme l'équation des géodésiques s'écrit : $dot.double(x)^mu + Gamma^mu_(alpha beta) dot(x)^alpha dot(x)^beta = 0$, alors en identifiant avec @eqr, on trouve :\
 $
-  Gamma^1""_(mu nu) = mat( A'/(2B), 0, 0, 0; 0, B'/(2B), 0, 0; 0, 0, -r/B, 0; 0, 0, 0, - (r sin(theta)^2)/B )
+  Gamma^1""_(mu nu) = mat(A'/(2B), 0, 0, 0; 0, B'/(2B), 0, 0; 0, 0, -r/B, 0; 0, 0, 0, - (r sin(theta)^2)/B)
 $
 À l'aide du programme de l'#ref(<programme>), on trouve :\
 $
-  Gamma^0""_(mu nu) = mat( 0, A'/(2A), 0, 0; A'/(2A), 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0 )
+  Gamma^0""_(mu nu) = mat(0, A'/(2A), 0, 0; A'/(2A), 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0)
 $
 $
-  Gamma^2""_(mu nu) = mat( 0, 0, 0, 0; 0, 0, 1/r, 0; 0, 1/r, 0, 0; 0, 0, 0, -sin(theta) cos(theta); )
+  Gamma^2""_(mu nu) = mat(0, 0, 0, 0; 0, 0, 1/r, 0; 0, 1/r, 0, 0; 0, 0, 0, -sin(theta) cos(theta);)
 $
 $
-  Gamma^3""_(mu nu) = mat( 0, 0, 0, 0; 0, 0, 0, 1/r; 0, 0, 0, cot(theta); 0, 1/r, cot(theta), 0; )
+  Gamma^3""_(mu nu) = mat(0, 0, 0, 0; 0, 0, 0, 1/r; 0, 0, 0, cot(theta); 0, 1/r, cot(theta), 0;)
 $
 
 === Équations sur $A$ et $B$
 
-De la même manière, les différents coefficients de $R_(mu nu)$ ont été calculés par le même programme; ainsi on obtient comme seuls coefficients non nuls :
+De la même manière, les différents coefficients de $R_(mu nu)$ ont été calculés par le même programme; ainsi on obtient comme seuls coefficients non nuls (cf. fin @programme) :
 $
   R_(0 0) = A'/(r B) + A''/(2B) - A'/(4B) (A'/A + B'/B)\
   R_(1 1) = B'/(r B) - A''/(2A) + A'/(4A) (A'/A + B'/B)\
@@ -615,7 +545,7 @@ $ <metswart>
 
 = Étude de la métrique
 
-Maintenant que nous avons dérivé la métrique de Schwarzschild, nous allons nous intéresser au comportement 
+Maintenant que nous avons dérivé la métrique de Schwarzschild, nous allons nous intéresser au comportement
 d’objets aux abords de la masse ponctuelle, jusqu’à arriver aux solutions trou noir et trou blanc en fin de chapitre.
 
 == Cônes de Lumière <géoradphot>
@@ -937,21 +867,18 @@ En traçant ces deux solutions pour des $p$ différents, on obtient le diagramme
 ) <fig2geolum>
 \
 On observe que dans la zone ${0<r<R_s}$, les cônes de lumière sont entièrement retournés vers la singularité ; ainsi les photons présents dans cette zone finiront au niveau de la singularité quelle que soit leur nature de départ, car le seul future indiqué par les cônes de lumière ( celuis indiqué par la @fig2geolum ) . Ainsi toute particule massive doit également finir au niveau de la singularité, ainsi l’objet d’écrit ici est un #text(style: "italic")[trou noir].\
-On aurait pu voir cette inversion temps $<=>$ espace via la métrique ; en effet si on s’intéresse au signe des composante temporelle et spacial, on obtient le tableau suivant :
-#align(center, 
-  table(
-    columns: 3,
-    $$, $r < R_s$, $r > R_s$,
-    [temps], $+$, $-$,
-    [espace], $-$, $+$
-
-  )
-)
-Ainsi ici, on vois très clairement l’inversion espace $<=>$ temps qui se produit, passé la limite $r = R_r$
+On aurait pu voir cette inversion temps $<=>$ espace via la métrique ; en effet si on s’intéresse au signe des composante temporelle et spacial de la métrique, on obtient le tableau suivant :
+#align(center, table(
+  columns: 3,
+  $$, $r < R_s$, $r > R_s$,
+  [temps], $+$, $-$,
+  [espace], $-$, $+$,
+))
+Ainsi ici, on vois très clairement l’inversion espace $<=>$ temps qui se produit, passé la limite $r = R_s$
 
 === Coordonnées d’Eddington–Finkelstein
 
-Nous pouvons remarquer en regardant la métrique (@metswart) et la @fig2geolum que nous avons deux singularités : 
+Nous pouvons remarquer en regardant la métrique (@metswart) et la @fig2geolum que nous avons deux singularités :
 - en $r = 0$, qui est une #text(style: "italic")[vraie] singularité, car la courbure sectionnelle $R_(mu nu rho sigma)R^(mu mu rho sigma) = 12 R_s^2/r^6$ diverge en $0$,\
 - en $r = R_s$, qui est une #text(style: "italic")[fausse] singularité ; en effet, ici la courbure sectionnelle est finie $R_(mu nu rho sigma)R^(mu mu rho sigma) = 12/R_s^4$.\
 La seconde singularité est appelée #text(style: "italic")[singularité du système de coordonnées] ; comme son nom l’indique, il est possible de « retirer »
@@ -1235,6 +1162,45 @@ Nous aurions pu continuer l’étude de la métrique de Schwarzschild jusqu’au
 
 #pagebreak()
 
+#align(center)[== transformation de $Gamma$ <annexepasbontenseur>]
+
+#align(center, math.equation(numbering: none, block: true)[
+  $
+    Gamma^lambda""_(mu nu) ' &= croh()' = (diff x'^lambda)/(diff xi^beta) (diff^2 xi^beta)/(diff x'^mu diff x'^nu)\
+    &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff xi^beta)/(diff x'^nu))\
+    &= (diff x'^lambda)/(diff xi^beta) diff/(diff x'^mu) ((diff x^alpha)/(diff x'^nu) (diff xi^beta)/(diff x^alpha))\
+    &= (diff x'^lambda)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
+    &= (diff x'^lambda)/(diff x^rho) (diff x^rho)/(diff xi^beta) ( (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu)
+      + (diff x^alpha)/(diff x'^nu) (diff^2 xi^beta)/(diff x'^mu diff x^alpha) )\
+    &= (diff x'^lambda)/(diff x^rho) (diff x^alpha)/(diff x'^nu) (diff x^sigma)/(diff x'^mu) underbrace((diff x^rho)/(diff xi^beta) (diff^2 xi^beta)/(diff x^sigma diff x^alpha), = croh(m: sigma, l: rho, n: alpha) = Gamma^rho""_(sigma alpha))
+    + (diff x'^lambda)/(diff xi^beta) (diff xi^beta)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
+    &= (diff x'^lambda)/(diff x^rho) Gamma^rho""_(sigma alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^nu)
+    + (diff x'^lambda)/(diff x^alpha) (diff^2 x^alpha)/( diff x'^mu diff x'^nu) \
+  $
+])
+
+#align(center)[== Preuve que la dérivé covariante est un tenseur<annexederivecov>]
+
+Vérifions que $nabla_mu$ est bien un tenseur pour un vecteur $v^nu$, ainsi :\
+\
+#align(center, math.equation(numbering: none)[
+  $
+    nabla_mu ' v'^nu & = diff/(diff x'^mu) v'^nu + croh(l: nu, n: rho)' v'^rho \
+    &= (diff x^alpha)/(diff x'^mu) diff/(diff x^alpha) ((diff x'^nu)/(diff x^beta) v^beta) + ((diff x'^nu)/(diff x^omega) croh(m: sigma, l: omega, n: alpha) (diff x^sigma)/(diff x'^mu) (diff x^alpha)/(diff x'^rho)
+      - (diff x^alpha)/(diff x'^mu) (diff x^sigma)/(diff x'^rho) (diff^2 x'^nu)/( diff x^alpha diff x^sigma)) (diff x'^rho)/(diff x^beta) v^beta\
+    &= cancel((diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/(diff x^alpha diff x^beta) v^beta) + (diff x^alpha)/(diff x'^mu) (diff x'^nu)/(diff x^beta) (diff v^beta)/(diff x^alpha) \
+    &+ (diff x'^nu)/(diff x^omega) croh(m: alpha, l: omega, n: beta) (diff x^alpha)/(diff x'^mu) v^beta
+    cancel(- (diff x^alpha)/(diff x'^mu) (diff^2 x'^nu)/( diff x^alpha diff x^beta) v^beta) \
+    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) (underbrace((diff v^beta) / (diff x^alpha) + croh(m: alpha, l: beta, n: tau) x^tau, = nabla_alpha v^beta))\
+    &= (diff x'^nu)/(diff x^beta) (diff x^alpha)/(diff x'^mu) nabla_alpha v^beta
+  $
+])
+
+Ainsi $nabla_mu$ se transforme comme il faut, et donc $nabla_mu$ est un $(1,0)$-tenseur.
+#QED
+
+#pagebreak()
+
 #align(center)[== Programme<programme>]
 
 Pour le calcul des symboles de Christoffel de la @calcristo, on a fait un programme, ici fait via le CAS : #link("https://xcas.univ-grenoble-alpes.fr/index.html", [giac/Xcas]).\
@@ -1273,12 +1239,12 @@ print("\\newline");
 G:=(makemat(matrix(d),0,d))[0];
 for (j:=0;j<d;j++) {
   for (k:=0;k<d;k++) {
-    for (l:=0;l<d;l++) { 
-        tmp:=0;  
+    for (l:=0;l<d;l++) {
+        tmp:=0;
         for (m:=0;m<d;m++) {
           tmp=(tmp+1/2*(ginv[j])[m]*(diff((g[k])[m],X[l])+diff((g[l])[m],X[k])-(diff((g[k])[l],X[m]))))
-        };  
-        ((G[j])[k])[l]:=simplify(tmp);  
+        };
+        ((G[j])[k])[l]:=simplify(tmp);
     }
   }
 };
@@ -1291,25 +1257,25 @@ for (j := 0; j < d; j++){
 
 dg:=det(g);
 Ri:=makemat(d);
-for (j:=0;j<d;j++) {for (k:=0;k<d;k++) { 
-      tmp1:=0;  
-      tmp2:=0;  
-      tmp3:=0;  
-      tmp4:=0;  
-      for (a:=0;a<d;a++) { 
-          tmp1:=tmp1+diff(((G[a])[j])[k],X[a]);  
-          tmp3:=tmp3+((G[a])[j])[k]*diff(ln(sqrt(-dg)),X[a]);  
+for (j:=0;j<d;j++) {for (k:=0;k<d;k++) {
+      tmp1:=0;
+      tmp2:=0;
+      tmp3:=0;
+      tmp4:=0;
+      for (a:=0;a<d;a++) {
+          tmp1:=tmp1+diff(((G[a])[j])[k],X[a]);
+          tmp3:=tmp3+((G[a])[j])[k]*diff(ln(sqrt(-dg)),X[a]);
           for (b:=0;b<d;b++) {
             tmp2:=tmp2+((G[b])[a])[j]*((G[a])[b])[k]
-          };  
-        };  
-      (Ri[j])[k]:=simplify(-(diff(diff(ln(sqrt(-dg)),X[k]),X[j]))+tmp1-tmp2+tmp3);  
+          };
+        };
+      (Ri[j])[k]:=simplify(-(diff(diff(ln(sqrt(-dg)),X[k]),X[j]))+tmp1-tmp2+tmp3);
     }};
 print("%Le tenseur de Ricci");
 print("R_{\\mu \\nu} = ");
 print(latex(Ri));
 print("\\newline");
-  
+
 R:=0;
 for (j:=0;j<d;j++) {
   for (k:=0;k<d;k++) {
@@ -1326,40 +1292,40 @@ Le programme vous sortiras un code LaTe#sym.Chi \
 par exemple ici le programme vous sortiras :
 ```
 %les coordonnées
-x^\mu = 
+x^\mu =
 \left[t,r,\theta,\varphi\right]
 \newline
 %la dimension de l’espace
-\text{la dimension de l’espace  } n = 
+\text{la dimension de l’espace  } n =
 4
 \newline
 %la métrique
-g_{\mu \nu} = 
+g_{\mu \nu} =
 \left[\begin{array}{cccc}A\left(r\right)&0&0&0\\0&B\left(r\right)&0&0\\0&0&-r^{2}&0\\0&0&0&-r^{2} \sin ^{2}\theta\end{array}\right]
 \newline
 %la métrique inverse
-g^{\mu \nu} = 
+g^{\mu \nu} =
 \left[\begin{array}{cccc}\frac1{A\left(r\right)}&0&0&0\\0&\frac1{B\left(r\right)}&0&0\\0&0&-\frac1{r^{2}}&0\\0&0&0&-\frac{1}{r^{2} \sin ^{2}\theta}\end{array}\right]
 \newline
 %les symboles de Christofell
-\Gamma^0_{\mu \nu} = 
+\Gamma^0_{\mu \nu} =
 \left[\begin{array}{cccc}0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0\\\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
 \newline
-\Gamma^1_{\mu \nu} = 
+\Gamma^1_{\mu \nu} =
 \left[\begin{array}{cccc}-\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 B\left(r\right)}&0&0&0\\0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right)}{2 B\left(r\right)}&0&0\\0&0&\frac{r}{B\left(r\right)}&0\\0&0&0&\frac{r \sin ^{2}\theta}{B\left(r\right)}\end{array}\right]
 \newline
-\Gamma^2_{\mu \nu} = 
+\Gamma^2_{\mu \nu} =
 \left[\begin{array}{cccc}0&0&0&0\\0&0&\frac1{r}&0\\0&\frac1{r}&0&0\\0&0&0&-\frac{\tan \theta}{\tan ^{2}\theta+1}\end{array}\right]
 \newline
-\Gamma^3_{\mu \nu} = 
+\Gamma^3_{\mu \nu} =
 \left[\begin{array}{cccc}0&0&0&0\\0&0&0&\frac1{r}\\0&0&0&\frac1{\tan \theta}\\0&\frac1{r}&\frac1{\tan \theta}&0\end{array}\right]
 \newline
 %Le tenseur de Ricci
-R_{\mu \nu} = 
+R_{\mu \nu} =
 \left[\begin{array}{cccc}\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{4 r A\left(r\right) B\left(r\right)^{2}}&0&0&0\\0&\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{4 r A\left(r\right)^{2} B\left(r\right)}&0&0\\0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{2 A\left(r\right) B\left(r\right)^{2}}&0\\0&0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}}\end{array}\right]
 \newline
 %la courbure scalaire
-R = 
+R =
 \frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{A\left(r\right)\cdot 4 r A\left(r\right) B\left(r\right)^{2}}+\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{B\left(r\right)\cdot 4 r A\left(r\right)^{2} B\left(r\right)}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{r^{2}\cdot 2 A\left(r\right) B\left(r\right)^{2}}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{r^{2} \sin ^{2}\theta\cdot \left(2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}\right)}
 ```
 
@@ -1367,44 +1333,90 @@ qui une fois compiler en pdf nous donne :
 
 #set page(width: auto)
 #mitex(
-```%les coordonnées
-x^\mu = 
-\left[t,r,\theta,\varphi\right]
-\newline
-%la dimension de l’espace
-\text{la dimension de l’espace  } n = 
-4
-\newline
-%la métrique
-g_{\mu \nu} = 
-\left[\begin{array}{cccc}A\left(r\right)&0&0&0\\0&B\left(r\right)&0&0\\0&0&-r^{2}&0\\0&0&0&-r^{2} \sin ^{2}\theta\end{array}\right]
-\newline
-%la métrique inverse
-g^{\mu \nu} = 
-\left[\begin{array}{cccc}\frac1{A\left(r\right)}&0&0&0\\0&\frac1{B\left(r\right)}&0&0\\0&0&-\frac1{r^{2}}&0\\0&0&0&-\frac{1}{r^{2} \sin ^{2}\theta}\end{array}\right]
-\newline
-%les symboles de Christofell
-\Gamma^0_{\mu \nu} = 
-\left[\begin{array}{cccc}0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0\\\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
-\newline
-\Gamma^1_{\mu \nu} = 
-\left[\begin{array}{cccc}-\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 B\left(r\right)}&0&0&0\\0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right)}{2 B\left(r\right)}&0&0\\0&0&\frac{r}{B\left(r\right)}&0\\0&0&0&\frac{r \sin ^{2}\theta}{B\left(r\right)}\end{array}\right]
-\newline
-\Gamma^2_{\mu \nu} = 
-\left[\begin{array}{cccc}0&0&0&0\\0&0&\frac1{r}&0\\0&\frac1{r}&0&0\\0&0&0&-\frac{\tan \theta}{\tan ^{2}\theta+1}\end{array}\right]
-\newline
-\Gamma^3_{\mu \nu} = 
-\left[\begin{array}{cccc}0&0&0&0\\0&0&0&\frac1{r}\\0&0&0&\frac1{\tan \theta}\\0&\frac1{r}&\frac1{\tan \theta}&0\end{array}\right]
-\newline
-%Le tenseur de Ricci
-R_{\mu \nu} = 
-\left[\begin{array}{cccc}\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{4 r A\left(r\right) B\left(r\right)^{2}}&0&0&0\\0&\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{4 r A\left(r\right)^{2} B\left(r\right)}&0&0\\0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{2 A\left(r\right) B\left(r\right)^{2}}&0\\0&0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}}\end{array}\right]
-\newline
-%la courbure scalaire
-R = 
-\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{A\left(r\right)\cdot 4 r A\left(r\right) B\left(r\right)^{2}}+\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{B\left(r\right)\cdot 4 r A\left(r\right)^{2} B\left(r\right)}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{r^{2}\cdot 2 A\left(r\right) B\left(r\right)^{2}}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{r^{2} \sin ^{2}\theta\cdot \left(2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}\right)}
-```
+  ```%les coordonnées
+  x^\mu =
+  \left[t,r,\theta,\varphi\right]
+  \newline
+  %la dimension de l’espace
+  \text{la dimension de l’espace  } n =
+  4
+  \newline
+  %la métrique
+  g_{\mu \nu} =
+  \left[\begin{array}{cccc}A\left(r\right)&0&0&0\\0&B\left(r\right)&0&0\\0&0&-r^{2}&0\\0&0&0&-r^{2} \sin ^{2}\theta\end{array}\right]
+  \newline
+  %la métrique inverse
+  g^{\mu \nu} =
+  \left[\begin{array}{cccc}\frac1{A\left(r\right)}&0&0&0\\0&\frac1{B\left(r\right)}&0&0\\0&0&-\frac1{r^{2}}&0\\0&0&0&-\frac{1}{r^{2} \sin ^{2}\theta}\end{array}\right]
+  \newline
+  %les symboles de Christofell
+  \Gamma^0_{\mu \nu} =
+  \left[\begin{array}{cccc}0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0\\\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 A\left(r\right)}&0&0&0\\0&0&0&0\\0&0&0&0\end{array}\right]
+  \newline
+  \Gamma^1_{\mu \nu} =
+  \left[\begin{array}{cccc}-\frac{\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)}{2 B\left(r\right)}&0&0&0\\0&\frac{\frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right)}{2 B\left(r\right)}&0&0\\0&0&\frac{r}{B\left(r\right)}&0\\0&0&0&\frac{r \sin ^{2}\theta}{B\left(r\right)}\end{array}\right]
+  \newline
+  \Gamma^2_{\mu \nu} =
+  \left[\begin{array}{cccc}0&0&0&0\\0&0&\frac1{r}&0\\0&\frac1{r}&0&0\\0&0&0&-\frac{\tan \theta}{\tan ^{2}\theta+1}\end{array}\right]
+  \newline
+  \Gamma^3_{\mu \nu} =
+  \left[\begin{array}{cccc}0&0&0&0\\0&0&0&\frac1{r}\\0&0&0&\frac1{\tan \theta}\\0&\frac1{r}&\frac1{\tan \theta}&0\end{array}\right]
+  \newline
+  %Le tenseur de Ricci
+  R_{\mu \nu} =
+  \left[\begin{array}{cccc}\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{4 r A\left(r\right) B\left(r\right)^{2}}&0&0&0\\0&\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{4 r A\left(r\right)^{2} B\left(r\right)}&0&0\\0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{2 A\left(r\right) B\left(r\right)^{2}}&0\\0&0&0&\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}}\end{array}\right]
+  \newline
+  %la courbure scalaire
+  R =
+  \frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)-4 \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) A\left(r\right) B\left(r\right)}{A\left(r\right)\cdot 4 r A\left(r\right) B\left(r\right)^{2}}+\frac{r \left(\frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\right)^{2} B\left(r\right)+r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right)\cdot \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)-2 r \frac{\mathrm{d}^{2}}{\mathrm{d}r^{2}}A\left(r\right) A\left(r\right) B\left(r\right)+4 \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)^{2}}{B\left(r\right)\cdot 4 r A\left(r\right)^{2} B\left(r\right)}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right)-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right)+2 A\left(r\right) B\left(r\right)^{2}+2 A\left(r\right) B\left(r\right)}{r^{2}\cdot 2 A\left(r\right) B\left(r\right)^{2}}-\frac{r \frac{\mathrm{d}}{\mathrm{d}r}A\left(r\right) B\left(r\right) \tan ^{2}\theta-r \frac{\mathrm{d}}{\mathrm{d}r}B\left(r\right) A\left(r\right) \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right) \tan ^{2}\theta}{r^{2} \sin ^{2}\theta\cdot \left(2 A\left(r\right) B\left(r\right)^{2} \tan ^{2}\theta+2 A\left(r\right) B\left(r\right)^{2}\right)}
+  ```,
 )
 
 #pagebreak()
 #set page(paper: "a4")
+
+#align(center)[== Écriture de la métrique dans un espace isotrope statique <annexemetriqueisometriquestatique>]
+
+D'après #text(style: "italic")[General Relativity, An Introduction for Physicists] @RGbook, pour un espace isotrope, la métrique doit ressembler à :\
+$
+  dif s^2 = A(r,t)dif t^2 - B(r, t) dif t (arrow(x) dot.c dif arrow(x)) - C(r, t) (arrow(x) dot.c dif arrow(x))^2 - D(r, t) dif arrow(x)^2
+$
+En opérant le changement de variables en coordonnées sphériques :\
+$
+  x^1 & = r sin(theta) cos(phi) \
+  x^2 & = r sin(theta) sin(phi) \
+  x^3 & = r cos(theta)
+$
+Dans ce cas on a :\
+$
+  arrow(x) dot.c arrow(x) = r^2, "    " arrow(x) dot.c dif arrow(x) = r dr, "    "dif arrow(x) dot.c dif arrow(x) = dr^2 + r^2 dif theta^2 + r^2 sin(theta)^2 dif phi^2
+$
+Ainsi, la métrique devient :\
+$
+  ds^2 & = A(t,r)dt^2 - B(t, r) r dt dr - C(t,r) r^2 dr^2 - D(t, r) dr^2 - D(t,r) r^2 dif^2 Omega \
+       & = A(t,r)dt^2 - B'(t,r) dt dr - C'(r,t) dr^2 - D' dif^2 Omega
+$
+avec $dif^2 Omega = dif theta^2 + sin(theta)^2 dif phi^2$ l'angle solide et $B' = B r ; " " C' = C r^2 + D " et " D' = D$.\
+On pose $dash(r)^2 = D'$, alors :\
+$
+  ds^2 = A(t, dash(r)) dt^2 - B'(t, dash(r)) dt dif dash(r) - C'(t, dash(r)) dif dash(r)^2 - dash(r)^2 dif^2 Omega
+$
+On pose également un nouveau temps : $dif dash(t) = Phi(t, dash(r))[A(t, dash(r)) dt - 1/2 B'(t, dash(r)) dif dash(r)]$, donc\
+$
+  dif dash(r)^2 = Phi(t, dash(r)) [A^2 dt^2 + 1/4 B'^2 dif dash(r)^2 - A B' dt dif dash(r) ]\
+  "Donc " A dt^2 - B' dt dif dash(r) = 1/(A Phi) dif dash(t)^2 - B/(4 A) dif dash(r)^2
+$
+La métrique devient :\
+$
+  ds^2 = 1/(A Phi) dif dash(t)^2 -(B/(4A) + C')dif dash(r)^2 - dash(r)^2 dif^2 Omega
+$
+Ainsi, en posant deux nouvelles fonctions $dash(A) = 1/(A Phi)$ et $dash(B) = B/(4A) + C'$, la métrique devient :\
+$
+  ds^2 = dash(A)(dash(t), dash(r)) dif dash(t)^2 - dash(B)(dash(t), dash(r)) dif dash(r)^2 - dash(r)^2 dif^2 Omega
+$
+Comme à partir de maintenant l'on ne travaillera qu'avec les quantités avec une barre : $dash(A), dash(B), dash(t), dash(r)$, on les renotera sans la barre pour plus de clarté.\
+De plus, comme l'on impose au système d'être statique, alors les grandeurs $A$ et $B$ sont indépendantes du temps ;\
+ainsi la métrique s'écrit finalement :\
+$
+  ds^2 = A(r) dt^2 - B(r)dr^2 - r^2 dif^2 Omega
+$
