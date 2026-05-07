@@ -77,7 +77,7 @@
 #set text(font: "Linux Libertine", historical-ligatures: true)
 #show raw: set text(font: "Linux Libertine")
 #show heading: set block(above: 1.4em, below: 1em)
-#set document(title: text(20pt)[Sur la Résolution de Schwarzschild des Équations d’Einstein])
+#set document(title: text(20pt)[Rapport de stage\ sur la résolution de Schwarzschild\ des Équations d’Einstein])
 #set text(size: 11pt)
 #set math.cancel(stroke: red)
 
