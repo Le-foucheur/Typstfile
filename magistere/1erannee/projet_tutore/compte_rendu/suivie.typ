@@ -154,7 +154,7 @@ Ainsi, nous avons découpé notre travail en trois parties distinctes qui formen
 
 = Bases Théoriques
 
-#align(center)[== Équation des géodésiques]
+#align(center)[== Équation des géodésiques <sectionEquageo>]
 
 Dans un premier temps, nous avons cherché à déduire la trajectoire dans un espace d'une particule soumise à aucune force. Cette trajectoire est appelée #text(style: "italic")[géodésique].\
 Nous ne donnerons pas de définition formelle de ce qu'est une géodésique, car ceci sort du cadre du stage effectué.\
@@ -627,6 +627,7 @@ $
 Intéressons-nous maintenant au temps de chute d’un corps massif de deux points de vue : premièrement du point de vue de l’objet lui-même, puis du point de vue d’un observateur lointain.\
 On note $tau$ le temps propre de l’objet tombant,\
 alors si l’on prend le lagrangien : $cal(L) = g_(mu nu) dot(x)^mu dot(x)^nu = (1 - R_s/r) ((dif t)/(dif tau))^2 - (1 - R_s/r)^(-1) ((dif r)/(dif tau))^2$.\
+Ce lagrangien est le même que dans la @sectionEquageo, cependant ici on préfaire sa version mise au carré, car il est plus simple de le manipuler.\
 Alors d’après les équations d’Euler-Lagrange par rapport à $t$ :
 $
                dif/(dif tau) diff_(dot(t)) cal(L) & = underbrace(diff_t cal(L), = 0) \
@@ -636,7 +637,7 @@ Donc
 $
   (dif t)/(dif tau) = k/(1 - R_s/r)
 $ <constanteducul>
-Or on a :
+Or d’après la relativité restreinte, la norme du quadri-vecteur d’un objet massif vaut $c^2 = 1$, on a donc la relation suivante :
 $
   g_(mu nu) dot(x)^mu dot(x)^nu = c^2 = 1\
   (1 - R_s/r) dot(t)^2 - (1 - R_s/r)^(-1) dot(r)^2 = 1
@@ -650,7 +651,7 @@ donc en dérivant :
 #align(center, math.equation(numbering: none)[$
   2 dot(r) dot.double(r) & = - R_s dot(r)/r^2 \
 $])
-Ainsi en ré-intégrant de $r$ à $R_0$
+Ainsi en ré-intégrant de $r$ à $R_0$, on peut en déduire une exprésion sur $k$
 $
   dot(r)^2 = -R_s [1/r]_r^(R_0) = R_s/r - R_s/R_0
 $

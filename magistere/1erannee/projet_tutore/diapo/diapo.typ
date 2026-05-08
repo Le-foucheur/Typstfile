@@ -180,15 +180,34 @@ B
 
 #place(
   horizon + left,
+  dx: 35mm,
   [
+    *Cas le plus simple :*
+    - masse ponctuelle
 
+    - statique
   ],
+)
+
+#place(
+  right + horizon,
+  dx: 35mm,
+  figure(
+    scale(
+      image(
+        "./image/TrouNoir.gif",
+      ),
+      50%,
+    ),
+  ),
 )
 
 #pagebreak()
 
 #place(
-  center,
+  left + horizon,
+  dx: 10mm,
+  dy: -20mm,
   [
     Espace vide : $T_(mu nu) = 0$\
     \
@@ -198,11 +217,19 @@ B
 
 #place(
   center + horizon,
+  dy: -20mm,
   [
     $
       +
     $
-    Espace statique à symétrie sphérique :
+  ],
+)
+
+#place(
+  right + horizon,
+  dy: -20mm,
+  align(center)[
+    Espace statique\ à symétrie sphérique :
     $
       ds^2 = A(r) dt^2 - B(r) dr^2 - r^2 dif Omega^2
     $
@@ -211,6 +238,7 @@ B
 
 #place(
   center + bottom,
+  dy: -10mm,
   [
     $
       arrow.b.double\
