@@ -627,7 +627,7 @@ $
 Intéressons-nous maintenant au temps de chute d’un corps massif de deux points de vue : premièrement du point de vue de l’objet lui-même, puis du point de vue d’un observateur lointain.\
 On note $tau$ le temps propre de l’objet tombant,\
 alors si l’on prend le lagrangien : $cal(L) = g_(mu nu) dot(x)^mu dot(x)^nu = (1 - R_s/r) ((dif t)/(dif tau))^2 - (1 - R_s/r)^(-1) ((dif r)/(dif tau))^2$.\
-Ce lagrangien est le même que dans la @sectionEquageo, cependant ici on préfaire sa version mise au carré, car il est plus simple de le manipuler.\
+Ce lagrangien est le même que dans le @sectionEquageo, cependant ici on préfaire sa version mise au carré, car il est plus simple de le manipuler.\
 Alors d’après les équations d’Euler-Lagrange par rapport à $t$ :
 $
                dif/(dif tau) diff_(dot(t)) cal(L) & = underbrace(diff_t cal(L), = 0) \
@@ -651,7 +651,7 @@ donc en dérivant :
 #align(center, math.equation(numbering: none)[$
   2 dot(r) dot.double(r) & = - R_s dot(r)/r^2 \
 $])
-Ainsi en ré-intégrant de $r$ à $R_0$, on peut en déduire une exprésion sur $k$
+Ainsi en ré-intégrant de $r$ à $R_0$, on peut en déduire une expression sur $k$
 $
   dot(r)^2 = -R_s [1/r]_r^(R_0) = R_s/r - R_s/R_0
 $
@@ -727,7 +727,7 @@ Ainsi pour conclure, nous avons les deux grandeurs suivantes :
     columns: 1,
     row-gutter: 1cm,
     align: center + horizon,
-    $tau(r) tend(r, 0) 2/3 (sqrt(R_0^3/R_s) - R_s)$,
+    $tau(r) tend(r, R_s) 2/3 (sqrt(R_0^3/R_s) - R_s)$,
     $t(r) tend(r, R_s) + oo$,
   ),
 )\

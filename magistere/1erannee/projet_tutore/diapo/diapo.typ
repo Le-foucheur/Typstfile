@@ -1,5 +1,7 @@
 #import "../../../../template.typ": *
 #import "@preview/hydra:0.6.2": hydra
+#import "@preview/cetz:0.5.2"
+#import "@preview/cetz-plot:0.1.3": *
 
 #set page(
   paper: "presentation-16-9",
@@ -252,6 +254,134 @@ B
 = 3) Chute dans un trou noir
 
 #pagebreak()
+
+#place(
+  left,
+  dy: 20mm,
+  align(center)[
+    Lagrangien:\
+    $
+      cal(L) = g_(mu nu) dot(x)^mu dot(x)^nu
+    $
+  ],
+)
+
+#place(
+  left,
+  dy: 30mm,
+  dx: 75mm,
+  $
+    ==>
+  $,
+)
+
+#place(
+  center,
+  dy: 20mm,
+  align(center)[
+    $
+      dt/(dif tau) = k /(1 - R_s/r)
+    $
+  ],
+)
+
+#place(
+  bottom + center,
+  dy: -10mm,
+  align(center)[
+    Norme\
+    du quadri-vecteur :
+    $
+      g_(mu nu) dot(x)^mu dot(x)^nu = 1
+    $
+  ],
+)
+
+#place(
+  center + horizon,
+  dx: 25mm,
+  $
+    & + "           " & ==>
+  $,
+)
+
+#place(
+  right + horizon,
+  align(center)[
+    $
+      ((dif r)/(dif tau))^2 = k^2 - 1 + R_s/r
+    $
+  ],
+)
+
+#pagebreak()
+
+#place(
+  center + horizon,
+  grid(
+    columns: 2,
+    column-gutter: 45mm,
+    row-gutter: 30mm,
+    [Du point de vue\ de l’objet], [Du point de vue\ d’un observateur lointain],
+    $
+      tau(r) tend(r, R_s) 2/3 (sqrt(R_0^3/R_s) - R_s)
+    $,
+    $
+      t(r) tend(r, R_s) +oo
+    $,
+  ),
+)
+
+#line(start: (50%, 10%), end: (50%, 90%))
+
+#pagebreak()
+
+#place(
+  center + horizon,
+  cetz.canvas({
+    import cetz.draw: *
+
+    let R0 = 2
+    let Rs = 0.5
+
+    let temprop(x, R) = 2 / 3 * (calc.sqrt(calc.pow(R, 3) / Rs) - calc.sqrt(calc.pow(x, 3) / Rs))
+    let tempob(x, R) = (
+      2 / 3 * Rs * (calc.pow(R / Rs, 2 / 3) - calc.pow(x / Rs, 2 / 3))
+        + 2 * Rs * (calc.pow(R / Rs, 1 / 2) - calc.pow(x / Rs, 1 / 2))
+        + Rs
+          * calc.ln(calc.abs(
+            (1 - calc.sqrt(R / Rs)) * (1 + calc.sqrt(x / Rs)) / ((1 + calc.sqrt(R / Rs)) * (1 - calc.sqrt(x / Rs))),
+          ))
+    )
+
+
+    plot.plot(
+      size: (10, 10),
+      x-min: 0,
+      x-max: R0,
+      y-min: 0,
+      y-max: 3,
+      x-tick-step: none,
+      y-tick-step: none,
+      axis-style: "left",
+      x-label: [#h(7mm)$r$],
+      y-label: $#h(-5mm)t$,
+
+      {
+        plot.add(
+          samples: 200,
+          domain: (Rs + 0.001, R0 + 1),
+          x => tempob(x, R0),
+        )
+
+        plot.add-vline(
+          Rs,
+          style: (stroke: (paint: black, dash: "dashed")),
+        )
+      },
+    )
+  }),
+)
 
 #pagebreak()
 
