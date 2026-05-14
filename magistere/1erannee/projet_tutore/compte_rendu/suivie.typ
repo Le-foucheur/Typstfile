@@ -364,7 +364,7 @@ $]
 \
 Ainsi, on trouve que :\
 $
-  R^rho""_(mu nu kappa) = [nabla_mu, nabla_nu] = diff_nu Gamma^rho""_(mu kappa) - diff_kappa Gamma^rho""_(mu nu) + Gamma^rho""_(nu lambda) Gamma^lambda""_(mu kappa) - Gamma^rho""_(kappa lambda) Gamma^lambda""_(mu nu)
+  R^rho""_(mu nu kappa) = diff_nu Gamma^rho""_(mu kappa) - diff_kappa Gamma^rho""_(mu nu) + Gamma^rho""_(nu lambda) Gamma^lambda""_(mu kappa) - Gamma^rho""_(kappa lambda) Gamma^lambda""_(mu nu)
 $
 #QED
 

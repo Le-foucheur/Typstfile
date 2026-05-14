@@ -66,7 +66,7 @@
 #place(center + horizon, dx: -60mm)[
   #set align(left)
 
-  + Introduction
+  + Géométrie Riemannienne
 
   + La métrique de Schwarzschild
   + Chute dans un trou noir
@@ -81,7 +81,7 @@
 
 #pagebreak()
 
-= 1) Introduction
+= 1) Géométrie Riemannienne
 
 #pagebreak()
 
@@ -118,7 +118,7 @@ B (= brouillon)
 #place(
   horizon,
   [
-    Géodésique : courbe qui maximise la distance entre deux points dans l’espace\
+    Géodésique : courbe qui éxtrémise la distance entre deux points dans l’espace\
     \
     Métrique :
     - forme tensorielle : produit scalaire entre les éléments de la base ($g_(mu nu)$)
@@ -151,29 +151,6 @@ B
 #pagebreak()
 
 #place(
-  center + horizon,
-  [
-    Équation d’Einstein :\
-    $
-      underbrace(R_(mu nu) + 1/2 g_(mu nu) R, #[Géométrie de\ l’espace]) = underbrace(kappa T_(mu nu), #[contenue de\ l’espace]) + cases(#[Espace statique], #[à symétrie shérique], delim: #none) \
-      arrow.b.double
-    $
-    Métrique Schwarzschild :\
-    $
-      ds^2 = (1 - R_s / r)dt^2 - (1 - R_s/r)^(-1) dr - r^2 dif Omega^2
-    $
-  ],
-)
-
-#place(
-  horizon + left,
-  dy: 20mm,
-  $R_s = (2G M)/(c^2)$,
-)
-
-#pagebreak()
-
-#place(
   center,
   [
     *Hypotèse de Schwarzschild*
@@ -185,7 +162,7 @@ B
   dx: 35mm,
   [
     *Cas le plus simple :*
-    - masse ponctuelle
+    - masse ponctuelle\ $=>$ symétrie sphérique
 
     - statique
   ],
@@ -207,29 +184,70 @@ B
 #pagebreak()
 
 #place(
-  left + horizon,
   dx: 10mm,
-  dy: -20mm,
-  [
-    Espace vide : $T_(mu nu) = 0$\
-    \
-    Alors $R = 0$ et donc $R_(mu nu) = 0$
+  dy: 7mm,
+  align(center)[
+    Équation d’Einstein
+    $
+      underbrace(R_(mu nu) - 1/2 g_(mu nu)R, = #[Géométrie\ de l’univers]) = underbrace(kappa T_(mu nu), = #[Contenue\ de l’univers]) = 0
+    $],
+)
+
+#place(
+  right,
+  dx: -30mm,
+  dy: 20mm,
+  align(center)[
+    $
+      underbrace(g^(mu nu) R_(mu nu), = R) - 1/2 underbrace(g^(mu nu) g_(mu nu), = delta^mu_mu = n) R = 0
+    $
   ],
 )
 
 #place(
-  center + horizon,
-  dy: -20mm,
-  [
-    $
-      +
-    $
+  center,
+  dy: 30mm,
+  $
+    ==>
+  $,
+)
+
+#place(
+  bottom + center,
+  dx: -70mm,
+  dy: -25mm,
+  align(center)[
+    Donc
+    $R(2 - n) = 0$
   ],
 )
 
 #place(
-  right + horizon,
+  center + bottom,
+  dy: -25mm,
+  $
+    ==>
+  $,
+)
+
+#place(
+  bottom + center,
+  dx: 60mm,
   dy: -20mm,
+  align(center)[
+
+    Ainsi $R = 0$\
+    Donc :
+    $R_(mu nu) = 0$
+  ],
+)
+
+#pagebreak()
+
+#place(
+  left,
+  dy: 20mm,
+  dx: 0mm,
   align(center)[
     Espace statique\ à symétrie sphérique :
     $
@@ -239,12 +257,32 @@ B
 )
 
 #place(
-  center + bottom,
-  dy: -10mm,
-  [
+  center,
+  dy: 35mm,
+  dx: 5mm,
+  $
+    ==>
+  $,
+)
+
+#place(
+  right,
+  dx: -40mm,
+  dy: 20mm,
+  align(center)[
+    Or $R_(mu nu) = 0$
     $
-      arrow.b.double\
-      A(r) = 1 - R_s / r et B(r) = (1 - R_s / r)^(-1)
+      #[Donc ]cases(A = 1 - R_s / r, B = 1 / A)
+    $
+  ],
+)
+
+#place(
+  bottom + center,
+  dy: -15mm,
+  align(center)[
+    $
+      ds^2 = (1 - R_s/r)dt^2 - (1 - R_s/r)^(-1) dr^2 -r^2 d Omega^2
     $
   ],
 )
@@ -257,7 +295,8 @@ B
 
 #place(
   left,
-  dy: 20mm,
+  dy: 20mm + 10mm,
+  dx: 12mm,
   align(center)[
     Lagrangien:\
     $
@@ -268,7 +307,7 @@ B
 
 #place(
   left,
-  dy: 30mm,
+  dy: 30mm + 10mm,
   dx: 75mm,
   $
     ==>
@@ -277,7 +316,7 @@ B
 
 #place(
   center,
-  dy: 20mm,
+  dy: 20mm + 10mm,
   align(center)[
     $
       dt/(dif tau) = k /(1 - R_s/r)
@@ -286,8 +325,15 @@ B
 )
 
 #place(
-  bottom + center,
-  dy: -10mm,
+  center,
+  dx: 50mm,
+  dy: 25mm + 10mm,
+  [et],
+)
+
+#place(
+  right,
+  dy: 15mm + 10mm,
   align(center)[
     Norme\
     du quadri-vecteur :
@@ -298,15 +344,8 @@ B
 )
 
 #place(
-  center + horizon,
-  dx: 25mm,
-  $
-    & + "           " & ==>
-  $,
-)
-
-#place(
-  right + horizon,
+  center + bottom,
+  dy: -15mm,
   align(center)[
     $
       ((dif r)/(dif tau))^2 = k^2 - 1 + R_s/r
@@ -380,6 +419,8 @@ B
         )
       },
     )
+
+    content((2.64, -0.6), $R_s$)
   }),
 )
 
