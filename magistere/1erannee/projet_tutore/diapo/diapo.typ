@@ -15,7 +15,9 @@
     )
 
     #if counter(heading).at(here()).first() != 0 {
-      place(left + horizon, dy: -1mm, text(fill: white, 30pt, weight: "bold")[#hydra(1)])
+      place(left + horizon, dy: -1mm, 
+        text(fill: white, 30pt, weight: "bold")[#hydra()]
+      )
     }
   ],
   footer: context [
@@ -54,7 +56,7 @@
 
 
 #place(center + horizon, dy: -10mm)[
-  = #[Résolution de Schwarzschild\ à l’équation d’Einstein]\
+  = #[Solution de Schwarzschild\ aux l’équations d’Einstein]\
   \
   \
   Gaspar Daguet
@@ -70,7 +72,6 @@
 
   + La métrique de Schwarzschild
   + Chute dans un trou noir
-  + Trou noir & blanc
 
 ]
 
@@ -604,7 +605,7 @@
       cone(10,0, 45deg)
       cone(10,8.97, 45deg)
 
-      cone(7.56,3.2, 30deg)
+      cone(7.56,3.2, 22deg)
 
       cone(5.5,5.6, 15deg/4)
 
@@ -618,3 +619,362 @@
   supplement: [Fig]
   )
 )
+
+#pagebreak()
+
+= Conclusion
+
+#pagebreak()
+
+= Annexe
+
+#set text(19pt)
+
+#pagebreak()
+
+== Différent types de trou noir
+
+#place(
+  center + horizon,
+  table(
+    columns: 3,
+    align: center + horizon,
+    table.vline(x: 1, start: 0, end: 1, stroke: 1pt),
+    table.hline(y: 1, start: 0, end: 1, stroke: 1pt),
+    table.cell(stroke: 0pt, []),table.cell(colspan: 2)[Moment Cinétique],
+    table.header([Charge], $J = 0$, $J != 0$, level: 1),
+    $Q = 0$, scale(75%, figure(image("./image/TrouNoir.gif"), caption: [Schwarzschild])), scale(90%, figure(image("./image/Kerr.gif"), caption: [Schwarzschild])),
+    $Q != 0$, [Reissner-Nordström], [Kerr-Newman],
+  )
+)
+
+#pagebreak()
+
+== Remarque sur l’équation des géodésique
+
+On peut en effet remarqué que 
+$
+  dot.double(x)^mu + Gamma^mu""_(rho sigma) dot(x)^rho dot(x)^sigma = 0 <==> dot.double(x)^mu = - Gamma^mu""_(rho sigma) dot(x)^rho dot(x)^sigma
+$
+Or la seconde loi de Newton s’écrit :
+$
+  m dot.double(x)^mu = sum upright(F)^mu
+$
+Ainsi on peut assimiler le terme $- Gamma^mu""_(rho sigma) dot(x)^rho dot(x)^sigma$ à une force.\
+Donc la courbure de l’espace induie une force sur les objets
+
+#pagebreak()
+
+== Coordonnées d’Eddington–Finkelstein
+
+#place(
+  [
+    État des cônes de lumière :
+  ]
+)
+
+#let R0 = 2
+#let Rs = 0.75
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    let entr(r, p) = r + Rs * calc.ln(calc.abs(r / Rs - 1)) + p
+    let sort(r, p) = -r - Rs * calc.ln(calc.abs(r / Rs - 1)) - p
+    plot.plot(
+      size: (10, 10),
+      x-min: 0,
+      x-max: 2 * Rs,
+      y-min: 0,
+      y-max: 3,
+      x-tick-step: none,
+      y-tick-step: none,
+      axis-style: "left",
+      x-label: $ r $,
+      y-label: $ t $,
+      {
+        for i in (1, 2, 3) {
+          plot.add(
+            samples: 200,
+            domain: (0, 2 * Rs),
+            x => (x, entr(x, i)),
+            style: (stroke: blue, marks: ">"),
+          )
+        }
+
+        for i in (-0.5, -1.5, -2.5) {
+          plot.add(
+            samples: 200,
+            domain: (0, 2 * Rs),
+            x => (x, sort(x, i)),
+            style: (stroke: red),
+          )
+        }
+
+        plot.add-vline(
+          Rs,
+          style: (stroke: (paint: black, dash: "dashed")),
+        )
+      },
+    )
+
+
+    //les cones avant Rs
+    circle((2.7, 2.5), radius: (0.7mm, 2mm))
+    circle((2.7, 5.834), radius: (0.7mm, 2.03mm))
+    circle((2.7, 9.17), radius: (0.7mm, 2mm))
+
+    circle((3.9, 4.15), radius: (0.7mm, 6mm))
+    circle((3.9, 7.52), radius: (0.7mm, 6mm))
+
+    circle((4.39, 5.85), radius: (0.9mm, 9mm))
+
+    //les cones apres Rs
+    circle((6.08, 3), radius: (1.5mm, 0.5mm))
+    circle((6.08, 6.35), radius: (1.5mm, 0.5mm))
+    circle((6.08, 9.65), radius: (1.5mm, 0.5mm))
+
+    circle((5.62, 4.8), radius: (1.3mm, 0.5mm))
+    circle((5.62, 8.15), radius: (1.3mm, 0.5mm))
+
+    circle((5.34, 6.7), radius: (1mm, 0.5mm))
+
+    circle((6.805, 4.6), radius: (2mm, 0.6mm))
+    circle((6.805, 7.93), radius: (2mm, 0.6mm))
+
+    circle((7.848, 6.17), radius: (2.1mm, 0.6mm))
+
+    //les tetes de fleches
+    let tetfle(x, y, angl, color) = {
+      let rotat(x, y, angl) = (calc.cos(angl) * x - calc.sin(angl) * y, calc.sin(angl) * x + calc.cos(angl) * y)
+
+      let cood1 = (0, 0)
+      let deucood1 = (0.33, 0)
+      let cood2 = (0, 0)
+      let deucood2 = rotat(0.33, 0, 50deg)
+      deucood1 = rotat(deucood1.first(), deucood1.last(), angl)
+      deucood2 = rotat(deucood2.first(), deucood2.last(), angl)
+      cood1 = (cood1.first() + x, cood1.last() + y)
+      deucood1 = (deucood1.first() + x, deucood1.last() + y)
+      cood2 = (cood2.first() + x, cood2.last() + y)
+      deucood2 = (deucood2.first() + x, deucood2.last() + y)
+      line(cood1, deucood1, stroke: color)
+      line(cood2, deucood2, stroke: color)
+    }
+
+    //rouge
+    tetfle(3.41, 9.5, 22deg, red)
+    tetfle(4.52, 8.6, 53deg, red)
+    tetfle(4.74, 6.7, 58deg, red)
+
+    tetfle(6.71, 1, -89deg, red)
+    tetfle(8, 2.27, -78deg, red)
+    tetfle(8.5, 4.96, -72deg, red)
+
+    //bleu
+    tetfle(3.7, 1.8, -80deg, blue)
+    tetfle(4.58, 2.7, -102deg, blue)
+    tetfle(4.8, 4.3, -108deg, blue)
+
+    tetfle(6.387, 9.99, -138deg, blue)
+    tetfle(7.51, 8.7, -147deg, blue)
+    tetfle(9.02, 7.3, -156deg, blue)
+
+    content((5.06, -0.5), $R_s$)
+  }),
+  caption: [
+    structure des cônes de lumière ( seul le coté future est montré )\ pour la métrique de Schwarzschild
+    en bleu les rayons sortants, et en rouge les rayons entrants
+  ],
+)
+
+#pagebreak()
+
+#place(
+  align()[
+    *l’idée :* se placé dans un système de coordonnées plus « naturel » pour d’écrire c’est objet\
+    On à montré que les cônes de lumière était régie par ces équations :
+    $
+      t = - r - R_s ln abs(r/R_s - 1) + p_1 &"Rayon entrant"\
+      t =  r + R_s ln abs(r/R_s - 1) + p_2 &"Rayon sortant"
+    $
+    Pour celà, on prend les deux constante d’intégration $p_1 \& p_2$ comme nouvelle coordonées de temps.\
+    Ainsi la métrique devient :
+    $
+      ds^2 = (1- R_s/r) dif p^2 minus.plus 2 dr dif p - r^2 dif Omega^2 
+    $
+    avec $-$ pour les rayons entrants ( système dit avancées ) et $+$ pour les sortants ( système dit retardées ).\
+    On remarque que la singularité en $R_s$ à disparut.
+  ]
+)
+
+#pagebreak()
+
+#place(
+  center + horizon,
+  [
+    #figure(
+      scale( 90%,grid(
+        columns: 2,
+        column-gutter: 3cm,
+        cetz.canvas({
+          import cetz.draw: *
+
+          let ent(x, p) = p - x
+          let sort(x, p) = x + 2 * Rs * calc.ln(calc.abs(x / Rs - 1)) + p
+          plot.plot(
+            size: (10, 10),
+            x-min: 0,
+            x-max: 2 * Rs,
+            y-min: 0,
+            y-max: 3,
+            x-tick-step: none,
+            y-tick-step: none,
+            axis-style: "left",
+            x-label: $r$,
+            y-label: $t'$,
+
+            {
+              for i in range(0, 4) {
+                plot.add(
+                  domain: (0, 2 * Rs),
+                  x => ent(x, i),
+                  style: (stroke: red),
+                )
+              }
+
+              for i in (0.5, 1.5, 2.5, 3.5) {
+                plot.add(
+                  domain: (0, 2 * Rs),
+                  x => sort(x, i),
+                  style: (stroke: blue),
+                )
+              }
+
+              plot.add-vline(
+                Rs,
+                style: (stroke: (paint: black, dash: "dashed")),
+              )
+            },
+          )
+
+          rotate(-30deg)
+          circle((1.1, 3.2499), radius: (1mm, 2mm))
+          circle((-0.6, 6.156), radius: (1mm, 2mm))
+          circle((-2.25, 9.04), radius: (1mm, 2mm))
+
+          rotate(-12deg)
+          circle((1.8, 3.85), radius: (1mm, 2.4mm))
+          circle((-0.4, 6.32), radius: (1mm, 2.4mm))
+          circle((2.5, 3.925), radius: (0.5mm, 1.2mm))
+
+          rotate(-20deg)
+          circle((2.97, 6.01), radius: (0.8mm, 2mm))
+          circle((-0, 7.572), radius: (0.8mm, 2.1mm))
+          circle((-2.94, 9.14), radius: (0.8mm, 2mm))
+
+          circle((2.35, 5.51), radius: (0.6mm, 1.6mm))
+          circle((-0.6, 7.07), radius: (0.6mm, 1.6mm))
+          circle((-1.06, 6.767), radius: (0.6mm, 1.6mm))
+          circle((-3.57, 8.64), radius: (0.6mm, 1.6mm))
+
+          rotate(-10deg)
+
+          circle((-0.5, 8.29), radius: (0.8mm, 2.5mm))
+          circle((-3.67, 9.32), radius: (0.8mm, 2.5mm))
+
+          rotate(-5deg)
+          circle((-3.46, 10.16), radius: (1mm, 2.5mm))
+
+          rotate((30 + 12 + 20 + 10 + 5) * 1deg)
+          content((5.06, -0.4), $R_s$)
+        }
+      ),
+
+      cetz.canvas({
+        import cetz.draw: *
+
+        let ent(x, p) = p + x
+        let sort(x, p) = x - 2 * Rs * calc.ln(calc.abs(x / Rs - 1)) + p
+        plot.plot(
+          size: (10, 10),
+          x-min: 0,
+          x-max: 2 * Rs,
+          y-min: 0,
+          y-max: 3,
+          x-tick-step: none,
+          y-tick-step: none,
+          axis-style: "left",
+          x-label: $r$,
+          y-label: $t'$,
+
+          {
+            for i in (0, 1, -1, 2) {
+              plot.add(
+                domain: (0, 2 * Rs),
+                x => ent(x, i),
+                style: (stroke: blue),
+              )
+            }
+
+            for i in (0.5, 1.5, 2.5, -0.5) {
+              plot.add(
+                domain: (0, 2 * Rs),
+                x => sort(x, i),
+                style: (stroke: red),
+              )
+            }
+
+            plot.add-vline(
+              Rs,
+              style: (stroke: (paint: black, dash: "dashed")),
+            )
+          },
+        )
+
+        rotate(37deg)
+        circle((2.2, -0.2), radius: (1mm, 2mm))
+        circle((4.2, 2.465), radius: (1mm, 2mm))
+        circle((6.25, 5.135), radius: (1mm, 2mm))
+
+        rotate(10deg)
+        circle((6.25, 1.07), radius: (1mm, 2mm))
+        circle((8.65, 3.329), radius: (1mm, 2mm))
+
+        rotate(5deg)
+        circle((9.77, 2.17), radius: (1mm, 2mm))
+
+        rotate(15deg)
+        circle((11.43, -1.73), radius: (0.5mm, 1.5mm))
+
+        rotate(5deg)
+        circle((8.9, -4.45), radius: (1.1mm, 3mm))
+
+        rotate(10deg)
+        circle((9.14, -7.46), radius: (1.2mm, 5mm))
+        circle((5.83, -7.92), radius: (1.2mm, 5mm))
+
+
+        rotate(-82deg)
+        content((5.06, -0.4), $R_s$)
+      }))),
+      caption: [diagramme $(t',r)$, avec les cônes de lumière,\ avec en rouge les photons entrants, et en bleu les photons sortants\ le système avancées à gauche, et retardées à droite],
+    )
+  ]
+)
+
+#place(
+  bottom + center,
+  dx: -6.4cm,
+  dy: -2cm,
+  box[trou noir]
+)
+
+#place(
+  bottom + center,
+  dx: 6.4cm,
+  dy: -2cm,
+  box[trou blanc]
+)
+
