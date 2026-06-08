@@ -507,6 +507,8 @@ $
 Enfin on peut récrire $Lambda$ sous forme exponantielle :
 $
   Lambda &= underparen(1, = delta^(mu nu)\ "sans les indices"\ "matricielles") + omega = 1 + 1/2 Omega_(rho sigma) cal(M)^(rho sigma)\
+  \
+  \
   &= e^(1/2 Omega_(rho sigma) cal(M)^(rho sigma))
 $
 
@@ -603,7 +605,7 @@ $
   Lambda = exp(1/2 Omega_(rho sigma) cal(M)^(rho sigma))\
   S[Lambda] = exp(1/2 Omega_(rho sigma) S^(rho sigma))
 $
-ici $S[Lambda]$ représente $Lambda$ écrit dans la représentation de la base $S$. On pourrat égalemnet noté que l’on utilise les même $Omega$ pour les deux représentation, cecis nous assure que l’on fasse la même transformation de Lorentz.\
+ici $S[Lambda]$ représente $Lambda$ écrit dans la représentation de la base $S$. On pourrat également noté que l’on utilise les même $Omega$ pour les deux représentation, cecis nous assure que l’on fasse la même transformation de Lorentz.\
 
 Pour s’assurer que $Lambda$ et $S[Lambda]$ sont effectivement bien différent nous considérons l’exemple suivant :\
 \
@@ -748,7 +750,56 @@ Voir Tong
 \
 \
 \
-Nous povons donc maintenant construire une action invariante pas groupe de Lorentz, grâce au 3 forme bilinéaire que l’on viens de construire : $overline(psi) psi, overline(psi) gamma^mu psi$ et $overline(psi) gamma^mu gamma^nu psi$, en réalité seul les deux première serons utile
+Nous povons donc maintenant construire une action invariante pas groupe de Lorentz, grâce au 3 forme bilinéaire que l’on viens de construire : $overline(psi) psi, overline(psi) gamma^mu psi$ et $overline(psi) gamma^mu gamma^nu psi$, en réalité seul les deux première serons utile, alors nous définisons l’action de Dirac par :
+$
+  S = integral dx^4 overline(psi) (x) (i gamma^mu partial_mu - m) psi (x)
+$ <ActionDirac>
+
+== Équation de Dirac
+
+A partir de l’action de Dirac, définis ci-dessus, on peut en déduire le lagrangien suivant :
+$
+  cal(L) = overline(psi) (i gamma^mu partial_mu - m) psi
+$
+\
+Ainsi on a :
+$
+            partial_mu ((partial lagr)/(partial (partial_mu psi))) & = i partial_mu overline(psi) gamma^mu \
+                                                              "et" \
+  partial_mu ((partial lagr)/(partial (partial_mu overline(psi)))) & = 0
+$
+Or
+$
+            (partial lagr)/(partial psi) & = -m overline(psi) \
+                                    "et" \
+  (partial lagr)/(partial overline(psi)) & = i gamma^mu partial_mu psi - m psi
+$
+Donc par les équations d’Euler-Lagrange, on trouve les deux équations suivante :
+$
+  (i gamma^mu partial_mu - m) psi = 0
+$
+$
+  i partial_mu overline(psi) gamma^mu + m overline(psi) = 0
+$
+Ces équations sont des fois, également, appelé « racine carré » de la solution de l’équation de Klein-Gordon, en effet ces équations sont solution de l’équation de Klein-Gordon :
+$
+  (i gamma^nu partial_nu - m)(i gamma^mu partial_mu + m) psi = - (gamma^mu gamma^nu partial_nu partial_mu + m^2) psi = 0
+$
+Or, on peut montré que dans notre cas : $gamma^mu gamma^nu = eta^(mu nu)$, ainsi, on trouve :
+$
+  - (eta^(mu nu) partial_mu partial_nu + m^2) psi = -(partial^mu partial_mu + m^2)psi = 0\
+$
+cette équation ne dépend plus de $gamma^mu$ ainsi, elle s’applique de la même manière à toute les composante de $psi$\
+\
+*Le Slash*\
+Dans de nombreux ouvrages on trouve l’équation de Dirac écirt comme suit :
+$
+  (i fey(partial) - m)psi = 0
+$
+où on définis la notation, relativement pratique, suivante :
+$
+  fey(A) = gamma^mu A_mu
+$
 
 #pagebreak()
 
