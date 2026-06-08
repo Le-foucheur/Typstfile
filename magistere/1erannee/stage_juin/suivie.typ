@@ -2,7 +2,7 @@
 #import "../../../transposition.typ": *
 #import "@preview/cetz:0.4.2"
 #import "@preview/cetz-plot:0.1.3": plot
-#import "@preview/zebraw:0.6.1": *
+#import "@preview/zebraw:0.6.3": *
 #import "@preview/mitex:0.2.7": *
 #show: zebraw
 
@@ -531,7 +531,7 @@ $
   forall i in [|1; 3|], 2 (gamma^i)^2 = -2 upright(I)_4 & ==> (gamma^i)^2 = - upright(I)_4 \
 $
 Ces matrices sont nécessairement de dimension $4$, en effet en dimension $2$ seul $i upright(I)_2$ vaut $-upright(I)_2$ or il nous faut encore $2$ autre matrices pour décrire cette représentation. De même en dimension 3, il n’est pas dur de se convaicre qu’il n’y a pas assez de matrice vérifiant $A^2 = -upright(I)_3$.\
-Dans notre cas, on peut, par exemple, considéré les matrices par block suivantes :
+Dans notre cas, on peut, par exemple, considéré les matrices par bloc suivantes :
 $
   gamma^0 = mat(upright(0)_2, upright(I)_2; upright(I)_2, upright(0)_2), forall i in [|1,3|], gamma^i = mat(upright(0)_2, sigma^i; -sigma^i, upright(0)_2)
 $
@@ -619,7 +619,7 @@ De plus le paramètre $Omega$ dans le cas d’une rotation dans le plan $(x^i, x
 $
   Omega_(i j) = - epsilon_(i j k)phi^k
 $
-où $arrow(phi) = (phi^1, phi^2, phi^3)$, où chaque composante représente une rotation de $phi^i$ autour de l’axe $x^i$\
+où $arrow(phi) = (phi^1, phi^2, phi^3)$ et $arrow(sigma) = (sigma^1, sigma^2, sigma^3)$, où chaque composante représente une rotation de $phi^i$ autour de l’axe $x^i$\
 Alors, la matrice de rotation deviens :
 $
   S[Lambda] & = exp(1/2 Omega_(rho sigma) S^(rho sigma)) \
@@ -709,30 +709,30 @@ $
 \
 Ainsi, on peut définir l’adjoins de Dirac par :
 $
-  overline(psi) = (psi)^dagger gamma^0
+  dash(psi) = (psi)^dagger gamma^0
 $
 Voyons donc comment celui-ci se transforme par le groupe de Lorentz :
 
 *Propriété :*
 $
-  overline(psi) (x) psi(x) "est un scalaire de Lorentz"
+  dash(psi) (x) psi(x) "est un scalaire de Lorentz"
 $\
 
 *Preuve :*
 $
-  overline(psi') (x) psi'(x) &= (psi')^dagger (x) gamma^0 psi'(x)\
+  dash(psi') (x) psi'(x) &= (psi')^dagger (x) gamma^0 psi'(x)\
   &= psi^dagger (Lambda^(-1) x) S[Lambda]^dagger gamma^0 S[Lambda] psi(Lambda^(-1) x)\
   &= psi^dagger (Lambda^(-1) x) gamma^0 cancel(S[Lambda]^(-1) gamma^0 gamma^0 S[Lambda]) psi(Lambda^(-1) x)\
   &= psi^dagger (Lambda^(-1) x) gamma^0 psi(Lambda^(-1) x)\
-  &= overline(psi) (Lambda^(-1) x) psi(Lambda^(-1) x)\
+  &= dash(psi) (Lambda^(-1) x) psi(Lambda^(-1) x)\
 $\
 \
 Par cette même méthode, on peut construire deux autre invariant par transformé de Lorentz, des vecteurs et des tenseurs, en effet :\
 \
 *Propriété :*
 $
-  overline(psi) gamma^mu psi "est un vecteur de Lorentz, i.e. :"\
-  overline(psi) (x) gamma^mu psi (x) --> Lambda^mu""_nu overline(psi) (Lambda^(-1) x) gamma^nu psi (Lambda^(-1) x)
+  dash(psi) gamma^mu psi "est un vecteur de Lorentz, i.e. :"\
+  dash(psi) (x) gamma^mu psi (x) --> Lambda^mu""_nu dash(psi) (Lambda^(-1) x) gamma^nu psi (Lambda^(-1) x)
 $\
 
 *Preuve :*
@@ -741,8 +741,8 @@ Voir Tong\
 \
 *Propriété :*
 $
-  overline(psi) gamma^mu gamma^nu psi "est un tenseur de Lorentz"\
-  overline(psi) (x) gamma^mu gamma^nu psi (x) --> Lambda^mu""_rho Lambda^nu""_sigma overline(psi) (Lambda^(-1) x) gamma^rho gamma^sigma psi (Lambda^(-1) x)
+  dash(psi) gamma^mu gamma^nu psi "est un tenseur de Lorentz"\
+  dash(psi) (x) gamma^mu gamma^nu psi (x) --> Lambda^mu""_rho Lambda^nu""_sigma dash(psi) (Lambda^(-1) x) gamma^rho gamma^sigma psi (Lambda^(-1) x)
 $\
 
 *Preuve :*
@@ -750,36 +750,36 @@ Voir Tong
 \
 \
 \
-Nous povons donc maintenant construire une action invariante pas groupe de Lorentz, grâce au 3 forme bilinéaire que l’on viens de construire : $overline(psi) psi, overline(psi) gamma^mu psi$ et $overline(psi) gamma^mu gamma^nu psi$, en réalité seul les deux première serons utile, alors nous définisons l’action de Dirac par :
+Nous povons donc maintenant construire une action invariante pas groupe de Lorentz, grâce au 3 forme bilinéaire que l’on viens de construire : $dash(psi) psi, dash(psi) gamma^mu psi$ et $dash(psi) gamma^mu gamma^nu psi$, en réalité seul les deux première serons utile, alors nous définisons l’action de Dirac par :
 $
-  S = integral dx^4 overline(psi) (x) (i gamma^mu partial_mu - m) psi (x)
+  S = integral dx^4 dash(psi) (x) (i gamma^mu partial_mu - m) psi (x)
 $ <ActionDirac>
 
 == Équation de Dirac
 
 A partir de l’action de Dirac, définis ci-dessus, on peut en déduire le lagrangien suivant :
 $
-  cal(L) = overline(psi) (i gamma^mu partial_mu - m) psi
+  cal(L) = dash(psi) (i gamma^mu partial_mu - m) psi
 $
 \
 Ainsi on a :
 $
-            partial_mu ((partial lagr)/(partial (partial_mu psi))) & = i partial_mu overline(psi) gamma^mu \
+            partial_mu ((partial lagr)/(partial (partial_mu psi))) & = i partial_mu dash(psi) gamma^mu \
                                                               "et" \
-  partial_mu ((partial lagr)/(partial (partial_mu overline(psi)))) & = 0
+  partial_mu ((partial lagr)/(partial (partial_mu dash(psi)))) & = 0
 $
 Or
 $
-            (partial lagr)/(partial psi) & = -m overline(psi) \
+            (partial lagr)/(partial psi) & = -m dash(psi) \
                                     "et" \
-  (partial lagr)/(partial overline(psi)) & = i gamma^mu partial_mu psi - m psi
+  (partial lagr)/(partial dash(psi)) & = i gamma^mu partial_mu psi - m psi
 $
 Donc par les équations d’Euler-Lagrange, on trouve les deux équations suivante :
 $
   (i gamma^mu partial_mu - m) psi = 0
+$<eqDirac>
 $
-$
-  i partial_mu overline(psi) gamma^mu + m overline(psi) = 0
+  i partial_mu dash(psi) gamma^mu + m dash(psi) = 0
 $
 Ces équations sont des fois, également, appelé « racine carré » de la solution de l’équation de Klein-Gordon, en effet ces équations sont solution de l’équation de Klein-Gordon :
 $
@@ -800,6 +800,167 @@ où on définis la notation, relativement pratique, suivante :
 $
   fey(A) = gamma^mu A_mu
 $
+
+== Spineurs Chiraux
+
+Nous avons vue dans l’exemple, que $S[Lambda]$ s’écrivais dans le cas d’une rotation comme :
+$
+  S[Lambda_"rot"] = mat(e^(i (arrow(phi) dot.c arrow(sigma))/2), 0; 0, e^(i (arrow(phi) dot.c arrow(sigma))/2)) 
+$
+On peut montré que dans le cas d’un Boost $S[Lambda]$ peu s’écrire :
+$
+  S[Lambda_"boost"] = mat(e^(arrow(chi) dot.c arrow(sigma) \/ 2), 0; 0, e^(- arrow(chi) dot.c arrow(sigma) \/ 2))
+$
+où $arrow(chi)$ est le paramètre du boost ($forall i in [|1;3|], Omega_(i 0) = chi_i$)\
+\
+On remarque que ces matricet sont diagonale par bloc, ce qui veut dire que la représentation des spineur de Dirac du groupe de Lorentz est réductible, i.e. qu’il existe deux (car deux blocs dans la diagonale) sous groupes iréductible, suplémentaire de notre représentation. Ainsi on peut décomposé un spineur $psi$ de Dirac en deux composantes $u_plus.minus$, que l’on définis comme suit :
+$
+  psi = vec(u_+, u_-)
+$
+Les deux composantes $u_plus.minus$ sont appelé spineurs de Weyl ou spineurs chiraux, comme il corresponde à un bloc de notre transformation, il se transforme comme :
+- pour les rotations :
+$
+  u_plus.minus --> e^(i arrow(phi) dot.c arrow(sigma) \/2) u_plus.minus
+$
+- pour les boosts :
+$
+  u_plus.minus --> e^(plus.minus i arrow(chi) dot.c arrow(sigma) \/2) u_plus.minus\
+$\
+\
+On peut regarder ce que deviens l’équation de #link(<eqDirac>)[Dirac], pour celà calculons d’avance les grandeurs : $psi^dagger$ & $gamma^0 gamma^mu$\
+\
+*Propriété :*
+$
+  psi^dagger = ((u_plus)^dagger " " (u_minus)^dagger )
+$\
+*Preuve :*
+$
+  psi^dagger &= vec(u_+, u_-)^dagger = (vec(u_+, u_-)^star)^t\
+  &= ((u_+^star)^t " " (u_-^star)^t) = (u_+^dagger " " u_-^dagger)
+$
+#QED\
+\
+*Propriété :*
+$
+  gamma^0 gamma^mu = mat(dash(sigma)^mu, 0; 0, sigma^mu)
+$
+où nous nous redéfinision $sigma = (1, sigma^i)$ et $dash(sigma) = (1, - sigma^i)$, dénoté par l’indice $mu$, ce qui ne seras pas à confondres avec $sigma^i$ qui réfaire toujours au $sigma$ originaux\
+\
+*Preuve :*
+$
+  gamma^0 gamma^mu &= cases(gap: #5mm ,gamma^0 gamma^0 = upright(I)_4 &"si" mu = 0, mat(0, 1; 1, 0) mat(0, sigma^i; - sigma^i, 0 ) = mat(- sigma^i, 0; 0, sigma^i) &"sinon")\
+  &= mat(dash(sigma)^mu, 0; 0, sigma^mu)
+$
+#QED\
+\
+Maintenant, nous somme paré pour réécrire le lagrangien de Dirac, pour les spineurs de Weyl
+$
+  lagr &= dash(psi) (i gamma^mu partial_mu -m) psi\
+  &= i psi^dagger gamma^0 gamma^mu partial_mu psi - m psi^dagger gamma^0 psi\
+  &= i mat(u_+^dagger, u_-^dagger) mat(dash(sigma)^mu, 0; 0, sigma^mu) vec(partial_mu u_+, partial_mu u_-) - m mat(u_+^dagger, u_-^dagger) mat(0, 1; 1, 0) vec(u_+, u_-)\
+  &= i mat(u_+^dagger, u_-^dagger) vec(dash(sigma)^mu partial_mu u_+, sigma^mu partial_mu u_-) - m mat(u_+^dagger, u_-^dagger) vec(u_-, u_+)\
+  &= i u_+^dagger dash(sigma)^mu partial_mu u_+ + i u_-^dagger sigma^mu partial_mu u_- - m (u_+^dagger u_- + u_-^dagger u_+)
+$
+Or nous avons si on respecte les équations de mouvement $lagr = 0$, donc :
+$
+  i u_+^dagger dash(sigma)^mu partial_mu u_+ + i u_-^dagger sigma^mu partial_mu u_- - m (u_+^dagger u_- + u_-^dagger u_+) = 0
+$
+Ainsi, on remarque que dans le cas d’un fermions massif, on a besoin de décrire $u_+$ ou $u_-$ car ces deux terme sons couplé, dans le terme de masse, cependant, dans le cas d’un fermion non-massif ce termes disparait, il ne suffi que de $u_+$ ou $u_-$ pour décrire un tel fermion, qui doit donc respécté l’équation de mouvement suivant :
+$
+  i dash(sigma)^mu partial_mu u_+ = 0 "décrit par" u_+\
+  i sigma^mu partial_mu u_- = 0 "décrit par" u_-\
+$
+
+*Preuve :*\
+Comme le fermion est non-massif, alors le lagrangien ce réécrit :
+$
+  lagr = i u_+^dagger dash(sigma)^mu partial_mu u_+ + i u_-^dagger sigma^mu partial_mu u_-
+$
+On a donc, d’une part :
+$
+  partial_mu ((partial lagr)/ (partial (partial_mu u_+))) = i partial_mu u_+^dagger dash(sigma)^mu
+$
+et d’autre part :
+$
+  (partial lagr)/(partial u_+) = 
+$
+#AFL
+
+== Projection sur d’autre représentation
+Dans notre représentation $S[Lambda]$ nous apparait diagonale par bloc, c’est d’ailleurs pourquoi cette représentation est aussi appelé la représentation chiral, car elle explicite cette décomposition en spineurs chiraux. Regardons ce qu’il se passerais pour une autre représentation $gamma^mu$ de l’algèbre de Clifford :
+$
+  gamma^mu --> U gamma^mu U^(-1) et psi --> U psi
+$
+Ainsi $S[Lambda]$ n’a plus aucune raisons d’être diagonale par bloc, il nous faut maintenant trouver un invariant pour définir les spineurs chiraux.\
+Pour celà on peut définir l’objet suivant :\
+*Définison :*
+$
+  gamma^5 = - i gamma^0 gamma^1 gamma^2 gamma^3
+$\
+\
+*Propriété :*
+$
+  {gamma^5, gamma^mu} = 0 et (gamma^5)^2 = upright(I)_4
+$\
+\
+*Preuve :*\
+soit $mu in [|0; 3|]$
+$
+  {gamma^5, gamma^mu} &=  gamma^5 gamma^mu + gamma^mu gamma^5\
+  &= - i gamma^0 gamma^1 gamma^2 gamma^3 gamma^mu -i gamma^mu gamma^0 gamma^1 gamma^2 gamma^3\
+  & = i gamma^mu gamma^0 gamma^1 gamma^2 gamma^3 - i gamma^5 gamma^0 gamma^1 gamma^2 gamma^3 = 0 
+$
+Et
+$
+  (gamma^5)^2 &= (-i gamma^0 gamma^1 gamma^2 gamma^3) (-i gamma^0 gamma^1 gamma^2 gamma^3)\
+  &= - gamma^0 gamma^1 gamma^2 gamma^3 gamma^0 gamma^1 gamma^2 gamma^3\
+  &= - gamma^0 gamma^1 gamma^2 gamma^0 gamma^1 gamma^2\
+  &= gamma^0 gamma^1 gamma^0 gamma^1\
+  &= gamma^0 gamma^0 = upright(I)_4
+$
+#QED\
+\
+*Propriété :*\
+$
+  [S_(mu nu); gamma^5] = 0
+$\
+*Preuve :*
+$
+  S_(mu nu) gamma^5 &= 1/2 (eta_(mu rho) eta_(nu sigma) gamma^rho gamma^sigma - eta_(mu nu)) gamma^5 = 1/2 (eta_(mu rho) eta_(nu sigma) gamma^rho gamma^sigma gamma^5 - gamma^5 eta_(mu nu))\
+    &= 1/2 ( - eta_(mu rho) eta_(nu sigma) gamma^rho gamma^5 gamma^sigma - gamma^5 eta_(mu nu))\
+    &= 1/2 ( eta_(mu rho) eta_(nu sigma) gamma^5 gamma^rho gamma^sigma - gamma^5 eta_(mu nu))\
+    &= 1/2 gamma^5 ( eta_(mu rho) eta_(nu sigma) gamma^rho gamma^sigma - eta_(mu nu))\
+    &= gamma^5 S_(mu nu)\
+$
+Donc on a bien :
+$
+  [S_(mu nu); gamma^5] = S_(mu nu) gamma^5 - gamma^5 S_(mu nu) = 0
+$
+#QED
+
+Cette dernière propriété, nous indique que $gamma^5$ est un scalaire sous les rotations et les boosts et comme $(gamma^5)^2 = upright(I)_4$, on peut définir les projections suivantes, qui sont donc invariante par le groupe de Lorentz :
+$
+  P_plus.minus = 1/2 (upright(I)_4 plus.minus gamma^5)
+$
+*Propriété :*
+$
+  P_plus.minus "est une projection" et P_+ P_- = 0
+$\
+*Preuve :*
+$
+  (P_plus.minus)^2 &= 1/4 (upright(I)_4 plus.minus gamma^5) (upright(I)_4 plus.minus gamma^5)\
+  &= 1/4 (upright(I)_4 plus.minus 2 gamma^5 + underbrace((gamma^5)^2, = upright(I)_4))\
+  &= 1/4 (2 upright(I)_4 plus.minus 2 gamma^5 )\
+  &= 1/2 ( upright(I)_4 plus.minus gamma^5 ) = P_plus.minus
+$
+Et 
+$
+  P_+ P_- &= (upright(I)_4 + gamma^5) (upright(I)_4 - gamma^5)\
+  &= upright(I)_4 - (gamma^5)^2 = upright(I)_4 - upright(I)_4 = 0
+$
+#QED
+
+
 
 #pagebreak()
 
