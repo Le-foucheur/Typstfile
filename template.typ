@@ -19,6 +19,7 @@
 #let et = "et" + h(3pt)
 #let dt = math.dif + "t"
 #let ddt = diff + $t$
+#let lagr = $cal(L)$
 #let Id(n) = math.mat(..for x in range(n) {
   let l = ()
   for y in range(n) {
@@ -49,7 +50,7 @@
 #let Vect = math.class("unary", "Vect")
 #let ou = "ou" + h(3pt)
 #let ar(body) = $arrow(#body)$
-#let vec(..body) = math.cases(delim: "|", ..body)
+#let vect(..body) = math.cases(delim: "|", ..body)
 #let equi(n: $n$, k: $+oo$) = $ tilde_(#n -> #k) $
 #let po(ele: $x$, vers: $0$) = $ =_(#ele -> #vers) $
 #let QED = align(right, text[*Q.E.D.*]) // Quod erat demonstratum
@@ -77,13 +78,13 @@
 
 #let numbering_joli(..num) = {
   let res = ""
-  for j in range(num.pos().len()){
+  for j in range(num.pos().len()) {
     if j == 0 or j == 1 {
       str(num.pos().at(j))
     } else {
       str.from-unicode(num.pos().at(j) + 96)
     }
-    if j != num.pos().len() - 1 {"."}
+    if j != num.pos().len() - 1 { "." }
   }
 }
 
@@ -121,6 +122,7 @@
   #set par(leading: 0.8em)
   #set page(numbering: (..nums) => nums.pos().map(na).join("/"), number-align: right)
   #set math.cancel(stroke: red)
+  #set math.mat(row-gap: 3mm, column-gap: 3mm)
   #set text(font: "Linux Libertine", lang: "fr", historical-ligatures: ancienne_lig, ligatures: not ancienne_lig)
   #show math.equation: set block(breakable: true)
   #doc
