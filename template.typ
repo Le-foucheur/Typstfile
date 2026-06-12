@@ -76,6 +76,7 @@
 #let dt = $dif t$
 #let dr = $dif r$
 #let fey(it) = math.cancel(stroke: black, angle: 15deg, it)
+#let id = $upright(I)$
 
 #let numbering_joli(..num) = {
   let res = ""
