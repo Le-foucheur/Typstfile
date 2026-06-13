@@ -167,6 +167,8 @@ On liste ici l’ensembe des conventions utilisé de manière plus ou moins impl
 
 = Théorie lagrangienne des champs
 
+Dans un permier tant, il nous faut réécrire la mécanique lagrangienne, non plus pour des variables réél ou complexe, mais pour des champs, qui serons scalaire @spin0, spinorielle @spin12 ou vectorielle @spin1, c’est ce qu’il seras faits dans cette partie, on nous réécrirons les équations d’Euler-Lagrange et le théorème de Noether pour un nouveau genre de lagrangien.\
+
 == Équation d’Euler-Lagrange <1.1>
 
 *Définition :*\
@@ -178,6 +180,7 @@ On l’appelle par abus de language seulement lagrangien, au lieux de #text(styl
 \
 \
 *Équation d’Euler-Lagrange :*\
+Le théorème d’Euler-Lagrange reste vrais pour ce nouveau lagrangien, en effet :\
 Soit $phi.alt_a$ un champs, labélisé par $a$, tel que $delta phi.alt (arrow(x), t_1) = delta phi.alt (arrow(x), t_1) = 0$, alors sont lagrangien respecte l’équation suivante :
 $
   forall a, partial_mu ( (partial lagr) / (partial(partial_mu phi.alt_a))) - (partial lagr) / (partial phi.alt_a) = 0
@@ -204,31 +207,9 @@ $
 $
 #QED
 
-=== Exemple 1 : L’équation de Klein-Gordon
-
-On se place dans l’espace de Minkovski, de métrique $eta_(mu nu) = eta^(mu nu) = "diag"(+, -, -, -)$, et que l’on considére le lagrangien suivant :
-$
-  lagr = 1/2 eta^(mu nu) partial_mu phi.alt partial_nu phi.alt - 1/2 m^2 phi.alt^2
-$
-Alors, nous avons :
-$
-  partial_mu ((partial lagr)/(partial(partial_mu phi.alt))) &= partial_mu (1/2 eta^(sigma nu)( underbrace((partial(partial_sigma phi.alt)) / (partial (partial_mu phi.alt)), = delta_(sigma)^mu) partial_nu phi.alt + underbrace((partial(partial_nu phi.alt)) / (partial(partial_mu phi.alt)), = delta_(nu)^mu) partial_sigma phi.alt))\
-  &= partial_mu (1/2(underbrace(eta^(sigma nu) delta_sigma^(mu), = eta^(mu nu)) partial_nu phi.alt + underbrace(eta^(sigma nu) delta_nu^(mu), = eta^(sigma mu) = eta^(mu sigma)) partial_sigma phi.alt))\
-  &= partial_mu (1/2 times 2 underbrace(eta^(mu nu) partial_nu phi.alt, = partial^mu phi.alt))\
-  &= partial_mu partial^mu phi.alt
-$
-Et
-$
-  (partial lagr)/(partial phi.alt) = - m^2 phi.alt
-$
-Donc d’après @equlagr :
-$
-  partial_mu partial^mu phi.alt + m^2 phi.alt = 0
-$
-
-=== Exemple 2 : Équations de Maxwel
+=== Exemple 1 : Équations de Maxwel
 On propose dans cette exemple de retrouvé les équations de Maxwel dans le vide.\
-Pour celà, on considére le lagrangien suivant :
+Pour celà, on considére le lagrangien suivant, où $A^mu$ représente le potentielle vecteur de l’éléctromagnétisme :
 $
   lagr = - 1/2 (partial_mu A_nu) (partial^mu A^nu) + 1/2 (partial_mu A^mu)^2
 $
@@ -290,31 +271,8 @@ Ici $Lambda$ est la matrice de transformations entre deux référentielles,\
 ))
 
 Ainsi, l’on veut que le champs scalaire soit invariant sous ces transformation, i.e. que si $phi.alt(x)$ est solution
-des équations du mouvement, alors $phi.alt'(x) = phi.alt(Lambda^(-1)x)$ le soit aussi.\
-On remarquera que l’exposant $-1$ est du au faits que l’on considère une transformation active
-
-=== Exemple 1 : L’équation de Klein-Gordon
-Regardons comment se comporte le lagrangien de notre premier exemple sous la transformation :
-$
-  phi.alt(x) --> phi.alt'(x) = phi.alt(Lambda^(-1)x)
-$
-alors :
-$
-  partial_mu phi.alt(x) --> (Lambda^(-1))^nu""_mu partial_nu phi.alt(y)
-$
-où $y = Lambda^(-1) x$, ainsi, le lagrangien deviens sous cette transformation :
-$
-  lagr'(x) & = partial_mu phi.alt'(x) partial_nu phi.alt'(x) eta^(mu nu) \
-  & = (Lambda^(-1))^sigma_mu partial_sigma phi.alt(y) times (Lambda^(-1))^rho_nu partial_rho phi.alt(y) eta^(mu nu)\
-  & = partial_sigma phi.alt(y) partial_rho phi.alt(y) underbrace((Lambda^(-1))^sigma""_mu (Lambda^(-1))^rho""_nu eta^(mu nu), = eta^(sigma rho))\
-  &= partial_sigma phi.alt(y) partial_rho phi.alt(y) eta^(sigma rho) = lagr(y)
-$
-On a par conséquant que l’action est invariante sous cette transformation :
-$
-  S' = integral dif y^4 lagr'(y) = integral dif y^4 lagr(x) = integral dx^4 lagr(x) = S
-$
-On pourra noté que l’on à omis le terme jacobien sur le changement de $dif y -> dx$, car
-ici on à que $det(Lambda) = 1$
+des équations du mouvement, alors $phi.alt'(x) = phi.alt(Lambda^(-1)x)$ le soit aussi. On chercheras en réalité à ce que tout les champs que l’on décriras ici le soit également. Car d’après le principe de relativité, si nos champs ne sont pas invariant par ces transformation, alors il ne décrive rien de physique (ou du moins une approximation).\
+On remarquera que l’exposant $-1$, sur $Lambda$ dans le champs, est du au faits que l’on considère une transformation active.
 
 == Symétrie
 
@@ -322,9 +280,9 @@ ici on à que $det(Lambda) = 1$
 
 *Théorème de Noether :*\
 Si le lagrangien possède une symétrie continue dépendante d’un paramètre $alpha$, alors
-il existe un courant $J_mu = display(sum_a (partial lagr)/(partial (partial_mu phi.alt_a)) (delta phi.alt_a)/(delta alpha)) - F^mu$,
+il existe un courant $J^mu = display(sum_a (partial lagr)/(partial (partial_mu phi.alt_a)) (delta phi.alt_a)/(delta alpha)) - F^mu$,
 appelé courant de Noether, associé à la symétrie, qui est conservé,\
-i.e. $partial_mu J_mu = 0$\
+i.e. $partial_mu J^mu = 0$\
 \
 *Preuve :*\
 Quand le lagrangien est invariant sous une certaine variation du type $phi.alt -> phi.alt + delta phi.alt$,
@@ -358,46 +316,7 @@ $
 On a donc bien que le courant de Noether est conservé
 #QED
 
-
-==== Exemple 1 : Klein-Gordon
-Si l’on considère le champs scalaire complexe $phi.alt$, avec le lagrangien suivant :
-$
-  lagr = |partial^mu phi.alt|^2 - m^2 |phi.alt|^2
-$
-Comme il y a deux degrée de libérté dans un champs complexe : $phi.alt et phi.alt^star$, alors le lagrangien se réécrit :
-$
-  lagr = partial^mu phi.alt partial_mu phi.alt^star - m^2 phi.alt phi.alt^star
-$
-On peut remarquer que ce lagrangien est invariant sous la transformation : $phi.alt -> e^(-i alpha) phi.alt$, avec $alpha in RR$.\
-Cette transformation est donc une symétrie du lagrangien, ainsi, nous avons :
-$
-  (delta phi.alt)/(delta alpha) = -i phi.alt " " et " " (delta phi.alt^star)/(delta alpha) = i phi.alt^star
-$
-De plus le lagrangien est inchangé, donc :
-$
-  (delta lagr)/(delta alpha) = 0
-$
-donc $F^mu = "const"$, on peut choisir $F^mu = 0$ sans perte de généralité\
-On trouve alors :
-$
-  J^mu &= -i phi.alt (partial lagr)/(partial(partial_mu phi.alt)) + i phi.alt^star (partial lagr)/(partial (partial_mu phi.alt^star))\
-  &= -i (phi.alt partial^mu phi.alt^star - phi.alt^star partial^mu phi.alt)
-$ <courantKleinGordon>
-Et donc d’après le théorème de Noether, l’on a :
-$
-  partial_mu J^mu = -i( phi.alt partial_mu partial^mu phi.alt^star - phi.alt^star partial_mu partial^mu phi.alt) = 0
-$
-Ce qui peut également ce vérifier par l’équation de mouvement trouvé dans l’exemple 1 du @1.1.\
-En effet, nous avions trouvés que les équations de mouvement s’écrivait :
-$
-  partial_mu partial^mu phi.alt = - m^2 phi.alt
-$
-Donc @courantKleinGordon se réduit à :
-$
-  J^mu = i m^2 ( cancel(phi.alt phi.alt^star) - cancel(phi.alt^star phi.alt)) = 0
-$
-
-==== Exemple 2: Tenseur Energie-Impulsion <TenseurEP>
+==== Exemple 1: Tenseur Energie-Impulsion <TenseurEP>
 Si l’on considère une symétrie de translation par un quadri-vecteur $xi$ constant et très petit, soit $x^nu -> x^nu + xi^nu$, alors le champs peut se réécrire :
 $
   phi.alt(x + xi) = phi.alt(x) + xi^nu partial_nu phi.alt(x) + o (xi)
@@ -446,7 +365,98 @@ $
   P^i = integral dx^3 cal(P)^i
 $
 
-= Particules de spin null
+= Particules de spin null <spin0>
+
+Le but de ce chapitre est de décrire le comprotement d’une particule de spin null, pour celà on va considéré tout du long un champs scalaire noté $phi.alt$, qui seras dans un premier tant réél. Mais l’on verra que pour décrire le couplage entre une telle particule et le photon (l’éléctromagnétisme) on sera obligé de passé par un champs scalaire complexe.
+
+== Équation de Klein-Gordon
+
+Considérons, tout d’abord un champs scalaire réél $phi.alt$, décrit par le lagrangien suivant :
+$
+  lagr &= 1/2 eta^(mu nu) partial_mu phi.alt partial_nu phi.alt - m^2 phi.alt^2\
+  &= 1/2 partial_mu phi.alt partial^mu phi.alt - m^2 phi.alt^2
+$
+où $m$ est un coefficient de couplage, physiquement il représenete la masse, et où on à définis $eta^(mu nu) partial_nu = partial^mu$
+
+Regardons comment se comporte le lagrangien sous les transformations de Lorentz :
+$
+  phi.alt(x) --> phi.alt'(x) = phi.alt(Lambda^(-1)x)
+$
+alors :
+$
+  partial_mu phi.alt(x) --> (Lambda^(-1))^nu""_mu partial_nu phi.alt(y)
+$
+où $y = Lambda^(-1) x$, ainsi, le lagrangien deviens sous cette transformation :
+$
+  lagr'(x) & = 1/2 partial_mu phi.alt'(x) partial_nu phi.alt'(x) eta^(mu nu) - m^2 phi.alt'^2 \
+  & = (Lambda^(-1 ))^sigma_mu partial_sigma phi.alt(y) times (Lambda^(-1))^rho_nu partial_rho phi.alt(y) eta^(mu nu) - m^2 phi.alt(y)^2\
+  & = partial_sigma phi.alt(y) partial_rho phi.alt(y) underbrace((Lambda^(-1))^sigma""_mu (Lambda^(-1))^rho""_nu eta^(mu nu), = eta^(sigma rho)) - m^2 phi.alt(y)^2 \
+  &= partial_sigma phi.alt(y) partial_rho phi.alt(y) eta^(sigma rho) - m^2 phi.alt(y)^2 = lagr(y)
+$
+On a par conséquant que l’action est invariante sous cette transformation :
+$
+  S' = integral dif y^4 lagr'(y) = integral dif y^4 lagr(x) = integral dx^4 lagr(x) = S
+$
+On pourra noté que l’on à omis le terme jacobien sur le changement de $dif y -> dx$, car
+ici on à que $det(Lambda) = 1$\
+\
+On peut alors calculer à l’aide de l’équation d’Euler-Lagrange, l’équation du mouvement pour une telle particules.\
+Donc nous avons d’une part :
+$
+  partial_mu ((partial lagr)/(partial(partial_mu phi.alt))) &= partial_mu (1/2 eta^(sigma nu)( underbrace((partial(partial_sigma phi.alt)) / (partial (partial_mu phi.alt)), = delta_(sigma)^mu) partial_nu phi.alt + underbrace((partial(partial_nu phi.alt)) / (partial(partial_mu phi.alt)), = delta_(nu)^mu) partial_sigma phi.alt))\
+  &= partial_mu (1/2(underbrace(eta^(sigma nu) delta_sigma^(mu), = eta^(mu nu)) partial_nu phi.alt + underbrace(eta^(sigma nu) delta_nu^(mu), = eta^(sigma mu) = eta^(mu sigma)) partial_sigma phi.alt))\
+  &= partial_mu (1/2 times 2 underbrace(eta^(mu nu) partial_nu phi.alt, = partial^mu phi.alt))\
+  &= partial_mu partial^mu phi.alt
+$
+Et d’autre part :
+$
+  (partial lagr)/(partial phi.alt) = - m^2 phi.alt
+$
+Donc d’après l’équation d’Euler-Lagrange (@equlagr) :
+$
+  partial_mu partial^mu phi.alt + m^2 phi.alt = 0
+$<eqmouvementkleinGordon>
+Cette équation est connue sous le nom d’équation de Klein-Gordon, elle permet de décrire l’évolution d’un champs scalaire massique. Un telle champs peut être assimilé à une particule de spin 0, comme le bosons de Higgs.
+
+== Courant de Noether
+
+Si l’on considère maintenant le champs scalaire complexe $phi.alt$, avec le lagrangien suivant, analogue à celui étudier précédemment :
+$
+  lagr = |partial^mu phi.alt|^2 - m^2 |phi.alt|^2
+$
+Comme il y a deux degrée de libérté dans un champs complexe : $phi.alt et phi.alt^star$, alors le lagrangien se réécrit :
+$
+  lagr = partial^mu phi.alt partial_mu phi.alt^star - m^2 phi.alt phi.alt^star
+$
+On peut remarquer que ce lagrangien est maintenant invariant également sous la transformation : $phi.alt -> e^(-i alpha) phi.alt$, avec $alpha in RR$, que l’on décriras plus en détail dans le sous-chapitre suivant (@scalaireele).\
+Cette transformation est donc une symétrie du lagrangien, ainsi, nous avons :
+$
+  (delta phi.alt)/(delta alpha) = -i phi.alt " " et " " (delta phi.alt^star)/(delta alpha) = i phi.alt^star
+$
+De plus le lagrangien est inchangé, donc :
+$
+  (delta lagr)/(delta alpha) = 0
+$
+donc $F^mu = "const"$, on peut choisir $F^mu = 0$ sans perte de généralité\
+On trouve alors :
+$
+  J^mu &= -i phi.alt (partial lagr)/(partial(partial_mu phi.alt)) + i phi.alt^star (partial lagr)/(partial (partial_mu phi.alt^star))\
+  &= -i (phi.alt partial^mu phi.alt^star - phi.alt^star partial^mu phi.alt)
+$ <courantKleinGordon>
+Et donc d’après le théorème de Noether, l’on a :
+$
+  partial_mu J^mu = -i( phi.alt partial_mu partial^mu phi.alt^star - phi.alt^star partial_mu partial^mu phi.alt) = 0
+$
+Ce qui peut également ce vérifier par l’équation de mouvement trouvé précédemment (@eqmouvementkleinGordon). \
+En effet, nous avions trouvés que les équations de mouvement s’écrivait :
+$
+  partial_mu partial^mu phi.alt = - m^2 phi.alt
+$
+Donc @courantKleinGordon se réduit à :
+$
+  J^mu = i m^2 ( cancel(phi.alt phi.alt^star) - cancel(phi.alt^star phi.alt)) = 0
+$
+
 
 == Couplage avec l’éléctromagnétisme <scalaireele>
 
@@ -662,7 +672,7 @@ On peut alors résumé les 3 équation dans le tableau suivant :
   ),
 )
 
-= Particules de spin $1 \/2$
+= Particules de spin $1 \/2$ <spin12>
 
 Dans le paragraphe précédent, on a dévelopé la théorie pour des champs scalaires, ce qui nous à permis de décrire les particules de spin 0, on propose dans ce chapitre le dévelopement pour des particules de spine demi-entier.\
 Pour celà, on va devoire introduire un nouveaux genre d’objet : les spineurs
@@ -1624,37 +1634,18 @@ $
   partial_k F_(i j) + partial_i F_(j k) + partial_j F_(k i) &= - epsilon_(i j l) partial_k B^l - epsilon_(j k l) partial_i B^l - epsilon_(k i l) partial_j B^l\
   &= - (epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j) B^l = 0
 $<3.1.17>
-Il reste donc à prouver que $epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j = epsilon_(i j k) partial_l$, pour celà on va dresser le tableau exaustif de toute les permutation $(i j k)$ valide
-#align(
-  center,
-  figure(
-    table(
-      columns: 3,
-      inset: 4mm,
-      align: center + horizon,
-      [permutation\ $i j k$],
-      [signe de la\ permutation],
-      [expression de\ $epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j$],
-
-      $1 2 3$, $+$, $epsilon_(l 2 3) partial_1 + epsilon_(1 l 3) partial_2 + epsilon_(1 2 l) partial_3$,
-      $1 3 2$, $-$, $- [epsilon_(l 2 3) partial_1 + epsilon_(1 l 3) partial_2 + epsilon_(1 2 l) partial_3]$,
-      $2 1 3$, $-$, $- [epsilon_(l 2 3) partial_1 + epsilon_(1 l 3) partial_2 + epsilon_(1 2 l) partial_3]$,
-      $2 3 1$, $+$, $epsilon_(l 2 3) partial_1 + epsilon_(1 l 3) partial_2 + epsilon_(1 2 l) partial_3$,
-      $3 1 2$, $+$, $epsilon_(l 2 3) partial_1 + epsilon_(1 l 3) partial_2 + epsilon_(1 2 l) partial_3$,
-      $3 2 1$, $-$, $- [epsilon_(l 2 3) partial_1 + epsilon_(1 l 3) partial_2 + epsilon_(1 2 l) partial_3]$,
-    ),
-    caption: [expression et signe de $epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j = epsilon_(i j k) partial_l$,\ sous toute les permutations valables],
-  ),
-)\
+Or, nous avons bien que $epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j = epsilon_(i j k) partial_l$, en effet :\
 \
-On remarque donc que l’expression est de même signe que la signature de la permutation $i j k$, ce qui affirme bien le facteur $epsilon_(i j k)$, et de plus :
 $
-  epsilon_(l 2 3) partial_1 + epsilon_(1 l 3) partial_2 + epsilon_(1 2 l) partial_3 = cases(partial_1 &"si" l = 1, partial_2 & "si" l = 2, partial_3 & "si" l = 3)= partial_l
+  epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j &= overbrace(6, = epsilon_(i j k) epsilon^(i j k))/6 (epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j)\
+  &= (epsilon_(i j k) epsilon^(i j k))/6 (epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j)\
+  &= (epsilon_(i j k) )/6 ( epsilon^(i j k) epsilon_(i j l) partial_k + epsilon^(i j k) epsilon_(j k l) partial_i + epsilon^(i j k) epsilon_(k i l) partial_j)\
+  &= (epsilon_(i j k) )/6 ( underbrace(epsilon^(i j k) epsilon_(i j l), = 2 delta^k""_l ) partial_k + underbrace(epsilon^(j k i) epsilon_(j k l), = 2 delta^i""_l) partial_i + underbrace(epsilon^(k i j) epsilon_(k i l), = 2 delta^j""_l) partial_j)\
+  &= (epsilon_(i j k) )/6 ( 2 delta^k""_l partial_k + 2 delta^i""_l partial_i + 2 delta^j""_l partial_j)\
+  &= (epsilon_(i j k) )/3 ( partial_l + partial_l + partial_l)\
+  &= epsilon_(i j k) partial_l\
 $
-Ainsi on retrouve bien l’expression voulus :
-$
-  epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j = epsilon_(i j k) partial_l
-$
+\
 Donc @3.1.17 deviens :
 $
   epsilon_(i j k) partial_l B^l = 0
@@ -1891,7 +1882,7 @@ On va également s’intéréser à l’energie de notre système, pour celà, c
 $
   cal(E) &= T^0""_(0) = (partial lagr)/(partial dot(A)_mu) dot(A)_mu + (partial lagr)/(partial dot(phi.alt)) dot(phi.alt) + (partial lagr)/(partial dot(phi.alt^star)) dot(phi.alt^star) + sum_(i = 1)^3 (partial lagr)/(partial dot(psi_i)) dot(psi_i) - lagr\
   &= - partial_t underbrace(F^(0 mu), = cases(-E^i &"si" mu != 0, 0 &"sinon")) partial_t A_mu + (partial_t dot(phi.alt) + partial_t dot(phi.alt)^star) dot(phi.alt) + (partial_t dot(phi.alt) + partial_t dot(phi.alt^star)) dot(phi.alt)^star + i sum_(i = 1)^3 dash(psi)_i gamma^0 - lagr\
-  &= partial_t F^(0 mu) partial_t A_mu + (partial_t dot(phi.alt) + partial_t dot(phi.alt^star))(dot(phi.alt) + dot(phi.alt)^star) + i sum_(i = 1)^3 dash(psi)_i gamma^0 - lagr\
+  &= partial_t E^i partial_t A_i + (partial_t dot(phi.alt) + partial_t dot(phi.alt^star))(dot(phi.alt) + dot(phi.alt)^star) + i sum_(i = 1)^3 dash(psi)_i gamma^0 - lagr\
 $
 Donc en posant $Phi = phi.alt + phi.alt^star$, on trouve :
 $
