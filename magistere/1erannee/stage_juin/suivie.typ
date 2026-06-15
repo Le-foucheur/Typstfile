@@ -373,8 +373,8 @@ Le but de ce chapitre est de décrire le comprotement d’une particule de spin 
 
 Considérons, tout d’abord un champs scalaire réél $phi.alt$, décrit par le lagrangien suivant :
 $
-  lagr &= 1/2 eta^(mu nu) partial_mu phi.alt partial_nu phi.alt - m^2 phi.alt^2\
-  &= 1/2 partial_mu phi.alt partial^mu phi.alt - m^2 phi.alt^2
+  lagr & = 1/2 eta^(mu nu) partial_mu phi.alt partial_nu phi.alt - m^2 phi.alt^2 \
+       & = 1/2 partial_mu phi.alt partial^mu phi.alt - m^2 phi.alt^2
 $
 où $m$ est un coefficient de couplage, physiquement il représenete la masse, et où on à définis $eta^(mu nu) partial_nu = partial^mu$
 
@@ -1640,7 +1640,7 @@ $
   epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j &= overbrace(6, = epsilon_(i j k) epsilon^(i j k))/6 (epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j)\
   &= (epsilon_(i j k) epsilon^(i j k))/6 (epsilon_(i j l) partial_k + epsilon_(j k l) partial_i + epsilon_(k i l) partial_j)\
   &= (epsilon_(i j k) )/6 ( epsilon^(i j k) epsilon_(i j l) partial_k + epsilon^(i j k) epsilon_(j k l) partial_i + epsilon^(i j k) epsilon_(k i l) partial_j)\
-  &= (epsilon_(i j k) )/6 ( underbrace(epsilon^(i j k) epsilon_(i j l), = 2 delta^k""_l ) partial_k + underbrace(epsilon^(j k i) epsilon_(j k l), = 2 delta^i""_l) partial_i + underbrace(epsilon^(k i j) epsilon_(k i l), = 2 delta^j""_l) partial_j)\
+  &= (epsilon_(i j k) )/6 ( underbrace(epsilon^(i j k) epsilon_(i j l), = 2 delta^k""_l) partial_k + underbrace(epsilon^(j k i) epsilon_(j k l), = 2 delta^i""_l) partial_i + underbrace(epsilon^(k i j) epsilon_(k i l), = 2 delta^j""_l) partial_j)\
   &= (epsilon_(i j k) )/6 ( 2 delta^k""_l partial_k + 2 delta^i""_l partial_i + 2 delta^j""_l partial_j)\
   &= (epsilon_(i j k) )/3 ( partial_l + partial_l + partial_l)\
   &= epsilon_(i j k) partial_l\
@@ -1834,9 +1834,15 @@ Ainsi pour pour écrire le lagrangien qui correspond au modèle voulus, il suffi
 - Interaction photon - fermion : $forall i in [|1;3|], q_i dash(psi)_i gamma^mu A_mu psi_i$ où $q_i$ est la charge de chaqu’un de nos fermions
 - interaction photon - champs scalaire : $- i q_s (phi.alt A_mu partial^mu phi.alt^star + phi.alt^star A_mu partial^mu phi.alt) - phi.alt phi.alt^star q_s^2 A^mu A_mu$ où $q_s$ est la charge de la particule décrit par le champs scalaire
 \
-*N.B. :* pour rajouter les couplages entre fermion il faudrais rajouter les termes $forall i,j in [|1;3|], i != j => dash(psi)_i (i fey(D) - m) psi_j$
+*N.B. :* pour rajouter les couplages entre fermion il faudrais rajouter les termes $forall i,j in [|1;3|], i != j => dash(psi)_i (i fey(D) - m) psi_j$, et pour les couplages entre fermion et champs scalaire, il faudrais ajouté des termes du genre $forall i in [|1;3|], dash(psi)_i phi.alt psi_i$
 \
 \
+Pour savoir quel termes, on a le droit de mettre ou non dans le lagrangien, on peut regarder ce que l’on appelle #text(style: "italic")[la dimension massique]. En effet l’action est, ici, sans dimmension, dût au faits que l’on s’est placé dans le système d’unité naturelle, en effet $[S] = [h] = 1$. Ainsi comme l’on intègre notre densité lagrangienne sur une longueure, autrement dit sur l’inverse d’une masse, alors notre densité lagrangienne doit avoir la dimension suivante : $[cal(L)] = upright(M)^4$, ainsi chaqu’un de nos termes doivent avoir cette même dimension. Attention on peut tout de même ajouter des termes de dimension différentes à condition d’avoir un coefficient dont la dimension compense, e.g. : le termes $partial_mu phi.alt partial^mu phi.alt^star$ doit être de dimension $4$, or une dérivé est de dimension $[partial_mu] = upright(L)^(-1) = upright(M)$, donc $[partial_mu phi.alt partial^mu phi.alt^star] = [phi.alt]^2 upright(M)^2 = upright(M)^4$, donc $[phi.alt] = upright(M)^1$. Ainsi le second termes $m_s^2 phi.alt phi.alt^star$ nous donne : $[m_s]^2 upright(M)^2 = upright(M)^4$, soit $[m_s] = upright(M)$, on a donc, en effet, que le coefficient $m_s$ à bien la dimension d’une masse (ce qui pour cette exemple étais relativement évident).\
+Pour plus de practicité, on travaille en réalité directement sur les exposants, i.e. que au lieu de $[phi.alt]^2 upright(M)^2 = upright(M)^4$, on écrirat directement $2 times [phi.alt] + 2 = 4$. Ce qui reviens à faire le calcul sur logarithme des grandeurs au lieu des grandeurs elle même (en effet $ln([phi.alt]^2 upright(M)^2) = ln(upright(M)^4) <=> 2 ln([phi.alt]) + 2 = 4$, en posant $ln(upright(M)) = 1$). C’est ce nombre (le logarithme de la grandeur dans les unités naturelle) que l’on nomme #text(style: "italic")[dimension massique]. \
+En petite règle pour le calcul mentale, on pourra noté que le produit deviens une somme, et que la puissance un produit, pour la somme il faut que celà respecte la même condition que en analyse dimensionelle, i.e. que les deux termes de la somme doivent avoir la même dimension massique.
+\
+\
+Revenons à la construiction de notre lagrangien.\
 Comme nous l’avons montré dans les différents chapitres correspondant (@scalaireele et @spineurele), celà reviens en réalité à réécrire les différents lagrangien à l’aide de la dérivé covariantes. On feras attention, au faits que la dérivé covariante dépend du champs quelle dérive, en effet ici nous avons 4 charge $q$ différentes alors on auras de manière générale : $D_mu B_i = partial_mu B_i - i q_i A_mu B_i$ (on ferra gaffe à l’indice $i$ sur $q$). En combinant tout ce que nous venons de dire, on peut enfin écrire notre lagrangien dans la forme suivante :
 $
   lagr = - 1/4 F_(mu nu)F^(mu nu) + D_(mu) phi.alt D^(mu) phi.alt^star - m_s^2 phi.alt phi.alt^star + sum_(i = 1)^3 dash(psi)_i (i fey(D) - m_i) psi_i
@@ -1875,7 +1881,7 @@ Pour résumé, on présente le tableau ci-dessous, qui donne pour chaque champs 
   ),
 )
 
-*N.B. :* On pourrais réécrire l’équation de mouvement pour le photon avec les courant de Noether, en effet nous avons $j^nu_(V, i) = q_i dash(psi)_i gamma^mu psi_i$ et $J^mu_s = i q_s ( phi.alt D^nu phi.alt^star + phi.alt^star D^nu phi.alt)$, et donc on aurais : $partial_mu F^mu nu = J^nu_s - sum_(i = 1)^3 j^nu_(V,i)$
+*N.B. :* On pourrais réécrire l’équation de mouvement pour le photon avec les courant de Noether, en effet nous avons $j^nu_(V, i) = q_i dash(psi)_i gamma^mu psi_i$ et $J^mu_s = i q_s ( phi.alt D^nu phi.alt^star + phi.alt^star D^nu phi.alt)$, et donc on aurais : $partial_mu F^mu nu = J^nu_s - sum_(i = 1)^3 j^nu_(V,i)$. De plus on a volontairement omis les équations pour $phi.alt^star$ et $dash(psi)$, car il seraits simple de les retrouvé à partir des lagrangiens sans couplage (i.e. remplacer la dérivé par une dérivé covariante).
 \
 \
 On va également s’intéréser à l’energie de notre système, pour celà, comme décrit au @TenseurEP, l’energie vaut la composante $0 0$ du tenseur energie-impulsion, alors :
