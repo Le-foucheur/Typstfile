@@ -20,6 +20,7 @@
 #let dt = math.dif + "t"
 #let ddt = diff + $t$
 #let lagr = $cal(L)$
+#let ham = $cal(H)$
 #let Id(n) = math.mat(..for x in range(n) {
   let l = ()
   for y in range(n) {
@@ -77,6 +78,10 @@
 #let dr = $dif r$
 #let fey(it) = math.cancel(stroke: black, angle: 15deg, it)
 #let id = $upright(I)$
+#let bra(it) = $lr(chevron.l #it|)$
+#let ket(it) = $lr(|#it chevron.r)$
+#let braket(x, y) = $lr(chevron.l #x|#y chevron.r)$
+#let ketbra(x, y) = $lr(|#x chevron.r chevron.l #y|)$
 
 #let numbering_joli(..num) = {
   let res = ""

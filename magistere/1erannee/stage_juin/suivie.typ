@@ -115,9 +115,17 @@
     }
     let nr = na(counter(page).at(loc).at(0))
     if (chapter.level < 4 and (num != none and type(num) != int)) {
-      [#h(1cm * chapter.level) #link(loc)[#num #chapter.body] #box(width: 1fr, repeat[.]) #nr #v(
+      [
+        #if counter(heading).at(loc).len() <= 1 and counter(heading).at(loc).first() == 1 {
+          align(center)[\ *Chapitre I : Théorie classique\ des champs* \ \ ]
+        }
+        #if counter(heading).at(loc).len() <= 1 and counter(heading).at(loc).first() == 5 {
+          align(center)[\ *Chapitre II : Théorie quantique\ des champs* \ \ ]
+        }
+        #h(1cm * chapter.level) #link(loc)[#num #chapter.body] #box(width: 1fr, repeat[.]) #nr #v(
           2.5mm,
-        ) ]
+        )
+      ]
     } else if (chapter.level < 2 and num == none) {
       [#h(1cm * chapter.level) #link(loc)[#num #chapter.body] #box(width: 1fr, repeat[.]) #nr #v(2.5mm) ]
     }
@@ -129,7 +137,7 @@
 #show heading.where(body: [Introduction]): set heading(numbering: none)
 = Introduction
 
-Cette ouvrage à été écrit comme suivie d’un stage portant initialement sur la théorie classique des champs. Ce stage à été en grande partie basé sur l’ouvrge #text(style: "italic")[Quantum Field Theory] par le Dr. David Tong, il n’est donc pas étonnant d’en croisé par endroit une structure similaire, voir une paraphrase se sont œuvre (que l’on pourrait qualifier de plagia…). Cependant, comme le but de notre stage étant de nous familiarisé et d’apprendre la théorie classique des champs, alors vous trouverez ici quasiment toute les démonstration & définition de chaque objet présenté, exépté les objets, normalement, commun et ceux dont la démonstration ou la définition rigoureuse nous étais hors de notre porté.
+Cette ouvrage à été écrit comme suivie d’un stage portant initialement sur la théorie classique des champs. Ce stage à été en grande partie basé sur l’ouvrge #text(style: "italic")[Quantum Field Theory] par le Dr. David Tong @Tong pour la partie classique et sur #text(style: "italic")[An Introduction to Quantum Field Theory] de M.E. Peskin & D. V. Schroeder @Peskin, nous nous somme également appuyer sur l’œuvre #text(style: "italic")[Quantum Field Theory and the Standard Model] de M. D. Schwartz @Schwartz et sur des notes de notre maître de satge. il n’est donc pas étonnant de croisé par endroit une structure similaire au deux ouvrages de référence, voir une paraphrase de leur œuvres (que l’on pourrait parfois qualifier de plagia…). Cependant, comme le but de notre stage étant de nous familiariser et d’apprendre la théorie classique des champs, alors vous trouverez ici quasiment toute les démonstration & définition de chaque objet présenté, exépté les objets, normalement, commun et ceux dont la démonstration ou la définition rigoureuse nous étais hors de notre porté.
 
 #pagebreak()
 
@@ -146,6 +154,13 @@ On liste ici l’ensembe des conventions utilisé de manière plus ou moins impl
       inset: 5mm,
       table.header([convention], [raison]),
       $eta^(mu nu) = mat(+, -, -, -)$, [C’est la convention la plus courante\ contrairement à $mat(-, +, +, +)$],
+      $T_mu F^mu = sum_mu T_mu F^mu$,
+      [La convention de somation d’Einstein\ ($mu$ dépend du contexte et peut être mal définis)],
+
+      $(partial f)/(partial x_mu) = partial^mu f$,
+      [Cette notation permet de condensé les expression\ sans perte d’information.\ De plus, elle se comporte comme il faut vis à vis\ de la convention d’Einstein, la rendants pratique],
+
+      $partial^0 f = dot(f)$, [On utiliseras la notation de Newton, uniquement\ pour les dérivées au temps],
     ),
     caption: [Ensemble des conventions utilisé],
   ),
@@ -165,7 +180,7 @@ On liste ici l’ensembe des conventions utilisé de manière plus ou moins impl
   }
 })
 
-= Théorie lagrangienne des champs
+= Théorie lagrangienne des champs <lagrchamps>
 
 Dans un permier tant, il nous faut réécrire la mécanique lagrangienne, non plus pour des variables réél ou complexe, mais pour des champs, qui serons scalaire @spin0, spinorielle @spin12 ou vectorielle @spin1, c’est ce qu’il seras faits dans cette partie, on nous réécrirons les équations d’Euler-Lagrange et le théorème de Noether pour un nouveau genre de lagrangien.\
 
@@ -363,7 +378,7 @@ $
 avec ici aussi
 $
   P^i = integral dx^3 cal(P)^i
-$
+$<impulsion>
 
 = Particules de spin null <spin0>
 
@@ -1163,7 +1178,7 @@ $
 $
 Ainsi $S[Lambda]$ n’a plus aucune raisons d’être diagonale par bloc, il nous faut maintenant trouver un invariant pour définir les spineurs chiraux.\
 Pour celà on peut définir l’objet suivant :\
-*Définison :*
+*Définition :*
 $
   gamma^5 = - i gamma^0 gamma^1 gamma^2 gamma^3
 $\
@@ -1898,13 +1913,316 @@ $
 
 #pagebreak()
 
-#set heading(numbering: none)
+#align(center, text(weight: "bold", 30pt)[
+  Chapitre II\
+  #text(25pt)[
+    Théorie Quantique \
+    des champs
+  ]
+])
 
-= Conclusions
+On va maintenant décrire toute la théorie précédente (classique) mais dans un cadre quantique, i.e. que l’on va #text(style: "italic")[quantifié] certaine grandeurs.\
+On va donc pour celà réécrire la mécanique Hamiltonienne dans le cas des champs, pour enfin retraité les différents champs du chapitre I.
+
+= Théorie Hamiltonienne des champs
+
+Ce chapitre, bien que relativement court, a tout de même sont lot d’importance, car nous allons généralisé la théorie lagrangienne des champs (cf. @lagrchamps) à la théorie hamiltonienne des champs.\
+Dans la version classique de ces théorie, l’on passe de l’une à l’autre, en définisant un moment conjugé $p_i = partial L\/ partial dot(q_i)$, on va donc chercher un équivalent pour nos champs, un #text(style: "italic")[champs conjugé]. Dans la théorie lagrangien que l’on a dévelopé, on peut prendre $dot(phi.alt_i)$ comme équivalent à $dot(q_i)$, ainsi :
+$
+  p &= (partial L)/(partial dot(phi.alt)) = partial/(partial dot(phi.alt)) integral dif y^3 cal(L)(phi.alt(y), dot(phi.alt)(y))\
+  &= integral dif y^3 (partial lagr)/(partial dot(phi.alt))
+$
+Ainsi comme pour le lagrangien on définis la densité de moment conjugé par :
+$
+  p = integral dx^3 pi(x)
+$
+Et donc en identifiant, on trouve :
+$
+  pi = (partial lagr)/(partial dot(phi.alt))
+$
+On peut maintenant généralisé notre hamiltonien aux champs. Classiquement on à :
+$
+  H = sum_i p_i dot(q)_i - L
+$
+Or dans notre cas $dot(q)_i = dot(phi.alt)_i$, donc en remplacant $p_i$ et $L$ par leur densité éponyme.
+$
+  H & = sum_i (integral dx^3 pi_i (x)) dot(phi.alt)_i - integral dx^3 lagr \
+    & = integral dx^3 (sum_i pi_i dot(phi.alt)_i - lagr)
+$
+Ainsi on peut, encore une fois, définir une densité hamiltonienne $cal(H)$ par :
+$
+  H = integral dx^3 ham
+$
+Donc finalement :
+$
+  ham = sum_i pi_i dot(phi.alt)_i - lagr
+$
+
+== Équation d’Hamilton
+
+= Quantification du champs scalaire
+
+Pour décrire la théorie dévelopé au @spin0, dans une théorie quantique, il nous faut la #text(style: "italic")[quantifier], pour celà on repart de notre théorie classique que l’on (spoileur alert) #text(style: "italic")[quantifie], i.e. que l’on réeinterprette les variables comme des opérateur qui respecte des relation de commutation. Enfin on étudie les vecteurs et valeurs propre de l’Hamiltonien.\
+Dans un système discret, on peut écrire les relation de commutation entre les variables comme :
+$
+  [p_i, q_j] = i delta_(i j)\
+  [p_i, p_j] = [q_i, q_j] = 0
+$
+Ainsi pour un sytème continue, on généralise le delta de Kronecker par un delta de Dirac, donc pour $phi.alt et pi$ on obtient la relation suivante :
+$
+  [phi.alt (arrow(x)), pi(arrow(y))] = i delta(arrow(x) - arrow(y))
+$ <commutateurphipi>
+$
+  [phi.alt (arrow(x)), phi.alt (arrow(y))] = [pi (arrow(x)), pi(arrow(y))] = 0
+$
+\
+Comme en mécanique quantique classique, on décomposer $phi.alt$ en une base de Fourier. En analogie à la mécanique classique, où $phi.alt_"c" = 1/sqrt(2 E) (a + a^dagger)$, on décompose $phi.alt$ en deux modes de Fourier indépendants
+$
+  phi.alt = integral (dif^3 arrow(p))/((2 pi)^3) 1/sqrt(2 E_arrow(p)) (a_arrow(p) e^(i arrow(p) dot.c arrow(x)) + a^dagger_arrow(p) e^(- i arrow(p) dot.c arrow(x)))
+$
+En partant de l’écriture du lagrangien pour le champs scalaire que l’on considérons comme réél pour cette partie (i.e. : $lagr = 1/2 partial_mu phi.alt partial^mu phi.alt - 1/2 m^2 phi.alt^2$). On peut en déduire la forme de $pi$ :
+$
+  pi = (partial lagr)/(partial dot(phi.alt)) = 1/2 (partial (partial_mu phi.alt partial^mu phi.alt))/(partial dot(phi.alt)) = dot(phi.alt)
+$
+Donc en utilisant la décomposition de $phi.alt$, on peut trouver celle de $pi$ :
+$
+  pi = integral (dif^3 arrow(p))/((2 pi)^3) 1/sqrt(2 E_arrow(p)) (a_arrow(p) (partial e^(i arrow(p) dot.c arrow(x)))/(partial t) + a^dagger_arrow(p) (partial e^(-i arrow(p) dot.c arrow(x)))/(partial t))
+$
+Or comme $arrow(p) = (E_arrow(p), p^1, p^2, p^3) = (E_arrow(p), p^i)$ et $arrow(x) = (t, x^i)$, alors\
+\
+$
+  partial_alpha e^(i arrow(p) dot.c arrow(x)) = i partial_alpha eta_(mu nu) p^mu x^nu e^(i arrow(p) dot.c arrow(x)) = i eta_(mu nu) p^mu underbrace(partial_alpha x^nu, = delta^alpha""_nu) e^(i arrow(p) dot.c arrow(x)) = i eta_(mu alpha) p^mu = i p_alpha e^(i arrow(p) dot.c arrow(x))
+$
+Donc $partial_0 e^(i arrow(p) dot.c arrow(p)) = (partial e^(i arrow(p) dot.c arrow(x)))/(partial t) = i p_0 e^(i arrow(p) dot.c arrow(x)) = i E_arrow(p) e^(i arrow(p) dot.c arrow(x))$, de même $partial_0 e^(- i arrow(p) dot.c arrow(p)) = - i E_arrow(p) e^(-i arrow(p) dot.c arrow(x))$, ainsi :
+$
+  pi &= integral (dif^3 arrow(p))/((2 pi)^3) 1/sqrt(2 E_arrow(p)) (i a_arrow(p) E_arrow(p) e^(i arrow(p) dot.c arrow(x)) - i E_arrow(p) a^dagger_arrow(p) e^(-i arrow(p) dot.c arrow(x)) )\
+  &= integral (dif^3 arrow(p))/((2 pi)^3) i sqrt(E_arrow(p)/2) (a_arrow(p) e^(i arrow(p) dot.c arrow(x)) - a^dagger_arrow(p) e^(-i arrow(p) dot.c arrow(x)) )\
+$
+Il sera plus simple pour le calcule que $phi.alt et pi$ soit vue comme une onde plane, i.e. avec juste un seul facteur $e^(i arrow(p) dot.c arrow(x))$, on peut donc forcé cette forme en réécrivant le coefficient $a^dagger_arrow(p)$. On obtient donc les formes suivantes :
+$
+  phi.alt = integral (dif^3 arrow(p))/((2 pi)^3) 1/sqrt(2 E_arrow(p)) (a_arrow(p) + a^dagger_(- arrow(p))) e^(i arrow(p) dot.c arrow(x))
+$
+$
+  pi = integral (dif^3 arrow(p))/((2 pi)^3) i sqrt(E_arrow(p)/2) (a_arrow(p) - a^dagger_(- arrow(p))) e^(i arrow(p) dot.c arrow(x))
+$
+À partire de ces formes et de la condition sur leur comuntateur (@commutateurphipi), on peut prouvé la propriété suivantes :\
+*Propriété :*
+#{
+  set math.equation(numbering: none)
+  align(center, grid(
+    columns: 3,
+    column-gutter: 1cm,
+    row-gutter: 1mm,
+    $
+      [phi.alt(arrow(x)); pi(arrow(y))] = i delta(arrow(x) - arrow(y))
+    $,
+    [],
+    $
+      [a_arrow(p); a^dagger_arrow(q)] = (2 pi)^3 delta(arrow(p) - arrow(q))
+    $,
+
+    [],
+    $
+      <==>
+    $,
+    [],
+
+    $
+      [phi.alt(arrow(x)); phi.alt (arrow(y))] = [pi (arrow(x)); pi(arrow(y))] = 0
+    $,
+    [],
+    $ [a_(arrow(p)); a_(arrow(q))] = [a^dagger_(arrow(p)); a^dagger_(arrow(q))] = 0 $,
+  ))
+}
+*Preuve :*
+On ne prouveras ici que l’implication dans le sens $<==$, l’autre sens étant trop long et complexe pour être détaillé ici.\
+On suposse donc :
+$
+  [a_arrow(p); a^dagger_arrow(q)] = (2pi)^3 delta(arrow(p) - arrow(q))\
+  [a_arrow(p); a_arrow(q)] = [a^dagger_arrow(p); a^dagger_arrow(q)] = 0\
+$
+alors
+
+$
+  [phi.alt(arrow(x)); pi (arrow(arrow(y)))] &= integral (dif^3 arrow(p) dif^3 arrow(q))/(2 pi)^6 ((-i))/2 sqrt(E_arrow(q)/E_arrow(p)) e^(i (arrow(p) dot.c arrow(x) + arrow(q) dot.c arrow(y))) [a_arrow(p) + a^dagger_(- arrow(p)) ; a_arrow(q) - a^dagger_(-arrow(q))]\
+  &= integral (dif^3 arrow(p) dif^3 arrow(q))/(2 pi)^6 ((-i))/2 sqrt(E_arrow(q)/E_arrow(p)) e^(i (arrow(p) dot.c arrow(x) + arrow(q) dot.c arrow(y))) (underbrace([a_arrow(p); a_arrow(q)], = 0) - underbrace([a_arrow(p); a^dagger_(-arrow(q))], = (2pi)^3 delta(arrow(p) - arrow(q))) + underbrace([a^dagger_(-arrow(p)); a_arrow(q)], = - (2pi)^3 delta(arrow(q) - arrow(p))) - underbrace([a^dagger_(-arrow(p)); a^dagger_(- arrow(q))], = 0))\
+  &= integral (dif^3 arrow(p) dif^3 arrow(q))/(2 pi)^6 ((-i))/2 sqrt(E_arrow(q)/E_arrow(p)) e^(i (arrow(p) dot.c arrow(x) + arrow(q) dot.c arrow(y))) ( (2pi)^3 delta(arrow(p) - arrow(q)) +(2pi)^3 delta(arrow(q) - arrow(p)))\
+  &= i integral (dif^3 arrow(p) dif^3 arrow(q))/(2 pi)^3 1/2 sqrt(E_arrow(q)/E_arrow(p)) e^(i (arrow(p) dot.c arrow(x) + arrow(q) dot.c arrow(y))) ( delta(arrow(p) - arrow(q)) + delta(arrow(p) - arrow(q)))\
+  &= i integral (dif^3 arrow(p) dif^3 arrow(q))/(2 pi)^3 sqrt(E_arrow(q)/E_arrow(p)) e^(i (arrow(p) dot.c arrow(x) + arrow(q) dot.c arrow(y))) delta(arrow(p) - arrow(q))\
+  #box($arrow(p) = arrow(q)\ donc E_arrow(p) = E_arrow(q)$) &= i integral (dif^3 arrow(p))/(2 pi)^3 e^(i arrow(p) dot.c (arrow(x) + arrow(y)))\
+  &= i delta(arrow(x) - arrow(y))\
+$
+#QED\
+\
+Avant d’écrire l’Hamiltonien, on peut réécrire le lagrangien avec comme variable $phi.alt et pi$ :
+$
+  lagr & = 1/2 partial_mu phi.alt partial^mu phi.alt - 1/2 m^2 phi.alt^2 \
+  lagr & = 1/2 partial_0 phi.alt partial^0 phi.alt + partial_i phi.alt partial^i phi.alt - 1/2 m^2 phi.alt^2 \
+  lagr & = 1/2 dot(phi.alt)^2 - (nabla phi.alt)^2 - 1/2 m^2 phi.alt^2 \
+  lagr & = 1/2 pi^2 - (nabla phi.alt)^2 - 1/2 m^2 phi.alt^2 \
+$
+On va maintenant pouvoir calculer l’Hamiltonien pour les champs scalaire, calculons d’abord la densité hamiltonienne :
+$
+  ham & = pi dot(phi.alt) - lagr \
+  & = pi^2 - 1/2(pi^2 - (nabla phi.alt)^2 - m^2 phi.alt^2) \
+  & = 1/2 pi^2 + 1/2 (nabla phi.alt)^2 + 1/2 m^2 phi.alt^2 \
+  & = 1/2 pi(arrow(x)) pi(arrow(x)) + 1/2 nabla phi.alt(arrow(x)) nabla phi.alt(arrow(x)) + 1/2 m^2 phi.alt(x) phi.alt(x) \
+  & = 1/2 integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^6 { - sqrt(E_arrow(p) E_arrow(q))/2 (a_arrow(p) - a^dagger_(- arrow(p))) (a_arrow(q) - a^dagger_(- arrow(q))) e^(i (arrow(p) + arrow(q)) dot.c arrow(x)) - (arrow(p) dot.c arrow(q))/(2 sqrt(E_arrow(p) E_arrow(q))) (a_arrow(p) + a^dagger_(- arrow(p))) (a_arrow(q) + a^dagger_(- arrow(q))) e^(i (arrow(p) + arrow(q)) dot.c arrow(x))\
+    &#h(9.47cm)+ m^2/(2 sqrt(E_arrow(p) E_arrow(q)))(a_arrow(p) + a^dagger_(- arrow(p))) (a_arrow(q) + a^dagger_(- arrow(q))) e^(i (arrow(p) + arrow(q)) dot.c arrow(x))} \
+  & = 1/4 integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^6 e^(i (arrow(p) + arrow(q)) dot.c arrow(x)) { - sqrt(E_arrow(p) E_arrow(q)) (a_arrow(p) - a^dagger_(- arrow(p))) (a_arrow(q) - a^dagger_(- arrow(q)))\
+    &#h(7cm) + ( - arrow(p) dot.c arrow(q) + m^2)/(sqrt(E_arrow(p) E_arrow(q))) (a_arrow(p) + a^dagger_(- arrow(p))) (a_arrow(q) + a^dagger_(- arrow(q)))} \
+$
+Ainsi on peut calculer l’Hamiltonien :
+$
+  H & = integral dif^3 arrow(x) cal(H) \
+  & = 1/4 integral dif^3 arrow(x) integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^6 e^(i (arrow(p) + arrow(q)) dot.c arrow(x)) lr({dots.c}, size: #220%) \
+  & = 1/4 integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^3 underbrace(integral (dif^3 arrow(x))/(2pi)^3 e^(i (arrow(p) + arrow(q)) dot.c arrow(x)), = delta(arrow(p) + arrow(q))) lr({dots.c}, size: #220%) \
+  & = 1/4 integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^3 delta(arrow(p) + arrow(q)) lr({dots.c}, size: #220%) \
+  #box([$arrow(q) -> - arrow(p)$\ comme $E_arrow(p)^2 prop arrow(p)^2$\ donc $E_(- arrow(p)) = E_arrow(p)$]) #h(1cm)& = 1/4 integral (dif^3 arrow(p))/(2pi)^3 {- E_arrow(p) (a_arrow(p) - a^dagger_(- arrow(p))) (a_( - arrow(p)) - a^dagger_(arrow(p))) + ( overparen(arrow(p)^2 + m^2, = E^2_arrow(p)))/(E_arrow(p)) (a_arrow(p) + a^dagger_(- arrow(p))) (a_( - arrow(p)) + a^dagger_(arrow(p)))} \
+  & = 1/4 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) { - (a_arrow(p) - a^dagger_(- arrow(p))) (a_( - arrow(p)) - a^dagger_(arrow(p))) + (a_arrow(p) + a^dagger_(- arrow(p))) (a_( - arrow(p)) + a^dagger_(arrow(p)))} \
+  & = 1/4 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) { - cancel(a_arrow(p) a_(- arrow(p))) + a_arrow(p) a^dagger_(arrow(p)) + a^dagger_(- arrow(p)) a_(- arrow(p)) - cancel(stroke: #blue, a^dagger_(-arrow(p)) a^dagger_arrow(p)) + cancel(a_arrow(p) a_(- arrow(p))) + a_arrow(p) a^dagger_arrow(p) + a^dagger_(-arrow(p)) a_(-arrow(p)) + cancel(stroke: #blue, a^dagger_(-arrow(p)) a^dagger_arrow(p))} \
+  & = 1/4 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) { 2 a_arrow(p) a^dagger_(arrow(p)) + 2 a^dagger_(- arrow(p)) a_(- arrow(p))} \
+  & = 1/2 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) a_arrow(p) a^dagger_(arrow(p)) + underbrace(1/2 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) a^dagger_(- arrow(p)) a_(- arrow(p)), #[on opère le changement de variable\ $arrow(p) -> - arrow(p)$, un signe proviens de $dif^3 arrow(p)$\ un autre proviens de l’interversion\ des bornes de l’intégrale.]) \
+  & = 1/2 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) a_arrow(p) a^dagger_(arrow(p)) + 1/2 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) a^dagger_(arrow(p)) a_(arrow(p)) \
+  & = 1/4 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) { 2 a_arrow(p) a^dagger_(arrow(p)) + 2 a^dagger_(arrow(p)) a_(arrow(p))} \
+  & = 1/2 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) {a_arrow(p) ; a^dagger_(arrow(p))} \
+$
+Or
+$
+  {A; B} & = A B + B A = B A + underbrace(A B - B A, = [A; B]) + B A \
+         & = 2 B A + [A; B]
+$
+Ainsi l’Hamiltonien prend la forme suivante :
+$
+  H & = 1/2 integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) (2 a^dagger_arrow(p) a_arrow(p) + [a_arrow(p); a^dagger_(arrow(p))]) \
+  & = integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) (a^dagger_arrow(p) a_arrow(p) + 1/2 [a_arrow(p); a^dagger_(arrow(p))]) \
+$<offsetinf>
+On noteras que le second termes est proportionelle à $delta(0)$, en effet $[a_arrow(p); a^dagger_(arrow(p))] = (2 pi)^3 delta(0)$, ainsi l’intégrale sur ce terme diverge. Ce qui physiquement « peut » poser problème. En faites, on peut faire disparaitre ce termes à l’aide d’argumement physique, bien que mathématiquements celà reste un immense point noir dans la théorie. Dans l’experience, on ne mesure toujours que en comparant avec le vide, que l’on pose à 0, pour des soucis de practicité. Ainsi on peut interprété ce terme infini comme un « #text(style: "italic")[offset] », un peut comme l’énergie potentielle qui elle aussi est définis à un offset près. Alors comme pour l’énergie potentielle, on peut décidé de retirer cette « #text(style: "italic")[offset] » infini. On peut donc réécrire l’Hamiltonien par :
+$
+  H = integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) a^dagger_arrow(p) a_arrow(p)
+$
+On peut regarder comment cette Hamiltonienne commute avec $a_arrow(p)$ & $a^dagger_arrow(p)$\
+*Propriété :*
+#grid(
+  columns: 2,
+  $
+    [H, a_arrow(p)] = - E_arrow(p) a_arrow(p)
+  $,
+  $
+    [H, a^dagger_arrow(p)] = E_arrow(p) a^dagger_arrow(p)
+  $,
+)
+*Preuve :*
+#grid(
+  columns: 2,
+  $
+    [H, a_arrow(q)] &= integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) (a_arrow(q) a^dagger_arrow(p) a_arrow(p) - a^dagger_arrow(p) a_arrow(p) a_arrow(q))\
+    &= integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) (a_arrow(q) a^dagger_arrow(p) a_arrow(p) - a^dagger_arrow(p) a_arrow(q) a_arrow(p))\
+    &= integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) underbrace((a_arrow(q) a^dagger_arrow(p) - a^dagger_arrow(p) a_arrow(q)), = - (2pi)^3 delta(arrow(p) - arrow(q))) a_arrow(p)\
+    &= - integral dif^3 arrow(p) E_arrow(p) delta(arrow(p) - arrow(q)) a_arrow(p)\
+    &= - E_arrow(q) a_arrow(q)
+  $,
+  $
+    [H, a^dagger_arrow(q)] &= integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) (a^dagger_arrow(q) a^dagger_arrow(p) a_arrow(p) - a^dagger_arrow(p) a_arrow(p) a^dagger_arrow(q))\
+    &= integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) (a^dagger_arrow(p) a^dagger_arrow(q) a_arrow(p) - a^dagger_arrow(p) a_arrow(p) a^dagger_arrow(q))\
+    &= integral (dif^3 arrow(p))/(2pi)^3 E_arrow(p) a^dagger_arrow(p) underbrace((a^dagger_arrow(q) a_arrow(p) - a_arrow(p) a^dagger_arrow(q)), = (2pi)^3 delta(arrow(p) - arrow(q)))\
+    &= integral dif^3 arrow(p) E_arrow(p) delta(arrow(p) - arrow(q)) a^dagger_arrow(p)\
+    &= E_arrow(q) a^dagger_arrow(q)
+  $,
+)
+#QED
+
+On peut opéré le même calcul que l’Hamiltonien, pour l’impulsion :\
+*Propriété :*
+$
+  arrow(P) = integral (dif^3 p)/(2 pi)^3 arrow(p) a^dagger_arrow(p) a_arrow(p)
+$
+
+*Preuve :*\
+En repartant de la définition donnée à @impulsion, nous avons d’abord que le tenseur énérgie impulsion s’écrit :
+$
+  T^i""_0 &= (partial lagr)/(partial (partial_i phi.alt)) underbrace(dot(phi.alt), = pi) - underbrace(delta^i""_0 lagr, = 0)\
+  &= pi partial^i phi.alt = - pi partial_i phi.alt
+$
+Donc réécrit sous forme vectorielle, avec $arrow(T) = (T^i""_0)$  :
+$
+  arrow(P) = integral dx^3 arrow(T) = - integral dx^3 pi(arrow(x)) nabla phi.alt
+$
+En utilisant la décomposition en transformé de Fourier, on peut éxprimé l’impulsion en les $a_arrow(p) \& a^dagger_arrow(p)$ :
+$
+  arrow(P) &= - 1/2 integral dx^3 integral (dif^3 arrow(p) dif^3 arrow(q))/((2pi)^6) sqrt(E_arrow(p) / E_arrow(q)) (-i) times i arrow(q) (a_arrow(p) - a^dagger_(-arrow(p))) (a_arrow(q) + a^dagger_(-arrow(q))) e^(i (arrow(p) + arrow(q))dot.c arrow(x))\
+  &= - 1/2 integral (dif^3 arrow(p) dif^3 arrow(q))/((2pi)^3) sqrt(E_arrow(p) / E_arrow(q))
+  arrow(q) (a_arrow(p) - a^dagger_(-arrow(p))) (a_arrow(q) + a^dagger_(-arrow(q))) underbrace(integral (dx^3)/((2pi)^3) e^(i (arrow(p) + arrow(q))dot.c arrow(x)), = delta(arrow(p) + arrow(q)))\
+  &= - 1/2 integral (dif^3 arrow(p) dif^3 arrow(q))/((2pi)^3) sqrt(E_arrow(p) / E_arrow(q)) arrow(q) (a_arrow(p) - a^dagger_(-arrow(p))) (a_arrow(q) + a^dagger_(-arrow(q))) delta(arrow(p) + arrow(q))\
+  &= 1/2 integral (dif^3 arrow(p))/((2pi)^3) arrow(p) (a_(arrow(p)) - a^dagger_(-arrow(p))) (a_(- arrow(p)) + a^dagger_(arrow(p)))\
+  &= 1/2 integral (dif^3 arrow(p))/((2pi)^3) arrow(p) (a_arrow(p) a_(- arrow(p)) + a_arrow(p) a^dagger_arrow(p) - a^dagger_(- arrow(p)) a_(- arrow(p)) - a^dagger_(-arrow(p)) a^dagger_arrow(p) )\
+$
+On peut montré aisément que $a_arrow(p) a_(-arrow(p))$ & $a^dagger_(-arrow(p)) a^dagger_arrow(p)$ sont des fonctions impaire sur $arrow(p)$, donc leurs intégrale est null, ainsi :
+$
+  arrow(P) &= 1/2 integral (dif^3 arrow(p))/((2 pi)^3) arrow(p) (a_arrow(p) a^dagger_arrow(p) - a^dagger_(- arrow(p)) a_(- arrow(p)))\
+  arrow(P) &= 1/2 integral (dif^3 arrow(p))/((2 pi)^3) arrow(p) a_arrow(p) a^dagger_arrow(p) - underbrace(integral (dif^3 arrow(p))/((2 pi)^3) arrow(p) a^dagger_(- arrow(p)) a_(- arrow(p)), #[On opère le chamgement\ de variable $arrow(p) -> - arrow(p)$])\
+  arrow(P) &= 1/2 integral (dif^3 arrow(p))/((2 pi)^3) arrow(p) a_arrow(p) a^dagger_arrow(p) + integral (dif^3 arrow(p))/((2 pi)^3) arrow(p) a^dagger_(arrow(p)) a_(arrow(p))\
+  arrow(P) &= 1/2 integral (dif^3 arrow(p))/((2 pi)^3) arrow(p) (a_arrow(p) a^dagger_arrow(p) + a^dagger_(arrow(p)) a_(arrow(p)))\
+  arrow(P) &= 1/2 integral (dif^3 arrow(p))/((2 pi)^3) arrow(p) {a_arrow(p); a^dagger_arrow(p)}\
+  arrow(P) &= 1/2 integral (dif^3 arrow(p))/((2 pi)^3) arrow(p) (2 a^dagger_arrow(p) a_arrow(p) + [a_arrow(p); a^dagger_arrow(p)])\
+  arrow(P) &= integral (dif^3 arrow(p))/((2 pi)^3) arrow(p) (a^dagger_arrow(p) a_arrow(p) + 1/2 [a_arrow(p); a^dagger_arrow(p)])\
+$
+Comme pour l’Hamiltonien, on retrouve « #text(style: "italic")[l’offset] » infini dû au commutateur de $a_arrow(p)$ et $a^dagger_arrow(p)$, donc par les même arguments que pour l’Hamiltonien, on peut omettre ce termes (cf. @offsetinf).#QED\
+Similairement à l’Hamiltonien, on peut montré les deux relations suivantes :\
+*Propriété :*\
+\
+#align(center, grid(
+  columns: 2,
+  $
+    [arrow(P), a_arrow(q)] = - arrow(q) a_arrow(q)
+  $,
+  $
+    [arrow(P), a^dagger_arrow(q)] = arrow(q) a^dagger_arrow(q)
+  $,
+))\
+*Preuve :* Voir la preuve des pour les même relation que l’Hamiltonien (cf. #context { link(query(math.equation).at(679).location())[les équations (6.21) & (6.22)] })
+\
+Pour étudier la théorie que l’on viens d’écrire, on va définir l’état de référence, à savoir l’état du vide, d’énérgie $E = 0$ (quand l’on faits tombé $delta$ dans l’exprésion de l’Hamiltonien), ainsi on définis l’état du vide par :
+\
+*Définition :*\
+#let vide = $ket(0)$
+On appelle état du vide, et on le note $#ket(0)$, l’état tel que :
+$
+  forall arrow(p), a_arrow(p) vide = 0 et braket(0, 0) = 1
+$\
+\
+Alors nous avons les deux importantes propriété suivantes :\
+*Propriété :*
+les états $a^dagger_arrow(p) vide$ sont des états propre (au sens de vecteur propre) de l’Hamiltonien $H$, de valeur propre $E_arrow(p)$, i.e. :
+$
+  H a^dagger_arrow(p) vide = E_arrow(p) a^dagger_arrow(p) vide
+$
+Et sont également états propre de l’impulsion $arrow(P)$, de valeurs propre $arrow(p)$, i.e :
+$
+  arrow(P) a^dagger_arrow(p) vide = arrow(p) a^dagger_arrow(p) vide
+$
+\
+*Preuve :*\
+Dans un permier tant, en partant de la relation #context { link(query(math.equation).at(678).location())[des équations (6.19) & (6.20)] }, on a :
+$
+  E_arrow(p) a^dagger_arrow(p) vide & = [H; a^dagger_arrow(p)] vide \
+  & = H a^dagger_arrow(p) vide - a^dagger_arrow(p) H vide\
+  &= H a^dagger_arrow(p) vide - cancel(a^dagger_arrow(p) integral (dif^3 arrow(p))/((2pi)^3) E_arrow(p) a^dagger_arrow(p) underbrace(a_arrow(p) vide, = 0))\
+  &= H a^dagger_arrow(p) vide
+$
+Étant donnée que $arrow(P)$ vérifie exactement les même équations que $H$, alors il est simple de prouver la relation voulus.
+#QED
 
 #pagebreak()
 
-//#bibliography("biblio.bib", title: [Bibliographie])
+#set heading(numbering: none)
+
+= Conclusions
+@Tong @Schwartz @Peskin
+
+#pagebreak()
+
+#bibliography("bibli.bib", title: [Bibliographie])
 
 #pagebreak()
 
