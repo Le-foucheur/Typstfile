@@ -1,7 +1,6 @@
 #import "../../../template.typ": *
 #import "../../../transposition.typ": *
-#import "@preview/cetz:0.4.2"
-#import "@preview/cetz-plot:0.1.3": plot
+#import "@preview/cetz:0.5.2"
 #import "@preview/zebraw:0.6.3": *
 #import "@preview/mitex:0.2.7": *
 #show: zebraw
@@ -66,7 +65,6 @@
 #show raw: set text(font: "Linux Libertine")
 #show heading: set block(above: 1.4em, below: 1em)
 #set document(title: text(20pt)[Théorie classique (et quantique ?)\ des champs])
-#set text(size: 11pt)
 #set math.cancel(stroke: red)
 
 #align(center, title())
@@ -138,6 +136,16 @@
 = Introduction
 
 Cette ouvrage à été écrit comme suivie d’un stage portant initialement sur la théorie classique des champs. Ce stage à été en grande partie basé sur l’ouvrge #text(style: "italic")[Quantum Field Theory] par le Dr. David Tong @Tong pour la partie classique et sur #text(style: "italic")[An Introduction to Quantum Field Theory] de M.E. Peskin & D. V. Schroeder @Peskin, nous nous somme également appuyer sur l’œuvre #text(style: "italic")[Quantum Field Theory and the Standard Model] de M. D. Schwartz @Schwartz et sur des notes de notre maître de satge. il n’est donc pas étonnant de croisé par endroit une structure similaire au deux ouvrages de référence, voir une paraphrase de leur œuvres (que l’on pourrait parfois qualifier de plagia…). Cependant, comme le but de notre stage étant de nous familiariser et d’apprendre la théorie classique des champs, alors vous trouverez ici quasiment toute les démonstration & définition de chaque objet présenté, exépté les objets, normalement, commun et ceux dont la démonstration ou la définition rigoureuse nous étais hors de notre porté.
+\
+\
+Cet ouvrage a été écrit comme suivi d'un stage portant initialement sur la théorie classique des champs. Ce travail s'articule autour de l'étude des structures fondamentales qui unissent la mécanique quantique et la relativité restreinte, un domaine où le concept de champ devient le langage universel de la physique théorique.
+
+La trame conceptuelle et technique de ce manuscrit a été en grande partie basée sur l'ouvrage de référence _Quantum Field Theory_ par le Dr. David Tong @Tong pour la formulation classique et lagrangienne, ainsi que sur _An Introduction to Quantum Field Theory_ de M.E. Peskin & D. V. Schroeder @Peskin pour les développements formels. Nous nous sommes également appuyé sur l'œuvre exhaustive _Quantum Field Theory and the Standard Model_ de M. D. Schwartz @Schwartz, ainsi que sur les notes de cours et les orientations précieuses de notre maître de stage. Il n'est donc pas étonnant de croiser par endroit une structure similaire à ces ouvrages de référence, voire une paraphrase de leurs développements formels (que l’on pourrait parfois qualifier de plagia…).
+
+Cependant, comme le but premier de notre stage était de nous familiariser, d'assimiler et d'approfondir la théorie classique des champs, le lecteur trouveras ici quasiment toutes les démonstrations explicites et les définitions rigoureuses de chaque objet présenté. Nous avons fait le choix délibéré de détailler les étapes calculatoires souvent omises dans la littérature afin d'offrir un texte fluide et autosuffisant. Seuls les objets mathématiques considérés comme communs au bagage d'un étudiant en physique théorique, ou ceux dont la définition formelle dépassait le cadre et la portée de ce travail, ont été admis sans démonstration.
+
+À travers ce manuscrit, nous guiderons le lecteur depuis la réécriture de la mécanique lagrangienne appliquée aux milieux continus (Chapitre I) jusqu'à l'introduction des formalismes hamiltoniens indispensables à la transition vers la théorie quantique des champs (Chapitre II).
+
 
 #pagebreak()
 
@@ -1958,8 +1966,6 @@ $
   ham = sum_i pi_i dot(phi.alt)_i - lagr
 $
 
-== Équation d’Hamilton
-
 = Quantification du champs scalaire
 
 Pour décrire la théorie dévelopé au @spin0, dans une théorie quantique, il nous faut la #text(style: "italic")[quantifier], pour celà on repart de notre théorie classique que l’on (spoileur alert) #text(style: "italic")[quantifie], i.e. que l’on réeinterprette les variables comme des opérateur qui respecte des relation de commutation. Enfin on étudie les vecteurs et valeurs propre de l’Hamiltonien.\
@@ -1974,16 +1980,22 @@ $
 $ <commutateurphipi>
 $
   [phi.alt (arrow(x)), phi.alt (arrow(y))] = [pi (arrow(x)), pi(arrow(y))] = 0
-$
+$<commuphiphi>\
+\
+On s’interesseras à deux point de vue; le premier, celuis de M. Schrodïnger, où la dépendance en temps est induite dans les états eux même et où les opérateurs sont indépendants du temps; en second, le point de vue de M. Heisenberg, où ici, c’est le stricte inverse, la dépendance en temps passe dans les opérateurs, et les états sont donc constant face au temps.
+
+== représentation de Schrodïnger
+Dans cette sous partie les différents champs abordé serons indépendants du temps, car dû à la qunatification ce sont des opérateurs. Ainsi on note avec une flèches au dessus d’un symbole, les grandeurs purement spaciale, e.g. $arrow(p) = p^i$ & $arrow(x) = x^i$, et les grandeurs sans flèches comprenne les grandeur spaciale et temporelle, e.g. $p = (p^0, arrow(p))$ & $x = (x^0, arrow(x))$.\
+
 \
 Comme en mécanique quantique classique, on décomposer $phi.alt$ en une base de Fourier. En analogie à la mécanique classique, où $phi.alt_"c" = 1/sqrt(2 E) (a + a^dagger)$, on décompose $phi.alt$ en deux modes de Fourier indépendants
 $
   phi.alt = integral (dif^3 arrow(p))/((2 pi)^3) 1/sqrt(2 E_arrow(p)) (a_arrow(p) e^(i arrow(p) dot.c arrow(x)) + a^dagger_arrow(p) e^(- i arrow(p) dot.c arrow(x)))
-$
+$<fourierphi>
 En partant de l’écriture du lagrangien pour le champs scalaire que l’on considérons comme réél pour cette partie (i.e. : $lagr = 1/2 partial_mu phi.alt partial^mu phi.alt - 1/2 m^2 phi.alt^2$). On peut en déduire la forme de $pi$ :
 $
   pi = (partial lagr)/(partial dot(phi.alt)) = 1/2 (partial (partial_mu phi.alt partial^mu phi.alt))/(partial dot(phi.alt)) = dot(phi.alt)
-$
+$<exprpi>
 Donc en utilisant la décomposition de $phi.alt$, on peut trouver celle de $pi$ :
 $
   pi = integral (dif^3 arrow(p))/((2 pi)^3) 1/sqrt(2 E_arrow(p)) (a_arrow(p) (partial e^(i arrow(p) dot.c arrow(x)))/(partial t) + a^dagger_arrow(p) (partial e^(-i arrow(p) dot.c arrow(x)))/(partial t))
@@ -2105,12 +2117,12 @@ On peut regarder comment cette Hamiltonienne commute avec $a_arrow(p)$ & $a^dagg
 *Propriété :*
 #grid(
   columns: 2,
-  $
+  [$
     [H, a_arrow(p)] = - E_arrow(p) a_arrow(p)
-  $,
-  $
+  $<commutHa>],
+  [$
     [H, a^dagger_arrow(p)] = E_arrow(p) a^dagger_arrow(p)
-  $,
+  $<commutHad>],
 )
 *Preuve :*
 #grid(
@@ -2211,14 +2223,474 @@ $
   &= H a^dagger_arrow(p) vide
 $
 Étant donnée que $arrow(P)$ vérifie exactement les même équations que $H$, alors il est simple de prouver la relation voulus.
+#QED\
+\
+Nous pouvons alors interprété les états $a^dagger_arrow(p) vide$ comme la création d’une exitation du champs d’énergie $E_arrow(p)$ et d’une impulsion $arrow(p)$ d’où le terme #text(style: "italic")[d’opérateur de création] pour $a^dagger$. À l’inverse, comme $a_arrow(p) vide = 0$, cette opérateur peut être vue comme la déstruction d’une exitation du champs, ainsi cette opérateur est appelé #text(style: "italic")[opérateur de déstruction]. Il est plutôt naturelle de voir ces dite exitation comme étant des particules (attention, ici ces particules ne sont pas localisé dans l’espace).\
+De plus notre formalisme nous permet de déduire la statistique que respecte nos particules, en effet comme $a^dagger_arrow(p)$ et $a^dagger_arrow(q)$ commute, alors les états $a^dagger_arrow(p) a^dagger_arrow(q) vide$ & $a^dagger_arrow(q) a^dagger_arrow(p) vide$ représentes le même états, or ici en échangant les deux opérateur de création, on échange les deux particules. Ainsi comme l’états résultant reste inchangé, alors nos particules ne sont pas « #text(style: "italic")[identifiable] ». Et donc nos particules suive #text(style: "italic")[la statistique de Bose-Einstein].\
+\
+*Définition :*\
+Nous définisons pour l’instant l’état $ket(arrow(p))$, par cette proprotionalité :
+$
+  ket(arrow(p)) prop a^dagger_arrow(p) vide
+$
+
+Pour détérminé le coefficient de proprotionalité, on va s’intéréser à la relation de normalisation. Intutivement on pourrais poser que $forall arrow(p), arrow(q), braket(arrow(p), arrow(q)) = (2 pi)^3 delta(arrow(p) - arrow(q))$ (ce que font beaucoup d’ouvrage selon le Peskin @Peskin), le problème avec cette normalisation, c’est qu’elle n’est pas invariante, ce qui pose problème pour une théorie que cherche justement à unifier la mécanique quantique avec la relativité restrainte. Ainsi on peut regarder ce qu’advient la distribution de Dirac sous une telle transformation : considérons alors un boost de Lorentz suivant $x^3$ et d’une vitesse $beta$, ainsi nous avons $p'^3 = gamma(p^3 + beta E_arrow(p))$ et $E_arrow(p)' = gamma(E_arrow(p) + beta p^3)$, grâce à la relation :
+$
+  delta(x - x_0) = |f'(x_0)| delta(f(x) - f(x_0))
+$
+Et en posant $f: p^3 |-> p'^3 = gamma(p^3 + beta E_arrow(p))$, alors :
+$
+  delta(p^3 - q^3) & = delta(p'^3 - q'^3) gamma (1 + beta (dif E_arrow(p))/(dif p^3)) \
+                   & = delta(p'^3 - q'^3) gamma/E_arrow(p) (E_arrow(p) + beta E_arrow(p) (dif E_arrow(p))/(dif p^3))
+$
+Or comme $E_arrow(p)^2 = p^2 - m^2$ donc $E_arrow(p) (dif E_arrow(p))/(dif p^3) = p^3$, donc :
+$
+  delta(p^3 - q^3) & = delta(p'^3 - q'^3) 1/E_arrow(p) underbrace(gamma (E_arrow(p) + beta p^3), =E_arrow(p)') \
+                   & = delta(p'^3 - q'^3) E_arrow(p)'/E_arrow(p)
+$
+Et comme celà ne change pas pour les autres coordonnée, nous avons :
+$
+  E_arrow(p) delta^((3)) (arrow(p) - arrow(q)) = E_arrow(p)' delta^((3)) (arrow(p)' - arrow(q)')
+$
+Et ainsi nous obtenons donc que $E_arrow(p) delta(arrow(p) - arrow(q))$ est invariant par transformé de Lorentz.\
+Nous pouvons ainis redéfinir notre état $ket(arrow(p))$ en :\
+*reDéfinition :*
+$
+  ket(arrow(p)) = sqrt(2 E_arrow(p)) a^dagger_arrow(p) vide
+$
+Ainsi la relation de normalisation devient :\
+*Propriété :*
+$
+  braket(arrow(p), arrow(q)) & = bra(0) a_arrow(p) sqrt(2 E_arrow(p)) sqrt(2 E_arrow(q)) a^dagger_arrow(q) vide \
+  & = 2 sqrt(E_arrow(p) E_arrow(q)) bra(0) underbrace(a_arrow(p) a^dagger_arrow(q), = [a_arrow(p); a^dagger_arrow(q)] + a^dagger_arrow(p) a_arrow(q)) vide\
+  & = 2 sqrt(E_arrow(p) E_arrow(q)) bra(0) underbrace([a_arrow(p); a^dagger_arrow(q)], = (2pi)^3 delta(arrow(p) - arrow(q))) + cancel(a^dagger_arrow(p) a_arrow(q)) vide\
+  & = 2 sqrt(E_arrow(p) E_arrow(q)) (2pi)^3 delta(arrow(p) - arrow(q)) braket(0, 0)\
+  & = 2 sqrt(E_arrow(p) E_arrow(q)) (2pi)^3 delta(arrow(p) - arrow(q))\
+$
+Or dû au delta de Dirac, $E_arrow(q)$ deviendras toujours $E_arrow(p)$, alors on peut directement écrire :
+$
+  braket(arrow(p), arrow(q)) = 2 E_arrow(p) (2 pi)^3 delta (arrow(p) - arrow(q))
+$
+*N.B. :* Le facteur deux est optionelle, mais on l’ajoute pour collé a la transformé de fourier de $phi.alt$ (cf. @fourierphi).\
+\
+À cause du facteur $2 E_arrow(p)$ dans la normalisation, on redéfinis la relation de fermeture par :
+$
+  integral (dif^3 arrow(p))/(2 pi)^3 ket(arrow(p)) 1/(2 E_arrow(p)) bra(arrow(p)) = bb(1)
+$
+où $bb(1)$ est l’indicatrice pour une seul praticules, i.e. $bb(1) = 1$ si l’on se trouve sur le sous-escpace correspondant à la praticule, et $bb(1) = 0$ sinon.\
+\
+On peut maintenant regarder ce qu’il se passe quand on applique un champs scalaire $phi.alt$ quelconque aux vide :
+$
+  phi.alt vide & = integral (dif^3 arrow(p))/(2pi)^3 1/sqrt(2 E_arrow(p)) (a_arrow(p) + a^dagger_(-arrow(p))) e^(i arrow(p) dot.c arrow(x)) vide\
+  &= integral (dif^3 arrow(p))/(2pi)^3 1/sqrt(2 E_arrow(p)) (underbrace(a_arrow(p) vide, = 0) + underbrace(a^dagger_(-arrow(p)) vide, = ket(-arrow(p))/sqrt(2 E_(-arrow(p)))) e^(i arrow(p) dot.c arrow(x))\
+  &= integral (dif^3 arrow(p))/(2pi)^3 1/sqrt(2 E_arrow(p)) ket(-arrow(p))/sqrt(2 E_(arrow(p))) e^(i arrow(p) dot.c arrow(x))\
+  &= integral (dif^3 arrow(p))/(2pi)^3 1/(2 E_arrow(p)) e^(-i arrow(p) dot.c arrow(x)) ket(arrow(p))\
+$
+Ainsi, on reconnais une superposition linéaire de particules d’une implusion bien définis. de plus on reconnais aux facteur $1\/2 E_arrow(p)$ près, les états propres de la position $ket(arrow(x))$ dans le cas classique, à noté que pour de faible $arrow(p)$ (non-relativiste), le facteurs est quasiment constant. Ainsi nous pouvons interprété que l’opérateurs $phi.alt(arrow(x))$ créé une particule quand il agis sur le vide. On noteras donc $phi.alt(arrow(x)) vide = ket(arrow(x))$.\
+On peut confirmé cette interprétation en calculant :
+$
+  braket(arrow(x), arrow(p)) &= bra(0) phi.alt(arrow(x)) ket(arrow(p))\
+  &= bra(0) integral (dif^3 arrow(q))/(2pi)^3 1/sqrt(2 E_arrow(q)) (a_arrow(q) + a^dagger_(-arrow(q)))e^(i arrow(q) dot.c arrow(x)) sqrt(2 E_arrow(p)) a^dagger_arrow(p) vide\
+  &= integral (dif^3 arrow(q))/(2pi)^3 sqrt(E_arrow(p) / E_arrow(q)) ( bra(0) a_arrow(q) a^dagger_arrow(p) vide + cancel(bra(0) a^dagger_(-arrow(q)) a^dagger_arrow(p) vide))e^(i arrow(q) dot.c arrow(x))\
+  &= integral (dif^3 arrow(q))/(2pi)^3 sqrt(E_arrow(p) / E_arrow(q)) bra(0) ([a_arrow(q); a^dagger_arrow(p)] + cancel(a^dagger_arrow(p) a_arrow(q)) ) vide e^(i arrow(q) dot.c arrow(x))\
+  &= integral (dif^3 arrow(q))/(2pi)^3 sqrt(E_arrow(p) / E_arrow(q)) bra(0) (2pi)^3 delta(arrow(q) - arrow(p)) vide e^(i arrow(q) dot.c arrow(x))\
+  &= integral (dif^3 arrow(q)) sqrt(E_arrow(p) / E_arrow(q)) delta(arrow(q) - arrow(p)) e^(i arrow(q) dot.c arrow(x)) underbrace(braket(0, 0), = 1)\
+  &= sqrt(E_arrow(p) / E_arrow(p)) e^(i arrow(p) dot.c arrow(x)) \
+  &= e^(i arrow(p) dot.c arrow(x)) \
+$
+que nous pouvons interprété comme la représentation dans l’espace de la fonction d’onde pour l’état $ket(arrow(p))$, et comme en mécanique quantique non-relativiste, où $braket(arrow(x), arrow(p)) prop e^(i arrow(p) dot.c arrow(x))$ est la fonction d’onde de $ket(arrow(p))$
+
+== Représentation d’Heisenberg
+
+Dans le sous-chapitre précédent, nous nous somme intérésé au point de vue de Schrodïnger, i.e. un champs indépendant du temps, et nous avons interprété la théorie en termes de particule relativistique. Dans ce sous-chapitre, nous regarderons ce qu’il advient quand on passe la dépendance en temps au champs, qui ici sont des opérateurs; c’est le point de vue de Heisenberg, nous traiterons donc des question de causalité.\
+\
+Pour rétablire la dépendance en temps des champs, nous le fesons de la manière classique :\
+Soit $A_S (arrow(x))$ un opérateur, indépendant du temps (i.e. de la représentation de M. Schrodïnger), alors on pose
+$
+  A_H (x) = U^dagger (t) (t) U(t)
+$<queletempssoit>
+où $U(t) = e^(i H t)$\
+\
+*Propriété :* Les opérateurs suivent l’équation du mouvement suivante :\
+Soit $cal(O)$ un opérateur, alors :
+$
+  i dif/dt cal(O) = [cal(O); H]
+$
+avec $H$ l’Hamiltonien\
+\
+*Preuve :*\
+Soit $O_S (arrow(x))$ un opérateur indépendant du temps, alors par @queletempssoit  :
+$
+  O(x) = U^dagger (t) O(arrow(x)) U(t)
+$
+Or on à : $dif/dt U(t) = i H U(t)$, ainsi :
+$
+  dif/dt O & = (dif/dt U^dagger ) O_S U + U^dagger O_S (dif/dt U) + cancel(U^dagger (partial_t O_S(arrow(x))) U) \
+           & = i U^dagger H O_S U - i U^dagger O_S H U \
+           & = i H underbrace(U^dagger O_S U, = O) - i underbrace(U^dagger O_S U, = O) H \
+           & = i H O - i O H \
+           & = - i [O; H] \
+$
 #QED
+
+On peut alors regarder ce que nous donne cette équantion pour $phi.alt$ & $pi$ :
+$
+  i partial_t phi.alt(arrow(x), t) &= [phi.alt(arrow(x), t); 1/2 integral dif^3 arrow(x)' (pi^2 (arrow(x)', t) + (nabla phi.alt(arrow(x)', t))^2 + m^2 phi.alt^2 (arrow(x)', t))]\
+  &= 1/2 integral dif^3 arrow(x)' ([phi.alt(arrow(x), t); pi^2 (arrow(x)', t)] + cancel([phi.alt(arrow(x), t); (nabla phi.alt(arrow(x)', t))^2]) + cancel([phi.alt(arrow(x), t); m^2 phi.alt^2 (arrow(x)', t)]))\
+  &= 1/2 integral dif^3 arrow(x)' { pi(arrow(x)', t) underbrace([phi.alt(arrow(x), t); pi (arrow(x)', t)], = i delta(arrow(x) - arrow(x)')) + underbrace([phi.alt(arrow(x), t); pi (arrow(x)', t)], = i delta(arrow(x) - arrow(x)')) pi(arrow(x)', t) }\
+  &= i integral dif^3 arrow(x)' pi(arrow(x)', t) delta(arrow(x) - arrow(x)')\
+  &= i pi (arrow(x), t)
+$<piHeis>
+On retrouve ici le résulta déjà obtenus par la mécanique Hamiltonienne (cf. @exprpi).
+
+$
+  i partial_t pi (arrow(x),t) &= [pi(arrow(x), t); 1/2 integral dif^3 arrow(x)' (pi^2 (arrow(x)', t) + phi.alt(arrow(x)', t) (- nabla^2 + m^2) phi.alt (arrow(x)', t))]\
+  &= 1/2 integral dif^3 arrow(x)' (cancel([pi(arrow(x), t);pi^2 (arrow(x)', t)]) + [pi(arrow(x), t); phi.alt(arrow(x)', t) (-nabla^2 + m^2) phi.alt(arrow(x)', t)])\
+  &= 1/2 integral dif^3 arrow(x)' {[pi(arrow(x), t); phi.alt(arrow(x)', t)] (-nabla^2 + m^2) phi.alt(arrow(x)', t) + phi.alt(arrow(x)', t) (-nabla^2 + m^2) [pi(arrow(x), t); phi.alt(arrow(x)', t)] }\
+  &= integral dif^3 arrow(x)' (- i) delta(arrow(x) - arrow(x)') (-nabla^2 + m^2) phi.alt(arrow(x)', t)\
+  & = -i (-nabla^2 + m^2) phi.alt(arrow(x), t)
+$
+
+Ainsi en combinant ces deux équation on obtients :
+$
+  partial_t^2 phi.alt(x) & = partial_t (partial_t phi.alt) = partial_t pi \
+                         & = (nabla^2 - m^2) phi.alt
+$
+On retrouve bien l’équation de Klein-Gordon.\
+\
+On va montré le lemme suivant qui nous reserviras un peu plus tard :\
+*Lemme :*\
+Soit $A, K, a$ des opérateurs, alors on à l’implication suivante :
+$
+  [A, a] = a K ==> e^A a e^(-A) = a e^(K + 1/2 [A;K])
+$
+*Preuve :*\
+On va dabord chercher à prouvé par récurrance que :
+$
+  [A, a] = a K ==> forall n in NN, A^n a = a (A + K)^n
+$
+- Initialisation :
+on a bien $A^0 = Id a = a Id = a (A + K)^0$
+- Hérédité :
+Soit $n in NN$ tel que $A^n a = a (A + K)^n$, alors :
+$
+  A^(n + 1) a & = A (A^n a) = A a (A + K)^n
+$
+Or $A a = [A, a] + a A = a K + a A = a (A + K)$, donc :
+$
+  A^(n + 1) a = a (A + K) (A + K)^n = a (A + K)^n
+$
+ainsi par principe de récurrance simple, on a bien $A^n a = a (A + K)^n$\
+À partir de ce résultat, on peut prouvé le résultat voulus, en calculant :
+$
+  e^A a e^(-A) & = sum_(n = 0)^(+oo) A^n/n! a e^(-A) \
+               & = sum_(n = 0)^(+oo) 1/n! underbrace(A^n a, = a (A + K)^n) e^(-A) \
+               & = a sum_(n = 0)^(+oo) 1/n! (A + K)^n e^(-A) \
+               & = a e^(A + K) e^(-A) \
+               & = a e^(A + K - A - 1/2 [A + K; A]) \
+               & = a e^(K - 1/2 [K; A]) \
+$
+#QED\
+\
+À partire de ce lemme on peut démontré les résultats suivants :
+
+*Propriété :*
+$
+  e^(i H t) a_arrow(p) e^( - i H t) = a_arrow(p) e^(- i E_arrow(p) t)
+$
+$
+  e^(i H t) a^dagger_arrow(p) e^( - i H t) = a^dagger_arrow(p) e^(i E_arrow(p) t)
+$\
+\
+*Preuve :*\
+d’après @commutHa et @commutHad, on peut appliquer le lemme, et comme $E_p$ et $H$ commute, en posant $a = a_arrow(p)$, $A = i H t$ et $K = - i E_arrow(p) t$. On obtient directement les expréssions voulus.
+#QED
+\
+\
+À l’aide de ces propriétés, on va pouvoir réécrire dans la représentation de M. Heisenberg, les opérateurs $phi.alt$ & $pi$.\
+*Propriété :*
+$
+  phi.alt(x) = integral (dif^3 arrow(p))/(2 pi)^3 1/sqrt(2 E_arrow(p)) (a_arrow(p) e^( - i p dot.c x) + a^dagger_(arrow(p)) e^(i p dot.c x))
+$<reecritureHein>
+$
+  pi(x) = partial_t phi.alt(x)
+$
+avec $p = (p^0, arrow(p)) = (E_arrow(p), arrow(p))$ \
+\
+*Preuve :*\
+la seconde équation à déjà été donnée par la mécanique Hamiltonienne (cf. @exprpi) et qui à été retrouvée par l’équation du mouvement de la représentation de M. Heisenberg (cf. @piHeis).\
+Pour la première équation, nous avons :
+$
+  phi.alt(x) & = e^(- i H t) phi.alt(arrow(x)) e^(i H t) \
+  & = e^(- i H t) integral (dif^3 arrow(p))/(2pi)^3 (a_arrow(p) e^(i arrow(p) dot.c arrow(x)) + a^dagger_arrow(p) e^(- i arrow(p) dot.c arrow(x))) e^(i H t) \
+  & = integral (dif^3 arrow(p))/(2pi)^3 ( underbrace(e^(- i H t) a_arrow(p) e^(i H t), = a_arrow(p) e^(- i E_arrow(p) t)) e^(i arrow(p) dot.c arrow(x)) + underbrace(e^(- i H t) a^dagger_arrow(p) e^(i H t), = a^dagger_arrow(p) e^(i E_arrow(p) t)) e^(- i arrow(p) dot.c arrow(x))) \
+  & = integral (dif^3 arrow(p))/(2pi)^3 (a_arrow(p) underbrace(e^(- i E_arrow(p) t) e^(i arrow(p) dot.c arrow(x)), = e^(-i p dot.c x)) + a^dagger_arrow(p) underbrace(e^(i E_arrow(p) t) e^(- i arrow(p) dot.c arrow(x)), = e^(i p dot.c x))) \
+  & = integral (dif^3 arrow(p))/(2pi)^3 (a_arrow(p) e^(-i p dot.c x) + a^dagger_arrow(p) e^(i p dot.c x)) \
+$
+#QED
+
+Il est intérésant de remarquer que comme $a_arrow(p)$ à également une relation similaire avec $arrow(P)$, $([arrow(P), a_arrow(p)] = - a_arrow(p) arrow(p))$, alors on peut éxprimer $phi.alt(x)$ en fonction de $phi.alt(0)$. Comme pour $H$ et $a_arrow(p)$, on à les propirétés suivantes :\
+*Propriété :*
+$
+  e^(- i arrow(P) dot.c arrow(x)) a_arrow(p) e^( i arrow(P) dot.c arrow(x)) = a_arrow(p) e^(i arrow(p) dot.c arrow(x))
+$
+$
+  e^(-i arrow(P) dot.c arrow(x)) a^dagger_arrow(p) e^( i arrow(P) dot.c arrow(x)) = a^dagger_arrow(p) e^(- i arrow(p) dot.c arrow(x))
+$
+*Preuve :*\
+Comme pour $a_arrow(p)$ avec $H$, comme on a la relation de comutation $[arrow(P), a_arrow(p)] = - a_arrow(p) arrow(p)$, alors par le lemme, en possant : $a = a_arrow(p)$, $A = - i arrow(P) dot.c arrow(x)$ et $K = i arrow(p) dot.c arrow(x)$.\
+Et de même pour $a^dagger_arrow(p)$
+#QED
+\
+\
+Nous pouvons donc démontré la propriété suivante :\
+*Propriété :*
+$
+  phi.alt(x) & = e^(i(H t - arrow(P) dot.c arrow(x))) phi.alt(0) e^(-i(H t - arrow(P) dot.c arrow(x))) \
+             & = e^(i P dot.c x) phi.alt(0) e^(-i P dot.c x)
+$
+avec $P = (H, arrow(P))$\
+\
+*Preuve :*
+$
+  phi.alt(x) &= integral (dif^3 arrow(p))/(2 pi)^3 1/sqrt(2 E_arrow(p)) (a_arrow(p) e^(-i p dot.c x) + a^dagger_(arrow(p)) e^(i p dot.c x))\
+  &= integral (dif^3 arrow(p))/(2 pi)^3 1/sqrt(2 E_arrow(p)) (e^(i H t) a_arrow(p) e^(i arrow(p) dot.c arrow(x)) e^(-i H t) + e^(i H t) a^dagger_(arrow(p)) e^(i arrow(p) dot.c arrow(x)) e^(- i H t))\
+  &= e^(i H t) integral (dif^3 arrow(p))/(2 pi)^3 1/sqrt(2 E_arrow(p)) (underbrace(a_arrow(p) e^(i arrow(p) dot.c arrow(x)), = e^(-i arrow(P) dot.c arrow(x)) a_arrow(p) e^(i arrow(P) dot.c arrow(x))) + underbrace(a^dagger_arrow(p) e^(-i arrow(p) dot.c arrow(x)), = e^(-i arrow(P) dot.c arrow(x)) a^dagger_arrow(p) e^(i arrow(P) dot.c arrow(x))) ) e^(-i H t)\
+  & = e^(i(H t - arrow(P) dot.c arrow(x))) underbrace(integral (dif^3 arrow(p)) / (2pi)^3 1/sqrt(2 E_arrow(p)) (a_arrow(p) + a^dagger_arrow(p)), = phi.alt(0)) e^(-i(H t - arrow(P) dot.c arrow(x))) \
+  & = e^(i P dot.c x) phi.alt(0) e^(-i P dot.c x)
+$
+#QED\
+\
+
+Pour revenir sur @reecritureHein. Cette réécriture, nous faits explicitement apparaitre la dualité entre les particules et l’interprétation en fonction d’onde. En effet, nous écrivons $phi.alt$ comme; d’une part, des opérateurs de création et d’annihilation; et d’autre part comme une combinaison linéaire de deux séries de fourier, qui sont solution de l’équation de Klein-Gordon ($e^(i p dot.c x)$ et $e^(-i p dot.c x)$)
+
+=== Causalité
+
+Comme annoncé au début de ce chapitre, nous allons maintenant traité les question de causalité, pour celà nous allons considérer l’objet suivant :\
+*Définition :*\
+On appelle propagateur de $x$ à $y$ :
+$
+  D(x - y) = bra(0) phi.alt(x) phi.alt(y) vide
+$
+Comme nous l’avions vue, $phi.alt(y) vide$ correspond à la création d’une particule en $y$, et réciproquement, $bra(0) phi.alt(x)$ correspond à la déstruction de la praticule en $x$, ainsi on peut interpréter $bra(0) phi.alt(x) phi.alt(y) vide$, comme le déplacement d’une particule créé en $y$ à sa déstruction en $x$, ce qui justifie le nom de #text(style: "italic")[propagateur].\
+On peut dans un permier temps, réécrire le propagateur sous forme intégral :\
+*Propriété :*
+$
+  D(x - y) = integral (dif^3 arrow(p))/(2pi)^3 1/(2 E_arrow(p)) e^(-i p dot.c (x - y))
+$\
+*Preuve :*
+$
+  D(x - y) & = bra(0) phi.alt(x) phi.alt(y) vide \
+  & = bra(0) integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^6 1/(2 sqrt(E_arrow(p) E_arrow(q))) (a_arrow(p) e^(- i p dot.c x) + a^dagger_arrow(p) e^(i p dot.c x)) (a_arrow(q) e^(-i q dot.c y) + a^dagger_arrow(q) e^(i q dot.c y)) vide\
+  & = bra(0) integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^6 1/(2 sqrt(E_arrow(p) E_arrow(q))) (cancel(a_arrow(p) a_arrow(q) e^(-i p dot.c x - i q dot.c y)) + a_arrow(p) a^dagger_arrow(q) e^(-i p dot.c x + i q dot.c y) + cancel(a^dagger_arrow(p) a_arrow(q) e^(i p dot.c x - i q dot.c y)) + cancel(a^dagger_arrow(p) a^dagger_arrow(q) e^(i p dot.c x + q dot.c y))) vide\
+  & = integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^6 1/(2 sqrt(E_arrow(p) E_arrow(q))) underbrace(bra(0) a_arrow(p) a^dagger_arrow(q) vide, = (2pi)^3 delta(arrow(p) - arrow(q))) e^(-i p dot.c x + i q dot.c y)\
+  & = integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^3 1/(2 sqrt(E_arrow(p) E_arrow(q)))delta(arrow(p) - arrow(q)) e^(-i p dot.c x + i q dot.c y)\
+  & = integral (dif^3 arrow(p))/(2pi)^3 1/(2 E_arrow(p)) e^(- i p dot.c (x - y) )\
+$
+#QED
+\
+
+On va pouvoir s’intéréser à différent cas, le premier où la différence entre $x$ et $y$ est de genre temps, et le second où cette différence est de genre espace.\
+Dans le premier cas on peut poser $x^0 - y^0 = t$ & $arrow(x) - arrow(y) = 0$, car il est toujours possible de trouver un référentielle pour que ce soit le cas, si la différence est de genre temps, ainsi le propagateur devient :
+$
+  D(x - y) & = integral (dif^3 p)/(2 pi)^3 1/(2E_arrow(p)) e^(-i p dot.c (x - y)) \
+           & = integral.triple (dif p^1 dif p^2 dif p^3)/(2pi)^3 1/(2E_arrow(p)) e^(-i p^0 t)
+$
+Alors en opérant le changement de variable pour passez en des coordonnées sphérique :
+$
+  D(x - y) & = integral_0^(+oo) integral_0^pi integral_0^(2pi) norm(arrow(p))^2 /(2pi)^3 1/(2 E_arrow(p)) e^(- i E_arrow(p) t) sin(theta) dif norm(arrow(p)) dif theta dif phi\
+  & = integral_0^(+oo) norm(arrow(p))^2 /(2pi)^3 1/(2 E_arrow(p)) e^(- i E_arrow(p) t) dif norm(arrow(p)) underbrace(integral_0^pi sin(theta) dif theta, = 2) underbrace(integral_0^(2pi) dif phi, = 2pi)\
+$
+Or comme $E_arrow(p)^2 = norm(arrow(p))^2 - m^2$, on peut opéré le changement de variable $arrow(p) --> E_arrow(p)$, on a : $(dif arrow(p))/(dif E_arrow(p)) = E_arrow(p)/sqrt(E_arrow(p)^2 + m^2)$, donc :
+$
+  D(x - y) &= (2pi)/(2pi)^3 integral_m^(+oo) (E_arrow(p)^2 + m^2)/(cancel(E_arrow(p))) cancel(E_arrow(p))/(sqrt(E_arrow(p)^2 + m^2)) e^(- i E_arrow(p) t) dif E_arrow(p)\
+  &= 1/(2pi)^2 integral_m^(+oo) sqrt(E_arrow(p)^2 + m^2) e^(- i E_arrow(p) t) dif E_arrow(p)\
+$
+En posant $X = i m t$ et en fessant le changement de variable $u = E_arrow(p)/m$ donc $dif E_arrow(p) = m dif u$, on trouve :
+$
+  D(x - y) = m^2/(2pi)^2 integral_1^(+oo) sqrt(u^2 + 1) e^(- u X) dif u
+$
+On reconnais une composante d’une fontion de Bessel, en effet, on définis les fonctions de Bessel modifié du second espèce par :
+$
+  forall n in NN, K_n (z) = sqrt(pi)/(2^n Gamma(n + 1/2)) z^n integral_1^(+oo) (x^2 + 1)^(n - 1/2) e^(- z x) dx
+$
+Dans notre cas pour $n = 1$, on trouve :
+$
+  integral_1^(+oo) sqrt(x^2 + 1) e^(- z x) dx = (2 overparen(Gamma(3/2), = sqrt(pi)\/2))/(sqrt(pi) z) K_1 (z) = 1/z K_1 (z)
+$
+Ainsi
+$
+  D(x - y) = m^2/(2pi)^2 1/X K_1(X) = - (i m)/(4 pi^2 t) K_1 (i m t)
+$
+Or $K_1 (z) limits(~)_(t --> +oo) sqrt(pi /(2 z)) e^(-z)$, donc :
+$
+  D(x - y) & ~_(z --> +oo) - (i m) /(4 pi^2 t) sqrt(pi/(2 i m t)) e^(- i m t) \
+           & ~ - (i) /(4 pi^2) sqrt(pi/(2 i)) sqrt(m)/t^(3/2) e^(- i m t)
+$<propagagenretemps>\
+\
+On peut maintenant nous intéréser au second cas, i.e. quand $x - y$ est de genre espace, alors on peut choisir un référentielle tel que : $x^0 - y^0 = 0$ & $arrow(x) - arrow(y) = arrow(r)$, alors :
+$
+  D(x - y) &= integral (dif^3 p)/(2pi)^3 1/(2E_arrow(p)) e^(i arrow(p) dot.c arrow(r))\
+  &= 1/(2pi)^3 integral_0^(+oo) integral_0^(pi) integral_0^(2pi) 1/(2 E_arrow(p)) e^(i norm(arrow(p)) norm(arrow(r)) cos(theta)) norm(arrow(p))^2 sin(theta) dif norm(arrow(p)) dif theta dif phi\
+  &= 1/(2pi)^2 integral_0^(+oo) integral_0^(pi) 1/(2 E_arrow(p)) e^(i norm(arrow(p)) norm(arrow(r)) cos(theta)) norm(arrow(p))^2 sin(theta) dif norm(arrow(p)) dif theta\
+$
+En posant $u = cos(theta)$, alors $(dif u)/(dif theta) = -sin(theta)$, alors :
+$
+  D(x - y) & = - 1/(2 pi)^2 integral_0^(+oo) norm(arrow(p))^2/(2E_arrow(p)) integral_(-1)^1 e^(i norm(arrow(p)) norm(arrow(r)) u) dif u\
+  & = - 1/(2 pi)^2 integral_0^(+oo) norm(arrow(p))^2/(2E_arrow(p)) [e^(i norm(arrow(p)) norm(arrow(r)) u)/(i norm(arrow(p)) norm(arrow(r)))]^(-1)_(1)\
+  & = 1/(2 pi)^2 integral_0^(+oo) norm(arrow(p))^cancel(2)/(2E_arrow(p)) (e^(i norm(arrow(p)) norm(arrow(r))) - e^( - i norm(arrow(p)) norm(arrow(r))))/(i cancel(norm(arrow(p))) norm(arrow(r))) dif norm(arrow(p))\
+  & = 1/(2 pi)^2 1/(i norm(arrow(r))) (integral_0^(+oo) norm(arrow(p))/(2E_arrow(p)) e^(i norm(arrow(p)) norm(arrow(r))) dif norm(arrow(p)) - integral_0^(+oo) norm(arrow(p))/(2E_arrow(p)) e^( - i norm(arrow(p)) norm(arrow(r))) dif norm(arrow(p)))\
+  & = - i/(2(2 pi)^2 norm(arrow(r))) (integral_0^(+oo) norm(arrow(p))/(E_arrow(p)) e^(i norm(arrow(p)) norm(arrow(r))) dif norm(arrow(p)) + integral_(-oo)^(0) norm(arrow(p))/(E_arrow(p)) e^( - i norm(arrow(p)) norm(arrow(r))) dif norm(arrow(p)))\
+  & = - i/(2(2 pi)^2 norm(arrow(r))) integral_(-oo)^(+oo) norm(arrow(p))/(E_arrow(p)) e^(i norm(arrow(p)) norm(arrow(r))) dif norm(arrow(p)) \
+  & = - i/(2(2 pi)^2 norm(arrow(r))) integral_(-oo)^(+oo) (norm(arrow(p)) e^(i norm(arrow(p)) norm(arrow(r))))/sqrt(norm(arrow(p))^2 + m^2) dif norm(arrow(p)) \
+$
+À l’aide de l’analyse complexe on peut montré le résulta suivant :
+$
+  D(x - y) ~_(r -> +oo) e^(- m norm(arrow(r)))
+$
+Pour plus de détail, je vous invite à allez regarder dans le Peskin @Peskin.\
+\
+Nous avons donc montré que à l’interieur et à l’extérieur du cone de lumière, l’amplitude de la propagation tend certe vers $0$, mais n’est pas null.\
+Pour réélement discuté sur la causalité, il faut en faites nous intéréser à la propagation de l’information, et non juste à sa création, en effet si de l’information du futur parviens à un instant passé, alors on brise la causalité, mais si les deux instant produise de l’information, alors on ne peut rien dire.\
+Pour mesurer cette propagation d’information, on va regarder si la mesure en un point, change une mesure en un autre point, la manière la plus simple de faire, est de considéré le commutateur $[phi.alt(x); phi.alt(y)]$, si il est null, alors une mesure n’affecte pas la seconde. Attention ici, le commutateur comprend la coordonée de temps, par contre si $x^0 = y^0$, alors on reviens bien à @commuphiphi, et donc le commutateur s’annulent.\
+*Propriété :*
+$
+  [phi.alt(x); phi.alt(y)]p &= integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^6 1/(2sqrt(E_arrow(p) E_arrow(q))) [a_arrow(p) e^(- i p dot.c x) + a^dagger_arrow(p) e^(i p dot.c x); a_arrow(q) e^(- i q dot.c y) + a^dagger_arrow(q) e^(i q dot.c y)]\
+  &= integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^6 1/(2sqrt(E_arrow(p) E_arrow(q))) {cancel([a_arrow(p); a_arrow(q)]) e^(-i p dot.c x - i q dot.c y) + underbrace([a_arrow(p); a^dagger_arrow(q)], = (2pi)^3 delta(arrow(p) - arrow(q))) e^(- i p dot.c x + i q dot.c y)\
+    &"                           "+ underbrace([a^dagger_arrow(p); a_arrow(q)], = - (2pi)^3 delta(arrow(p) - arrow(q))) e^( i p dot.c x - i q dot.c y) + cancel([a^dagger_arrow(p); a^dagger_arrow(q)])e^(i p dot.c x + i q dot.c y)}\
+  &= integral (dif^3 arrow(p) dif^3 arrow(q))/(2pi)^3 1/(2sqrt(E_arrow(p) E_arrow(q))) { e^(- i p dot.c x + i q dot.c y) - e^( i p dot.c x - i q dot.c y)} delta(arrow(p) - arrow(q))\
+  &= integral (dif^3 arrow(p))/(2pi)^3 1/(2E_arrow(p)) ( e^(- i p dot.c (x - y)) - e^( i p dot.c (x - y)))\
+  &= D(x - y) - D(y - x)
+$
+Pour $(x - y)^2 < 0$ (genre espace), nous pouvons faire une transformé de Lorentz sur le second termes, les deux termes étant invariant indépendamment du second. Considérons alors la transformation $(x - y) -> - (x - y)$, imagé par la @causagenreespace, dan ce cas les deux termes devienne égaux, et s’annulent, présèrvant ainsi la causalité.
+\
+\
+
+#align(center, [#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    line((0, 0), (7, -7))
+    line((7, 0), (0 - 0.007, -7 - 0.007))
+
+    circle((7 / 2, 0), radius: (7 / 2, 0.5), fill: rgb(0, 0, 0, 20%))
+    arc((7, -7), start: 0deg, stop: -180deg, radius: (7 / 2, 0.5))
+
+    boolean(
+      {
+        circle((7 / 2 - 0.08, -1.19), radius: (7 / 2 + 0.5, 0.7))
+      },
+      {
+        line((0, 0), (7 / 2, -7 / 2), (7, 0), close: true)
+      },
+      op: "difference",
+      fill: rgb(0, 0, 0, 20%),
+    )
+
+    arc((7 - 0.7, -0.7), start: 44deg, stop: -227deg, radius: (7 / 2 + 0.5, 0.7))
+    arc((7 + 0.5, -7 + 0.7), start: 0deg, stop: -180deg, radius: (7 / 2 + 0.5, 0.7))
+
+    let (a, b, x1) = ((-0.5, -1.325), (-0.505, -6.31), (7 / 2 - 1.5, -7 / 2))
+    bezier(a, b, x1)
+
+    let (a, b, x1) = ((7 + 0.38, -1.29), (7 + 0.505, -6.31), (7 / 2 + 1.5, -7 / 2))
+    bezier(a, b, x1)
+
+    circle((7 / 2, -7 / 2), radius: 1mm, fill: black, name: "x")
+    content("x", $x$, anchor: 0deg, padding: 0.2)
+
+    circle((7 - 0.37, -2.2), radius: 1mm, fill: black, name: "y")
+    content("y", $y$, anchor: 190deg, padding: 0.2)
+
+    circle((0.13, -7 + 1.5), radius: 1mm, fill: black, name: "y")
+    content("y", $-y$, anchor: 0deg, padding: 0.2)
+
+    bezier((7 - 0.37, -2.2), (0.13, -7 + 1.5), (7 / 2 + 1, -6))
+
+    polygon((2, -5.5), 3, fill: black, angle: 190deg, radius: 0.15)
+  }),
+  caption: [Illustration de la transformé de Lorentz $(x - y) -> - (x - y)$\ quand $x - y$ est de genre temps],
+)<causagenreespace>])\
+
+Dans le cas où $(x - y)^2 > 0$ (genre temps), il n’existe pas de telle transformé (@causagenretemps), le commutateur est donc non null, de plus dans le cas où $arrow(x) - arrow(y) = 0$, on à démontré que l’on avais (grossièrement) par @propagagenretemps, $[phi.alt(x); phi.alt(y)] = e^(-i m t) - e^(i m t)$.\
+Ainsi, dans le cas du champs scalaire, la causalité est bien présèrvé, et que aucune mesure ne peut en affécté une seconde en dehors du cône de lumière.
+
+#align(center, [#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    line((0, 0), (7, -7))
+    line((7, 0), (0 - 0.007, -7 - 0.007))
+
+    arc((7, 0), start: 0deg, stop: -180deg, radius: (7 / 2, 0.5))
+    arc((7, -7), start: 0deg, stop: -180deg, radius: (7 / 2, 0.5))
+
+    circle((7 / 2, -7 / 2), radius: 1mm, fill: black, name: "x")
+    content("x", $x$, anchor: 0deg, padding: 0.2)
+
+    circle((7 / 2, 0.5), radius: (7 / 2 * 5 / 7, 0.5 * 5 / 7), fill: rgb(0, 0, 0, 20%))
+    boolean(
+      {
+        circle((7 / 2, 0), start: 0deg, stop: -180deg, radius: (7 / 2, 0.5))
+      },
+      {
+        merge-path(close: true, {
+          line((1, 0.5), (6, 0.5))
+          bezier((1, 0.5), (6, 0.5), (7 / 2, -4))
+        })
+      },
+      op: "difference",
+      fill: rgb(0, 0, 0, 20%),
+    )
+
+    bezier((1, 0.5), (6, 0.5), (7 / 2, -4))
+
+    bezier((1, -7 - 0.5), (6, -7 - 0.5), (7 / 2, -4))
+    arc((6, -7 - 0.5), start: 0deg, stop: -180deg, radius: (7 / 2 * 5 / 7, 0.5 * 5 / 7))
+
+    arc((6, -7 - 0.5), start: 0deg, stop: 180deg, radius: (7 / 2 * 5 / 7, 0.5 * 5 / 7), stroke: (dash: "dashed"))
+
+    let (y, y2) = (
+      (7 / 2 + 1.12, -1.3),
+      (7 / 2 - 1.12, -6.11),
+    )
+
+    circle(y, radius: 1mm, fill: black, name: "y")
+    content("y", $y$, anchor: 0deg, padding: 0.2)
+
+    circle(y2, radius: 1mm, fill: black, name: "y'")
+    content("y'", $-y$, anchor: 0deg, padding: 0.2)
+
+    bezier(y, y2, (5, -5), (7 / 2 - 1.12, -4))
+    polygon((2.767, -5), 3, angle: -8deg, radius: 0.15, fill: black)
+
+    translate((4.2, -3.5))
+
+    group({
+      set-style(stroke: red)
+      line((0, 0), (1 / 2, 1 / 2))
+      line((0, 1 / 2), (1 / 2, 0))
+    })
+  }),
+
+  caption: [Illustration de l’impossibilité de relier $y$ à $-y$\ en restant dans le cone de lumière],
+)<causagenretemps>])\
 
 #pagebreak()
 
 #set heading(numbering: none)
 
-= Conclusions
-@Tong @Schwartz @Peskin
+= Conclusion
+
+Ce stage, effectué au cours de l'année académique 2025-2026 dans le cadre du cursus de l'UFR de Physique et Ingénierie de l'Université de Strasbourg, a été entièrement consacré à l'étude approfondie de la *théorie classique des champs* ainsi qu'à une introduction structurée aux fondements de la *théorie quantique des champs*. En nous appuyant sur les ouvrages de référence de David Tong, de M.E. Peskin & D.V. Schroeder @Peskin, ainsi que de M.D. Schwartz @Schwartz, ce travail a permis de s'approprier le formalisme mathématique et conceptuel qui sous-tend la physique théorique moderne.
+
+Le manuscrit rédigé retrace un parcours rigoureux s'articulant autour des accomplissements clés du stage :
+
+- *Formalisation de la théorie classique et principes de symétrie :* L'extension de la mécanique lagrangienne aux champs continus (scalaires, spinoriels et vectoriels) a permis d'établir les équations d'Euler-Lagrange fondamentales. Grâce au théorème de Noether, le lien entre les symétries continues de l'espace-temps et les lois de conservation a été mis en lumière, aboutissant notamment à la dérivation du tenseur énergie-impulsion et à la caractérisation de la densité d'énergie et d'impulsion du système.
+- *Classification des champs selon le spin et mécanismes de couplage :* L'analyse systématique s'est structurée selon le spin des particules. Pour le spin $0$, l'équation de Klein-Gordon a décrit la dynamique des champs scalaires libres, et l'exigence d'une symétrie de jauge locale $U(1)$ a introduit la dérivée covariante, révélant le couplage naturel avec le champ électromagnétique. Pour le spin $1/2$, l'exploration de l'algèbre de Clifford et de l'équation de Dirac a permis de formaliser le comportement des fermions massifs et chiraux. Enfin, pour le spin $1$, les équations de Maxwell dans le vide ont été retrouvées de façon cohérente à partir du tenseur de champ $F^(mu nu)$, ouvrant la voie à une description unifiée du couplage entre le photon et la matière.
+- *Transition quantique et préservation de la causalité :* La dernière étape de ce travail a marqué le passage au domaine quantique via la quantification canonique du champ scalaire. En explorant les représentations de Schrödinger et d'Heisenberg, la dualité onde-particule a été explicitée par les opérateurs de création et d'annihilation agissant sur l'état de vide. Enfin, l'étude du propagateur $D(x-y)$ et du comportement du commutateur $[phi(x), phi(y)]$ pour des intervalles de genre espace a démontré l'annulation des commutateurs, garantissant ainsi le respect strict du principe de causalité relativiste au niveau micro-causal.
+
+Sur le plan académique et personnel, ce stage a constitué une opportunité inestimable d'assimiler des concepts avancés de la physique moderne en se confrontant directement à la rigueur de leurs démonstrations mathématiques. La démarche d'explicitation de chaque objet présenté forme une base solide pour aborder sereinement de futures études approfondies en physique des particules, en physique des hautes énergies et en théorie des champs unifiés.
 
 #pagebreak()
 
