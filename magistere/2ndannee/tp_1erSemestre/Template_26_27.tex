@@ -1,0 +1,329 @@
+%\documentclass[a4paper]{article}
+\documentclass[a4paper, twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{caption}
+\captionsetup{
+    font=footnotesize,          % Font size for the entire caption
+    labelfont=bf,        % Bold font for the label (e.g., "Figure 1:")
+    textfont=it          % Italic font for the caption text
+}
+
+\usepackage{geometry}
+\geometry{a4paper, margin=0.5in} % Reduced margin for better utilization DONT CHANGE!
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lipsum} % For generating dummy text
+\usepackage{enumitem} % For customizing lists
+\usepackage{xcolor} % Add this package for color
+\usepackage{verbatim} % for code insertion
+%\usepackage{wordcount}  % fCount the words in the file 
+%insert this et the end of the document : the total word count is \thewordcount.
+
+\newcommand\wordcount{
+    \immediate\write18{texcount -sub=section \jobname.tex  | grep "Section" | sed -e 's/+.*//' | sed -n \thesection p > 'count.txt'}
+(\input{count.txt}words)}
+
+\usepackage{hyperref} % Load the hyperref package
+\usepackage{url} % For proper URL formatting in the bibliography
+% Customize hyperlink colors (optional, default is blue for links)
+\hypersetup{
+    colorlinks=true,     % Enable colored links
+    linkcolor=blue,      % Color for internal links (sections, equations, etc.)
+    urlcolor=blue        % Color for external hyperlinks (URLs)
+}
+
+
+\newcommand{\ie}{\textit{i.e.}~}
+
+
+% Force the font size to 9pt
+\fontsize{9}{11}\selectfont  %DONT CHANGE!
+
+
+
+
+\begin{document}
+
+%% ARTICLE starts here
+%%%%%%%%%%%%%%%%%%%%%
+
+\title{\textbf{Template for subatomic reports},\\
+\textbf{{\color{red} DO NOT CHANGE the document setup}}.\\
+You can use this template for other experiments but please verify with the corresponding instructor the number of pages, style etc...\\
+\textbf{When you upload to moodle} :\\Please name 
+your file EXP\#-SESSION1or2-GROUPETAG\footnote{The group TAG will be assigned on the moodle planning by the instructor.},\\
+\ie for experiment "alpha", session 1 and group A3\\ 
+File Name : alpha-S1-A3.pdf\\}
+
+%%Authors
+\author{Author1 Name, Author 2 Name, Author 3 Name}
+
+% Date
+\date{\today}
+
+% Force the font size to 4pt
+\fontsize{8}{10}\selectfont  %DONT CHANGE!
+
+\maketitle
+
+\begin{abstract}
+Here you should write a brief summary of the article. It provides an overview of the main findings and the purpose of the research. It also contains the main measurement value, \textit{for example : $\theta=3.4^\circ \pm 0.2^\circ$} which can be in agreement or not with the tabulated/theoretical values. The abstract is designed to give readers a quick understanding of the content and results of the paper.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+The introduction provides background information on the topic of the research. It outlines the problem, the significance of the study, and the objectives. This section sets the stage for the detailed experiment and results that follow.
+
+{\color{red} The main article SHOULD NOT go beyound 4-5 pages maximum (\ie with figures/tables etc...), this is ONLY required for subatomic, other colleagues might have their own requirement please ask. The exercice is also to select the relevant information and not swarm the reader with repetitive or non-relevant information.}
+
+If more information (tables, figures, graphs, codes) need to be included (example : figures for similar cases of measurements, etc...) use the appendix. The appendices will not be read systematically only if needed.
+
+{\color{red} 
+Please start writing and filling the template on Monday, you can include the "raw" measurements, some bullet points, discussions with colleagues or instructor, reflections etc... The best way is to use \href{https://www.overleaf.com}{Overleaf} for collaborative writing.}
+
+\section{Experiment Description}
+\subsection{Material}
+This subsection describes the materials used in the experiment. It includes details on the type and specifications of the materials, such as:
+
+\begin{itemize}[noitemsep, topsep=0pt] % Compact itemize
+    \item (Always use the compact format to win space)
+    \item Material 1: Description
+    \item Material 2: Description
+    \item Material 3: Description
+\end{itemize}
+
+Below is a photo (or two if needed) of the experimental setup.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.45\columnwidth]{example-image-a} % Replace with your image file
+    \includegraphics[width=0.45\columnwidth]{example-image-b} % Replace with your image file
+    \caption{Experimental setup, caption must be more informative this is an example.}
+    \label{fig:setup}
+\end{figure}
+
+{\color{red} 
+It is a requirement to precise where the High Voltages and the Low voltages are connected on the setup.
+}
+
+\section{Calibration}
+Calibration is an essential part of the experiment to ensure accuracy and repeatability. This section describes the calibration procedure. Below is a photo of the calibration function.
+
+\paragraph{Discussion}
+In this paragraph, the results of the calibration are discussed. It includes analysis of the calibration data, any issues encountered, and how they were resolved. The discussion can also be written in a subsection. See for example the next section. Normally a paragraph is better for a short discussions.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.45\columnwidth]{example-image-a} % Replace with your image file
+    \includegraphics[width=0.45\columnwidth]{example-image-b} % Replace with your image file
+    \caption{Energy and efficiency if needed, see above for caption indications.}
+    \label{fig:setup}
+\end{figure}
+
+{\color{red} 
+Notice that every block/section (here it is the calibration) has an explanatory paragraph followed, if need be, by a discussion, you can add it as a subsection like it was done here. The discussions concerns any point that need to be raised, such as an outlier measurement, large errors etc... 
+
+Normally the graphs, figures, tables, graphs related to a given section are "packed" in this section. The reader \underline{SHOULD NOT} look around for the pictures ideally they are on the same or neighbouring page. 
+}
+
+\section{Measurement}
+This section details the raw measurement made in the experiment (in contrast with deduced or calculated measurements). 
+
+Raw measurements are typically what you read on a \href{https://en.wikipedia.org/wiki/Vernier_scale}{vernier scale}  with no further treatment. Every measurement should have an associated uncertainty. If there's many measurements use the appendix and refer to it. See example below.
+
+It also describes the procedures, mention the equipments, and techniques used to obtain the data. Example : If there is supplementary data that are important for the discussion they can be found here in Table~\ref{tab:raw_measurements}; \textbf{NB :} in some cases appendices could be indispensable to judge the accuracy of the work. You should provide enough data for the reader to be able to reproduce your calculated measurements.
+
+\subsection{Discussion}
+In this subsection, the results of the measurement are discussed. It includes critique of the measured data, any issues encountered, and how they were resolved. 
+
+\section{Main findings : Results And Discussion}
+The results of the experiment are presented in this section, it mainly includes the final \textbf{calculated} data and measurements, graphs, and tables that summarize the findings.
+ 
+\subsection{Discussion of result 1}
+In this subsection, the final result/conclusion are discussed in detail. It includes analysis of the calculated data, it should answer the following questions at minimum :
+\begin{itemize}%[label=\textcolor{black}{\Large\textbullet}]
+	\item Are the results in agreement with the expected value?
+	\item If not then why? Is there a clear reason? An estimate? A reasonable guess?...
+	\item What measured parameter or analysis method is at the origin of the anomalies? etc... 
+\end{itemize}
+%The discussion can also be merged with the section above.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\columnwidth]{example-image-a} % Replace with your image file
+    \includegraphics[width=0.4\columnwidth]{example-image-b} % Replace with your image file
+    \includegraphics[width=0.4\columnwidth]{example-image-a} % Replace with your image file
+    \includegraphics[width=0.4\columnwidth]{example-image-b} % Replace with your image file
+    \caption{Graph showing the results, analysis, diagrams etc... take out figures as needed.}
+    \label{fig:results}
+\end{figure}
+
+{\color{red}\noindent If you have several results you can create several subsections.}
+ 
+\section{Conclusion}
+The conclusion summarizes the key findings of the experiment, discusses their implications, and suggests possible areas for future research.
+
+%\section{Word count}
+%The number of words in the document : \wordcount
+ 
+ 
+\subsection{Referencing}
+You can reference sections with internal hyperlinks, like this: \hyperref[sec:introduction]{\color{blue} Introduction} to send the reader to the introduction section.
+
+Some referencing notes: 
+\begin{itemize}[noitemsep, topsep=0pt] % Compact itemize
+	\item Here's a direct link to \href{https://www.feynmanlectures.caltech.edu/}{Feynman lectures}.
+    \item The \href{https://www.nndc.bnl.gov/}{National Nuclear Data Center}, NNDC, collects, evaluates, and disseminates nuclear physics data for basic nuclear research and applied nuclear technologies.
+    \item Library for gamma and alpha emissions \href{http://www.lnhb.fr/Laraweb/index.php}{Nucléide - Lara}, useful for inspecting decay data of radioactive nuclei.
+	\item An example to cite a reference in the bibliography; Here's an article by Al-Khalili about Alhazen~\cite{alkhalili2015}.
+	\item An example to reference a website in the bibliography, IAEA Live shart can be found in this reference~\cite{websiteiaea}.
+\end{itemize}
+
+
+
+%\newpage uncomment for a new page
+
+\section{Bibliography}
+\begin{thebibliography}{9}  % Argument "9" sets the widest label size (adjust as necessary)
+
+\bibitem{authoryear}
+  Author Name,
+  \textit{Title}.
+  Publisher or Journal, year.
+
+\bibitem{Newton1704}
+Isaac Newton, \textit{Opticks: or, a treatise of the reflexions, refractions, inflexions and colours of light. First edition, 1704. }\url{http://cudl.lib.cam.ac.uk/view/MS-ADD-03970/}.
+
+
+\bibitem{alkhalili2015}
+  Jim Al-Khalili,
+  \textit{In retrospect: Book of Optics}.
+  Nature, Vol. 518, 2015.
+  \url{https://doi.org/10.1038/518164a}
+
+\bibitem{websiteiaea}
+International Atomic Energy Agency (IAEA) \emph{Live Chart of Nuclides}. Apr 2023 - Nov 2023. \url{https://www-nds.iaea.org/relnsd/vcharthtml/VChartHTML.html}.
+
+\bibitem{wikipage}
+\emph{Wikipedia page : History of the scientific method}. \url{https://en.wikipedia.org/wiki/History_of_scientific_method}.
+
+
+\end{thebibliography}
+
+
+
+%\newpage uncomment for new page
+\appendix
+\section{Appendix : purpose or use} \label{app:A}  % for the ref
+\textcolor{red}{\bf The appendix are not counted in the 4-5 pages of the report.\\}
+
+In case you use an appendix it should be referenced in the text such as Appendix~\ref{app:A} produced with this syntaxe
+ \verb|Appendix~\ref{app:A}|.
+% for big code blocks 
+% \begin{verbatim}
+% here's goes the block  of code
+%\end{verbatim}
+%
+It gives the authors a space to put more explanation (see Appendix~\ref{app:B} for more details), for non fundamental data or explanation it is optional.\\
+
+\textcolor{red}{\bf However if some measurements are presented ``out of the blue'' (\ie parachut\'es) in the main text, with no data to support it, the use of referenced appendix is \underline{indispensable} in order to provide the information without going beyond the allowed number of pages.}
+
+\section{Appendix Contents} \label{app:B}
+This Appendix contains what supplementary data and results that goes in an appendix in general.
+\begin{enumerate}
+    \item \textbf{Raw Data or Detailed Tables}
+    \begin{itemize}
+        \item Large sets of raw data or results that are referenced but not included in the main text.
+        \item Complex tables or figures that would disrupt the flow of the main document if placed within the core sections.
+    \end{itemize}
+    
+    \item \textbf{Supplementary Figures or Charts}
+    \begin{itemize}
+        \item Additional graphs, charts, diagrams, or images that support the analysis but are not critical to the main discussion.
+        \item Alternative or repetitive visualizations or versions of figures already present in the document.
+    \end{itemize}
+
+    \item \textbf{Supplementary Calculations}
+    \begin{itemize}
+        \item Detailed mathematical derivations, calculations, or proofs that support claims made in the main document but are too lengthy to include in the text.
+    \end{itemize}
+        \item \textbf{Technical or Methodological Details}
+    \begin{itemize}
+        \item Detailed descriptions of methodologies, procedures, or technical specifications that are essential but too extensive for the main text.
+        \item Software code, algorithms, or scripts used for analyses or simulations. For code sharing in general it is better to use \href{https://github.com}{github} or \href{https://about.gitlab.com/}{gitlab}. However this is not necessary in general.
+    \end{itemize}
+
+    \item \textbf{Extended Literature Review or Theoretical Explanations}
+    \begin{itemize}
+        \item Additional background information that is important but too detailed to be included in the main literature review.
+        \item Extended explanations of theories or models referenced in the paper.
+    \end{itemize}
+
+    \item \textbf{Abbreviations or Glossaries}
+    \begin{itemize}
+        \item A glossary of terms or a list of abbreviations and acronyms used in the document, especially if extensive.
+    \end{itemize}
+    
+\end{enumerate}
+
+\section{Appendix example} \label{app:C}
+\subsection{Raw Measurements Example}
+This part includes the raw data collected during the experiment. It presents the measurements in tabular form for detailed analysis, see Table~\ref{tab:raw_measurements}.
+% Table that spans across both columns
+\begin{table*}[h!t]
+    \centering
+    \caption{Raw measurements collected during the experiment, $P_1$ for parameter 1 or measured quantity 1 $\delta P_1$ for its uncertainty, $C$ for calculated etc..}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        $P_1$  & $\delta P_1$ & $P_2$  & $\delta P_2$ & $P_3$  & $\delta P_3$ & $C_1$  & $\delta C_1$ \\ 
+        \hline
+        Data 1   & Data 2   & Data 3   & Data 4   & Data 5   & Data 6   & Data 7   & Data 8   \\ 
+        Data 9   & Data 10  & Data 11  & Data 12  & Data 13  & Data 14  & Data 15  & Data 16  \\ 
+        Data 17  & Data 18  & Data 19  & Data 20  & Data 21  & Data 22  & Data 23  & Data 24  \\ 
+        Data 25  & Data 26  & Data 27  & Data 28  & Data 29  & Data 30  & Data 31  & Data 32  \\ 
+        \hline
+    \end{tabular}
+    \label{tab:raw_measurements}
+\end{table*}
+
+\subsection{Formula Development}
+A similar section could be used to provide a detailed development of the formulas used in the analysis. It includes derivations, explanations, and any relevant mathematical steps.
+
+\subsubsection{Example : Error propagation formula}
+The general error propagation formula for a function \( f(x, y, z) \) with three variables and including covariances is given by:
+
+%Aligning with &: The & character is used to align the equation at a specific point across multiple lines.
+%\nonumber: This suppresses equation numbering for each line except the final one.
+\begin{align}
+\sigma_f^2 = &\left( \frac{\partial f}{\partial x} \right)^2 \sigma_x^2 
++ \left( \frac{\partial f}{\partial y} \right)^2 \sigma_y^2 
++ \left( \frac{\partial f}{\partial z} \right)^2 \sigma_z^2 \nonumber \\
+&+ 2 \left( \frac{\partial f}{\partial x} \right) \left( \frac{\partial f}{\partial y} \right) \text{Cov}(x, y) \nonumber \\
+&+ 2 \left( \frac{\partial f}{\partial x} \right) \left( \frac{\partial f}{\partial z} \right) \text{Cov}(x, z) \nonumber \\
+&+ 2 \left( \frac{\partial f}{\partial y} \right) \left( \frac{\partial f}{\partial z} \right) \text{Cov}(y, z)
+\end{align}
+
+where:
+\begin{itemize}
+    \item \( \sigma_f^2 \): The variance of the function \( f(x, y, z) \).
+    \item \( \frac{\partial f}{\partial x} \), \( \frac{\partial f}{\partial y} \), \( \frac{\partial f}{\partial z} \): The partial derivatives of the function \( f \) with respect to variables \( x \), \( y \), and \( z \), respectively. These represent the sensitivity of the function \( f \) to changes in each variable.
+    \item \( \sigma_x^2 \), \( \sigma_y^2 \), \( \sigma_z^2 \): The variances of the individual variables \( x \), \( y \), and \( z \). These describe the uncertainties in the measurements or values of the variables.
+    \item \( \text{Cov}(x, y) \), \( \text{Cov}(x, z) \), \( \text{Cov}(y, z) \): The covariances between pairs of variables. Covariance measures how two variables change together. If the covariance is positive, an increase in one variable tends to be associated with an increase in the other.
+    \item The terms\\ \( 2 \left( \frac{\partial f}{\partial x} \right) \left( \frac{\partial f}{\partial y} \right) \text{Cov}(x, y) \), \( 2 \left( \frac{\partial f}{\partial x} \right) \left( \frac{\partial f}{\partial z} \right) \text{Cov}(x, z) \), and \( 2 \left( \frac{\partial f}{\partial y} \right) \left( \frac{\partial f}{\partial z} \right) \text{Cov}(y, z) \) account for the covariances between the variables \( x \), \( y \), and \( z \).
+\end{itemize}
+
+And here's a numbered equation with respect to the one above
+\begin{equation}
+    E = m c^2
+\end{equation}
+
+or the \underline{un}numbered equation if needed
+
+$$
+    E = m c^2
+$$
+
+The above formula represents the mass-energy equivalence where \( E \) is the energy in joules, \( m \) is the mass in kilogrammes, and \( c \) is the speed of light $m/s$.
+
+
+\end{document}
