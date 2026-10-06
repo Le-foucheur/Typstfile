@@ -156,4 +156,6 @@ $
   &= I_0/(2 rho omega_0^2 c upright(e)) (tan((pi omega_0)/(2 Omega)) sin(omega_0 t) - cos(omega_0 t) + 1  + (4 omega_0^2)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(omega^2_0 - (2n+1)^2 Omega^2)))
 $
 
+On peut premièrement remarqué un phénomène de résonance pour $Omega = omega_0/(2 n + 1)$
+
 Si vous voulez tester cette solution : #link("https://www.desmos.com/calculator/023hzq7f78?lang=fr")
