@@ -1,4 +1,5 @@
 #import "@preview/cetz:0.5.2" 
+#import "@preview/cetz-plot:0.1.4" : plot
 #import "@preview/mechanical-system-cetz-34j:1.1.5": spring, wall
 #import "../../template.typ": *
 
@@ -68,7 +69,7 @@ avec $I$ l’intensité du laser et $c$ la célérité de la lumière \
 Ainsi en supposant des frottement fluide à faible vitesse, j’obtiens, via la seconde loi de Newton :
 $
   m dot.double(x) &= S/c I(t) - k x - alpha dot(x)\
-  donc dot.double(x) &+ alpha dot(x) + (S E)/(m e) x = (S)/(m c) I(t) 
+  donc dot.double(x) &+ alpha/m dot(x) + (S E)/(m e) x = (S)/(m c) I(t) 
 $
 Je pose $omega_0^2 = (S E)/(m e)$, on peut le réecrire, car la masse de feuille d’or poussé vaut: $m = rho S upright(e)$, avec $rho$ la masse volumique, douc :
 $
@@ -77,7 +78,7 @@ $
 
 j’obtiens finalement, l’équation suivante :
 $
-  dot.double(x) + alpha dot(x) + omega_0^2 x = 1/(rho c upright(e)) I(t)
+  dot.double(x) + alpha/(rho S e) dot(x) + omega_0^2 x = 1/(rho c upright(e)) I(t)
 $ 
 
 - Quelque ordre de grandeur de $omega_0$ :
@@ -153,9 +154,255 @@ $
 La solution s’écrit finalement :
 $
   x(t) &= I_0/(2 rho omega_0^2 c upright(e)) tan((pi omega_0)/(2 Omega)) sin(omega_0 t) - I_0/(2 omega_0^2 rho c upright(e)) cos(omega_0 t) + I_0 / (2 rho omega_0^2 c upright(e)) (1 + (4 omega_0^2)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(omega^2_0 - (2n+1)^2 Omega^2)))\
-  &= I_0/(2 rho omega_0^2 c upright(e)) (tan((pi omega_0)/(2 Omega)) sin(omega_0 t) - cos(omega_0 t) + 1  + (4 omega_0^2)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(omega^2_0 - (2n+1)^2 Omega^2)))
+  &= I_0/(2 rho omega_0^2 c upright(e)) (1 + tan((pi omega_0)/(2 Omega)) sin(omega_0 t) - cos(omega_0 t)  + (4)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(1 - (2n+1)^2 Omega^2/omega_0^2)))
 $
 
 On peut premièrement remarqué un phénomène de résonance pour $Omega = omega_0/(2 n + 1)$
 
 Si vous voulez tester cette solution : #link("https://www.desmos.com/calculator/023hzq7f78?lang=fr")
+
+== Avec Frottement 
+
+=== Étude générale
+
+Considéron une harmonique pure, i.e. que $underline(x)(t) = underline(A) e^(i omega t)$, alors :
+$
+  (- omega^2 + i alpha/(rho S upright(e)) omega + omega_0^2) underline(x) = 1/(rho c upright(e)) I(t) 
+$
+Ainsi, la fonction de transfère est :
+$
+  H &= underline(x)/I = (1/(rho c upright(e)))/(omega_0^2 - omega^2 + i alpha/(rho S upright(e)) omega) = (overbrace(1/(omega_0^2 rho c upright(e)), = H_0))/(1 - (omega/omega_0)^2 + i underbrace(alpha/(rho S upright(e) omega_0), = 1/Q) omega/omega_0)\
+  &= H_0/(1 - omega^2/omega_0^2 + i/Q omega/omega_0)
+$
+
+On y reconnais un filtre passe-bas, de gain : $G = H_0/sqrt((1- X^2)^2 + X^2/Q^2)$\
+\
+et de phase $phi.alt = cases(arctan(X/(Q (1-X^2))) " " &Q (1-X^2) > 0, pi/2  " " &Q (1-X^2) = 0, pi + arctan(X/(Q (1-X^2))) " " & Q (1-X^2)< 0) $\
+avec $X = omega_0/omega$
+
+avec un laser de diamètre de $1,8$cm
+- Pour l’or :
+$Q = (omega_"or" rho S upright(e))/alpha approx 7595$
+- Pour l’aluminium :
+$Q = (omega_"alu" rho S upright(e))/alpha approx 2672$
+
+#grid(
+  columns: 2,
+  column-gutter: 2cm,
+  figure(
+    cetz.canvas({
+      import cetz.draw:*
+      let f(q, x) = {
+        20*calc.log(1/calc.sqrt(calc.pow(1-calc.pow(x,2), 2) + calc.pow(x/q,2)))
+      }
+
+      plot.plot(
+        axis-style: "left",
+        size: (7, 7),
+        x-mode: "log",
+        x-base: 10,
+        x-tick-step: 1,
+        x-minor-tick-step: 1,
+        x-format: calc.log,
+        y-tick-step: auto,
+        y-max: 80,
+        x-grid: "both",
+        y-grid: "both",
+        legend: "inner-south-west",
+        x-label: $ "    "omega/omega_0 $,
+        y-label: $ G $,
+        {
+          for q in ((7595, "or ", red),(2672, "alu", blue)) {
+            plot.add(
+              domain: (calc.pow(10,-0), calc.pow(10,0)),
+              x => f(q.first(), x),
+              style: (stroke: q.last()),
+              sample-at: (
+                0.3,
+                0.4,
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9,
+                0.95,
+                0.99,
+                0.995,
+                0.999,
+                1,
+                1.005,
+                1.001,
+                1.01,
+                1.05,
+                1.125,
+                1.25,
+                1.5,
+                2,
+                3,
+              ),
+              label: $Q_#q.at(1) = #q.first()$
+            )
+          }
+        }
+      )
+    }),
+    caption: "Gain"
+  ),
+  figure(
+    cetz.canvas({
+    import cetz.draw: set-style
+      set-style(legend: (fill: white))
+
+      let format(v) = {$#{calc.round(v, digits: 3)}$}
+      plot.plot(
+        axis-style: "left",
+        size: (7, 7),
+        x-mode: "log",
+        x-base: 10,
+        x-tick-step: 0.001,
+        x-minor-tick-step: 1,
+        x-format: format,
+        y-tick-step: 20, y-max: 180, y-min: 0,
+        x-grid: "both",
+        y-grid: "both",
+        legend: "inner-south-west",
+        x-label: $ "    "omega/omega_0 $,
+        y-label: $ phi.alt $,
+        {
+          let g(q, x) = {
+             -calc.atan(x/(q * (1-calc.pow(x,2)))).deg() + 180
+          }
+          let f(q, x) = {
+            -calc.atan(x/(q * (1-calc.pow(x,2)))).deg()
+          }
+          for q in ((7595, "or ", red),(2672, "alu", blue)) {
+            plot.add(
+              domain: (calc.pow(10,0.0000001), calc.pow(10,0.001)),
+              x => f(q.first(), x),
+              style: (stroke: q.last()),
+              label: $Q_#q.at(1) = #q.first()$,
+            )
+            plot.add(
+              domain: (calc.pow(10,-0.001), calc.pow(10,-0.0000001)),
+              x => g(q.first(), x),
+              style: (stroke: q.last()),
+            )
+          }
+        }
+      )
+  }),
+    caption: "Phase"
+  )
+)
+
+
+=== Étude avec un signal carré 
+
+Je rappelle l’équation diff ($Q = (omega_0 rho S upright(e))/alpha$) :
+$
+  dot.double(x) + underbrace(alpha/(rho S e), = omega_0/Q) dot(x) + omega_0^2 x = 1/(rho c upright(e)) I(t)
+$ 
+
+Comme tout dans le chapitre précédent on a :
+$
+  I(t) = I_0/2 + (2 I_0)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/(2n + 1) = I_0/2 + (2 I_0)/pi sum_(n = 0\ n "impaire")^(+oo) sin(n Omega t)/n
+$
+Cette fois on cherche une solution particulière de la forme :
+$
+  x_p (t) = X_0 + sum_(n = 0\ n "impaire")^(+oo) X_n sin(n Omega t + phi.alt_n) = X_0 + sum_(n = 0\ n "impaire")^(+oo) x_n (t)
+$
+alors, on obtient :
+$
+  omega_0^2 X_0 + sum_(n = 0)^(+oo) [dot.double(x)_n + omega_0/Q dot(x)_n + omega_0^2 x_n] = I_0/(2 rho c e) + (2 I_0)/(pi rho c e) sum_(n = 0\ n "impaire")^(+oo) sin(n Omega t)/n
+$
+Donc, on a :
+$
+  cases(
+    "coef constant :" X_0 = I_0/(2 omega_0^2 rho c e),
+    "pour" n "impaire :" dot.double(x)_n + omega_0/Q dot(x)_n + omega_0^2 x_n = (2 I_0)/(pi rho c e)  sin(n Omega t)/n
+  )
+$
+Pour résoudre le second cas on pose : $underline(x_n) = underline(X_n) e^(i n Omega t)$, ainsi $x_n = Im(underline(x_n))$, on obtient donc :
+$
+  underline(X_n)(- n^2 Omega^2 + i (omega_0 n Omega)/(Q)+ omega_0^2) = (2 I_0)/(pi n rho c upright(e))
+$ 
+donc
+$
+  underline(X_n) = (2 I_0)/(pi rho c upright(e)) 1/(n (omega_0^2 - n^2 Omega^2 + i (omega_0 n Omega)/(Q)))
+$
+On peut récupérer $X_n et phi.alt_n$ :
+$
+  X_n = abs(underline(X_n)) = (2 I_0)/(pi rho c upright(e)) 1/(n sqrt((omega_0^2 - n^2 Omega^2)^2 + (n^2 omega_0^2 Omega^2)/Q^2))
+$
+et
+$
+  phi.alt_n &= - arg(omega_0^2 - n^2 Omega^2 + i ( n omega_0 Omega)/(Q))\ 
+  &= -atan2(( n Omega)/(tau), omega_0^2 - n^2 Omega^2)
+$
+avec $atan2(y ,x) = cases(arctan(y/(|x|)) " " &x > 0, pi/2  " " &x = 0, pi + arctan(y/(|x|)) " " &x < 0)$\
+Ainsi :
+$
+  x_p (t) &= I_0/(2 omega_0^2 rho c e) + (2 I_0)/(pi rho c upright(e)) sum_(n = 0)^(+oo) 1/(2n+1) sin{(2n+1) Omega t -atan2((2n+1)(omega_0 Omega)/(Q), omega_0^2 - (2n+1)^2 Omega^2) }/sqrt((omega_0^2 - (2n+1)^2 Omega^2)^2 + (2n+1)^2( omega_0^2 Omega^2)/Q^2)\
+  &= I_0/(2 omega_0^2 rho c e) [1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin{(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) }/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2))]
+$
+*N.B. :* C’est vraiment pas beau… Mais on ré-obtiens bien ce que l’on trouvais dans l’étude générale, i.e. que chaque fréquence est bien multiplié par le gain et est déphasé par la phase que l’on avais trouvé\
+Ce qui voudrais dire que l’on a un signal carré dont on vire les hautes fréquence et on amplifie la fréquence proche de $omega_0$ ??\
+\
+Cherchons maintenants les solutions homogènes :
+$
+  dot.double(x) + omega_0/Q dot(x) + omega_0^2 x = 0
+$
+ici on a, avec un laser de $1,8$cm :
+- Pour l’or :
+$Q = (omega_"or" rho S upright(e))/alpha approx 7595$
+- Pour l’aluminium :
+$Q = (omega_"alu" rho S upright(e))/alpha approx 2672$
+
+Donc de manière générale, on prendra $Q > 1/2$, donc les solutions de la forme :
+$
+  x_h (t) = e^(Im(r) t) (A sin(abs(Re(r)) t) + B cos(abs(Re(r))t))
+$
+avec $r$ une des solution du plynome $X^2 + omega_0/Q X + omega_0^2$,\ 
+soit $r = - omega_0/(2Q) plus.minus i omega_0 sqrt(1 - 1/(4 Q^2)) = - underbrace(alpha/(2rho S upright(e)), = 1/tau) plus.minus sqrt(omega_0^2 - alpha^2/(4 rho^2 S^2 e^2)) = - 1/tau plus.minus sqrt(omega_0^2 - 1/tau^2)$\
+Donc :
+$
+  x_h (t) = e^(- t/tau) (A sin(sqrt(omega_0^2 - 1/tau^2)t) + B cos(sqrt(omega_0^2 - 1/tau^2)t) )
+$
+
+Ainsi les solutions sont :
+$
+  x(t) = e^(- t/tau) (A sin(sqrt(omega_0^2 - 1/tau^2)t) + B cos(sqrt(omega_0^2 - 1/tau^2)t) ) + x_p (t)
+$
+En posant comme condition initiale $x(0) = dot(x) (0) = 0$ :
+$
+  B = - x_p (0)
+$
+et
+$
+  A = - (dot(x)_p (0))/sqrt(omega_0^2 - 1/tau^2)
+$
+avec :
+$
+  x_p (0) = I_0/(2 omega_0^2 rho c e) (1 - C(Q, Omega/omega_0))
+$
+et
+$
+  dot(x)_p (0) = (I_0 Omega)/(2 omega_0^2 rho c e) C'(Q, Omega/omega_0)
+$
+où on définis :
+$
+  C(Q, x) &=  (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin{atan2((2n+1)/Q x, 1 - (2n+1)^2 x^2) }/sqrt((1 - (2n+1)^2 x^2)^2 + (2n+1)^2/Q^2 x^2)\ 
+    &= (4 x)/(pi Q) sum_(n = 0)^(+oo) abs(1 - (2n+1)^2 x^2)/(1 - (2n+1)^2 x^2) 1/((1 - (2n+1)^2 x^2)^2 + (2n+1)^2/Q^2 x^2) \
+  "pour" x >= 1  &= (sh(pi/(2 Q x)) - 1/sqrt(4Q^2 - 1)sin((pi sqrt(4Q^2 - 1))/(2 Q x)))/(ch(pi/(2 Q x)) + cos((pi sqrt(4Q^2 - 1))/(2 Q x))) \
+  C'(Q, x) &= (4)/pi sum_(n = 0)^(+oo)  cos{atan2((2n+1)/Q x, 1 - (2n+1)^2 x^2) }/sqrt((1 - (2n+1)^2 x^2)^2 + (2n+1)^2/Q^2 x^2)\
+  &= (4)/pi sum_(n = 0)^(+oo)  ((2n+1)^2 x^2)/((1 - (2n+1)^2 x^2)^2 + (2n+1)^2/Q^2 x^2)\
+  &= 1/(2Q x) (sh(pi/(2 Q x)) + 1/sqrt(4Q^2 - 1)sin((pi sqrt(4Q^2 - 1))/(2 Q x)))/(ch(pi/(2 Q x)) + cos((pi sqrt(4Q^2 - 1))/(2 Q x)))
+$
+
+*N.B. :* Les deux forme « closes » faudrait les démontré, car la elle sorte juste de mon cul (-> gémini) 
+
+Revenons à nos moutons :\
+La solution final est donc :
+$
+  x(t) = e^(- t/tau) ()
+$

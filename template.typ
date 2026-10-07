@@ -82,6 +82,10 @@
 #let ket(it) = $lr(|#it chevron.r)$
 #let braket(x, y) = $lr(chevron.l #x|#y chevron.r)$
 #let ketbra(x, y) = $lr(|#x chevron.r chevron.l #y|)$
+#let atan2(x ,y) = math.class("unary", [atan2$(#x , #y)$])
+#let sh = math.class("unary", "sh")
+#let ch = math.class("unary", "ch")
+#let th = math.class("unary", "th")
 
 #let numbering_joli(..num) = {
   let res = ""
