@@ -364,6 +364,13 @@ $
 $
 avec $r$ une des solution du plynome $X^2 + omega_0/Q X + omega_0^2$,\ 
 soit $r = - omega_0/(2Q) plus.minus i omega_0 sqrt(1 - 1/(4 Q^2)) = - underbrace(alpha/(2rho S upright(e)), = 1/tau) plus.minus sqrt(omega_0^2 - alpha^2/(4 rho^2 S^2 e^2)) = - 1/tau plus.minus sqrt(omega_0^2 - 1/tau^2)$\
+
+Ordre de grandeur du $tau$ :\
+- Pour l’or :
+$tau_"or" = (2Q)/omega_"or" approx 7,6 dot.c 10^(-6) "s"$
+- Pour l’aluminium :
+$tau_"alu" = (2Q)/omega_"alu" approx 2,1 dot.c 10^(-5) "s"$
+
 Donc :
 $
   x_h (t) = e^(- t/tau) (A sin(sqrt(omega_0^2 - 1/tau^2)t) + B cos(sqrt(omega_0^2 - 1/tau^2)t) )
@@ -404,5 +411,34 @@ $
 Revenons à nos moutons :\
 La solution final est donc :
 $
-  x(t) = e^(- t/tau) ()
+  x(t) &= - I_0/(2 omega_0^2 rho c e) e^(- t/tau) [ (1 - C(Q, Omega/omega_0)) sin(sqrt(omega_0^2 - 1/tau^2)t)+Omega C'(Q, Omega/omega_0) cos(sqrt(omega_0^2 - 1/tau^2)t) ] + x_p (t)\
+  &=  I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin{(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) }/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2))\ 
+  &"                   "- e^(- t/tau) [ (1 - C(Q, Omega/omega_0)) sin(sqrt(omega_0^2 - 1/tau^2)t)+Omega C'(Q, Omega/omega_0) cos(sqrt(omega_0^2 - 1/tau^2)t) ]}
 $
+
+Comme vue on a $tau << 1$, donc en vrais on peut simplifier avec juste la série ($e^(-t/tau) approx 0$) (oui j’aime me faire chier…)
+$
+  x(t) = I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin[(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) ]/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2)) }
+$
+
+=== Cas concret et sans résonance ($Omega != omega_0/(2 n + 1)$)
+
+dans ce cas on a : $Omega << omega_0$ :
+$
+  x(t) &= I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin[(2n+1) Omega t -arctan((2n+1)/Q ( Omega)/(omega_0)) ] }\
+  &= I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin((2n+1) Omega t -(2n+1)/Q ( Omega)/(omega_0)) }\
+  &= I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin((2n+1) Omega (t - 1/(Q omega_0) )) }\
+  &= 1/(omega_0^2 rho c e) I(t - 1/(Q omega_0))
+$
+On retombe sur le signal crénaux départ mais retardé et réduis\
+dans les faits on a $omega_0 >> 1$, donc il n’est même pas retardé
+
+Ordre de grandeur du $1/(omega_0^2 rho c e)$ :\
+- Pour l’or :
+$1/(omega_"or"^2 rho c e) = e_"or"/(c E_"or") approx 4,3 dot.c 10^(-26) "s"$
+- Pour l’aluminium :
+$e_"alu"/(c E_"alu") approx 9,7 dot.c 10^(-25) "s"$
+
+heu, on devrais rien voir là… #str.from-unicode(0x1F480)
+
+===
