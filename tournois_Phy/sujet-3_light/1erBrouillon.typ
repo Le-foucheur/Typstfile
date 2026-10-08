@@ -453,7 +453,7 @@ On est dans un cas où une des fréquence du signal carré est en résonance, do
 $
   Omega = omega_0/(2 n' + 1) sqrt(1 - 1/(2Q^2)) approx omega_0/(2 n' + 1)
 $
-avec $n' >> 1$, donc pour la fréquance amplifiée ($n = n'$) :
+avec $n' >> 1$ et $Q >> 1$, donc pour la fréquance amplifiée ($n = n'$) :
 
 premièrement : $1 - (2n'+1)^2 Omega^2/omega_0^2 = 1 - (2n'+1)^2/(2n'+1)^2 omega_0^2/omega_0^2 = 0$ et $(2n'+1)/Q ( Omega)/(omega_0) = 1/Q$ \
 \
