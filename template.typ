@@ -86,6 +86,7 @@
 #let sh = math.class("unary", "sh")
 #let ch = math.class("unary", "ch")
 #let th = math.class("unary", "th")
+#let Aleph = text(str.from-unicode(0x10900), font: "Noto Sans Phoenician")
 
 #let numbering_joli(..num) = {
   let res = ""

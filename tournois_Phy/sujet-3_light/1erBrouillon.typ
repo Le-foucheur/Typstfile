@@ -3,6 +3,12 @@
 #import "@preview/mechanical-system-cetz-34j:1.1.5": spring, wall
 #import "../../template.typ": *
 
+#show math.equation: it => {
+    show regex("\d+\.\d+"): it => {show ".": {","+h(0pt)}
+        it}
+    it
+}
+
 #show: it => template(ancienne_lig: true, it)
 
 Pour l’instant je ne considère que un système proche d’un haut parleur classique, en suposant que seul la pression radiative bouge la feuille et que le reste de la feuille, non toucher par le laser, sert de ressort, d’une constante de raideur $k$ :
@@ -83,7 +89,7 @@ $
 
 - Quelque ordre de grandeur de $omega_0$ :
  - Or : $upright(e) = 0.001 "mm"$ donc $omega_"or" approx 2 dot.c 10^9 "s"^(-1)$
- - Aluminium : $upright(e) = 0.02 "mm"$ donc $omega_"alu" approx 2,5 dot.c 10^8 "s"^(-1)$
+ - Aluminium : $upright(e) = 0.02 "mm"$ donc $omega_"alu" approx 2.5 dot.c 10^8 "s"^(-1)$
 
 == Solution pour un signal crénaux sans frottement
 Pour l’instant je considère le cas sans frottement ($alpha = 0$), et ou l’intensité suit un signal crénaux d’intensité $I_0$ et de pulsation $Omega$, donc :
@@ -105,20 +111,28 @@ $
 $
 Or tout la décompositon en série de fourier est unique, donc :
 $
-  a_o = I_0 / (2 omega^2_0 rho c upright(e))
+  a_o = I_0 / (2 omega^2_0 rho c upright(e)) =I_0/(2 Aleph )
 $
+avec $Aleph = omega_0^2 rho c upright(e) = cancel(rho) c cancel(upright(e)) dot.c E/(e^cancel(2) cancel(rho)) = (c E)/upright(e)$\
+- Pour l’or :
+$Aleph_"or" = (3 dot.c 10^8 times 78)/0.001 approx 2.3 dot.c 10^(25) "Pa" dot.c "s"^(-1) = 2.3 dot.c 10^(25) "W" dot.c "m"^(-3)$
+- Pour l’aluminium :
+$Aleph_"alu" = 0.02/(3 dot.c 10^8 times 69) approx 1,0 dot.c 10^(24) "Pa" dot.c "s"^(-1) = 1,0 dot.c 10^(24) "W" dot.c "m"^(-3)$
+
+Revenons au calcule :
+
 pour $n > 0$ et paire :
 $
   a_n (omega_0^2 - n^2 Omega^2) = 0 => a_n = 0
 $
 pour $n > 0$ et impaire :
 $
-  a_n (omega_0^2 - n^2 Omega^2) = (2 I_0)/(n pi rho c upright(e)) => a_n = (2 I_0)/(pi rho c upright(e)) 1/(n (omega_0^2 - n^2 Omega^2))
+  a_n (omega_0^2 - n^2 Omega^2) = (2 I_0 omega_0^2)/(n pi Aleph) => a_n = (2 I_0 omega_0^2)/(pi Aleph) 1/(n (omega_0^2 - n^2 Omega^2))
 $
 donc on a, la solution suivante :
 $
-  x_p (t) &= I_0 / (2 omega^2_0 rho c upright(e)) + (2 I_0)/(pi rho c upright(e)) sum_(n = 0\ n "impaire")^(+oo) sin(n Omega t)/(n (omega_0^2 - n^2 Omega^2))\
-  &= I_0 / (2 rho c upright(e)) (1/omega_0^2 + 4/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(omega^2_0 - (2n+1)^2 Omega^2)))
+  x_p (t) &= I_0 / (2 Aleph) + (2 I_0 omega_0^2)/(pi Aleph) sum_(n = 0\ n "impaire")^(+oo) sin(n Omega t)/(n (omega_0^2 - n^2 Omega^2))\
+  &= I_0 / (2 Aleph) (1 + (4omega_0^2)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(omega^2_0 - (2n+1)^2 Omega^2)))
 $
 
 Ainsi les solution de l’équation sont :
@@ -127,16 +141,16 @@ $
 $
 je prend en condition initiale : $x(0) = dot(x)(0) = 0$, la feuille bouge pas quoi, donc :
 $
-  A = - I_0/(2 omega_0^2 rho c upright(e))
+  A = - I_0/(2 Aleph)
 $
 et 
 $
-  omega_0 B + (2 I_0)/(pi rho c upright(e)) sum_(n = 0)^(+oo) Omega/(omega^2_0 - (2n+1)^2 Omega^2) = 0
+  omega_0 B + (2 I_0 omega_0^2)/(pi Aleph) sum_(n = 0)^(+oo) Omega/(omega^2_0 - (2n+1)^2 Omega^2) = 0
 $
 Donc
 $
-  B &= - (2 I_0)/(pi rho Omega omega_0 c upright(e)) sum_(n = 0)^(+oo) 1/(underbrace(omega^2_0/Omega^2, = lambda^2) - (2n+1)^2)\
-  &= - (2 I_0)/(pi rho Omega omega_0 c upright(e)) sum_(n = 0)^(+oo) 1/(lambda^2 - (2n+1)^2)
+  B &= - (2 I_0 omega_0)/(pi Omega Aleph) sum_(n = 0)^(+oo) 1/(underbrace(omega^2_0/Omega^2, = lambda^2) - (2n+1)^2)\
+  &= - (2 I_0)/(pi Aleph) (omega_0)/Omega sum_(n = 0)^(+oo) 1/(lambda^2 - (2n+1)^2)
 $
 Calculon la série:
 $
@@ -149,12 +163,12 @@ $
 \
 Ainsi :
 $
-  B = - (2 I_0)/(cancel(pi) rho cancel(Omega) omega_0 c upright(e)) times - (cancel(pi) cancel(Omega))/(4 omega_0) tan((pi omega_0)/(2 Omega)) = I_0/(2 rho omega_0^2 c upright(e)) tan((pi omega_0)/(2 Omega))
+  B = - (2 I_0)/(cancel(pi) Aleph) (cancel(omega_0))/cancel(Omega) times - (cancel(pi) cancel(Omega))/(4 cancel(omega_0)) tan((pi omega_0)/(2 Omega)) = I_0/(2 Aleph) tan((pi omega_0)/(2 Omega))
 $
 La solution s’écrit finalement :
 $
-  x(t) &= I_0/(2 rho omega_0^2 c upright(e)) tan((pi omega_0)/(2 Omega)) sin(omega_0 t) - I_0/(2 omega_0^2 rho c upright(e)) cos(omega_0 t) + I_0 / (2 rho omega_0^2 c upright(e)) (1 + (4 omega_0^2)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(omega^2_0 - (2n+1)^2 Omega^2)))\
-  &= I_0/(2 rho omega_0^2 c upright(e)) (1 + tan((pi omega_0)/(2 Omega)) sin(omega_0 t) - cos(omega_0 t)  + (4)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(1 - (2n+1)^2 Omega^2/omega_0^2)))
+  x(t) &= I_0/(2 Aleph) tan((pi omega_0)/(2 Omega)) sin(omega_0 t) - I_0/(2 Aleph) cos(omega_0 t) + I_0 / (2 Aleph) (1 + (4 omega_0^2)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(omega^2_0 - (2n+1)^2 Omega^2)))\
+  &= I_0/(2 Aleph) (1 + tan((pi omega_0)/(2 Omega)) sin(omega_0 t) - cos(omega_0 t)  + (4 omega_0^2)/pi sum_(n = 0)^(+oo) sin((2n+1) Omega t)/((2n+1)(1 - (2n+1)^2 Omega^2/omega_0^2)))
 $
 
 On peut premièrement remarqué un phénomène de résonance pour $Omega = omega_0/(2 n + 1)$
@@ -171,7 +185,7 @@ $
 $
 Ainsi, la fonction de transfère est :
 $
-  H &= underline(x)/I = (1/(rho c upright(e)))/(omega_0^2 - omega^2 + i alpha/(rho S upright(e)) omega) = (overbrace(1/(omega_0^2 rho c upright(e)), = H_0))/(1 - (omega/omega_0)^2 + i underbrace(alpha/(rho S upright(e) omega_0), = 1/Q) omega/omega_0)\
+  H &= underline(x)/I = (1/(rho c upright(e)))/(omega_0^2 - omega^2 + i alpha/(rho S upright(e)) omega) = (overbrace(1/(omega_0^2 rho c upright(e)), = 1/Aleph = H_0))/(1 - (omega/omega_0)^2 + i underbrace(alpha/(rho S upright(e) omega_0), = 1/Q) omega/omega_0)\
   &= H_0/(1 - omega^2/omega_0^2 + i/Q omega/omega_0)
 $
 
@@ -180,11 +194,13 @@ On y reconnais un filtre passe-bas, de gain : $G = H_0/sqrt((1- X^2)^2 + X^2/Q
 et de phase $phi.alt = cases(arctan(X/(Q (1-X^2))) " " &Q (1-X^2) > 0, pi/2  " " &Q (1-X^2) = 0, pi + arctan(X/(Q (1-X^2))) " " & Q (1-X^2)< 0) $\
 avec $X = omega_0/omega$
 
-avec un laser de diamètre de $1,8$cm
+avec un laser de diamètre de $1,8$cm et $alpha approx 1.3$
 - Pour l’or :
 $Q = (omega_"or" rho S upright(e))/alpha approx 7595$
 - Pour l’aluminium :
 $Q = (omega_"alu" rho S upright(e))/alpha approx 2672$
+
+De plus on à une résonance pour : $Omega_r = omega_0 sqrt(1-1/(2Q^2))$
 
 #grid(
   columns: 2,
@@ -300,7 +316,7 @@ $Q = (omega_"alu" rho S upright(e))/alpha approx 2672$
 
 Je rappelle l’équation diff ($Q = (omega_0 rho S upright(e))/alpha$) :
 $
-  dot.double(x) + underbrace(alpha/(rho S e), = omega_0/Q) dot(x) + omega_0^2 x = 1/(rho c upright(e)) I(t)
+  dot.double(x) + underbrace(alpha/(rho S e), = omega_0/Q) dot(x) + omega_0^2 x = omega_0^2/(Aleph) I(t)
 $ 
 
 Comme tout dans le chapitre précédent on a :
@@ -313,37 +329,37 @@ $
 $
 alors, on obtient :
 $
-  omega_0^2 X_0 + sum_(n = 0)^(+oo) [dot.double(x)_n + omega_0/Q dot(x)_n + omega_0^2 x_n] = I_0/(2 rho c e) + (2 I_0)/(pi rho c e) sum_(n = 0\ n "impaire")^(+oo) sin(n Omega t)/n
+  omega_0^2 X_0 + sum_(n = 0)^(+oo) [dot.double(x)_n + omega_0/Q dot(x)_n + omega_0^2 x_n] = (I_0 omega_0^2)/(2 Aleph) + (2 I_0 omega_0^2)/(pi Aleph) sum_(n = 0\ n "impaire")^(+oo) sin(n Omega t)/n
 $
 Donc, on a :
 $
   cases(
-    "coef constant :" X_0 = I_0/(2 omega_0^2 rho c e),
-    "pour" n "impaire :" dot.double(x)_n + omega_0/Q dot(x)_n + omega_0^2 x_n = (2 I_0)/(pi rho c e)  sin(n Omega t)/n
+    "coef constant :" X_0 = I_0/(2 Aleph),
+    "pour" n "impaire :" dot.double(x)_n + omega_0/Q dot(x)_n + omega_0^2 x_n = (2 I_0 omega_0^2)/(pi Aleph)  sin(n Omega t)/n
   )
 $
 Pour résoudre le second cas on pose : $underline(x_n) = underline(X_n) e^(i n Omega t)$, ainsi $x_n = Im(underline(x_n))$, on obtient donc :
 $
-  underline(X_n)(- n^2 Omega^2 + i (omega_0 n Omega)/(Q)+ omega_0^2) = (2 I_0)/(pi n rho c upright(e))
+  underline(X_n)(- n^2 Omega^2 + i (omega_0 n Omega)/(Q)+ omega_0^2) = (2 I_0 omega_0^2/(pi n Aleph)
 $ 
 donc
 $
-  underline(X_n) = (2 I_0)/(pi rho c upright(e)) 1/(n (omega_0^2 - n^2 Omega^2 + i (omega_0 n Omega)/(Q)))
+  underline(X_n) = (2 I_0)/(pi Aleph) (omega_0^2)/(n (omega_0^2 - n^2 Omega^2 + i (omega_0 n Omega)/(Q))) = (2 I_0)/(pi Aleph) 1/(n (1 - n^2 Omega^2/omega_0^2 + i (n)/(Q) Omega/omega_0))
 $
 On peut récupérer $X_n et phi.alt_n$ :
 $
-  X_n = abs(underline(X_n)) = (2 I_0)/(pi rho c upright(e)) 1/(n sqrt((omega_0^2 - n^2 Omega^2)^2 + (n^2 omega_0^2 Omega^2)/Q^2))
+  X_n = abs(underline(X_n)) = (2 I_0)/(pi Aleph) 1/(n sqrt((1 - n^2 Omega^2/omega_0^2)^2 + (n^2)/Q^2 Omega^2/omega_0^2))
 $
 et
 $
-  phi.alt_n &= - arg(omega_0^2 - n^2 Omega^2 + i ( n omega_0 Omega)/(Q))\ 
-  &= -atan2(( n Omega)/(tau), omega_0^2 - n^2 Omega^2)
+  phi.alt_n &= - arg(1 - n^2 Omega^2/omega_0^2 + i ( n)/(Q) Omega/omega_0)\ 
+  &= -atan2( n/Q Omega/(omega_0), 1 - n^2 Omega^2/omega_0^2)
 $
 avec $atan2(y ,x) = cases(arctan(y/(|x|)) " " &x > 0, pi/2  " " &x = 0, pi + arctan(y/(|x|)) " " &x < 0)$\
 Ainsi :
 $
-  x_p (t) &= I_0/(2 omega_0^2 rho c e) + (2 I_0)/(pi rho c upright(e)) sum_(n = 0)^(+oo) 1/(2n+1) sin{(2n+1) Omega t -atan2((2n+1)(omega_0 Omega)/(Q), omega_0^2 - (2n+1)^2 Omega^2) }/sqrt((omega_0^2 - (2n+1)^2 Omega^2)^2 + (2n+1)^2( omega_0^2 Omega^2)/Q^2)\
-  &= I_0/(2 omega_0^2 rho c e) [1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin{(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) }/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2))]
+  x_p (t) &= I_0/(2 Aleph) + (2 I_0)/(pi Aleph) sum_(n = 0)^(+oo) 1/(2n+1) sin{(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) }/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2))\
+  &= I_0/(2 Aleph) [1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin{(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) }/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2))]
 $
 *N.B. :* C’est vraiment pas beau… Mais on ré-obtiens bien ce que l’on trouvais dans l’étude générale, i.e. que chaque fréquence est bien multiplié par le gain et est déphasé par la phase que l’on avais trouvé\
 Ce qui voudrais dire que l’on a un signal carré dont on vire les hautes fréquence et on amplifie la fréquence proche de $omega_0$ ??\
@@ -352,11 +368,6 @@ Cherchons maintenants les solutions homogènes :
 $
   dot.double(x) + omega_0/Q dot(x) + omega_0^2 x = 0
 $
-ici on a, avec un laser de $1,8$cm :
-- Pour l’or :
-$Q = (omega_"or" rho S upright(e))/alpha approx 7595$
-- Pour l’aluminium :
-$Q = (omega_"alu" rho S upright(e))/alpha approx 2672$
 
 Donc de manière générale, on prendra $Q > 1/2$, donc les solutions de la forme :
 $
@@ -367,9 +378,9 @@ soit $r = - omega_0/(2Q) plus.minus i omega_0 sqrt(1 - 1/(4 Q^2)) = - underbrace
 
 Ordre de grandeur du $tau$ :\
 - Pour l’or :
-$tau_"or" = (2Q)/omega_"or" approx 7,6 dot.c 10^(-6) "s"$
+$tau_"or" = (2Q)/omega_"or" approx 7.6 dot.c 10^(-6) "s"$
 - Pour l’aluminium :
-$tau_"alu" = (2Q)/omega_"alu" approx 2,1 dot.c 10^(-5) "s"$
+$tau_"alu" = (2Q)/omega_"alu" approx 2.1 dot.c 10^(-5) "s"$
 
 Donc :
 $
@@ -390,11 +401,11 @@ $
 $
 avec :
 $
-  x_p (0) = I_0/(2 omega_0^2 rho c e) (1 - C(Q, Omega/omega_0))
+  x_p (0) = I_0/(2 Aleph) (1 - C(Q, Omega/omega_0))
 $
 et
 $
-  dot(x)_p (0) = (I_0 Omega)/(2 omega_0^2 rho c e) C'(Q, Omega/omega_0)
+  dot(x)_p (0) = (I_0 Omega)/(2 Aleph) C'(Q, Omega/omega_0)
 $
 où on définis :
 $
@@ -411,34 +422,70 @@ $
 Revenons à nos moutons :\
 La solution final est donc :
 $
-  x(t) &= - I_0/(2 omega_0^2 rho c e) e^(- t/tau) [ (1 - C(Q, Omega/omega_0)) sin(sqrt(omega_0^2 - 1/tau^2)t)+Omega C'(Q, Omega/omega_0) cos(sqrt(omega_0^2 - 1/tau^2)t) ] + x_p (t)\
-  &=  I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin{(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) }/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2))\ 
+  x(t) &= - I_0/(2 Aleph) e^(- t/tau) [ (1 - C(Q, Omega/omega_0)) sin(sqrt(omega_0^2 - 1/tau^2)t)+Omega C'(Q, Omega/omega_0) cos(sqrt(omega_0^2 - 1/tau^2)t) ] + x_p (t)\
+  &=  I_0/(2 Aleph) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin{(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) }/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2))\ 
   &"                   "- e^(- t/tau) [ (1 - C(Q, Omega/omega_0)) sin(sqrt(omega_0^2 - 1/tau^2)t)+Omega C'(Q, Omega/omega_0) cos(sqrt(omega_0^2 - 1/tau^2)t) ]}
 $
 
-Comme vue on a $tau << 1$, donc en vrais on peut simplifier avec juste la série ($e^(-t/tau) approx 0$) (oui j’aime me faire chier…)
+Comme vue, on a $tau << 1$, donc en vrais on peut simplifier avec juste la série ($e^(-t/tau) approx 0$) (oui j’aime me faire chier…)
 $
-  x(t) = I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin[(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) ]/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2)) }
+  x(t) = I_0/(2 Aleph) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin[(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) ]/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2)) }
 $
 
-=== Cas concret et sans résonance ($Omega != omega_0/(2 n + 1)$)
+=== Cas concret et sans résonance ($Omega != omega_0/(2 n + 1) sqrt(1 - 1/(2Q^2))$)
 
 dans ce cas on a : $Omega << omega_0$ :
 $
-  x(t) &= I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin[(2n+1) Omega t -arctan((2n+1)/Q ( Omega)/(omega_0)) ] }\
-  &= I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin((2n+1) Omega t -(2n+1)/Q ( Omega)/(omega_0)) }\
-  &= I_0/(2 omega_0^2 rho c e) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin((2n+1) Omega (t - 1/(Q omega_0) )) }\
-  &= 1/(omega_0^2 rho c e) I(t - 1/(Q omega_0))
+  x(t) &= I_0/(2 Aleph) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin[(2n+1) Omega t -arctan((2n+1)/Q ( Omega)/(omega_0)) ] }\
+  &= I_0/(2 Aleph) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin((2n+1) Omega t -(2n+1)/Q ( Omega)/(omega_0)) }\
+  &= I_0/(2 Aleph) { 1 + (4)/pi sum_(n = 0)^(+oo) 1/(2n+1) sin((2n+1) Omega (t - 1/(Q omega_0) )) }\
+  &= 1/(Aleph) I(t - 1/(Q omega_0)) approx 1/Aleph I(t)
 $
 On retombe sur le signal crénaux départ mais retardé et réduis\
 dans les faits on a $omega_0 >> 1$, donc il n’est même pas retardé
 
-Ordre de grandeur du $1/(omega_0^2 rho c e)$ :\
+
+Sauf que je rappelle que $Aleph$ est de l’ordre $10^(-24 )$, donc ,heu, on devrais rien voir là… #str.from-unicode(0x1F480)
+
+=== Cas concret et avec résonance 
+
+On est dans un cas où une des fréquence du signal carré est en résonance, donc on posse :
+$
+  Omega = omega_0/(2 n' + 1) sqrt(1 - 1/(2Q^2)) approx omega_0/(2 n' + 1)
+$
+avec $n' >> 1$, donc pour la fréquance amplifiée ($n = n'$) :
+
+premièrement : $1 - (2n'+1)^2 Omega^2/omega_0^2 = 1 - (2n'+1)^2/(2n'+1)^2 omega_0^2/omega_0^2 = 0$ et $(2n'+1)/Q ( Omega)/(omega_0) = 1/Q$ \
+\
+
+$
+  &"   "1/(2n'+1) sin[(2n'+1) Omega t -atan2((2n'+1)/Q ( Omega)/(omega_0), 1 - (2n'+1)^2 Omega^2/omega_0^2) ]/sqrt((1 - (2n'+1)^2 Omega^2/omega_0^2)^2 + (2n'+1)^2/Q^2 (Omega^2)/(omega_0^2))\
+  &= 1/(2n'+1) sin[omega_0 t -overbrace(atan2(1/Q, 0), = pi/2)]/sqrt(1/Q^2 ) = - Q/(2n'+1) cos(omega_0 t)
+$
+et les autres fréquance :
+$
+  &"    "1 + (4)/pi sum_(n = 0\ n= n')^(+oo) 1/(2n+1) sin[(2n+1) Omega t -atan2((2n+1)/Q ( Omega)/(omega_0), 1 - (2n+1)^2 Omega^2/omega_0^2) ]/sqrt((1 - (2n+1)^2 Omega^2/omega_0^2)^2 + (2n+1)^2/Q^2 (Omega^2)/(omega_0^2))\
+  &approx 2/I_0 I(t)
+$
+J’ai le droit de faire ça car $n'>> 1$ et donc on retire juste une toute petite fréquance qui « n’apporte » pas grand chose, de plus on a $Omega << omega_0$ donc on peut faire la même approximation que dans le chapitre précédent.\
+Ainsi le signal deviens :
+$
+  x(t) = 1/(Aleph) I(t) - (2 I_0)/(pi Aleph) Q/(2n'+1) cos(omega_0 t) 
+$
+
+Pour avoir une résonance dans l’audible on veut :
+$
+  20 <= omega_0/(2n'+1) <= 20 dot.c 10^3
+$
+on obtient que $n'$ doit être compris entre :
+$
+  omega_0/(40 dot.c 10^3) <= n' <= omega_0/(40)
+$
 - Pour l’or :
-$1/(omega_"or"^2 rho c e) = e_"or"/(c E_"or") approx 4,3 dot.c 10^(-26) "s"$
+$
+  50" "258 <= n' <= 50" "258" "400 
+$
 - Pour l’aluminium :
-$e_"alu"/(c E_"alu") approx 9,7 dot.c 10^(-25) "s"$
-
-heu, on devrais rien voir là… #str.from-unicode(0x1F480)
-
-===
+$
+  6" "321 <= n' <= 6" "320" "351
+$
